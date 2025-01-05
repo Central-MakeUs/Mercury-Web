@@ -1,0 +1,9 @@
+name: env
+description: setup env
+runs:
+  using: composite
+  steps:
+    - name: inject environment
+      shell: bash
+      run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env

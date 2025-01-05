@@ -21,7 +21,10 @@ jobs:
 
       - name: 'Install Deps'
         run: npm ci
-  
+
+      - name: Setup env
+        uses: ./.github/actions/env
+
       - name: 'Test'
         run: npm run report
 
