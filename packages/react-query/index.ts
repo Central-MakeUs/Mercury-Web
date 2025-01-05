@@ -5,3 +5,4 @@ export type MutationParams<TData, TVariables, TError = Error> = TData extends (
 ) => any
   ? Omit<UseMutationOptions<Awaited<ReturnType<TData>>, TError, TVariables>, "mutationFn">
   : Omit<UseMutationOptions<Awaited<TData>, TError, TVariables>, "mutationFn">;
+ 
