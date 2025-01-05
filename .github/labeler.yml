@@ -1,0 +1,8 @@
+"web":
+  - changed-files:
+      - any-glob-to-any-file: "/web/**"
+
+"mobile":
+  - changed-files:
+      - any-glob-to-any-file: "/mobile/**"
+

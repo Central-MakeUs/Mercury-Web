@@ -1,0 +1,182 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 100,
+    "attributePosition": "auto"
+  },
+  "organizeImports": { "enabled": true },
+  "linter": {
+    "enabled": true,
+    "ignore": ["vite-env.d.ts", "biome-ci.json"],
+    "rules": {
+      "all": true,
+      "suspicious": {
+        "noReactSpecificProps": "off",
+        "noExplicitAny": "off",
+        "useAwait": "off",
+        "noEmptyBlockStatements": "off",
+        "noConsole": "off",
+        "noConsoleLog": "off",
+        "noArrayIndexKey": "warn",
+        "noGlobalIsNan": "warn",
+        "noEmptyBlock": "warn",
+        "noPrototypeBuiltins": "warn",
+        "noConfusingVoidType": "warn",
+        "noImplicitAnyLet": "warn"
+      },
+      "performance": {
+        "useTopLevelRegex": {
+          "level": "off"
+        },
+        "noBarrelFile": "warn",
+        "noReExportAll": "warn",
+        "noAccumulatingSpread": "warn"
+      },
+      "style": {
+        "recommended": true,
+        "noDefaultExport": "off",
+        "noNamespaceImport": "off",
+        "useSelfClosingElements": "off",
+        "useTemplate": "warn",
+        "noNonNullAssertion": "off",
+        "noUnusedTemplateLiteral": "off",
+        "noParameterAssign": "off",
+        "useDefaultParameterLast": "off",
+        "useNamingConvention": "off",
+        "useFragmentSyntax": "off",
+        "useConsistentArrayType": {
+          "fix": "safe",
+          "level": "error",
+          "options": { "syntax": "shorthand" }
+        },
+        "useShorthandArrayType": {
+          "fix": "safe",
+          "level": "error"
+        },
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "filenameCases": ["camelCase", "PascalCase"]
+          }
+        },
+        "useBlockStatements": {
+          "fix": "safe",
+          "level": "off"
+        },
+        "useImportType": {
+          "fix": "safe",
+          "level": "off"
+        }
+      },
+      "correctness": {
+        "recommended": true,
+        "useImportExtensions": "off",
+        "noUndeclaredDependencies": "off",
+        "noUnusedFunctionParameters": "warn",
+        "useExhaustiveDependencies": "warn",
+        "noEmptyPattern": "warn",
+        "noNodejsModules": {
+          "level": "off"
+        },
+        "noUnusedImports": "off",
+        "noUnusedVariables": "off"
+      },
+      "complexity": {
+        "recommended": true,
+        "noForEach": "off",
+        "noUselessFragments": "off",
+        "noStaticOnlyClass": "off",
+        "noBannedTypes": "warn",
+        "useArrowFunction": "warn",
+        "noUselessTernary": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
+      },
+      "a11y": {
+        "recommended": true,
+        "noAccessKey": "error",
+        "noAriaUnsupportedElements": "error",
+        "noAutofocus": "error",
+        "useButtonType": "off",
+        "noLabelWithoutControl": "warn",
+        "noDistractingElements": "error",
+        "noHeaderScope": "error",
+        "noInteractiveElementToNoninteractiveRole": "error",
+        "noNoninteractiveElementToInteractiveRole": "error",
+        "noNoninteractiveTabindex": "error",
+        "noPositiveTabindex": "error",
+        "noRedundantAlt": "error",
+        "noRedundantRoles": "error",
+        "useAltText": "error",
+        "useAnchorContent": "error",
+        "useAriaActivedescendantWithTabindex": "error",
+        "useAriaPropsForRole": "error",
+        "noSvgWithoutTitle": "warn",
+        "useHeadingContent": "error",
+        "useHtmlLang": "error",
+        "useIframeTitle": "error",
+        "useKeyWithClickEvents": "warn",
+        "useKeyWithMouseEvents": "warn",
+        "useMediaCaption": "error",
+        "useValidAnchor": "error",
+        "useValidAriaProps": "error",
+        "useValidAriaRole": "error",
+        "useValidAriaValues": "error",
+        "useSemanticElements": "warn"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "quoteStyle": "double",
+      "attributePosition": "auto"
+    },
+    "globals": [
+      "describe",
+      "it",
+      "test",
+      "expect",
+      "JSX",
+      "React",
+      "beforeEach",
+      "afterEach",
+      "vi",
+      "afterAll",
+      "beforeAll"
+    ]
+  },
+  "files": {
+    "ignore": [
+      "**/.gitignore",
+      "**/.yarn/*",
+      "**/.pnp.*",
+      "**/.turbo/*",
+      "**/build/*",
+      "**/.vercel/*",
+      "**/coverage/*",
+      "**/dist/*",
+      "**/.next/*",
+      "**/node_modules/*",
+      "*storybook.log",
+      "**/.expo",
+      "**/ios",
+      "**/android",
+      "**/storybook-static",
+      "**/@mf-types/*",
+      ".template"
+    ]
+  }
+}

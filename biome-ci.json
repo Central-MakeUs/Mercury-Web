@@ -1,0 +1,71 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
+  "extends": ["./biome.json"],
+  "linter": {
+    "ignore": ["**/vitest.setup.tsx"],
+    "rules": {
+      "suspicious": {
+        "noConsole": {
+          "level": "error",
+          "fix": "safe",
+          "options": { "allow": ["error", "warn"] }
+        },
+        "noGlobalIsNan": {
+          "fix": "safe",
+          "level": "error"
+        },
+        "noDoubleEquals": {
+          "fix": "safe",
+          "level": "error",
+          "options": { "ignoreNull": true }
+        }
+      },
+      "style": {
+        "useBlockStatements": {
+          "fix": "safe",
+          "level": "error"
+        },
+        "useImportType": {
+          "fix": "safe",
+          "level": "error"
+        },
+        "useNodejsImportProtocol": {
+          "fix": "safe",
+          "level": "error"
+        },
+        "noUselessElse": {
+          "fix": "safe",
+          "level": "error"
+        }
+      },
+      "correctness": {
+        "recommended": true,
+        "noNodejsModules": {
+          "level": "off"
+        },
+        "noUnusedImports": {
+          "fix": "safe",
+          "level": "warn"
+        },
+        "noUnusedVariables": {
+          "fix": "safe",
+          "level": "warn"
+        }
+      },
+      "complexity": {
+        "noUselessSwitchCase": {
+          "fix": "safe",
+          "level": "error"
+        },
+        "useOptionalChain": {
+          "fix": "safe",
+          "level": "error"
+        },
+        "useLiteralKeys": {
+          "fix": "safe",
+          "level": "error"
+        }
+      }
+    }
+  }
+}
