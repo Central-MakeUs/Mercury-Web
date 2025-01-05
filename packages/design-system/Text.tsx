@@ -1,6 +1,6 @@
 import { Box, type BoxRef } from "@repo/ui/Box";
 import type { BoxProps } from "@repo/ui/Box";
-import { VariantProps, cva } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type ElementType, forwardRef } from "react";
 import { cn } from "./cn";
 

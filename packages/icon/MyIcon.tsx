@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 export const MyIcon = (props: ComponentPropsWithoutRef<"svg">) => {
   return (
