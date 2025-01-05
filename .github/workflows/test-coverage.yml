@@ -22,8 +22,9 @@ jobs:
       - name: 'Install Deps'
         run: npm ci
 
-      - name: Setup env
-        uses: ./.github/actions/env
+      - name: Inject environment
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
 
       - name: 'Test'
         run: npm run report

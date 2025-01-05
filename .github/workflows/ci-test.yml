@@ -21,13 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Setup env
-        uses: ./.github/actions/env
-        
+      - name: Inject environment
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+
       - name: Run Check
         run: npm run ci:check
 
-      - name: Run tests
+      - name: Run Tests
         run: npm run ci:test
 
       - name: Run Build
