@@ -1,5 +1,11 @@
+import { MyIcon } from "@repo/icon/MyIcon";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <MyIcon />
+    </>
+  );
 }
 
 export default App;
