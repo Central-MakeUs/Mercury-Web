@@ -1,6 +1,5 @@
 import "./index.css";
 import { Analytics } from "@repo/analytics";
-import { MswDevTools } from "@repo/mocks/DevTools.tsx";
 import { worker } from "@repo/mocks/browser";
 import { Providers } from "@repo/providers";
 import { StrictMode } from "react";
@@ -12,7 +11,6 @@ createRoot(document.getElementById("root")!).render(
     <Providers>
       <App />
       <Analytics />
-      <MswDevTools enabled={true} />
     </Providers>
   </StrictMode>,
 );

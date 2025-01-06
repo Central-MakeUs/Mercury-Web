@@ -40,9 +40,18 @@ pre-push:
     lint:
       run: npm run ci:check
       stage_fixed: true
+    test:
+      run: npm run ci:test
+      stage_fixed: true
+    build:
+      run: npm run build
+      stage_fixed: true
 
 pre-commit:
   commands:
     lint:
       run: npm run ci:check
+      stage_fixed: true
+    test:
+      run: npm run ci:test
       stage_fixed: true

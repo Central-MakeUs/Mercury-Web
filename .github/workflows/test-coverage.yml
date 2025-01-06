@@ -1,0 +1,34 @@
+name: Vitest Report Coverage
+on: 
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 'Install Deps'
+        run: npm ci
+
+      - name: Inject environment
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+
+      - name: 'Test'
+        run: npm run report
+
+      - name: 'Report Coverage'
+        if: always() 
+        uses: davelosert/vitest-coverage-report-action@v2

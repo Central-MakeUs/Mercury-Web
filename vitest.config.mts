@@ -18,7 +18,7 @@ export default defineConfig({
     setupFiles: ["./vitest.setup.tsx"],
     include: ["**/*.test.+(ts|tsx|js)"],
     reporters: ["default", "json", "github-actions"],
-    outputFile: "test-results.json",
+    outputFile: "testResults.json",
     poolOptions: {
       threads: {
         singleThread: true,

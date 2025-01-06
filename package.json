@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@mercury/web",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,7 @@
     "build-storybook": "storybook build",
     "test": "vitest",
     "ci:test": "vitest run",
+    "report": "vitest run --coverage.enabled true",
     "ci:check": "npx @biomejs/biome check --config-path=./biome-ci.json --diagnostic-level=error --write ."
   },
   "dependencies": {
@@ -79,9 +80,6 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^2.1.8",
     "vitest-fetch-mock": "^0.4.3"
-  },
-  "eslintConfig": {
-    "extends": ["plugin:storybook/recommended"]
   },
   "msw": {
     "workerDirectory": ["public"]

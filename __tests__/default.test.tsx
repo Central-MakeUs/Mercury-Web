@@ -1,4 +1,4 @@
-import { renderWithUser } from "@repo/test-utils.ts";
+import { renderWithUser } from "@repo/test-utils";
 import { screen } from "@testing-library/react";
 
 describe("Default Test Code", () => {

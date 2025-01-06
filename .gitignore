@@ -22,3 +22,7 @@ dist-ssr
 *.sw?
 
 *storybook.log
+
+
+coverage
+testResults.json
