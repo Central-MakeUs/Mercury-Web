@@ -8,6 +8,8 @@ export const FloatingActionButton = forwardRef(function FloatingActionButton(
   return (
     <button
       ref={ref}
+      // bg - green
+      // ring - aquagreen
       className={cn(
         " bg-[#00CD80] ring-[2px] ring-[#5EE0AF] flex justify-center items-center w-[60px] h-[60px] rounded-full",
         className,
