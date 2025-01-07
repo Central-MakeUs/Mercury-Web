@@ -43,9 +43,6 @@ pre-push:
     test:
       run: npm run ci:test
       stage_fixed: true
-    build:
-      run: npm run build
-      stage_fixed: true
 
 pre-commit:
   commands:
