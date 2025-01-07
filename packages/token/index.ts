@@ -1,3 +1,5 @@
+export const MAX_WIDTH = "450px" as const;
+
 export const scaleColors = {
   "pastel-red": "#FF6767",
   "pastel-violet": "#A269FF",
