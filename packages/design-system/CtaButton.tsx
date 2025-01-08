@@ -1,21 +1,21 @@
-import { type ComponentPropsWithoutRef, type Ref, forwardRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
+import { textVariants } from "./Text";
+import { cn } from "./cn";
 
-type CtaButtonProps = ComponentPropsWithoutRef<"button"> & {
-  text?: string;
-  isActive: boolean;
-};
-
-export const CtaButton = forwardRef(function CtaButton(
-  { text, isActive, children, className, ...rest }: CtaButtonProps,
-  ref?: Ref<HTMLButtonElement>,
-) {
+export const CtaButton = (props: ComponentPropsWithoutRef<"button">) => {
+  const { children, disabled, className } = props;
   return (
     <button
-      ref={ref}
-      className={`${isActive ? "bg-green text-white" : "bg-gray-200 text-gray-400"} rounded-[30px] h-[54px] ${className}`}
-      {...rest}
+      className={cn(
+        textVariants({ variant: "title/20_sb" }),
+        "text-white rounded-[30px] h-[54px]",
+        disabled && "bg-gray-200 dtext-gray-200",
+        className,
+      )}
+      {...props}
+      aria-disabled={disabled}
     >
-      {text}
+      {children}
     </button>
   );
-});
+};
