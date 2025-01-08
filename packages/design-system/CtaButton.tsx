@@ -8,8 +8,8 @@ export const CtaButton = (props: ComponentPropsWithoutRef<"button">) => {
     <button
       className={cn(
         textVariants({ variant: "title/20_sb" }),
-        "text-white rounded-[30px] h-[54px]",
-        disabled && "bg-gray-200 dtext-gray-200",
+        "rounded-[30px] h-[54px]",
+        disabled && "bg-gray-200 text-gray-200",
         className,
       )}
       {...props}
