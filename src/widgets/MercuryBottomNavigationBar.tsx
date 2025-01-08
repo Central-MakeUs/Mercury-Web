@@ -3,11 +3,13 @@ import { BookIcon } from "@repo/icon/BookIcon";
 import { HomeIcon } from "@repo/icon/HomeIcon";
 import { MyIcon } from "@repo/icon/MyIcon";
 import { TimerIcon } from "@repo/icon/TimerIcon";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 export const MercuryBottomNavigationBar = () => {
+  const location = useLocation();
+  const pathname = location.pathname;
   return (
-    <BottomNavigationBar.Root>
+    <BottomNavigationBar.Root value={pathname}>
       <BottomNavigationBar.Action
         icon={({ selected }) => (
           <Link to="/home">
