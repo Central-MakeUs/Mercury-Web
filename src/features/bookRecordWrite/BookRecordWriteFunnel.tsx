@@ -1,21 +1,40 @@
+import { Stack } from "@repo/ui/Stack";
 import { useFunnel } from "@use-funnel/browser";
-import type { BookRecordWriteGageStepProps } from "./BookRecordWriteGageStep";
-import type { BookRecordWriteSearchStepProps } from "./BookRecordWriteSearchStep";
-import type { BookRecordWriteTextStepProps } from "./BookRecordWriteTextStep";
+import BookRecordWriteGageStep from "./BookRecordWriteGageStep";
+import BookRecordWriteSearchStep from "./BookRecordWriteSearchStep";
+import BookRecordWriteTextStep from "./BookRecordWriteTextStep";
+import { bookRecordWriteSteps } from "./bookRecordStepState";
 
-type OmitOnNext<T> = Omit<T, "onNext">;
+const options = {
+  id: "@bookrecordwrite",
+  initial: {
+    context: { book: null, gage: 0, text: "" },
+    step: "SearchStep",
+  } as const,
+  steps: bookRecordWriteSteps,
+};
 
 export const BookRecordWriteFunnel = () => {
-  const _funnel = useFunnel<{
-    SearchStep: OmitOnNext<BookRecordWriteSearchStepProps>;
-    TextStep: OmitOnNext<BookRecordWriteTextStepProps>;
-    GageStep: OmitOnNext<BookRecordWriteGageStepProps>;
-  }>({
-    id: "@bookrecordwrite",
-    initial: {
-      context: {},
-      step: "SearchStep",
-    },
-  });
-  return <div>BookRecordWriteFunnel</div>;
+  const funnel = useFunnel(options);
+  return (
+    <Stack>
+      <funnel.Render
+        SearchStep={({ history }) => (
+          <BookRecordWriteSearchStep onNext={(book) => history.push("TextStep", { book })} />
+        )}
+        TextStep={({ context, history }) => (
+          <BookRecordWriteTextStep
+            onNext={(text) => history.push("GageStep", { text, book: context.book })}
+          />
+        )}
+        GageStep={({ context }) => (
+          <BookRecordWriteGageStep
+            onNext={(gage) => {
+              const _result = { ...context, gage };
+            }}
+          />
+        )}
+      />
+    </Stack>
+  );
 };
