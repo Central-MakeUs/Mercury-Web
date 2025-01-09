@@ -10,7 +10,7 @@ export const Delete: StoryObj = {
   render: () => {
     return (
       <>
-        <Button variant="delete">삭제</Button>
+        <Button variant="gray">삭제</Button>
       </>
     );
   },
@@ -29,6 +29,17 @@ export const Restart: StoryObj = {
     return (
       <>
         <Button variant="primary">계속하기</Button>
+      </>
+    );
+  },
+};
+export const Medium: StoryObj = {
+  render: () => {
+    return (
+      <>
+        <Button variant="primary" size="medium">
+          계속하기
+        </Button>
       </>
     );
   },
