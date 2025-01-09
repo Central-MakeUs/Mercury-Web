@@ -29,6 +29,7 @@
     "vitest.setup.tsx",
     "vitest.config.mts",
     ".storybook/Configure.mdx",
-    "__tests__"
+    "__tests__",
+    ".storybook/**/*.tsx"
   ]
 }
