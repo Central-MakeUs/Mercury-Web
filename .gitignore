@@ -23,6 +23,7 @@ dist-ssr
 
 *storybook.log
 
+.env
 
 coverage
 testResults.json
