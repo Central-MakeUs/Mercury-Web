@@ -11,7 +11,13 @@ const config: Config = {
     fontSize: {
       ...vars.fontSize,
     },
+    extend: {
+      fontFamily: {
+        pretendard: ["Pretendard", "sans-serif"],
+      },
+    },
   },
+
   darkMode: "class",
   plugins: [animate],
 };
