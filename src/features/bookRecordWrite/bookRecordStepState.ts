@@ -2,7 +2,7 @@ import { createFunnelSteps } from "@use-funnel/browser";
 
 export interface BookRecordWriteFormOptionalState {
   text?: string;
-  gage?: number;
+  progress?: number;
   book?: unknown;
 }
 
@@ -13,7 +13,7 @@ export const bookRecordWriteSteps = createFunnelSteps<BookRecordWriteFormOptiona
   .extends("TextStep", {
     requiredKeys: ["book"],
   })
-  .extends("GageStep", {
+  .extends("ProgressStep", {
     requiredKeys: ["text", "book"],
   })
   .build();
