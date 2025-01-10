@@ -14,6 +14,7 @@ export const textVariants = cva("leading-[150%] tracking-[-2%]", {
       "title/24_m": "font-medium text-[24px]",
       "title/20_b": "font-bold text-[20px]",
       "title/20_sb": "font-semibold text-[20px]",
+      "title/18_sb": "font-semibold text-[18px]",
       "title/16_b": "font-bold text-[16px]",
       "title/16_sb": "font-semibold text-[16px]",
       "title/16_m": "font-medium text-[16px]",
