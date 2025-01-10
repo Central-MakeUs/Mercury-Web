@@ -1,6 +1,6 @@
 import { BackIcon } from "@repo/icon/BackIcon";
 import { type ComponentPropsWithoutRef, type Ref, forwardRef } from "react";
-import { textVariants } from "./Text";
+import { Text } from "./Text";
 import { cn } from "./cn";
 
 interface TopNavigationProps extends ComponentPropsWithoutRef<"button"> {
@@ -22,9 +22,9 @@ export const TopNavigation = forwardRef(function SearchBar(
         <BackIcon />
       </button>
 
-      <h1 className={cn(textVariants({ variant: "title/18_sb" }), "flex-grow text-center")}>
+      <Text as="h1" variant="title/18_sb" className="flex-grow text-center">
         {title}
-      </h1>
+      </Text>
     </div>
   );
 });
