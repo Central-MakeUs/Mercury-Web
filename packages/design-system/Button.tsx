@@ -39,7 +39,6 @@ export const Button = ({
       className={cn(
         textVariants({ variant: "title/18_sb" }),
         buttonStyles({ variant, size }),
-        "rounded-[30px] max-h-[50px]",
         className,
       )}
       {...props}
