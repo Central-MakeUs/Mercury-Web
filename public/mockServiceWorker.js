@@ -13,15 +13,15 @@ const INTEGRITY_CHECKSUM = "00729d72e3b82faf54ca8b9621dbb96f";
 const IS_MOCKED_RESPONSE = Symbol("isMockedResponse");
 const activeClientIds = new Set();
 
-self.addEventListener("install", () => {
+self.addEventListener("install", function () {
   self.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
+self.addEventListener("activate", function (event) {
   event.waitUntil(self.clients.claim());
 });
 
-self.addEventListener("message", async (event) => {
+self.addEventListener("message", async function (event) {
   const clientId = event.source.id;
 
   if (!clientId || !self.clients) {
@@ -94,7 +94,7 @@ self.addEventListener("message", async (event) => {
   }
 });
 
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", function (event) {
   const { request } = event;
 
   // Bypass navigation requests.
@@ -128,7 +128,7 @@ async function handleRequest(event, requestId) {
   // Ensure MSW is active and ready to handle the message, otherwise
   // this message will pend indefinitely.
   if (client && activeClientIds.has(client.id)) {
-    (async () => {
+    (async function () {
       const responseClone = response.clone();
 
       sendToClient(
@@ -271,7 +271,7 @@ function sendToClient(client, message, transferrables = []) {
     const channel = new MessageChannel();
 
     channel.port1.onmessage = (event) => {
-      if (event.data?.error) {
+      if (event.data && event.data.error) {
         return reject(event.data.error);
       }
 

@@ -12,7 +12,7 @@
   "organizeImports": { "enabled": true },
   "linter": {
     "enabled": true,
-    "ignore": ["vite-env.d.ts", "biome-ci.json"],
+    "ignore": ["vite-env.d.ts", "biome-ci.json", "node_modules", "dist", "coverage", "public"],
     "rules": {
       "all": true,
       "suspicious": {
