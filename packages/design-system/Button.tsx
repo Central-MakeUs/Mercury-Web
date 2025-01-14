@@ -9,7 +9,7 @@ interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
 
 import { cva } from "class-variance-authority";
 
-const buttonStyles = cva("rounded-[30px] max-h-[50px]", {
+const buttonStyles = cva("rounded-[30px] py-[12px] max-h-[50px]", {
   variants: {
     variant: {
       primary: "bg-green text-white-pink",
@@ -37,7 +37,7 @@ export const Button = ({
   return (
     <button
       className={cn(
-        textVariants({ variant: "title/18_sb" }),
+        textVariants({ variant: "body/18_sb" }),
         buttonStyles({ variant, size }),
         className,
       )}

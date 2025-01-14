@@ -11,7 +11,7 @@ interface TimerSpeechBubbleProps extends ComponentPropsWithoutRef<"div"> {}
 export const TimerSpeechBubble = (props: TimerSpeechBubbleProps) => {
   const { children, className, ...rest } = props;
   return (
-    <Box className={cn(" relative h-[60px]", className)} {...rest}>
+    <Box className={cn(" relative h-[60px] w-[186px]", className)} {...rest}>
       <AspectRatio className="w-[186px] h-[60px]" ratio={186 / 60}>
         <Image src={TIMER_ASSETS.SPEECH_BUBBLE_BG} alt="timer speech bubble background image" />
       </AspectRatio>
