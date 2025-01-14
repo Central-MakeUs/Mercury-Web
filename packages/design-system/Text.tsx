@@ -24,6 +24,7 @@ export const textVariants = cva("leading-[150%] tracking-[-2%]", {
       "title/12_m": "font-medium text-[12px]",
       "title/12_r": "font-normal text-[12px]",
       "body/16_sb": "font-semibold text-[16px]",
+      "body/14_m": "font-medium text-[14px]",
     },
   },
 });
