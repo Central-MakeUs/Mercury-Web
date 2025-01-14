@@ -1,13 +1,13 @@
 import { BackIcon } from "@repo/icon/BackIcon";
-import { type ComponentPropsWithoutRef, type Ref, forwardRef } from "react";
+import { type ComponentPropsWithRef, type Ref, forwardRef } from "react";
 import { Text } from "./Text";
 import { cn } from "./cn";
 
-interface TopNavigationProps extends ComponentPropsWithoutRef<"button"> {
+interface TopNavigationProps extends ComponentPropsWithRef<"button"> {
   title?: string;
 }
 
-export const TopNavigation = forwardRef(function SearchBar(
+export const TopNavigation = forwardRef(function TopNavigation(
   { className, title = "독서기록", ...rest }: TopNavigationProps,
   ref?: Ref<HTMLButtonElement>,
 ) {
