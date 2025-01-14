@@ -1,3 +1,4 @@
+import { vars } from "@repo/token";
 import { type ComponentPropsWithoutRef, useMemo } from "react";
 import type { ElementRef } from "react";
 import { forwardRef } from "react";
@@ -29,7 +30,23 @@ Overlay.displayName = "BottomSheetOverlay";
 export const Title = Drawer.Title;
 export const Description = Drawer.Description;
 
-export const Handle = Drawer.Handle;
+export const Handle = forwardRef<
+  ElementRef<typeof Drawer.Handle>,
+  ComponentPropsWithoutRef<typeof Drawer.Handle>
+>(({ className, style, ...props }, ref) => (
+  <Drawer.Handle
+    ref={ref}
+    className={cn(``, className)}
+    style={{
+      backgroundColor: vars.colors.gray[200],
+      width: "45px",
+      height: "4px",
+      borderRadius: "100px",
+      ...style,
+    }}
+    {...props}
+  />
+));
 
 export const Content = forwardRef<
   ElementRef<typeof Drawer.Content>,

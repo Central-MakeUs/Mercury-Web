@@ -1,7 +1,7 @@
 import type { EmblaCarouselType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import type React from "react";
-import { useCallback, useEffect, useRef } from "react";
+import { type ComponentPropsWithoutRef, useCallback, useEffect, useRef } from "react";
+import { cn } from "./cn";
 
 const CIRCLE_DEGREES = 360;
 const WHEEL_ITEM_SIZE = 32;
@@ -60,22 +60,26 @@ export const setContainerStyles = (emblaApi: EmblaCarouselType, wheelRotation: n
   emblaApi.containerNode().style.transform = `translateZ(${WHEEL_RADIUS}px) rotateX(${wheelRotation}deg)`;
 };
 
-type PropType = {
+interface PropType {
   loop?: boolean;
   label: string;
   slideCount: number;
   perspective: "left" | "right";
-};
+  value?: number;
+  onChange?: (value: number) => void;
+}
 
-export const IosTimePicker: React.FC<PropType> = (props) => {
-  const { slideCount, perspective, label, loop = false } = props;
+export const IosTimePicker = (props: PropType) => {
+  const { slideCount, perspective, label, loop = false, value, onChange } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop,
     axis: "y",
     dragFree: true,
     containScroll: false,
     watchSlides: false,
+    startIndex: value ?? 0,
   });
+
   const rootNodeRef = useRef<HTMLDivElement>(null);
   const totalRadius = slideCount * WHEEL_ITEM_RADIUS;
   const rotationOffset = loop ? 0 : WHEEL_ITEM_RADIUS;
@@ -113,6 +117,15 @@ export const IosTimePicker: React.FC<PropType> = (props) => {
       return;
     }
 
+    const handleSelect = () => {
+      const selectedIndex = emblaApi.selectedScrollSnap();
+      if (selectedIndex !== value) {
+        onChange?.(selectedIndex);
+      }
+    };
+
+    emblaApi.on("select", handleSelect);
+
     emblaApi.on("pointerUp", (emblaApi) => {
       const { scrollTo, target, location } = emblaApi.internalEngine();
       const diffToTarget = target.get() - location.get();
@@ -130,7 +143,17 @@ export const IosTimePicker: React.FC<PropType> = (props) => {
 
     inactivateEmblaTransform(emblaApi);
     rotateWheel(emblaApi);
-  }, [emblaApi, inactivateEmblaTransform, rotateWheel]);
+
+    return () => {
+      emblaApi.off("select", handleSelect);
+    };
+  }, [emblaApi, inactivateEmblaTransform, rotateWheel, value, onChange]);
+
+  useEffect(() => {
+    if (emblaApi && emblaApi.selectedScrollSnap() !== value) {
+      emblaApi.scrollTo(value ?? 0);
+    }
+  }, [emblaApi, value]);
 
   return (
     <div className="embla__ios-picker">
@@ -140,8 +163,7 @@ export const IosTimePicker: React.FC<PropType> = (props) => {
           ref={emblaRef}
         >
           <div className="embla__ios-picker__container">
-            {slides.map((_, index) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            {slides.map((index) => (
               <div className="embla__ios-picker__slide" key={index}>
                 {index}
               </div>
@@ -150,6 +172,15 @@ export const IosTimePicker: React.FC<PropType> = (props) => {
         </div>
       </div>
       <div className="embla__ios-picker__label">{label}</div>
+    </div>
+  );
+};
+
+IosTimePicker.Layout = (props: ComponentPropsWithoutRef<"div">) => {
+  const { className, ...rest } = props;
+  return (
+    <div className={cn("embla", className)} {...rest}>
+      {props.children}
     </div>
   );
 };
