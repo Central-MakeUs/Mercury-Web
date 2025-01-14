@@ -6,6 +6,7 @@ import { CenterStack } from "@repo/ui/CenterStack";
 import { Stack } from "@repo/ui/Stack";
 import { TimerSpeechBubble } from "~/features/timer/components/TimerSpeechBubble";
 import { getTimerDescription } from "~/features/timer/lib/getTimerDescription";
+import { getTimerSpeechBubbleText } from "~/features/timer/lib/getTimerSpeechBubbleText";
 import { TIMER_ASSETS } from "~/features/timer/lib/timer.constants";
 import { TIMER_STATUS } from "~/features/timer/model/timer.model";
 
@@ -17,7 +18,9 @@ export default function TimerPage() {
       </Text>
 
       <CenterStack>
-        <TimerSpeechBubble className=" mb-[2px]">집중해서 책을 읽어볼까?</TimerSpeechBubble>
+        <TimerSpeechBubble className=" mb-[2px]">
+          {getTimerSpeechBubbleText(TIMER_STATUS.INIT)}
+        </TimerSpeechBubble>
       </CenterStack>
 
       <CenterStack className=" w-full px-[46px]">
