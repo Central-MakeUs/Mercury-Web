@@ -144,8 +144,9 @@ export const toast = {
     content: Toast["content"],
     option?: Partial<Pick<Toast, "duration" | "type" | "icon" | "position">>,
   ) => {
+    const id = `${TOAST_PREFIX_ID}-${Math.random()}`;
     const toastData: Toast = {
-      id: `${TOAST_PREFIX_ID}-${Math.random()}`,
+      id,
       duration: option?.duration ?? TOAST_DEFAULT_DURATION,
       content,
       type: option?.type ?? "success",
@@ -153,12 +154,13 @@ export const toast = {
       position: option?.position ?? TOAST_DEFAULT_POSITION,
     };
     toastPubsub.publish("add", toastData);
+    return { id };
   },
   success: (
     content: Toast["content"],
     option?: Partial<Pick<Toast, "duration" | "icon" | "position">>,
   ) => {
-    toast.add(content, {
+    return toast.add(content, {
       ...option,
       type: "success",
     });
