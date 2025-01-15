@@ -1,6 +1,7 @@
 export const MAX_WIDTH = "450px" as const;
 
 export const scaleColors = {
+  white: "#FFFFFF",
   "pastel-red": "#FF6767",
   "pastel-violet": "#A269FF",
   "white-pink": "#FEECED",
@@ -31,6 +32,8 @@ export const scaleColors = {
   "main2-gradient-from": "#F2E8FF",
   "main2-gradient-via": "#5EE0AF",
   "main2-gradient-to": "#A269FF",
+  "main3-gradient-from": "#5EE0AF",
+  "main3-gradient-to": "#A269FF",
   "sub-gradient-from": "#FEECED",
   "sub-gradient-to": "#F2E8FF",
   "gray-gradient-from": "#C6C6CF",
