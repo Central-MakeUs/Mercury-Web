@@ -1,4 +1,5 @@
 import "./index.css";
+import "../packages/design-system/iosTimePicker.css";
 import { Analytics } from "@repo/analytics";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
 import { worker } from "@repo/mocks/browser";

@@ -1,5 +1,5 @@
-import * as AspectRatio from "@radix-ui/react-aspect-ratio";
 import type { Meta, StoryObj } from "@storybook/react";
+import { AspectRatio } from "./AspectRatio";
 import { Image } from "./Image";
 import { MaxWidthBox } from "./MaxWidthBox";
 
@@ -16,7 +16,9 @@ export const ObjectCoverAndFillCase: StoryObj = {
     return (
       <div>
         <MaxWidthBox className=" px-4">
-          <Image className=" size-full" ratio={16 / 9} objectFit={"cover"} alt="test" src={url} />
+          <AspectRatio ratio={16 / 9}>
+            <Image className=" size-full" objectFit={"cover"} alt="test" src={url} />
+          </AspectRatio>
         </MaxWidthBox>
       </div>
     );
@@ -28,20 +30,21 @@ export const LoadingFallback: StoryObj = {
     return (
       <div>
         <MaxWidthBox className=" px-4">
-          <Image
-            className=" size-full"
-            ratio={16 / 9}
-            objectFit={"cover"}
-            alt="test"
-            src={url}
-            fallback={
-              <MaxWidthBox className=" px-4">
-                <AspectRatio.Root ratio={16 / 9}>
-                  <div className=" size-full bg-gray-100">loading</div>
-                </AspectRatio.Root>
-              </MaxWidthBox>
-            }
-          />
+          <AspectRatio ratio={16 / 9}>
+            <Image
+              className=" size-full"
+              objectFit={"cover"}
+              alt="test"
+              src={url}
+              fallback={
+                <MaxWidthBox className=" px-4">
+                  <AspectRatio ratio={16 / 9}>
+                    <div className=" size-full bg-gray-100">loading</div>
+                  </AspectRatio>
+                </MaxWidthBox>
+              }
+            />
+          </AspectRatio>
         </MaxWidthBox>
         <div>isLayoutShift</div>
       </div>
