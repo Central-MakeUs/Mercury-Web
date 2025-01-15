@@ -1,0 +1,103 @@
+.embla {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 222px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.embla:before,
+.embla:after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  display: block;
+  height: calc(50% - 32px / 2);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.embla:before {
+  top: -0.5px;
+  border-bottom: 0.5px solid rgba(49, 49, 49, 0.3);
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.embla:after {
+  bottom: -0.5px;
+  border-top: 0.5px solid rgba(49, 49, 49, 0.3);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.embla__ios-picker {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  min-width: 50%;
+  justify-content: center;
+  line-height: 1;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.embla__ios-picker__scene {
+  min-width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  touch-action: pan-x;
+}
+
+.embla__ios-picker__viewport {
+  height: 32px;
+  width: 100%;
+  perspective: 1000px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.embla__ios-picker__viewport--perspective-left {
+  perspective-origin: calc(50% + 130px) 50%;
+  transform: translateX(27px);
+}
+
+.embla__ios-picker__viewport--perspective-right {
+  perspective-origin: calc(50% - 130px) 50%;
+  transform: translateX(-27px);
+}
+
+.embla__ios-picker__container {
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.embla__ios-picker__slide {
+  width: 100%;
+  height: 100%;
+  font-size: 19px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  opacity: 0;
+  color: rgb(49, 49, 49);
+}
+
+.embla__ios-picker__label {
+  font-weight: 700;
+  transform: translateX(-55px);
+  pointer-events: none;
+  color: rgb(49, 49, 49);
+}

@@ -22,7 +22,7 @@ export const TopNavigation = forwardRef(function TopNavigation(
         <BackIcon />
       </button>
 
-      <Text as="h1" variant="title/18_sb" className="flex-grow text-center">
+      <Text as="h1" variant="body/18_sb" className="flex-grow text-center">
         {title}
       </Text>
     </div>

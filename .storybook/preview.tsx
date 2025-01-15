@@ -1,7 +1,10 @@
 import type { Preview } from "@storybook/react";
 import "../src/index.css";
+import "../packages/design-system/iosTimePicker.css";
+
 import { MobileLayout } from "@repo/design-system/MobileLayout";
 import { cn } from "@repo/design-system/cn";
+import { Providers } from "@repo/providers";
 import { MAX_WIDTH } from "@repo/token";
 import { type PropsWithChildren, useState } from "react";
 
@@ -38,9 +41,11 @@ const preview: Preview = {
   decorators: [
     (Story) => {
       return (
-        <StoryBookLayout>
-          <Story />
-        </StoryBookLayout>
+        <Providers>
+          <StoryBookLayout>
+            <Story />
+          </StoryBookLayout>
+        </Providers>
       );
     },
   ],

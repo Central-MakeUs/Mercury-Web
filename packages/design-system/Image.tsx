@@ -1,4 +1,3 @@
-import * as AspectRatio from "@radix-ui/react-aspect-ratio";
 import { type VariantProps, cva } from "class-variance-authority";
 import {
   type ComponentPropsWithoutRef,
@@ -43,7 +42,6 @@ export const Image = forwardRef(function Image(
      * - "scale-down": 콘텐츠는 none 또는 contain이 지정된 것처럼 크기가 조정됩니다 (더 작은 구체적인 객체 크기로 결과).
      */
     objectFit?: VariantProps<typeof imageVariants>["objectFit"];
-    ratio?: number;
     fallback?: ReactNode;
     errorFallback?: ReactNode;
     isError?: boolean;
@@ -55,7 +53,6 @@ export const Image = forwardRef(function Image(
     alt,
     isLoading: injectIsLoading,
     isError: injectIsError,
-    ratio,
     className,
     onLoad,
     onError,
@@ -79,7 +76,7 @@ export const Image = forwardRef(function Image(
     onError?.(e);
   };
 
-  const ImageComp = (
+  const Component = (
     <img
       loading="lazy"
       onLoad={handleLoad}
@@ -93,13 +90,6 @@ export const Image = forwardRef(function Image(
       className={cn(imageVariants({ objectFit: rest.objectFit }), className)}
     />
   );
-
-  const Component =
-    typeof ratio === "number" ? (
-      <AspectRatio.Root ratio={ratio}>{ImageComp}</AspectRatio.Root>
-    ) : (
-      ImageComp
-    );
 
   if (isLoading) {
     return (

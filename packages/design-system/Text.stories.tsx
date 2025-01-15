@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Text } from "./Text";
 
 const meta = {
-  title: "Components/Text",
+  title: "ds/Text",
   component: Text,
   parameters: {
     layout: "centered",
@@ -23,14 +23,20 @@ export const AllVariants: Story = {
       <Text variant="title/24_m">Title 24 Medium - The quick brown fox</Text>
       <Text variant="title/20_b">Title 20 Bold - The quick brown fox</Text>
       <Text variant="title/20_sb">Title 20 SemiBold - The quick brown fox</Text>
-      <Text variant="title/16_b">Title 16 Bold - The quick brown fox</Text>
-      <Text variant="title/16_sb">Title 16 SemiBold - The quick brown fox</Text>
-      <Text variant="title/16_m">Title 16 Medium - The quick brown fox</Text>
-      <Text variant="title/14_sb">Title 14 SemiBold - The quick brown fox</Text>
-      <Text variant="title/14_m">Title 14 Medium - The quick brown fox</Text>
-      <Text variant="title/12_sb">Title 12 SemiBold - The quick brown fox</Text>
-      <Text variant="title/12_m">Title 12 Medium - The quick brown fox</Text>
-      <Text variant="title/12_r">Title 12 Regular - The quick brown fox</Text>
+      <Text variant="body/18_b">Body 18 Bold - The quick brown fox</Text>
+      <Text variant="body/18_sb">Body 18 SemiBold - The quick brown fox</Text>
+      <Text variant="body/18_m">Body 18 Medium - The quick brown fox</Text>
+      <Text variant="body/16_sb">Body 16 SemiBold - The quick brown fox</Text>
+      <Text variant="body/16_m">Body 16 Medium - The quick brown fox</Text>
+      <Text variant="body/15_r">Body 15 Regular - The quick brown fox</Text>
+      <Text variant="body/15_sb">Body 15 SemiBold - The quick brown fox</Text>
+      <Text variant="body/15_m">Body 15 Medium - The quick brown fox</Text>
+      <Text variant="body/14_sb">Body 14 SemiBold - The quick brown fox</Text>
+      <Text variant="body/14_m">Body 14 Medium - The quick brown fox</Text>
+      <Text variant="body/13_r">Body 13 Regular - The quick brown fox</Text>
+      <Text variant="caption/12_sb">Caption 12 SemiBold - The quick brown fox</Text>
+      <Text variant="caption/12_m">Caption 12 Medium - The quick brown fox</Text>
+      <Text variant="caption/12_r">Caption 12 Regular - The quick brown fox</Text>
     </div>
   ),
 };
