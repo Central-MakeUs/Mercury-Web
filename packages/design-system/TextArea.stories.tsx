@@ -22,7 +22,7 @@ export const Default: StoryObj = {
           wrap="hard"
           required={true}
           className={cn(
-            textVariants({ variant: "title/16_m" }),
+            textVariants({ variant: "body/16_m" }),
             "w-full h-full bg-yellow-green py-[9px] px-[15px] rounded-3 text-gray-600 placeholder:gray-400",
           )}
         />
