@@ -6,6 +6,7 @@ import { Text } from "@repo/design-system/Text";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { useDraft } from "@xionwcfm/react";
+import { memo } from "react";
 
 export interface BookRecordWriteProgressStepProps {
   progress?: number;
@@ -29,36 +30,7 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
           </Text>
         </Stack>
 
-        <ImageFadeAnimator
-          value={getStatus(value)}
-          className=" mt-[64px] px-[100px]"
-          caseBy={{
-            "0": (
-              <ImageFadeAnimator.FadeIn
-                key={"0"}
-                transition={{ duration: GAUGE_DURATION_POLICY, ease: "easeOut" }}
-              >
-                <Image src={GAUGE_ASSETS[0]} alt="read gauge 0 image" objectfit={"contain"} />
-              </ImageFadeAnimator.FadeIn>
-            ),
-            "50": (
-              <ImageFadeAnimator.FadeIn
-                key={"50"}
-                transition={{ duration: GAUGE_DURATION_POLICY, ease: "easeOut" }}
-              >
-                <Image src={GAUGE_ASSETS[50]} alt="read gauge 50 image" objectfit={"contain"} />
-              </ImageFadeAnimator.FadeIn>
-            ),
-            "100": (
-              <ImageFadeAnimator.FadeIn
-                key={"100"}
-                transition={{ duration: GAUGE_DURATION_POLICY, ease: "easeOut" }}
-              >
-                <Image src={GAUGE_ASSETS[100]} alt="read gauge 100 image" objectfit={"contain"} />
-              </ImageFadeAnimator.FadeIn>
-            ),
-          }}
-        />
+        <ImageSection status={getStatus(value)} />
       </Stack>
 
       <Stack className=" px-4">
@@ -81,6 +53,41 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
     </Stack>
   );
 }
+
+const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
+  return (
+    <ImageFadeAnimator
+      value={props.status}
+      className=" mt-[64px] px-[100px]"
+      caseBy={{
+        "0": (
+          <ImageFadeAnimator.FadeIn
+            key={"0"}
+            transition={{ duration: GAUGE_DURATION_POLICY, ease: "easeOut" }}
+          >
+            <Image src={GAUGE_ASSETS[0]} alt="read gauge 0 image" objectfit={"contain"} />
+          </ImageFadeAnimator.FadeIn>
+        ),
+        "50": (
+          <ImageFadeAnimator.FadeIn
+            key={"50"}
+            transition={{ duration: GAUGE_DURATION_POLICY, ease: "easeOut" }}
+          >
+            <Image src={GAUGE_ASSETS[50]} alt="read gauge 50 image" objectfit={"contain"} />
+          </ImageFadeAnimator.FadeIn>
+        ),
+        "100": (
+          <ImageFadeAnimator.FadeIn
+            key={"100"}
+            transition={{ duration: GAUGE_DURATION_POLICY, ease: "easeOut" }}
+          >
+            <Image src={GAUGE_ASSETS[100]} alt="read gauge 100 image" objectfit={"contain"} />
+          </ImageFadeAnimator.FadeIn>
+        ),
+      }}
+    />
+  );
+});
 
 const GAUGE_DURATION_POLICY = 0.3; // 300ms duration
 
