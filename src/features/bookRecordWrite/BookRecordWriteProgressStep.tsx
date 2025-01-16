@@ -63,7 +63,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
         "0": (
           <ImageFadeAnimator.FadeIn
             key={"0"}
-            transition={{ duration: GAUGE_DURATION_POLICY, ease: "easeOut" }}
+            transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
           >
             <Image src={GAUGE_ASSETS[0]} alt="read gauge 0 image" objectfit={"contain"} />
           </ImageFadeAnimator.FadeIn>
@@ -71,7 +71,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
         "50": (
           <ImageFadeAnimator.FadeIn
             key={"50"}
-            transition={{ duration: GAUGE_DURATION_POLICY, ease: "easeOut" }}
+            transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
           >
             <Image src={GAUGE_ASSETS[50]} alt="read gauge 50 image" objectfit={"contain"} />
           </ImageFadeAnimator.FadeIn>
@@ -79,7 +79,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
         "100": (
           <ImageFadeAnimator.FadeIn
             key={"100"}
-            transition={{ duration: GAUGE_DURATION_POLICY, ease: "easeOut" }}
+            transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
           >
             <Image src={GAUGE_ASSETS[100]} alt="read gauge 100 image" objectfit={"contain"} />
           </ImageFadeAnimator.FadeIn>
@@ -90,7 +90,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
 });
 
 const GAUGE_DURATION_POLICY = 0.3; // 300ms duration
-
+const GAUGE_EASE_POLICY = "easeOut" as const;
 const GAUGE_ASSETS = {
   "0": "/images/gauge/gauge_0.webp",
   "50": "/images/gauge/gauge_50.webp",
