@@ -1,3 +1,4 @@
+import { Box } from "@repo/ui/Box";
 import { objectEntries } from "@xionwcfm/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { type ReactNode, forwardRef } from "react";
@@ -11,24 +12,14 @@ export const ImageFadeAnimator = <T extends string>(props: {
     [key in T]: ReactNode;
   };
   className?: string;
+  children?: ReactNode;
 }) => {
   const images = objectEntries(props.caseBy ?? {});
   return (
-    <MaxWidthBox className={cn("relative", props.className)}>
+    <MaxWidthBox className={cn("relative grid w-full", props.className)}>
       <AnimatePresence>
         {images.map(([key, itemValue]) => {
-          return (
-            key === props.value && (
-              <motion.div
-                key={key}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                {itemValue}
-              </motion.div>
-            )
-          );
+          return key === props.value && itemValue;
         })}
       </AnimatePresence>
     </MaxWidthBox>
@@ -41,16 +32,14 @@ ImageFadeAnimator.FadeIn = forwardRef<
 >(function FadeIn(props, ref) {
   const { className, ...rest } = props;
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      {...rest}
-      className={cn(
-        "absolute flex justify-center items-center w-full h-full top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]",
-        className,
-      )}
-    />
+    <Box className=" col-start-1 row-start-1">
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        {...rest}
+      ></motion.div>
+    </Box>
   );
 });

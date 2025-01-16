@@ -21,7 +21,7 @@ export const Controlled: StoryObj = {
     return (
       <Stack className=" w-full h-full">
         {value}
-        <SingleSlider value={value} step={1} max={100} onValueChange={(value) => setValue(value)} />
+        <SingleSlider value={value} step={1} max={100} onChange={(value) => setValue(value)} />
       </Stack>
     );
   },

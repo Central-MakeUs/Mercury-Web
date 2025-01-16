@@ -17,7 +17,7 @@ export const ObjectCoverAndFillCase: StoryObj = {
       <div>
         <MaxWidthBox className=" px-4">
           <AspectRatio ratio={16 / 9}>
-            <Image className=" size-full" objectFit={"cover"} alt="test" src={url} />
+            <Image className=" size-full" objectfit={"cover"} alt="test" src={url} />
           </AspectRatio>
         </MaxWidthBox>
       </div>
@@ -33,7 +33,7 @@ export const LoadingFallback: StoryObj = {
           <AspectRatio ratio={16 / 9}>
             <Image
               className=" size-full"
-              objectFit={"cover"}
+              objectfit={"cover"}
               alt="test"
               src={url}
               fallback={

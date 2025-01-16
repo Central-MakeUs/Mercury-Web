@@ -19,22 +19,21 @@ export const Default: StoryObj = {
       <Box className=" w-full">
         <Box className=" ">
           <ImageFadeAnimator
-            className=" h-[362px] justify-center items-center flex "
             value={value}
             caseBy={{
               "0": (
-                <ImageFadeAnimator.FadeIn transition={{ duration: 0.5 }}>
-                  <Image src="/images/gauge/gauge_0.webp" alt="test" objectFit={"contain"} />
+                <ImageFadeAnimator.FadeIn key="0" transition={{ duration: 0.5 }}>
+                  <Image src="/images/gauge/gauge_0.webp" alt="test" objectfit={"contain"} />
                 </ImageFadeAnimator.FadeIn>
               ),
               "50": (
-                <ImageFadeAnimator.FadeIn transition={{ duration: 0.5 }}>
-                  <Image src="/images/gauge/gauge_50.webp" alt="test" objectFit={"contain"} />
+                <ImageFadeAnimator.FadeIn key="50" transition={{ duration: 0.5 }}>
+                  <Image src="/images/gauge/gauge_50.webp" alt="test" objectfit={"contain"} />
                 </ImageFadeAnimator.FadeIn>
               ),
               "100": (
-                <ImageFadeAnimator.FadeIn transition={{ duration: 0.5 }}>
-                  <Image src="/images/gauge/gauge_100.webp" alt="test" objectFit={"contain"} />
+                <ImageFadeAnimator.FadeIn key="100" transition={{ duration: 0.5 }}>
+                  <Image src="/images/gauge/gauge_100.webp" alt="test" objectfit={"contain"} />
                 </ImageFadeAnimator.FadeIn>
               ),
             }}
