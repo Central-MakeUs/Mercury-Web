@@ -1,4 +1,4 @@
-import { Text } from "./Text";
+import { BookListText } from "./BookListText";
 
 interface BookListInfoProps {
   author: string;
@@ -8,22 +8,8 @@ interface BookListInfoProps {
 export const BookListInfo = ({ author, publisher }: BookListInfoProps) => {
   return (
     <div className="flex flex-col gap-[4px]">
-      <div className="flex gap-[5px]">
-        <Text variant={"body/15_m"} className="text-gray-500">
-          저자
-        </Text>
-        <Text variant={"body/15_m"} className="text-gray-800">
-          {author}
-        </Text>
-      </div>
-      <div className="flex gap-[5px]">
-        <Text variant={"body/15_m"} className="text-gray-500">
-          출판사
-        </Text>
-        <Text variant={"body/15_m"} className="text-gray-800">
-          {publisher}
-        </Text>
-      </div>
+      <BookListText category={"저자"} categoryContent={author} />
+      <BookListText category={"출판사"} categoryContent={publisher} />
     </div>
   );
 };
