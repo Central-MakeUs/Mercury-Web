@@ -1,10 +1,10 @@
+import { List } from "@repo/ui/List";
 import type { Meta, StoryObj } from "@storybook/react";
-import { BookList } from "./BookList";
-import { BookListInfo } from "./BookListInfo";
-import { BookListProgress } from "./BookListProgress";
+import { RecordedBookItem } from "./RecordedBookItem";
+import { SearchBookItem } from "./SearchBookItem";
 
 const meta: Meta = {
-  title: "ds/BookList",
+  title: "bookRecord/BookList",
   tags: ["autodocs"],
 };
 export default meta;
@@ -17,20 +17,22 @@ const BOOKLIST_CONTENT =
 export const Search: StoryObj = {
   render: () => {
     return (
-      <div className="mx-4 flex flex-col gap-6">
-        <BookList
+      <List className="gap-6 mx-4">
+        <SearchBookItem
           imageUrl={IMAGE_URL}
           title="나의 두 번째 교과서 X 궤도의 다시 만난 과학"
           onClick={() => alert("책 클릭")}
-          content={<BookListInfo author={"궤도, 송용조"} publisher={"페이지2북스"} />}
+          authorName={"궤도, 송용조"}
+          publishName={"페이지2북스"}
         />
-        <BookList
+        <SearchBookItem
           imageUrl={IMAGE_URL}
           title="나의 두 번째 교과서 X 궤도의 다시 만난 과학"
           onClick={() => alert("책 클릭")}
-          content={<BookListInfo author={"궤도, 송용조"} publisher={"페이지2북스"} />}
+          authorName={"궤도, 송용조"}
+          publishName={"페이지2북스"}
         />
-      </div>
+      </List>
     );
   },
 };
@@ -38,14 +40,22 @@ export const Search: StoryObj = {
 export const MyList: StoryObj = {
   render: () => {
     return (
-      <div className="mx-4">
-        <BookList
+      <List className="gap-6 mx-4">
+        <RecordedBookItem
           imageUrl={IMAGE_URL}
           title="나의 두 번째 교과서 X 궤도의 다시 만난 과학"
           onClick={() => alert("책 클릭")}
-          content={<BookListProgress updateDate={"2025.03.02"} bookContent={BOOKLIST_CONTENT} />}
+          updatedAt={"2025.01.25"}
+          bookSummary={BOOKLIST_CONTENT}
         />
-      </div>
+        <RecordedBookItem
+          imageUrl={IMAGE_URL}
+          title="나의 두 번째 교과서 X 궤도의 다시 만난 과학"
+          onClick={() => alert("책 클릭")}
+          updatedAt={"2025.01.25"}
+          bookSummary={BOOKLIST_CONTENT}
+        />
+      </List>
     );
   },
 };
