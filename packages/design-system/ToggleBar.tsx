@@ -15,9 +15,7 @@ export const ToggleBar: React.FC = () => {
       </Text>
       <ToggleButtonGroup
         value={value}
-        onChange={(newValue) => {
-          setValue(newValue ?? "created");
-        }}
+        onChange={(newValue) => setValue(newValue ?? "created")}
         allowToggle={false}
       >
         <Flex className="gap-x-4">
@@ -27,7 +25,6 @@ export const ToggleBar: React.FC = () => {
           >
             생성일 순
           </ToggleButton>
-
           <ToggleButton
             value="updated"
             className={cn("text-gray-300 data-[state=selected]:text-gray-500")}
