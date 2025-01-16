@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { BookList } from "./BookList";
 import { BookListInfo } from "./BookListInfo";
+import { BookListProgress } from "./BookListProgress";
 
 const meta: Meta = {
   title: "ds/BookList",
@@ -10,6 +11,8 @@ export default meta;
 
 const IMAGE_URL =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeTzw38qIlLaZRLNfbJCeDX7EE5QAGQHf-Hw&s";
+const BOOKLIST_CONTENT =
+  "과학 지식을 알기 쉽게 전달하는 과학 커뮤니케이터이며, 유튜브 과학 채널 유튜브 과학 채널유튜브 과학 채널 유튜브 과학 채널...유튜브 과학 채널...유튜브 과학 채널...유튜브 과학채널...유튜브 과학 채널...유튜브 과학 채널...";
 
 export const Search: StoryObj = {
   render: () => {
@@ -40,7 +43,7 @@ export const MyList: StoryObj = {
           imageUrl={IMAGE_URL}
           title="나의 두 번째 교과서 X 궤도의 다시 만난 과학"
           onClick={() => alert("책 클릭")}
-          content={<div></div>}
+          content={<BookListProgress updateDate={"2025.03.02"} bookContent={BOOKLIST_CONTENT} />}
         />
       </div>
     );
