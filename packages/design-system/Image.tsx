@@ -41,7 +41,7 @@ export const Image = forwardRef(function Image(
      * - "none": 대체 콘텐츠는 크기가 조정되지 않습니다.
      * - "scale-down": 콘텐츠는 none 또는 contain이 지정된 것처럼 크기가 조정됩니다 (더 작은 구체적인 객체 크기로 결과).
      */
-    objectFit?: VariantProps<typeof imageVariants>["objectFit"];
+    objectfit?: VariantProps<typeof imageVariants>["objectFit"];
     fallback?: ReactNode;
     errorFallback?: ReactNode;
     isError?: boolean;
@@ -87,7 +87,7 @@ export const Image = forwardRef(function Image(
       alt={alt}
       aria-label={alt}
       ref={ref}
-      className={cn(imageVariants({ objectFit: rest.objectFit }), className)}
+      className={cn(imageVariants({ objectFit: rest.objectfit }), className)}
     />
   );
 
