@@ -20,9 +20,10 @@ export const SafeAreaEffector = () => {
 };
 
 export const SafeArea = (props: ComponentPropsWithoutRef<"div"> & { edges: Edge[] }) => {
-  const { children, className, edges, ...rest } = props;
+  const { children, className, edges, style: injectStyle, ...rest } = props;
 
   const style = usePreservedReference({
+    ...injectStyle,
     paddingTop: edges.includes("top") ? `var(--safe-area-top)` : undefined,
     paddingBottom: edges.includes("bottom") ? `var(--safe-area-bottom)` : undefined,
     paddingLeft: edges.includes("left") ? `var(--safe-area-left)` : undefined,

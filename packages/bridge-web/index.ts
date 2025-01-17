@@ -1,6 +1,8 @@
 import type { BridgeStore } from "@webview-bridge/types";
 import { linkBridge } from "@webview-bridge/web";
 
+type StatusBarStyle = "auto" | "inverted" | "light" | "dark";
+
 type AbstractBridgeFunctions = {
   openInAppUrl: (url: string) => Promise<void>;
   openExternalUrl: (url: string) => Promise<void>;
@@ -10,6 +12,7 @@ type AbstractBridgeFunctions = {
   getUserAppVersion: () => Promise<string | null>;
   notifySafeArea: (safearea: Array<"top" | "bottom" | "left" | "right">) => Promise<void>;
   getInsets: () => Promise<{ top: number; bottom: number; left: number; right: number }>;
+  notifyStatusBar: (style: StatusBarStyle) => Promise<void>;
 };
 
 export type AppBridge = BridgeStore<AbstractBridgeFunctions>;

@@ -58,7 +58,31 @@ export const fontSize = {
   12: "0.75rem",
 };
 
+export const scaleTransitionDuration = {
+  "0": "0ms",
+  "100": "100ms",
+  "200": "200ms",
+  "300": "300ms",
+  "400": "400ms",
+  "500": "500ms",
+  "600": "600ms",
+  "700": "700ms",
+  "800": "800ms",
+  "900": "900ms",
+  "1000": "1000ms",
+};
+
+export const semanticTransitionDuration = {
+  header: scaleTransitionDuration[300],
+};
+
+export const transitionDuration = {
+  ...scaleTransitionDuration,
+  ...semanticTransitionDuration,
+};
+
 export const vars = {
   colors,
   fontSize,
+  transitionDuration,
 };

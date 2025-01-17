@@ -15,6 +15,7 @@ export const BackIcon = (
       {...rest}
     >
       <path
+        className=" transition-all duration-header"
         d="M26.25 12.2498L17.5 20.9998L26.25 29.7498"
         stroke={color}
         strokeWidth="2.5"

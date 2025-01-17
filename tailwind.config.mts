@@ -11,6 +11,9 @@ const config: Config = {
     fontSize: {
       ...vars.fontSize,
     },
+    transitionDuration: {
+      ...vars.transitionDuration,
+    },
     extend: {
       fontFamily: {
         pretendard: ["Pretendard", "sans-serif"],
