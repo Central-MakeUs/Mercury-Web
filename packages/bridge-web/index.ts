@@ -8,8 +8,10 @@ type AbstractBridgeFunctions = {
   copyClipboard: (text: string) => Promise<void>;
   requestReview: () => Promise<boolean>;
   getUserAppVersion: () => Promise<string | null>;
+  notifySafeArea: (safearea: Array<"top" | "bottom" | "left" | "right">) => Promise<void>;
+  getInsets: () => Promise<{ top: number; bottom: number; left: number; right: number }>;
 };
 
 export type AppBridge = BridgeStore<AbstractBridgeFunctions>;
 
-export const bridge = linkBridge();
+export const bridge = linkBridge<AppBridge>();

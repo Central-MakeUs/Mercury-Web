@@ -1,30 +1,30 @@
 import { BackIcon } from "@repo/icon/BackIcon";
-import { type ComponentPropsWithRef, type Ref, forwardRef } from "react";
-import { Text } from "./Text";
+import { KebabIcon } from "@repo/icon/KebabIcon";
+import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "./cn";
 
-interface TopNavigationProps extends ComponentPropsWithRef<"button"> {
-  title?: string;
-}
-
-export const TopNavigation = forwardRef(function TopNavigation(
-  { className, title = "독서기록", ...rest }: TopNavigationProps,
-  ref?: Ref<HTMLButtonElement>,
-) {
+const _Root = () => {
   return (
-    <div className={cn("w-full relative flex items-center h-[48px]", className)}>
-      <button
-        ref={ref}
-        className="absolute top-[50%] translate-y-[-50%] left-0 flex items-center justify-center w-[42px] h-[42px]"
-        aria-label="Back"
-        {...rest}
-      >
-        <BackIcon />
-      </button>
-
-      <Text as="h1" variant="body/18_sb" className="flex-grow text-center">
-        {title}
-      </Text>
-    </div>
+    <>
+      <header className=" "></header>
+    </>
   );
-});
+};
+
+const _Back = (props: Omit<ComponentPropsWithoutRef<"button">, "color"> & { color?: string }) => {
+  const { color, className, ...rest } = props;
+  return (
+    <button className={cn(" size-[42px] flex justify-center items-center", className)} {...rest}>
+      <BackIcon color={color} />
+    </button>
+  );
+};
+
+const _Kebab = (props: Omit<ComponentPropsWithoutRef<"button">, "color"> & { color?: string }) => {
+  const { color, className, ...rest } = props;
+  return (
+    <button className={cn(" size-[42px] flex justify-center items-center", className)} {...rest}>
+      <KebabIcon color={color} />
+    </button>
+  );
+};
