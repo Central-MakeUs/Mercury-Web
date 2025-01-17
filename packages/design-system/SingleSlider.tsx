@@ -13,6 +13,7 @@ export const SingleSlider = (
   },
 ) => {
   const { className, value, onChange, ...rest } = props;
+
   return (
     <SliderPrimitive.Root
       {...rest}
