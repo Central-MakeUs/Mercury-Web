@@ -176,7 +176,8 @@
       "**/android",
       "**/storybook-static",
       "**/@mf-types/*",
-      ".template"
+      ".template",
+      "testResults.json"
     ]
   }
 }

@@ -13,7 +13,8 @@
     "test:type": "tsc --noEmit",
     "ci:test": "vitest run",
     "report": "vitest run --coverage.enabled true",
-    "ci:check": "npx @biomejs/biome check --config-path=./biome-ci.json --diagnostic-level=error --write ."
+    "ci:check": "npx @biomejs/biome check --config-path=./biome-ci.json --diagnostic-level=error --write .",
+    "ci:check:nowrite": "npx @biomejs/biome check --config-path=./biome-ci.json --diagnostic-level=error ."
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
