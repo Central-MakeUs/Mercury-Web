@@ -16,6 +16,7 @@ import { Stack } from "@repo/ui/Stack";
 import { ToggleButton } from "@repo/ui/ToggleButton";
 import { ToggleButtonGroup } from "@repo/ui/ToggleButtonGroup";
 import { type ComponentProps, useState } from "react";
+import { Link } from "react-router";
 
 export default function BookRecordPage() {
   const [sortOption, setSortOption] = useState<string>(SORT_OPTIONS.CREATED_AT.value);
@@ -73,7 +74,9 @@ export default function BookRecordPage() {
         <Box className=" h-[78px]" />
         <Box className=" fixed bottom-0 left-[50%] translate-x-[-50%]">
           <MaxWidthBox className="flex justify-end mb-[94px] mr-[18px]">
-            <FloatingActionButton />
+            <Link to={"/book-record/write"}>
+              <FloatingActionButton />
+            </Link>
           </MaxWidthBox>
         </Box>
       </Stack>
