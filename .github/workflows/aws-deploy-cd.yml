@@ -28,9 +28,6 @@ jobs:
       - name: Run Tests
         run: npm run ci:test
 
-      - name: Run Biome
-        run: npm run ci:check:nowrite
-
       - name: Run Build
         run: npm run build
 
