@@ -22,7 +22,7 @@ export default function BookRecordPage() {
   const [sortOption, setSortOption] = useState<string>(SORT_OPTIONS.CREATED_AT.value);
 
   return (
-    <Stack className=" w-full justify-between">
+    <Stack className=" w-full h-full justify-between">
       <Stack>
         <Spacing className=" h-[24px]" />
         <JustifyBetween className=" items-end w-full px-[16px]">

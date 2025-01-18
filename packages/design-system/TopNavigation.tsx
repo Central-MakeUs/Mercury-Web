@@ -10,10 +10,16 @@ const Root = (
   const { left, right, children, className, ...rest } = props;
   return (
     <>
-      <header className={cn(" flex items-center justify-between px-[6px]", className)} {...rest}>
-        {left}
-        {children}
-        {right}
+      <header
+        className={cn(
+          " relative flex items-center justify-between px-[6px] min-h-[48px] py-[3px]",
+          className,
+        )}
+        {...rest}
+      >
+        {left ?? <div />}
+        {children ?? <div />}
+        {right ?? <div />}
       </header>
     </>
   );
@@ -22,18 +28,30 @@ const Root = (
 const Back = (props: Omit<ComponentPropsWithoutRef<"button">, "color"> & { color?: string }) => {
   const { color, className, ...rest } = props;
   return (
-    <button className={cn(" size-[42px] flex justify-center items-center", className)} {...rest}>
-      <BackIcon color={color} />
-    </button>
+    <>
+      <button
+        className={cn("  absolute size-[42px] flex justify-center items-center", className)}
+        {...rest}
+      >
+        <BackIcon color={color} />
+      </button>
+      <div />
+    </>
   );
 };
 
 const Kebab = (props: Omit<ComponentPropsWithoutRef<"button">, "color"> & { color?: string }) => {
   const { color, className, ...rest } = props;
   return (
-    <button className={cn(" size-[42px] flex justify-center items-center", className)} {...rest}>
-      <KebabIcon color={color} />
-    </button>
+    <>
+      <button
+        className={cn(" absolute size-[42px] flex justify-center items-center", className)}
+        {...rest}
+      >
+        <KebabIcon color={color} />
+      </button>
+      <div />
+    </>
   );
 };
 

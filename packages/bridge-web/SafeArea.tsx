@@ -31,7 +31,7 @@ export const SafeArea = (props: ComponentPropsWithoutRef<"div"> & { edges: Edge[
   });
 
   return (
-    <div className={cn(className)} style={style} {...rest}>
+    <div className={cn("", className)} style={style} {...rest}>
       {children}
     </div>
   );
