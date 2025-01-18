@@ -1,6 +1,7 @@
 import "./index.css";
 import "../packages/design-system/iosTimePicker.css";
 import { Analytics } from "@repo/analytics";
+import { SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
 import { worker } from "@repo/mocks/browser";
 import { Providers } from "@repo/providers";
@@ -32,6 +33,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="" element={<OnBoardingPage />} />
           </Routes>
         </BrowserRouter>
+        <SafeAreaEffector />
         <Analytics />
       </Providers>
     </MobileLayout>
