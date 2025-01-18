@@ -10,6 +10,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest",
+    "test:type": "tsc --noEmit",
     "ci:test": "vitest run",
     "report": "vitest run --coverage.enabled true",
     "ci:check": "npx @biomejs/biome check --config-path=./biome-ci.json --diagnostic-level=error --write ."
