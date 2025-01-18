@@ -52,7 +52,7 @@ export default function BookRecordPage() {
       <Stack className=" w-full h-full">
         <List
           fallback={
-            <CenterStack className="   h-full px-[72px]">
+            <CenterStack className="h-full px-[72px]">
               <AspectRatio ratio={283 / 210}>
                 <Image
                   src={BOOK_RECORD_ASSETS.EMPTY_FALLBACK}
