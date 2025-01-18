@@ -43,8 +43,9 @@ export default function TimerPage() {
           </CenterStack>
           <BottomNavigationBar.Height className=" mb-[62.5px]" />
         </Stack>
-        <TimerEffector />
       </Stack>
+
+      <TimerEffector />
     </>
   );
 }
