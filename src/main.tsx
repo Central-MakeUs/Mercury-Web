@@ -41,5 +41,5 @@ createRoot(document.getElementById("root")!).render(
 );
 
 if (process.env.NODE_ENV === "development") {
-  worker.start();
+  worker.start({ quiet: true, onUnhandledRequest: "bypass" });
 }
