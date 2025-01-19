@@ -89,7 +89,7 @@ export const TimePickerBottomSheet = (props: TimePickerBottomSheetProps) => {
               props.onConfirm?.({ left, right });
             }}
           >
-            다음
+            시작
           </CtaButton>
         </BottomSheet.Content>
       </BottomSheet.Portal>
@@ -99,9 +99,9 @@ export const TimePickerBottomSheet = (props: TimePickerBottomSheetProps) => {
 
 export const timePickerBottomSheet = {
   getMinuteAndSecondProps: () => ({
-    leftLabel: "min",
-    leftSlideCount: 60,
-    rightLabel: "sec",
+    leftLabel: "분",
+    leftSlideCount: 61,
+    rightLabel: "초",
     rightSlideCount: 60,
   }),
   openAsync: async (props: Omit<TimePickerBottomSheetProps, "isOpen" | "onClose" | "onExit">) => {

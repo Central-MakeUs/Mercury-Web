@@ -91,7 +91,13 @@ const Action = (props: ActionProps) => {
   );
 };
 
+export const Height = (props: ComponentPropsWithoutRef<"div">) => {
+  const { className, ...rest } = props;
+  return <Box className={cn(" h-[72px]", className)} {...rest} />;
+};
+
 export const BottomNavigationBar = {
   Root,
   Action,
+  Height,
 };

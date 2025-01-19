@@ -17,7 +17,7 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
   const [value, setValue] = useDraft(props.progress ?? 0);
 
   return (
-    <Stack className=" justify-between pb-[24px]">
+    <Stack className=" h-full justify-between pb-[24px]">
       <Stack>
         <Spacing className=" h-6" />
         <Stack className=" px-5">

@@ -39,4 +39,19 @@
     --safe-area-left: 0px;
     --safe-area-right: 0px;
   }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #c6c6cf;
+    border-radius: 999rem;
+    height: 57px;
+    max-height: 57px;
+  }
+  .scrollbar::-webkit-scrollbar {
+    background-color: inherit;
+    width: 3px;
+  }
+
+  .scrollbar::-webkit-resizer {
+    background-color: inherit;
+  }
 }

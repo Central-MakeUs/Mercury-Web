@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm } from "react-hook-form";
 import { textVariants } from "./Text";
-import { LetterCount } from "./TextArea";
 import { cn } from "./cn";
 
 const meta: Meta = {
@@ -26,7 +25,6 @@ export const Default: StoryObj = {
             "w-full h-full bg-yellow-green py-[9px] px-[15px] rounded-3 text-gray-600 placeholder:gray-400",
           )}
         />
-        <LetterCount control={form.control} name="text" />
       </div>
     );
   },
