@@ -1,4 +1,4 @@
-import { helloHandler } from "./hello/helloHandler";
+import { mockGetBooksSearchHandler } from "./booksSearch/mockGetbooksSearchHandler";
 import { mockHandler } from "./mock/mockHandler";
 
-export const handlers = [...helloHandler, ...mockHandler];
+export const handlers = [...mockHandler, ...mockGetBooksSearchHandler];
