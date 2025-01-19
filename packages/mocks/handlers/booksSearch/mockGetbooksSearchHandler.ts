@@ -1,9 +1,9 @@
 import { http, HttpResponse } from "msw";
 import type { GetBooksSearchSortType } from "~/entities/record/api/getBooksSearch";
 import { baseUrl } from "../../constants";
-import { mockCreateGetBooksSearchResponse } from "./getBooksSearch.mock";
+import { mockCreateGetBooksSearchResponse } from "./mockGetBooksSearch";
 
-export const getBooksSearchHandler = [
+export const mockGetBooksSearchHandler = [
   http.get(`${baseUrl}/books/search`, ({ request }) => {
     const url = new URL(request.url);
 

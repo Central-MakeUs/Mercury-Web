@@ -1,4 +1,4 @@
-import { getBooksSearchHandler } from "./booksSearch/getbooksSearchHandler";
+import { mockGetBooksSearchHandler } from "./booksSearch/mockGetbooksSearchHandler";
 import { mockHandler } from "./mock/mockHandler";
 
-export const handlers = [...mockHandler, ...getBooksSearchHandler];
+export const handlers = [...mockHandler, ...mockGetBooksSearchHandler];
