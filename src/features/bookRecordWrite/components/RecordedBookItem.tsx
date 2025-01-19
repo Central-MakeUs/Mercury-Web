@@ -27,7 +27,7 @@ export const RecordedBookItem = forwardRef(function RecordedBookItem(
     >
       <Image
         className="rounded-[4px] max-w-[104px] border-[1px] border-white/10"
-        objectFit={"contain"}
+        objectfit={"contain"}
         src={imageUrl}
         alt={`${title} 표지`}
       />
