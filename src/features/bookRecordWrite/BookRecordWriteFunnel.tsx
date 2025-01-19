@@ -1,5 +1,8 @@
+import { TopNavigation } from "@repo/design-system/TopNavigation";
+import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { useFunnel } from "@use-funnel/browser";
+import { useNavigate } from "react-router";
 import BookRecordWriteProgressStep from "./BookRecordWriteProgressStep";
 import BookRecordWriteSearchStep from "./BookRecordWriteSearchStep";
 import BookRecordWriteTextStep from "./BookRecordWriteTextStep";
@@ -16,8 +19,17 @@ const options = {
 
 export const BookRecordWriteFunnel = () => {
   const funnel = useFunnel(options);
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate(-1);
+  };
   return (
-    <Stack>
+    <Stack className=" w-full">
+      <TopNavigation.Root left={<TopNavigation.Back onClick={handleBack} />}>
+        <TopNavigation.Title>독서기록</TopNavigation.Title>
+      </TopNavigation.Root>
+      <Spacing className="h-[10px]" />
+
       <funnel.Render
         SearchStep={({ history }) => (
           <BookRecordWriteSearchStep onNext={(book) => history.push("TextStep", { book })} />
@@ -31,6 +43,7 @@ export const BookRecordWriteFunnel = () => {
           <BookRecordWriteProgressStep
             onNext={(progress) => {
               const _result = { ...context, progress };
+              navigate("/book-record");
             }}
           />
         )}
