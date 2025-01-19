@@ -5,25 +5,14 @@ import { Pubsub, delay } from "@xionwcfm/utils";
 import { type VariantProps, cva } from "class-variance-authority";
 import { AnimatePresence, motion } from "motion/react";
 import { type PropsWithChildren, type ReactNode, useEffect, useState } from "react";
-import { Image } from "./Image";
 import { MaxWidthBox } from "./MaxWidthBox";
 import { Text } from "./Text";
 import { cn } from "./cn";
+
 const TOAST_PREFIX_ID = "@mercury-toast-element";
 const TOAST_DEFAULT_DURATION = 5000;
 const TOAST_LIMIT_POLICY = 1;
 const TOAST_DEFAULT_POSITION = "bottom-navigation" as const;
-const TOAST_MERCURY_ICON = "/images/toast/toast_mercury_icon.webp";
-
-const ToastMercuryIcon = () => {
-  return (
-    <Image
-      src={TOAST_MERCURY_ICON}
-      alt="mercury icon"
-      className="w-[17px] h-[18px] rotate-[2.87]"
-    />
-  );
-};
 
 const toastVariants = cva("", {
   variants: {
@@ -41,11 +30,6 @@ interface Toast {
   icon: ReactNode;
   position: "bottom-navigation" | "bottom";
 }
-
-type ToastActionFunction = (
-  content: Toast["content"],
-  option?: Partial<Pick<Toast, "duration" | "type" | "icon" | "position">>,
-) => void;
 
 type ToastAction = "add" | "remove" | "clear";
 
@@ -105,7 +89,8 @@ const ToastItem = (props: Toast) => {
       className={cn(
         "flex justify-center items-center  w-screen",
         "fixed left-[50%] translate-x-[-50%] ",
-        props.position === "bottom-navigation" && " bottom-[67px]",
+        // 네비게이션 바 높이 72, 스페이싱 12px
+        props.position === "bottom-navigation" && " bottom-[84px]",
         props.position === "bottom" && " bottom-[12px]",
       )}
     >
@@ -118,7 +103,7 @@ const ToastItem = (props: Toast) => {
       >
         <MaxWidthBox className=" px-[16px] flex justify-center items-center">
           <Flex className=" gap-x-[4px] rounded-full w-fit py-[6px] px-[22px] flex items-center bg-gradient-to-r from-main3-gradient-from to-main3-gradient-to">
-            {props.icon ?? <ToastMercuryIcon />}
+            {props.icon}
             {typeof props.content === "string" ? (
               <Text variant={"body/14_sb"} className=" text-white">
                 {props.content}

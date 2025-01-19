@@ -4,17 +4,20 @@ import { TIMER_STATUS, type TimerStatus } from "./timer.model";
 
 interface TimerState {
   status: TimerStatus;
-  second: number;
+  settingSecond: number;
+  currentSecond: number;
+  lastAccessTime: string | null;
 }
-
-type ActionResult = { ok: boolean; reason: string };
 
 interface TimerActions {
   actions: {
-    reset: () => ActionResult;
-    start: () => ActionResult;
-    pause: () => ActionResult;
-    updateTime: (newSecond: number) => ActionResult;
+    reset: () => void;
+    start: (second: number) => void;
+    restart: () => void;
+    pause: () => void;
+    syncTimeOnReentry: () => void;
+    updateCurrentSecond: (second: number) => void;
+    updateStatus: (status: TimerStatus) => void;
   };
 }
 
@@ -24,87 +27,86 @@ export const useTimerStore = create(
   persist<TimerState & TimerActions>(
     (set) => ({
       status: TIMER_STATUS.INIT,
-      second: 0,
+      settingSecond: 0,
+      currentSecond: 0,
+      lastAccessTime: null,
+
       actions: {
         reset: () => {
           set({
             status: TIMER_STATUS.INIT,
-            second: 0,
+            settingSecond: 0,
+            currentSecond: 0,
+            lastAccessTime: null,
           });
-          return { ok: true, reason: "" };
         },
 
-        start: () => {
-          let ok = true;
-          let _reason = "";
-
-          set((prev) => {
-            if (prev.status === TIMER_STATUS.INIT || prev.status === TIMER_STATUS.PAUSED) {
-              return {
-                status: TIMER_STATUS.RUNNING,
-                second: prev.second,
-              };
-            }
-
-            ok = false;
-            _reason = "Timer Is Already Running Or Completed";
-
-            return {
-              status: prev.status,
-              second: prev.second,
-            };
+        start: (second: number) => {
+          set({
+            settingSecond: second,
+            currentSecond: 0,
+            status: TIMER_STATUS.RUNNING,
+            lastAccessTime: new Date().toISOString(),
           });
-          return { ok, reason: "" };
+        },
+
+        restart: () => {
+          set({
+            status: TIMER_STATUS.RUNNING,
+            lastAccessTime: new Date().toISOString(),
+          });
         },
 
         pause: () => {
-          let ok = true;
-          let reason = "";
-          set((prev) => {
-            if (prev.status !== TIMER_STATUS.RUNNING) {
-              ok = false;
-              reason = "Timer Is Not Running";
-              return {
-                status: prev.status,
-                second: prev.second,
-              };
-            }
-
-            return {
-              status: TIMER_STATUS.PAUSED,
-              second: prev.second,
-            };
+          set({
+            status: TIMER_STATUS.PAUSED,
+            lastAccessTime: new Date().toISOString(),
           });
-          return { ok, reason };
         },
 
-        updateTime: (newSecond: number) => {
-          set((prev) => {
-            let _ok = true;
-            let _reason = "";
-
-            if (prev.status !== TIMER_STATUS.RUNNING) {
-              _ok = false;
-              _reason = "Timer Is Not Running";
-
-              return {
-                status: prev.status,
-                second: prev.second,
-              };
+        syncTimeOnReentry: () => {
+          set((state) => {
+            if (state.status !== TIMER_STATUS.RUNNING || !state.lastAccessTime) {
+              return state;
             }
 
+            const lastAccess = new Date(state.lastAccessTime).getTime();
+            // biome-ignore lint/complexity/useDateNow: <explanation>
+            const now = new Date().getTime();
+            const elapsedSeconds = Math.floor((now - lastAccess) / 1000);
+            const newCurrentSecond = Math.min(
+              state.currentSecond + elapsedSeconds,
+              state.settingSecond,
+            );
+
             return {
-              status: prev.status,
-              second: newSecond,
+              ...state,
+              currentSecond: newCurrentSecond,
+              status:
+                newCurrentSecond < state.settingSecond
+                  ? TIMER_STATUS.RUNNING
+                  : TIMER_STATUS.COMPLETED,
+              lastAccessTime: new Date().toISOString(),
             };
           });
-          return { ok: true, reason: "" };
+        },
+
+        updateCurrentSecond: (second: number) => {
+          set({ currentSecond: second });
+        },
+
+        updateStatus: (status: TimerStatus) => {
+          set({ status });
         },
       },
     }),
     {
       name: TIMER_STATE_KEY,
       storage: createJSONStorage(() => localStorage),
+      partialize: (state) => {
+        const { actions, ...serializableState } = state;
+        return serializableState as TimerState & TimerActions;
+      },
     },
   ),
 );
