@@ -1,7 +1,7 @@
 import "./index.css";
 import "../packages/design-system/iosTimePicker.css";
-import { Analytics } from "@repo/analytics";
-import { SafeArea, SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
+import { Analytics, MercuryPostHogProvider } from "@repo/analytics";
+import { SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
 import { worker } from "@repo/mocks/browser";
 import { Providers } from "@repo/providers";
@@ -21,24 +21,21 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <MobileLayout maxWidth={MAX_WIDTH}>
       <Providers>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              element={
-                <SafeArea className=" w-full h-screen " edges={["top", "left", "bottom", "right"]}>
-                  <BottomNavigationLayout />
-                </SafeArea>
-              }
-            >
-              <Route path="home" element={<HomePage />} />
-              <Route path="timer" element={<TimerPage />} />
-              <Route path="book-record" element={<BookRecordPage />} />
-              <Route path="profile" element={<ProfilePage />} />
-            </Route>
-            <Route path="book-record/write" element={<BookRecordWritePage />} />
-            <Route path="" element={<OnBoardingPage />} />
-          </Routes>
-        </BrowserRouter>
+        <MercuryPostHogProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<BottomNavigationLayout />}>
+                <Route path="home" element={<HomePage />} />
+                <Route path="timer" element={<TimerPage />} />
+                <Route path="book-record" element={<BookRecordPage />} />
+                <Route path="profile" element={<ProfilePage />} />
+              </Route>
+              <Route path="book-record/write" element={<BookRecordWritePage />} />
+              <Route path="" element={<OnBoardingPage />} />
+            </Routes>
+          </BrowserRouter>
+        </MercuryPostHogProvider>
+
         <SafeAreaEffector />
         <Analytics />
       </Providers>
@@ -47,5 +44,5 @@ createRoot(document.getElementById("root")!).render(
 );
 
 if (process.env.NODE_ENV === "development") {
-  worker.start();
+  worker.start({ quiet: true, onUnhandledRequest: "bypass" });
 }
