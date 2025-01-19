@@ -3,6 +3,13 @@ import type { KyResponse } from "ky";
 export type ApiSuccessResponse<T> = {
   success: true;
   data: T;
-  status: number;
+  code: number;
+  message: string;
   response: KyResponse<T>;
+};
+
+export type ApiErrorResponse = {
+  code: string;
+  message: string;
+  data: null;
 };
