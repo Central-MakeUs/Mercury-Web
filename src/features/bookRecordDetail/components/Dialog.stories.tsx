@@ -3,6 +3,7 @@ import { CtaButton } from "@repo/design-system/CtaButton";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { DialogConfirm } from "./DialogConfirm";
+import { DialogMenu } from "./DialogMenu";
 import { DialogContainer } from "./dialogContainer";
 
 const meta: Meta = {
@@ -45,6 +46,24 @@ export const Confirm: StoryObj = {
 
         <DialogContainer>
           <DialogConfirm setIsOpen={setIsOpen} />
+        </DialogContainer>
+      </Dialog.Root>
+    );
+  },
+};
+
+export const Menu: StoryObj = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog.Trigger asChild={true}>
+          <CtaButton className="bg-green max-h-[50px]">Dialog Open</CtaButton>
+        </Dialog.Trigger>
+
+        <DialogContainer>
+          <DialogMenu />
         </DialogContainer>
       </Dialog.Root>
     );
