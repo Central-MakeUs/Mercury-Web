@@ -1,5 +1,4 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { CtaButton } from "@repo/design-system/CtaButton";
+import { Button } from "@repo/design-system/Button";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { DialogConfirm } from "./DialogConfirm";
@@ -12,60 +11,40 @@ const meta: Meta = {
 };
 export default meta;
 
-export const Default: StoryObj = {
+export const ConfirmDialog: StoryObj = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-        <Dialog.Trigger asChild={true}>
-          <CtaButton className="bg-green max-h-[50px]">Dialog Open</CtaButton>
-        </Dialog.Trigger>
+      <DialogContainer.Root open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContainer.Trigger asChild={true}>
+          <Button className="bg-blue-500 text-white bg-green">삭제 확인</Button>
+        </DialogContainer.Trigger>
 
-        <DialogContainer>
-          <p className="text-lg text-center font-medium">
-            모든 메모가 한 번에 삭제돼요.
-            <br />
-            정말 삭제할까요?
-          </p>
-        </DialogContainer>
-      </Dialog.Root>
+        <DialogContainer.Portal>
+          <DialogContainer.Overlay />
+          <DialogConfirm onClose={() => setIsOpen(false)} />
+        </DialogContainer.Portal>
+      </DialogContainer.Root>
     );
   },
 };
 
-export const Confirm: StoryObj = {
+export const MenuDialog: StoryObj = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-        <Dialog.Trigger asChild={true}>
-          <CtaButton className="bg-green max-h-[50px]">Dialog Open</CtaButton>
-        </Dialog.Trigger>
+      <DialogContainer.Root open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContainer.Trigger asChild={true}>
+          <Button className="bg-green-500 text-white bg-green">메뉴 열기</Button>
+        </DialogContainer.Trigger>
 
-        <DialogContainer>
-          <DialogConfirm setIsOpen={setIsOpen} />
-        </DialogContainer>
-      </Dialog.Root>
-    );
-  },
-};
-
-export const Menu: StoryObj = {
-  render: () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    return (
-      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-        <Dialog.Trigger asChild={true}>
-          <CtaButton className="bg-green max-h-[50px]">Dialog Open</CtaButton>
-        </Dialog.Trigger>
-
-        <DialogContainer>
+        <DialogContainer.Portal>
+          <DialogContainer.Overlay />
           <DialogMenu />
-        </DialogContainer>
-      </Dialog.Root>
+        </DialogContainer.Portal>
+      </DialogContainer.Root>
     );
   },
 };

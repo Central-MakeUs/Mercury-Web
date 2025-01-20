@@ -1,4 +1,5 @@
-import type { ComponentPropsWithoutRef } from "react";
+import { cva } from "class-variance-authority";
+import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from "react";
 import { textVariants } from "./Text";
 import { cn } from "./cn";
 
@@ -6,8 +7,6 @@ interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   variant?: "primary" | "warning" | "gray";
   size?: "small" | "medium";
 }
-
-import { cva } from "class-variance-authority";
 
 const buttonStyles = cva("rounded-[30px] py-[12px] max-h-[50px]", {
   variants: {
@@ -27,23 +26,22 @@ const buttonStyles = cva("rounded-[30px] py-[12px] max-h-[50px]", {
   },
 });
 
-export const Button = ({
-  children,
-  className,
-  variant = "primary",
-  size = "small",
-  ...props
-}: ButtonProps) => {
-  return (
-    <button
-      className={cn(
-        textVariants({ variant: "body/18_sb" }),
-        buttonStyles({ variant, size }),
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
+export const Button = forwardRef<ElementRef<"button">, ButtonProps>(
+  ({ children, className, variant = "primary", size = "small", ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={cn(
+          textVariants({ variant: "body/18_sb" }),
+          buttonStyles({ variant, size }),
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  },
+);
+
+Button.displayName = "Button";
