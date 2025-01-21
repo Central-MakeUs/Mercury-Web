@@ -1,6 +1,11 @@
 import { BackIcon } from "@repo/icon/BackIcon";
 import { KebabIcon } from "@repo/icon/KebabIcon";
-import type { ComponentProps, ComponentPropsWithoutRef, ReactNode } from "react";
+import {
+  type ComponentProps,
+  type ComponentPropsWithoutRef,
+  type ReactNode,
+  forwardRef,
+} from "react";
 import { Text } from "./Text";
 import { cn } from "./cn";
 
@@ -40,12 +45,15 @@ const Back = (props: Omit<ComponentPropsWithoutRef<"button">, "color"> & { color
   );
 };
 
-const Kebab = (props: Omit<ComponentPropsWithoutRef<"button">, "color"> & { color?: string }) => {
-  const { color, className, ...rest } = props;
+const Kebab = forwardRef<
+  HTMLButtonElement,
+  Omit<ComponentPropsWithoutRef<"button">, "color"> & { color?: string }
+>(({ color, className, ...rest }, ref) => {
   return (
     <>
       <button
-        className={cn(" absolute size-[42px] flex justify-center items-center", className)}
+        ref={ref} // ✅ `ref` 추가
+        className={cn("absolute size-[42px] flex justify-center items-center", className)}
         {...rest}
       >
         <KebabIcon color={color} />
@@ -53,7 +61,7 @@ const Kebab = (props: Omit<ComponentPropsWithoutRef<"button">, "color"> & { colo
       <div />
     </>
   );
-};
+});
 
 const Title = (props: ComponentProps<typeof Text>) => {
   const { children, className, ...rest } = props;
