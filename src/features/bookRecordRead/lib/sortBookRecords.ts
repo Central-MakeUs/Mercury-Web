@@ -1,6 +1,6 @@
 import type { BookRecord } from "~/entities/record/model/record.model";
-import type { BookRecordSortOption } from "~/features/bookRecordRead/ model/bookRecord.model";
-import { BOOK_RECORD_SORT_OPTIONS } from "~/features/bookRecordRead/ model/bookRecord.model";
+import type { BookRecordSortOption } from "~/features/bookRecordRead/model/bookRecord.model";
+import { BOOK_RECORD_SORT_OPTIONS } from "~/features/bookRecordRead/model/bookRecord.model";
 
 export const sortBookRecords = <T extends BookRecord>(
   records: T[],

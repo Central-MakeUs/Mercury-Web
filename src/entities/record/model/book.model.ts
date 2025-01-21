@@ -7,7 +7,7 @@ export interface Book {
 }
 
 export interface BookWithId extends Book {
-  id: string;
+  bookId: string;
   // createdAt: string; //datetime
   // updatedAt: string | null;
 }
