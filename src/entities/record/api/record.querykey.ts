@@ -7,4 +7,5 @@ export const recordQueryKeys = {
     "getBooksSearch",
     param,
   ],
+  getRecords: () => [...recordQueryKeys.all(), "getRecords"],
 };

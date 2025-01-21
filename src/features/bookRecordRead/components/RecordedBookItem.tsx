@@ -1,4 +1,5 @@
 import { Image } from "@repo/design-system/Image";
+import { MiniSingleSlider } from "@repo/design-system/MiniSingleSlider";
 import { Text } from "@repo/design-system/Text";
 import { cn } from "@repo/design-system/cn";
 import { Flex } from "@repo/ui/Flex";
@@ -13,17 +14,18 @@ interface RecordedBookItemProps {
   onClick?: () => void;
   updatedAt: string;
   bookSummary: string;
+  gauge: number;
 }
 
 export const RecordedBookItem = forwardRef(function RecordedBookItem(
-  { imageUrl, title, className, onClick, updatedAt, bookSummary }: RecordedBookItemProps,
+  { gauge, imageUrl, title, className, onClick, updatedAt, bookSummary }: RecordedBookItemProps,
   ref?: Ref<HTMLButtonElement>,
 ) {
   return (
     <button
       ref={ref}
       onClick={onClick}
-      className={cn("flex gap-[13px] max-h-[156px] text-left", className)}
+      className={cn("flex w-full  gap-[13px] max-h-[156px] text-left", className)}
     >
       <Image
         className="rounded-[4px] max-w-[104px] border-[1px] border-white/10"
@@ -31,19 +33,25 @@ export const RecordedBookItem = forwardRef(function RecordedBookItem(
         src={imageUrl}
         alt={`${title} 표지`}
       />
-      <div>
+      <div className=" w-full">
         <Text variant={"body/16_sb"} className="mb-[10px] line-clamp-2">
           {title}
         </Text>
 
-        <Stack>
-          <JustifyBetween>
+        <Stack className=" w-full flex-grow">
+          <JustifyBetween className=" w-full  ">
             <Flex className="gap-[5px]">
               <Text variant={"body/15_m"} className="text-gray-500">
                 업데이트
               </Text>
               <Text variant={"body/15_m"} className="text-gray-800">
                 {updatedAt}
+              </Text>
+            </Flex>
+            <Flex className=" items-center gap-x-[5px]">
+              <MiniSingleSlider value={gauge} />
+              <Text variant={"body/15_sb"} className=" text-pastel-violet">
+                {gauge}%
               </Text>
             </Flex>
           </JustifyBetween>
