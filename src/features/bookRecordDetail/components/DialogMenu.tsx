@@ -2,7 +2,7 @@ import { textVariants } from "@repo/design-system/Text";
 import { cn } from "@repo/design-system/cn";
 import { Stack } from "@repo/ui/Stack";
 import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from "react";
-import { DialogContent } from "./DialogContent";
+import { Dialog } from "./Dialog";
 
 export const Item = forwardRef<ElementRef<"button">, ComponentPropsWithoutRef<"button">>(
   ({ className, ...props }, ref) => (
@@ -21,11 +21,11 @@ Item.displayName = "DialogItem";
 
 export const DialogMenu = () => {
   return (
-    <DialogContent.Content>
+    <Dialog.Content>
       <Stack className="px-4 py-2">
         <Item>메모 수정하기</Item>
         <Item>메모 삭제하기</Item>
       </Stack>
-    </DialogContent.Content>
+    </Dialog.Content>
   );
 };
