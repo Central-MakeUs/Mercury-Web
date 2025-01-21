@@ -37,7 +37,7 @@ export const TimerButtonSection = (props: ComponentProps<"div">) => {
   };
 
   const handleComplete = () => {
-    toast.success("집중한만큼 보상을 얻었어요!", { icon: <MercuryIcon /> });
+    toast.main3("집중한만큼 보상을 얻었어요!", { icon: <MercuryIcon /> });
     actions.reset();
   };
 
