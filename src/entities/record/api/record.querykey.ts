@@ -1,4 +1,5 @@
 import type { GetBooksSearchRequest } from "./getBooksSearch";
+import type { GetRecordsRequest } from "./getRecords";
 
 export const recordQueryKeys = {
   all: () => ["record"],
@@ -7,5 +8,9 @@ export const recordQueryKeys = {
     "getBooksSearch",
     param,
   ],
-  getRecords: () => [...recordQueryKeys.all(), "getRecords"],
+  getRecords: (request: GetRecordsRequest) => [
+    ...recordQueryKeys.all(),
+    "getRecords",
+    request.userId,
+  ],
 };

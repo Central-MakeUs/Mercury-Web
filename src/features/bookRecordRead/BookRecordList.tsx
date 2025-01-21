@@ -21,10 +21,10 @@ export const BookRecordList = wrap
     ),
   })
   .on(() => {
+    const userId = "mock userid";
     const search = useBookRecordStore((store) => store.search);
     const sortOption = useBookRecordStore((store) => store.sortOption);
-
-    const recordsResponse = useSuspenseQuery(getRecordsQueryOptions());
+    const recordsResponse = useSuspenseQuery(getRecordsQueryOptions({ userId }));
 
     const searchedRecords = searchBookRecords(recordsResponse.data.records, search);
     const sortedRecords = sortBookRecords(searchedRecords, sortOption);

@@ -3,17 +3,26 @@ import { queryOptions } from "@tanstack/react-query";
 import type { BookRecord } from "../model/record.model";
 import { recordQueryKeys } from "./record.querykey";
 
-interface GetRecordsResponse {
+export interface GetRecordsResponse {
   records: BookRecord[];
 }
 
-export const getRecords = async () => {
-  const response = await http.get<GetRecordsResponse>(`/records`);
+export interface GetRecordsRequest {
+  userId: string;
+}
+
+export const getRecords = async (request: GetRecordsRequest) => {
+  const { userId } = request;
+  const response = await http.get<GetRecordsResponse>(`/records`, {
+    searchParams: {
+      userId,
+    },
+  });
   return response.data;
 };
 
-export const getRecordsQueryOptions = () =>
+export const getRecordsQueryOptions = (request: GetRecordsRequest) =>
   queryOptions({
-    queryKey: recordQueryKeys.getRecords(),
-    queryFn: getRecords,
+    queryKey: recordQueryKeys.getRecords(request),
+    queryFn: () => getRecords(request),
   });
