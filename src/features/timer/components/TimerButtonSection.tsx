@@ -11,6 +11,7 @@ import { TIMER_STATUS } from "../model/timer.model";
 export const TimerButtonSection = (props: ComponentProps<"div">) => {
   const { className, ...rest } = props;
   const status = useTimerStore((state) => state.status);
+  const _time = useTimerStore((state) => state.settingSecond);
   const actions = useTimerStore((state) => state.actions);
 
   const handleStart = () => {
