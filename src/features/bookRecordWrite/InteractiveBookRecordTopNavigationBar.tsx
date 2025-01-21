@@ -31,7 +31,7 @@ export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
   }, [isScrollTop]);
 
   return (
-    <MaxWidthBox className="fixed">
+    <MaxWidthBox className="fixed z-[2]">
       <SafeArea
         className=" duration-header transition-all"
         style={{ backgroundColor: backgroundColors }}
@@ -40,7 +40,7 @@ export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
         <TopNavigation.Root
           className=" py-[3px]"
           left={<TopNavigation.Back onClick={onBack} color={backColors} />}
-          right={<TopNavigation.Kebab color={kebabColors} />}
+          right={<TopNavigation.Kebab color={kebabColors} className="right-[16px]" />}
         >
           <TopNavigation.Title style={{ color: textColors }}>
             알라딘 {isScrollTop ? "top" : "bottom"}
