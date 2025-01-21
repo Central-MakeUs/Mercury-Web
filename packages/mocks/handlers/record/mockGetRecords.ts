@@ -26,8 +26,8 @@ export const mockGetRecordsHandler = [
           },
           {
             recordId: 2,
-            createdAt: "2024-01-10T10:00:00",
-            updatedAt: "2024-01-10T10:00:00",
+            createdAt: "2024-01-04T10:00:00",
+            updatedAt: "2024-01-05T10:00:00",
             book: {
               title: "달 러구트 꿈 백화점",
               coverImageUrl:
