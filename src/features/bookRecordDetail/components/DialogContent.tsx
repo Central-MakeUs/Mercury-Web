@@ -36,7 +36,7 @@ Content.displayName = "DialogContent";
 export const Title = Dialog.Title;
 export const Description = Dialog.Description;
 
-export const DialogContainer = {
+export const DialogContent = {
   Root,
   Trigger,
   Portal,

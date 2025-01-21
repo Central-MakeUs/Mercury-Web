@@ -2,7 +2,7 @@ import { Button } from "@repo/design-system/Button";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { DialogConfirm } from "./DialogConfirm";
-import { DialogContainer } from "./DialogContainer";
+import { DialogContent } from "./DialogContent";
 import { DialogMenu } from "./DialogMenu";
 
 const meta: Meta = {
@@ -16,16 +16,16 @@ export const ConfirmDialog: StoryObj = {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <DialogContainer.Root open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContainer.Trigger asChild={true}>
+      <DialogContent.Root open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent.Trigger asChild={true}>
           <Button className="bg-blue-500 text-white bg-green">삭제 확인</Button>
-        </DialogContainer.Trigger>
+        </DialogContent.Trigger>
 
-        <DialogContainer.Portal>
-          <DialogContainer.Overlay />
+        <DialogContent.Portal>
+          <DialogContent.Overlay />
           <DialogConfirm onClose={() => setIsOpen(false)} />
-        </DialogContainer.Portal>
-      </DialogContainer.Root>
+        </DialogContent.Portal>
+      </DialogContent.Root>
     );
   },
 };
@@ -35,16 +35,16 @@ export const MenuDialog: StoryObj = {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <DialogContainer.Root open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContainer.Trigger asChild={true}>
+      <DialogContent.Root open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent.Trigger asChild={true}>
           <Button className="bg-green-500 text-white bg-green">메뉴 열기</Button>
-        </DialogContainer.Trigger>
+        </DialogContent.Trigger>
 
-        <DialogContainer.Portal>
-          <DialogContainer.Overlay />
+        <DialogContent.Portal>
+          <DialogContent.Overlay />
           <DialogMenu />
-        </DialogContainer.Portal>
-      </DialogContainer.Root>
+        </DialogContent.Portal>
+      </DialogContent.Root>
     );
   },
 };

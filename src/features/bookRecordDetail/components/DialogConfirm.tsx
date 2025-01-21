@@ -3,7 +3,7 @@ import { textVariants } from "@repo/design-system/Text";
 import { cn } from "@repo/design-system/cn";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
-import { DialogContainer } from "./DialogContainer";
+import { DialogContent } from "./DialogContent";
 
 interface DialogConfirmProps {
   onClose: () => void;
@@ -11,9 +11,9 @@ interface DialogConfirmProps {
 
 export const DialogConfirm = ({ onClose }: DialogConfirmProps) => {
   return (
-    <DialogContainer.Content>
+    <DialogContent.Content>
       <Stack className="p-4 gap-[35px]">
-        <DialogContainer.Title
+        <DialogContent.Title
           className={cn(
             "DialogTitle text-center mt-[25px] text-gray-800",
             textVariants({ variant: "title/20_sb" }),
@@ -21,7 +21,7 @@ export const DialogConfirm = ({ onClose }: DialogConfirmProps) => {
         >
           모든 메모가 한 번에 삭제돼요
           <br /> 정말 삭제할까요?
-        </DialogContainer.Title>
+        </DialogContent.Title>
 
         <Flex className="gap-2">
           <Button
@@ -41,6 +41,6 @@ export const DialogConfirm = ({ onClose }: DialogConfirmProps) => {
           </Button>
         </Flex>
       </Stack>
-    </DialogContainer.Content>
+    </DialogContent.Content>
   );
 };
