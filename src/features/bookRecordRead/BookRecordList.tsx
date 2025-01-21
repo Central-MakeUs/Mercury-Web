@@ -8,7 +8,6 @@ import { FirstUserRecordFallback } from "~/features/bookRecordRead/components/Fi
 import { RecordedBookItem } from "~/features/bookRecordRead/components/RecordedBookItem";
 import { SearchResultEmptyFallback } from "~/features/bookRecordRead/components/SearchResultEmptyFallback";
 import { searchBookRecords } from "./lib/searchBookRecords";
-import { sortBookRecords } from "./lib/sortBookRecords";
 import { useBookRecordStore } from "./model/BookRecordProvider";
 
 export const BookRecordList = wrap
@@ -23,12 +22,12 @@ export const BookRecordList = wrap
   .on(() => {
     const userId = "mock userid";
     const search = useBookRecordStore((store) => store.search);
-    const sortOption = useBookRecordStore((store) => store.sortOption);
-    const recordsResponse = useSuspenseQuery(getRecordsQueryOptions({ userId }));
+    const sortType = useBookRecordStore((store) => store.sortType);
+    const recordsResponse = useSuspenseQuery(getRecordsQueryOptions({ userId, sortType }));
 
     const searchedRecords = searchBookRecords(recordsResponse.data.records, search);
-    const sortedRecords = sortBookRecords(searchedRecords, sortOption);
-    const records = sortedRecords;
+    // const sortedRecords = sortBookRecords(searchedRecords, sortType);
+    const records = searchedRecords;
     const isSearchResultEmpty = search.length > 0 && searchedRecords.length === 0;
 
     const fallback = isSearchResultEmpty ? (

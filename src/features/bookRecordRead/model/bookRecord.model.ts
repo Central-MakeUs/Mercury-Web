@@ -1,4 +1,4 @@
-export const BOOK_RECORD_SORT_OPTIONS = {
+export const BOOK_RECORD_SORT_TYPES = {
   CREATED_AT: {
     label: "생성일 순",
     value: "CREATED_AT",
@@ -9,9 +9,9 @@ export const BOOK_RECORD_SORT_OPTIONS = {
   },
 } as const;
 
-export type BookRecordSortOption =
-  (typeof BOOK_RECORD_SORT_OPTIONS)[keyof typeof BOOK_RECORD_SORT_OPTIONS]["value"];
+export type BookRecordSortType =
+  (typeof BOOK_RECORD_SORT_TYPES)[keyof typeof BOOK_RECORD_SORT_TYPES]["value"];
 
-export const isBookRecordSortOption = (value: unknown): value is BookRecordSortOption => {
-  return Object.values(BOOK_RECORD_SORT_OPTIONS).some((option) => option.value === value);
+export const isBookRecordSortType = (value: unknown): value is BookRecordSortType => {
+  return Object.values(BOOK_RECORD_SORT_TYPES).some((option) => option.value === value);
 };

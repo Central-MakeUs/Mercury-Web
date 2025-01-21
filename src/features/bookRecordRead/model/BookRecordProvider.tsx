@@ -1,17 +1,17 @@
 import { createSafeContext } from "@xionwcfm/react";
 import { type PropsWithChildren, useState } from "react";
 import { type StoreApi, createStore, useStore } from "zustand";
-import { BOOK_RECORD_SORT_OPTIONS, type BookRecordSortOption } from "./bookRecord.model";
+import { BOOK_RECORD_SORT_TYPES, type BookRecordSortType } from "./bookRecord.model";
 
 interface BookRecordStoreState {
   search: string;
-  sortOption: BookRecordSortOption;
+  sortType: BookRecordSortType;
 }
 
 type BookRecordStoreActions = {
   actions: {
     setSearch: (search: string) => void;
-    setSortOption: (sortOption: BookRecordSortOption) => void;
+    setSortType: (sortOption: BookRecordSortType) => void;
   };
 };
 
@@ -20,15 +20,15 @@ type BookRecordStore = StoreApi<BookRecordStoreState & BookRecordStoreActions>;
 const [StoreContext, useStoreContext] = createSafeContext<BookRecordStore>(null);
 
 export const BookRecordProvider = (
-  props: PropsWithChildren<{ search?: string; sortOption?: BookRecordSortOption }>,
+  props: PropsWithChildren<{ search?: string; sortType?: BookRecordSortType }>,
 ) => {
   const [store] = useState(() =>
     createStore<BookRecordStoreState & BookRecordStoreActions>((set) => ({
       search: props.search ?? "",
-      sortOption: props.sortOption ?? BOOK_RECORD_SORT_OPTIONS.CREATED_AT.value,
+      sortType: props.sortType ?? BOOK_RECORD_SORT_TYPES.CREATED_AT.value,
       actions: {
         setSearch: (search: string) => set({ search }),
-        setSortOption: (sortOption: BookRecordSortOption) => set({ sortOption }),
+        setSortType: (sortOption: BookRecordSortType) => set({ sortType: sortOption }),
       },
     })),
   );

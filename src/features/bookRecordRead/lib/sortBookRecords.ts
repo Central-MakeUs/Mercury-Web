@@ -1,14 +1,14 @@
 import { isBefore, toDate } from "date-fns";
 import type { BookRecord } from "~/entities/record/model/record.model";
-import type { BookRecordSortOption } from "~/features/bookRecordRead/model/bookRecord.model";
-import { BOOK_RECORD_SORT_OPTIONS } from "~/features/bookRecordRead/model/bookRecord.model";
+import type { BookRecordSortType } from "~/features/bookRecordRead/model/bookRecord.model";
+import { BOOK_RECORD_SORT_TYPES } from "~/features/bookRecordRead/model/bookRecord.model";
 
 export const sortBookRecords = <T extends BookRecord>(
   records: T[],
-  sortOption: BookRecordSortOption,
+  sortOption: BookRecordSortType,
 ) => {
   const copied = records.slice();
-  if (sortOption === BOOK_RECORD_SORT_OPTIONS.CREATED_AT.value) {
+  if (sortOption === BOOK_RECORD_SORT_TYPES.CREATED_AT.value) {
     return copied.sort((a, b) => {
       const aDate = toDate(a.createdAt);
       const bDate = toDate(b.createdAt);

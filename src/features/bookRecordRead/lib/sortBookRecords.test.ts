@@ -1,5 +1,5 @@
 import type { BookRecord } from "~/entities/record/model/record.model";
-import { BOOK_RECORD_SORT_OPTIONS } from "../model/bookRecord.model";
+import { BOOK_RECORD_SORT_TYPES } from "../model/bookRecord.model";
 import { sortBookRecords } from "./sortBookRecords";
 
 describe("sortBookRecords", () => {
@@ -54,13 +54,13 @@ describe("sortBookRecords", () => {
     },
   ] satisfies BookRecord[];
   it("생성일순 정렬", () => {
-    const sortedRecords = sortBookRecords(mockRecords, BOOK_RECORD_SORT_OPTIONS.CREATED_AT.value);
+    const sortedRecords = sortBookRecords(mockRecords, BOOK_RECORD_SORT_TYPES.CREATED_AT.value);
     expect(sortedRecords[0].recordId).toBe("3");
     expect(sortedRecords[1].recordId).toBe("1");
     expect(sortedRecords[2].recordId).toBe("2");
   });
   it("업데이트순 정렬", () => {
-    const sortedRecords = sortBookRecords(mockRecords, BOOK_RECORD_SORT_OPTIONS.UPDATED_AT.value);
+    const sortedRecords = sortBookRecords(mockRecords, BOOK_RECORD_SORT_TYPES.UPDATED_AT.value);
     expect(sortedRecords[0].recordId).toBe("3");
     expect(sortedRecords[1].recordId).toBe("1");
     expect(sortedRecords[2].recordId).toBe("2");
