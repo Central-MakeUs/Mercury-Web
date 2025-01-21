@@ -47,6 +47,7 @@ export const MyList: StoryObj = {
           onClick={() => alert("책 클릭")}
           updatedAt={"2025.01.25"}
           bookSummary={BOOKLIST_CONTENT}
+          gauge={100}
         />
         <RecordedBookItem
           imageUrl={IMAGE_URL}
@@ -54,6 +55,7 @@ export const MyList: StoryObj = {
           onClick={() => alert("책 클릭")}
           updatedAt={"2025.01.25"}
           bookSummary={BOOKLIST_CONTENT}
+          gauge={100}
         />
       </List>
     );
