@@ -13,7 +13,7 @@ export const Content = forwardRef<
 >(({ className, ...props }, ref) => (
   <Dropdown.Content
     ref={ref}
-    className={cn("bg-white rounded-[14px] shadow-lg p-2 z-[9999]", className)}
+    className={cn("bg-white rounded-[14px] shadow-lg p-2 z-[2]", className)}
     align="end"
     side="bottom"
     sideOffset={8}
