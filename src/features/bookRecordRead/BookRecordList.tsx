@@ -1,4 +1,5 @@
 import { List } from "@repo/ui/List";
+import { Delay, wrap } from "@suspensive/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { getRecordsQueryOptions } from "~/entities/record/api/getRecords";
@@ -10,30 +11,39 @@ import { searchBookRecords } from "./lib/searchBookRecords";
 import { sortBookRecords } from "./lib/sortBookRecords";
 import { useBookRecordStore } from "./model/BookRecordProvider";
 
-export const BookRecordList = () => {
-  const search = useBookRecordStore((store) => store.search);
-  const sortOption = useBookRecordStore((store) => store.sortOption);
+export const BookRecordList = wrap
+  .ErrorBoundary({ fallback: <FirstUserRecordFallback /> })
+  .Suspense({
+    fallback: (
+      <Delay ms={500}>
+        <FirstUserRecordFallback />
+      </Delay>
+    ),
+  })
+  .on(() => {
+    const search = useBookRecordStore((store) => store.search);
+    const sortOption = useBookRecordStore((store) => store.sortOption);
 
-  const recordsResponse = useSuspenseQuery(getRecordsQueryOptions());
+    const recordsResponse = useSuspenseQuery(getRecordsQueryOptions());
 
-  const searchedRecords = searchBookRecords(recordsResponse.data.records, search);
-  const sortedRecords = sortBookRecords(searchedRecords, sortOption);
-  const records = sortedRecords;
-  const isSearchResultEmpty = search.length > 0 && searchedRecords.length === 0;
+    const searchedRecords = searchBookRecords(recordsResponse.data.records, search);
+    const sortedRecords = sortBookRecords(searchedRecords, sortOption);
+    const records = sortedRecords;
+    const isSearchResultEmpty = search.length > 0 && searchedRecords.length === 0;
 
-  const fallback = isSearchResultEmpty ? (
-    <SearchResultEmptyFallback />
-  ) : (
-    <FirstUserRecordFallback />
-  );
-  return (
-    <List className=" gap-y-[24px]" fallback={fallback}>
-      {records.map((record) => (
-        <RecordedBookItem {...createRecordedBookItemProps(record)} key={record.recordId} />
-      ))}
-    </List>
-  );
-};
+    const fallback = isSearchResultEmpty ? (
+      <SearchResultEmptyFallback />
+    ) : (
+      <FirstUserRecordFallback />
+    );
+    return (
+      <List className=" gap-y-[24px]" fallback={fallback}>
+        {records.map((record) => (
+          <RecordedBookItem {...createRecordedBookItemProps(record)} key={record.recordId} />
+        ))}
+      </List>
+    );
+  });
 
 const createRecordedBookItemProps = (record: BookRecord) => {
   return {
