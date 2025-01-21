@@ -41,7 +41,7 @@ const Root = (props: ComponentPropsWithoutRef<"div"> & LayoutProps) => {
         <Box
           as={"nav"}
           className={cn(
-            "flex justify-between h-[72px] pt-[16px] pb-[20px] border-t-[2px] border-gray-200 rounded-[16px]",
+            " bg-white flex justify-between h-[72px] pt-[16px] pb-[20px] border-t-[2px] border-gray-200 rounded-[16px]",
             " duration-200 transition-all",
             className,
           )}
