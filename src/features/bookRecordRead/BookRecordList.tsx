@@ -46,11 +46,15 @@ export const BookRecordList = wrap
   });
 
 const createRecordedBookItemProps = (record: BookRecord) => {
-  return {
-    gauge: record.updatedGauge,
-    imageUrl: record.book.coverImageUrl,
-    title: record.book.title,
-    updatedAt: format(new Date(record.updatedAt ?? ""), "yyyy.MM.dd"),
-    bookSummary: record.latestMemoContent,
-  };
+  const gauge = record.updatedGauge;
+  const title = record.book.title;
+  const imageUrl = record.book.coverImageUrl;
+  const bookSummary = record.latestMemoContent;
+  try {
+    const updatedAt = format(new Date(record.updatedAt ?? ""), "yyyy.MM.dd");
+    return { gauge, title, imageUrl, bookSummary, updatedAt };
+  } catch (_e) {
+    const updatedAt = "업데이트 내역이 없어요";
+    return { gauge, title, imageUrl, bookSummary, updatedAt };
+  }
 };
