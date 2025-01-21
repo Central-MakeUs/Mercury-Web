@@ -1,4 +1,5 @@
 import { SearchBar } from "@repo/design-system/SearchBar";
+import { MagnifyIcon } from "@repo/icon/MagnifyIcon";
 import { useDebouncedInputValue } from "@xionwcfm/react";
 import { useEffect } from "react";
 import { useBookRecordStore } from "~/features/bookRecordRead/model/BookRecordProvider";
@@ -14,5 +15,12 @@ export const BookRecordSearchBar = () => {
     actions.setSearch(debounce.debouncedValue);
   }, [actions.setSearch, debounce.debouncedValue]);
 
-  return <SearchBar value={search} onChange={(e) => debounce.onChange(e.target.value)} />;
+  return (
+    <SearchBar
+      left={<MagnifyIcon />}
+      value={debounce.value}
+      onChange={(e) => debounce.onChange(e.target.value)}
+      placeholder="독서기록 검색하기"
+    />
+  );
 };

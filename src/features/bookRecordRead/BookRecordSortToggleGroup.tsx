@@ -18,9 +18,11 @@ export const BookRecordSortToggleGroup = () => {
   return (
     <Flex className=" gap-x-[18px]">
       <ToggleButtonGroup value={sortOption} onChange={handleChange}>
-        <BookRecordToggleButton value={BOOK_RECORD_SORT_OPTIONS.CREATED_AT.value}>
-          {BOOK_RECORD_SORT_OPTIONS.CREATED_AT.label}
-        </BookRecordToggleButton>
+        {Object.values(BOOK_RECORD_SORT_OPTIONS).map((option) => (
+          <BookRecordToggleButton value={option.value} key={option.value}>
+            {option.label}
+          </BookRecordToggleButton>
+        ))}
       </ToggleButtonGroup>
     </Flex>
   );
