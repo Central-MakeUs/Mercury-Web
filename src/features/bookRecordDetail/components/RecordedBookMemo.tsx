@@ -1,13 +1,15 @@
 import { Text, textVariants } from "@repo/design-system/Text";
 import { cn } from "@repo/design-system/cn";
 import { Box } from "@repo/ui/Box";
-import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
 import { useEffect, useRef, useState } from "react";
+import { Dialog } from "./Dialog";
+import { DialogMenu } from "./DialogMenu";
 
 interface RecordedBookMemoProps {
   updateAt: string;
   contents: string;
+  memoId: number;
 }
 
 function formatDate(isoString: string): string {
@@ -19,44 +21,77 @@ function formatDate(isoString: string): string {
   return `${year}.${month}.${day}`;
 }
 
-export const RecordedBookMemo = ({ updateAt, contents }: RecordedBookMemoProps) => {
+const useLongPress = (onLongPress: () => void, delay = 500) => {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [_isPressing, setIsPressing] = useState(false);
+
+  const startPress = () => {
+    setIsPressing(true);
+    timeoutRef.current = setTimeout(() => {
+      onLongPress();
+    }, delay);
+  };
+
+  const stopPress = () => {
+    setIsPressing(false);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
+
+  return {
+    onMouseDown: startPress,
+    onMouseUp: stopPress,
+    onMouseLeave: stopPress,
+    onTouchStart: startPress,
+    onTouchEnd: stopPress,
+  };
+};
+
+export const RecordedBookMemo = ({ updateAt, contents, memoId }: RecordedBookMemoProps) => {
   const boxRef = useRef<HTMLDivElement>(null);
   const [triangleMarginTop, setTriangleMarginTop] = useState("mt-[13px]");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const longPressEvent = useLongPress(() => setIsOpen(true), 700);
 
   useEffect(() => {
     if (boxRef.current) {
       const boxHeight = boxRef.current.clientHeight;
-      if (boxHeight < 44) {
-        setTriangleMarginTop("mt-[8px]");
-      } else {
-        setTriangleMarginTop("mt-[13px]");
-      }
+      setTriangleMarginTop(boxHeight < 44 ? "mt-[8px]" : "mt-[13px]");
     }
   }, [contents]);
 
   return (
-    <Stack>
-      <Text variant={"body/13_r"} className="text-gray-600">
-        {formatDate(updateAt)}
-      </Text>
+    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+      <Stack>
+        <Text variant={"body/13_r"} className="text-gray-600">
+          {formatDate(updateAt)}
+        </Text>
 
-      <Flex className="items-start mt-[7px] pl-[8px] w-full">
-        <div
-          className={cn(
-            "translate-x-[1px] w-0 h-0 border-solid border-t-[12px] border-b-[12px] border-r-[13px] border-l-0 border-t-white border-b-white border-r-yellow-green rounded-[3px]",
-            triangleMarginTop,
-          )}
-        ></div>
-        <Box
-          ref={boxRef}
-          className={cn(
-            "bg-yellow-green rounded-[12px] py-[10px] px-[11px] text-gray-600 w-full",
-            textVariants({ variant: "body/15_r" }),
-          )}
-        >
-          {contents}
-        </Box>
-      </Flex>
-    </Stack>
+        <button className="flex items-start mt-[7px] pl-[8px] w-full text-left" {...longPressEvent}>
+          <div
+            className={cn(
+              "translate-x-[1px] w-0 h-0 border-solid border-t-[12px] border-b-[12px] border-r-[13px] border-l-0 border-t-white border-b-white border-r-yellow-green rounded-[3px]",
+              triangleMarginTop,
+            )}
+          ></div>
+          <Box
+            ref={boxRef}
+            className={cn(
+              "bg-yellow-green rounded-[12px] py-[10px] px-[11px] text-gray-600 w-full",
+              textVariants({ variant: "body/15_r" }),
+            )}
+          >
+            {contents}
+          </Box>
+        </button>
+      </Stack>
+
+      <Dialog.Portal>
+        <Dialog.Overlay />
+        <DialogMenu memoId={memoId} />
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };

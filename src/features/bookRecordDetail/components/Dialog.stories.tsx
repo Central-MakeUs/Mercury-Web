@@ -42,7 +42,7 @@ export const MenuDialog: StoryObj = {
 
         <Dialog.Portal>
           <Dialog.Overlay />
-          <DialogMenu />
+          <DialogMenu memoId={1} />
         </Dialog.Portal>
       </Dialog.Root>
     );

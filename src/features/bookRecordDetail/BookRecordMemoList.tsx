@@ -83,7 +83,12 @@ export const BookRecordMemoList = ({
 
         <Stack className="mt-[14px] gap-[17px]">
           {memos.map(({ memoId, content, updatedAt }) => (
-            <RecordedBookMemo key={memoId} updateAt={updatedAt} contents={content} />
+            <RecordedBookMemo
+              key={memoId}
+              updateAt={updatedAt}
+              contents={content}
+              memoId={memoId}
+            />
           ))}
         </Stack>
       </Stack>

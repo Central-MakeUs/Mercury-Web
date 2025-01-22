@@ -19,7 +19,11 @@ export const Item = forwardRef<ElementRef<"button">, ComponentPropsWithoutRef<"b
 );
 Item.displayName = "DialogItem";
 
-export const DialogMenu = () => {
+interface DialogMenuProps {
+  memoId: number;
+}
+
+export const DialogMenu = ({ memoId }: DialogMenuProps) => {
   return (
     <Dialog.Content>
       <Stack className="px-4 py-2">

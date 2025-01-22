@@ -12,13 +12,13 @@ const CONTENT =
   "나는야멋쟁이나는야멋쟁이나는야멋쟁이나는야멋쟁이나는야멋쟁이나는야멋쟁이나 나는야 멋쟁이 나는야 멋쟁이 나는야 멋쟁이 나는야 멋쟁이 나는야 멋쟁이 나는야 멋쟁이 나는야 멋쟁이 나는야 멋쟁이 나는야 멋쟁이 나는야 멋쟁이 나는야 멋쟁이 나는야 나는야멋쟁이나는야멋쟁이나는야멋쟁이나는야멋쟁이나는야멋쟁이나는야멋쟁이나 나는야 멋쟁이";
 export const Memo: StoryObj = {
   render: () => {
-    return <RecordedBookMemo updateAt={DATE} contents={CONTENT} />;
+    return <RecordedBookMemo updateAt={DATE} contents={CONTENT} memoId={1} />;
   },
 };
 
 const ONE_CONTENT = "한줄이지롱";
 export const ShortMemo: StoryObj = {
   render: () => {
-    return <RecordedBookMemo updateAt={DATE} contents={ONE_CONTENT} />;
+    return <RecordedBookMemo updateAt={DATE} contents={ONE_CONTENT} memoId={2} />;
   },
 };
