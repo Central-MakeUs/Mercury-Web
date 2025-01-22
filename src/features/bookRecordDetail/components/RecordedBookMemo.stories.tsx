@@ -15,3 +15,10 @@ export const Memo: StoryObj = {
     return <RecordedBookMemo updateAt={DATE} contents={CONTENT} />;
   },
 };
+
+const ONE_CONTENT = "한줄이지롱";
+export const ShortMemo: StoryObj = {
+  render: () => {
+    return <RecordedBookMemo updateAt={DATE} contents={ONE_CONTENT} />;
+  },
+};
