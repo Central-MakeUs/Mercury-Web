@@ -3,7 +3,7 @@ import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { Text } from "@repo/design-system/Text";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
-import { InteractiveBookRecordTopNavigationBar } from "./InteractiveBookRecordTopNavigationBar";
+import { InteractiveBookRecordTopNavigationBar } from "../bookRecordDetail/InteractiveBookRecordTopNavigationBar";
 import { RecordedBookMemo } from "./components/RecordedBookMemo";
 
 export interface Memo {
