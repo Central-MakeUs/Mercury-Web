@@ -5,6 +5,7 @@ import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { vars } from "@repo/token";
 import { useEffect } from "react";
 import { useIsScrollTop } from "~/shared/hooks/useIsScrollTop";
+import { DropdownMenu } from "./components/DropDownMenu";
 
 const THRESHOLD_POLICY = 32;
 const BAR_DELAY = 10;
@@ -45,6 +46,14 @@ export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
           <TopNavigation.Title style={{ color: textColors }}>
             알라딘 {isScrollTop ? "top" : "bottom"}
           </TopNavigation.Title>
+          <DropdownMenu.Portal>
+            <DropdownMenu.Content>
+              <DropdownMenu.Item onClick={() => alert("삭제합니다")}>
+                전체 삭제하기
+              </DropdownMenu.Item>
+              <DropdownMenu.Item>리뷰 검색하기</DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Portal>
         </TopNavigation.Root>
       </SafeArea>
     </MaxWidthBox>
