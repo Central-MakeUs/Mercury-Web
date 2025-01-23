@@ -55,3 +55,12 @@
     background-color: inherit;
   }
 }
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none; /* IE 및 Edge */
+  scrollbar-width: none; /* Firefox */
+}
