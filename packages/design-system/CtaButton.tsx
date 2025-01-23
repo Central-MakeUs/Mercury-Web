@@ -3,7 +3,7 @@ import { textVariants } from "./Text";
 import { cn } from "./cn";
 
 export const CtaButton = (props: ComponentPropsWithoutRef<"button">) => {
-  const { children, disabled, className } = props;
+  const { children, disabled, className, ...rest } = props;
   return (
     <button
       className={cn(
@@ -12,7 +12,7 @@ export const CtaButton = (props: ComponentPropsWithoutRef<"button">) => {
         disabled && "bg-gray-200 text-gray-400",
         className,
       )}
-      {...props}
+      {...rest}
       aria-disabled={disabled}
     >
       {children}

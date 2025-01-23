@@ -7,6 +7,7 @@ import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
 import { List } from "@repo/ui/List";
 import { Stack } from "@repo/ui/Stack";
+import { wrap } from "@suspensive/react";
 
 export interface BookRecordWriteSearchStepProps {
   onNext: (book: unknown) => void;
@@ -14,6 +15,7 @@ export interface BookRecordWriteSearchStepProps {
 
 export default function BookRecordWriteSearchStep(props: BookRecordWriteSearchStepProps) {
   const { onNext } = props;
+
   return (
     <Stack className=" h-full">
       <Flex className=" px-[16px] mb-[14px]">
@@ -43,6 +45,15 @@ export default function BookRecordWriteSearchStep(props: BookRecordWriteSearchSt
     </Stack>
   );
 }
+
+const _SearchResult = wrap
+  .Suspense()
+  .ErrorBoundary({ fallback: null })
+  .on((props: { query: string }) => {
+    const { query } = props;
+
+    return <List></List>;
+  });
 
 const SEARCH_ASSETS = {
   EMPTY_FALLBACK: "/images/bookrecord/bookrecord_search_empty_fallback.webp",

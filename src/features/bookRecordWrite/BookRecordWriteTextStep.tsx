@@ -6,6 +6,7 @@ import { Box } from "@repo/ui/Box";
 import { Flex } from "@repo/ui/Flex";
 import { JustifyBetween } from "@repo/ui/JustifyBetween";
 import { Stack } from "@repo/ui/Stack";
+import type { PropsWithChildren } from "react";
 
 export interface BookRecordWriteTextStepProps {
   text?: string;
@@ -60,3 +61,8 @@ export default function BookRecordWriteTextStep(props: BookRecordWriteTextStepPr
     </Stack>
   );
 }
+
+const _Provider = (props: PropsWithChildren) => {
+  const { children } = props;
+  return;
+};
