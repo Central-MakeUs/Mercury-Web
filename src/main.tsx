@@ -1,7 +1,7 @@
 import "./index.css";
 import "../packages/design-system/iosTimePicker.css";
 import { Analytics, MercuryPostHogProvider } from "@repo/analytics";
-import { SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
+import { SafeArea, SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
 import { worker } from "@repo/mocks/browser";
 import { Providers } from "@repo/providers";
@@ -31,7 +31,14 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="profile" element={<ProfilePage />} />
               </Route>
               <Route path="book-record/write" element={<BookRecordWritePage />} />
-              <Route path="" element={<OnBoardingPage />} />
+              <Route
+                path=""
+                element={
+                  <SafeArea className=" w-full " edges={["top", "left", "right", "bottom"]}>
+                    <OnBoardingPage />
+                  </SafeArea>
+                }
+              />
             </Routes>
           </BrowserRouter>
         </MercuryPostHogProvider>
