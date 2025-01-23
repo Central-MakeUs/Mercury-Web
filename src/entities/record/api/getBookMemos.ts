@@ -7,10 +7,33 @@ export interface GetBookMemosRequest {
   recordId: string;
 }
 
-export const getMemos = (params: GetBookMemosRequest) => {
+export interface BookMemosResponse {
+  book: {
+    author: string;
+    //bookId: number;
+    coverImageUrl: string;
+    publisher: string;
+    title: string;
+  };
+  updatedGauge: number;
+  recordId: string;
+  memos: {
+    content: string;
+    updatedAt: string;
+    //createdAt: string;
+    memoId: number;
+    recordId: number;
+  }[];
+}
+
+export const getMemos = async (params: GetBookMemosRequest) => {
   const { userId, recordId } = params;
 
-  return http.get(`records/${recordId}`, { searchParams: { userId } });
+  const response = await http.get<BookMemosResponse>(`records/${recordId}`, {
+    searchParams: { userId },
+  });
+
+  return response.data;
 };
 
 export const getMemosQueryOptions = (request: GetBookMemosRequest) =>

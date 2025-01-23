@@ -9,7 +9,7 @@ export const Item = forwardRef<ElementRef<"button">, ComponentPropsWithoutRef<"b
     <button
       ref={ref}
       className={cn(
-        "py-[8.5px] mr-[113px] text-gray-600 bg-white text-left",
+        "py-[8.5px] pr-[80px] text-gray-600 bg-white text-left",
         textVariants({ variant: "body/15_m" }),
         className,
       )}

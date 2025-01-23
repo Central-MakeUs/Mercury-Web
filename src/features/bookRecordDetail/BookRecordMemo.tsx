@@ -2,6 +2,7 @@ import { Image } from "@repo/design-system/Image";
 import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { Text } from "@repo/design-system/Text";
 import { Flex } from "@repo/ui/Flex";
+import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { InteractiveBookRecordTopNavigationBar } from "./InteractiveBookRecordTopNavigationBar";
 import { RecordedBookMemo } from "./components/RecordedBookMemo";
@@ -13,23 +14,24 @@ export interface Memo {
 }
 
 interface BookRecordMemoProps {
-  writer: string;
-  publish: string;
+  author: string;
+  publisher: string;
   title: string;
-  progress: number;
+  gauge: number;
   cheeringMessage: string;
+  coverImageUrl: string;
   memos: Memo[];
 }
 
 export const BookRecordMemo = ({
-  writer,
-  publish,
+  author,
+  publisher,
   title,
-  progress,
+  gauge,
   cheeringMessage,
   memos,
+  coverImageUrl,
 }: BookRecordMemoProps) => {
-  const aladinUrl = "https://image.aladin.co.kr/product/35493/7/cover200/k562035555_1.jpg";
   return (
     <Stack>
       <Stack className="max-h-[287px]">
@@ -37,7 +39,7 @@ export const BookRecordMemo = ({
 
         <MaxWidthBox className=" w-screen h-screen relative">
           <Image
-            src={aladinUrl}
+            src={coverImageUrl}
             alt="aladin"
             className=" w-full max-h-[287px]"
             objectfit={"cover"}
@@ -49,7 +51,7 @@ export const BookRecordMemo = ({
                 저자
               </Text>
               <Text className="text-gray-200" variant={"body/15_m"}>
-                {writer}
+                {author}
               </Text>
             </Flex>
 
@@ -58,7 +60,7 @@ export const BookRecordMemo = ({
                 출판사
               </Text>
               <Text className="text-gray-200" variant={"body/15_m"}>
-                {publish}
+                {publisher}
               </Text>
             </Flex>
 
@@ -74,7 +76,7 @@ export const BookRecordMemo = ({
       <Stack className="px-4 py-[17px]">
         <Flex className="justify-between">
           <Text className="text-gray-600" variant={"body/16_sb"}>
-            {progress}%까지 읽었어요!
+            {gauge}%까지 읽었어요!
           </Text>
           <Text className="text-pastel-violet" variant={"body/16_m"}>
             {cheeringMessage}
@@ -92,6 +94,8 @@ export const BookRecordMemo = ({
           ))}
         </Stack>
       </Stack>
+
+      <Spacing className="h-[80px]" />
     </Stack>
   );
 };

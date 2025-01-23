@@ -43,7 +43,6 @@ const useLongPress = (onLongPress: () => void, delay = 500) => {
     }
   }, []);
 
-  // 특정 이벤트 핸들러에 종속되지 않도록, 이벤트 리스너 등록 방식 변경
   return {
     onPointerDown: startPress,
     onPointerUp: stopPress,
