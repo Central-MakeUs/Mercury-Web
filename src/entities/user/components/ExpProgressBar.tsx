@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import type { ComponentProps } from "react";
 import useAnimationCounter from "~/shared/hooks/useAnimationCounter";
 
-export const ProgressBar = (
+export const ExpProgressBar = (
   props: ComponentProps<typeof ProgressPrimitives.Root> & { totalExp: number; currentExp: number },
 ) => {
   const { children, value, totalExp, currentExp, style, ...rest } = props;

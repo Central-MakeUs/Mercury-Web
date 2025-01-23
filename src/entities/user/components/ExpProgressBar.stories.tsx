@@ -1,6 +1,6 @@
 import { Stack } from "@repo/ui/Stack";
 import type { Meta, StoryObj } from "@storybook/react";
-import { ProgressBar } from "./ExpProgressBar";
+import { ExpProgressBar } from "./ExpProgressBar";
 
 const meta: Meta = {
   title: "user/ExpProgressBar",
@@ -12,7 +12,7 @@ export const DotCase: StoryObj = {
   render: () => {
     return (
       <Stack className=" w-full ">
-        <ProgressBar value={50} totalExp={100} currentExp={50} />
+        <ExpProgressBar value={50} totalExp={100} currentExp={50} />
       </Stack>
     );
   },
