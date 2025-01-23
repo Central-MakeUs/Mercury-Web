@@ -44,7 +44,7 @@ const MercuryImageSection = () => {
 
 const SignUpSection = () => {
   return (
-    <Stack className=" gap-y-[14px] w-full items-center">
+    <Stack className="gap-y-[14px] w-full items-center">
       <Flex>
         <Text variant={"body/14_m"} className=" text-gray-100">
           SNS 계정으로 간편하게 시작해요
