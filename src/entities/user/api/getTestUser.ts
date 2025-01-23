@@ -36,14 +36,24 @@ export const getTestUser = async (userId: string) => {
   } satisfies GetTestUserResponse;
 };
 
-export const getTestUserQueryOptions = (userId: string) => {
-  return queryOptions({
-    queryKey: ["testUser", userId],
-    queryFn: () => getTestUser(userId),
-  });
-};
-
 export const useTestUserQueryOptions = () => {
   const userId = useTestUserStore((state) => state.userId);
-  return getTestUserQueryOptions(userId);
+  return queryOptions({
+    queryKey: ["testUser", userId],
+    queryFn: async () => {
+      try {
+        const response = await getTestUser(userId);
+        return response;
+      } catch (_e) {
+        return {
+          userId,
+          createdAt: "",
+          updatedAt: "",
+          nickname: "테스터",
+          email: "test@test.com",
+          exp: 0,
+        } satisfies GetTestUserResponse;
+      }
+    },
+  });
 };

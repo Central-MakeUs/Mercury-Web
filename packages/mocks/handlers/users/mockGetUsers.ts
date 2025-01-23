@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { baseUrl } from "../../constants";
 
-export const mockGetRecordsHandler = [
+export const mockGetUsersHandler = [
   http.get(`${baseUrl}/users/test/get-or-create`, () => {
     return HttpResponse.json({
       code: 200,

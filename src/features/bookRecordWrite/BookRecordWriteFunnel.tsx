@@ -1,8 +1,11 @@
 import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useFunnel } from "@use-funnel/browser";
 import { useNavigate } from "react-router";
+import { usePostRecords } from "~/entities/record/api/postRecords";
+import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import BookRecordWriteProgressStep from "./BookRecordWriteProgressStep";
 import BookRecordWriteSearchStep from "./BookRecordWriteSearchStep";
 import BookRecordWriteTextStep from "./BookRecordWriteTextStep";
@@ -11,7 +14,11 @@ import { type BookRecordWriteFormOptionalState, bookRecordWriteSteps } from "./b
 const options = {
   id: "@bookrecordwrite",
   initial: {
-    context: { book: null, progress: 0, text: "" } satisfies BookRecordWriteFormOptionalState,
+    context: {
+      book: undefined,
+      gauge: 0,
+      content: "",
+    } satisfies BookRecordWriteFormOptionalState,
     step: "SearchStep",
   } as const,
   steps: bookRecordWriteSteps,
@@ -20,9 +27,13 @@ const options = {
 export const BookRecordWriteFunnel = () => {
   const funnel = useFunnel(options);
   const navigate = useNavigate();
+  const { mutateAsync: createRecords } = usePostRecords();
+  const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
+
   const handleBack = () => {
     navigate(-1);
   };
+
   return (
     <Stack className=" w-full">
       <TopNavigation.Root left={<TopNavigation.Back onClick={handleBack} />}>
@@ -36,13 +47,15 @@ export const BookRecordWriteFunnel = () => {
         )}
         TextStep={({ context, history }) => (
           <BookRecordWriteTextStep
-            onNext={(text) => history.push("ProgressStep", { text, book: context.book })}
+            book={context.book}
+            onNext={(content) => history.push("ProgressStep", { content, book: context.book })}
           />
         )}
         ProgressStep={({ context }) => (
           <BookRecordWriteProgressStep
-            onNext={(progress) => {
-              const _result = { ...context, progress };
+            onNext={async (gauge) => {
+              const body = { ...context, gauge, userId: user.userId };
+              await createRecords(body);
               navigate("/book-record");
             }}
           />

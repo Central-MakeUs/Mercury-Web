@@ -8,9 +8,10 @@ import { Flex } from "@repo/ui/Flex";
 import { List } from "@repo/ui/List";
 import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
+import type { Book } from "~/entities/record/model/book.model";
 
 export interface BookRecordWriteSearchStepProps {
-  onNext: (book: unknown) => void;
+  onNext: (book: Book) => void;
 }
 
 export default function BookRecordWriteSearchStep(props: BookRecordWriteSearchStepProps) {
@@ -35,7 +36,15 @@ export default function BookRecordWriteSearchStep(props: BookRecordWriteSearchSt
       <Flex className=" justify-center px-16 mb-4 w-full">
         <Button
           onClick={() => {
-            onNext(undefined);
+            onNext({
+              title: "달러구트 꿈 백화점 - 주문하신 꿈은 매진입니다",
+              coverImageUrl:
+                "https://image.aladin.co.kr/product/24512/70/cover200/k392630952_2.jpg",
+              author: "이미예 지음",
+              isbn13: "9791165341909",
+              link: "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=245127051&amp",
+              publisher: "문학동네",
+            });
           }}
           className=" w-full"
         >

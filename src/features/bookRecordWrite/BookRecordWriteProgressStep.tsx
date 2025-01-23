@@ -1,20 +1,22 @@
 import { CtaButton } from "@repo/design-system/CtaButton";
+import { FixedBottom } from "@repo/design-system/FixedBottom";
 import { Image } from "@repo/design-system/Image";
 import { ImageFadeAnimator } from "@repo/design-system/ImageFadeAnimator";
 import { SingleSlider } from "@repo/design-system/SingleSlider";
 import { Text } from "@repo/design-system/Text";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
-import { useDraft } from "@xionwcfm/react";
+import { useDraft, useLoading } from "@xionwcfm/react";
 import { memo } from "react";
 
 export interface BookRecordWriteProgressStepProps {
-  progress?: number;
-  onNext: (progress: number) => void;
+  gauge?: number;
+  onNext: (gauge: number) => Promise<void>;
 }
 
 export default function BookRecordWriteProgressStep(props: BookRecordWriteProgressStepProps) {
-  const [value, setValue] = useDraft(props.progress ?? 0);
+  const [value, setValue] = useDraft(props.gauge ?? 0);
+  const [loading, startLoading] = useLoading();
 
   return (
     <Stack className=" h-full justify-between pb-[24px]">
@@ -48,7 +50,17 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
         <Text variant={"body/15_sb"} className=" mb-[62px] text-gray-600 text-center">
           {value}%까지 읽었어요
         </Text>
-        <CtaButton onClick={() => props.onNext(value)}>다음</CtaButton>
+        <Spacing className=" h-[80px]" />
+        <FixedBottom className=" px-[24px] pb-[24px]">
+          <CtaButton
+            loading={loading}
+            onClick={() => {
+              startLoading(props.onNext(value));
+            }}
+          >
+            다음
+          </CtaButton>
+        </FixedBottom>
       </Stack>
     </Stack>
   );
