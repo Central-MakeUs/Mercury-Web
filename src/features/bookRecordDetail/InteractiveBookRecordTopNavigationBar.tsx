@@ -13,6 +13,7 @@ const BAR_DELAY = 10;
 interface Props {
   onBack?: () => void;
   onMemoDelete?: () => void;
+  title?: string;
 }
 
 export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
@@ -32,6 +33,16 @@ export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
     }
   }, [isScrollTop]);
 
+  const handleOpenSearchBook = () => {
+    if (!props.title) {
+      alert("책 제목이 없습니다.");
+      return;
+    }
+
+    const url = `https://section.blog.naver.com/Search/Post.naver?pageNo=1&rangeType=ALL&orderBy=sim&keyword=${encodeURIComponent(props.title)}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <MaxWidthBox className="fixed z-[2]">
       <SafeArea
@@ -49,15 +60,13 @@ export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
               </DropdownMenu.Trigger>
             }
           >
-            <TopNavigation.Title style={{ color: textColors }}>
-              알라딘 {isScrollTop ? "top" : "bottom"}
-            </TopNavigation.Title>
+            <TopNavigation.Title style={{ color: textColors }}>독서기록</TopNavigation.Title>
             <DropdownMenu.Portal>
               <DropdownMenu.Content>
                 <DropdownMenu.Item onClick={() => alert("삭제합니다")}>
                   전체 삭제하기
                 </DropdownMenu.Item>
-                <DropdownMenu.Item>리뷰 검색하기</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={handleOpenSearchBook}>리뷰 검색하기</DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
           </TopNavigation.Root>

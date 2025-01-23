@@ -1,3 +1,5 @@
+import { Spacing } from "@repo/ui/Spacing";
+import { Stack } from "@repo/ui/Stack";
 import { useQuery } from "@tanstack/react-query";
 import { getMemos } from "~/entities/record/api/getBookMemos";
 import { BookRecordMemo } from "~/features/bookRecordDetail/BookRecordMemo";
@@ -64,15 +66,18 @@ export default function BookRecordMemoPage() {
 
   if (data) {
     return (
-      <BookRecordMemo
-        author={data.book.author}
-        publisher={data.book.publisher}
-        title={data.book.title}
-        gauge={data.updatedGauge}
-        cheeringMessage={cheeringMessage}
-        memos={data.memos}
-        coverImageUrl={data.book.coverImageUrl}
-      />
+      <Stack>
+        <BookRecordMemo
+          author={data.book.author}
+          publisher={data.book.publisher}
+          title={data.book.title}
+          gauge={data.updatedGauge}
+          cheeringMessage={cheeringMessage}
+          memos={data.memos}
+          coverImageUrl={data.book.coverImageUrl}
+        />
+        <Spacing className="h-[80px]" />
+      </Stack>
     );
   }
 }

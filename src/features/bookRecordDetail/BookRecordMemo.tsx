@@ -2,8 +2,8 @@ import { Image } from "@repo/design-system/Image";
 import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { Text } from "@repo/design-system/Text";
 import { Flex } from "@repo/ui/Flex";
-import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
+import { useNavigate } from "react-router";
 import { InteractiveBookRecordTopNavigationBar } from "./InteractiveBookRecordTopNavigationBar";
 import { RecordedBookMemo } from "./components/RecordedBookMemo";
 
@@ -32,10 +32,12 @@ export const BookRecordMemo = ({
   memos,
   coverImageUrl,
 }: BookRecordMemoProps) => {
+  const navigate = useNavigate();
+
   return (
     <Stack>
       <Stack className="max-h-[287px]">
-        <InteractiveBookRecordTopNavigationBar />
+        <InteractiveBookRecordTopNavigationBar title={title} onBack={() => navigate(-1)} />
 
         <MaxWidthBox className=" w-screen h-screen relative">
           <Image
@@ -94,8 +96,6 @@ export const BookRecordMemo = ({
           ))}
         </Stack>
       </Stack>
-
-      <Spacing className="h-[80px]" />
     </Stack>
   );
 };
