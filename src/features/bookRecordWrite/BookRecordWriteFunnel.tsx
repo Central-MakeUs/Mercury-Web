@@ -3,6 +3,7 @@ import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useFunnel } from "@use-funnel/browser";
+import { useLoading } from "@xionwcfm/react";
 import { useNavigate } from "react-router";
 import { usePostRecords } from "~/entities/record/api/postRecords";
 import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
@@ -29,6 +30,7 @@ export const BookRecordWriteFunnel = () => {
   const navigate = useNavigate();
   const { mutateAsync: createRecords } = usePostRecords();
   const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
+  const [loading, startLoading] = useLoading();
 
   const handleBack = () => {
     navigate(-1);
@@ -53,9 +55,10 @@ export const BookRecordWriteFunnel = () => {
         )}
         ProgressStep={({ context }) => (
           <BookRecordWriteProgressStep
+            loading={loading}
             onNext={async (gauge) => {
               const body = { ...context, gauge, userId: user.userId };
-              await createRecords(body);
+              await startLoading(createRecords(body));
               navigate("/book-record");
             }}
           />

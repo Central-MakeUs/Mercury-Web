@@ -6,17 +6,17 @@ import { SingleSlider } from "@repo/design-system/SingleSlider";
 import { Text } from "@repo/design-system/Text";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
-import { useDraft, useLoading } from "@xionwcfm/react";
+import { useDraft } from "@xionwcfm/react";
 import { memo } from "react";
 
 export interface BookRecordWriteProgressStepProps {
   gauge?: number;
-  onNext: (gauge: number) => Promise<void>;
+  onNext: (gauge: number) => void;
+  loading?: boolean;
 }
 
 export default function BookRecordWriteProgressStep(props: BookRecordWriteProgressStepProps) {
   const [value, setValue] = useDraft(props.gauge ?? 0);
-  const [loading, startLoading] = useLoading();
 
   return (
     <Stack className=" h-full justify-between pb-[24px]">
@@ -53,9 +53,9 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
         <Spacing className=" h-[80px]" />
         <FixedBottom className=" px-[24px] pb-[24px]">
           <CtaButton
-            loading={loading}
+            loading={props.loading}
             onClick={() => {
-              startLoading(props.onNext(value));
+              props.onNext(value);
             }}
           >
             다음
