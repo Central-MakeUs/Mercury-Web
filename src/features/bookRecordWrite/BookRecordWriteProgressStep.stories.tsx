@@ -9,6 +9,6 @@ export default meta;
 
 export const Default: StoryObj = {
   render: () => {
-    return <BookRecordWriteProgressStep onNext={() => {}} progress={0} />;
+    return <BookRecordWriteProgressStep onNext={async () => {}} gauge={0} />;
   },
 };

@@ -19,7 +19,10 @@ export const SingleSlider = (
       {...rest}
       value={value ? [value] : undefined}
       onValueChange={(value) => onChange?.(value[0])}
-      className={cn("relative w-full flex items-center h-[48px] grow rounded-full ", className)}
+      className={cn(
+        "relative w-full flex touch-none select-none  items-center h-[48px] grow rounded-full ",
+        className,
+      )}
     >
       <Box className=" shadow-[inset_0_0_0_3px_rgba(252,255,232,0.2)] rounded-full w-full h-[24px] bg-gradient-to-r from-main2-gradient-from via-main2-gradient-via to-main2-gradient-to" />
       <SliderPrimitive.Track>
