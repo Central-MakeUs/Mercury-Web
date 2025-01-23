@@ -79,6 +79,7 @@ export const TimePickerBottomSheet = (props: TimePickerBottomSheetProps) => {
             </IosTimePicker.Layout>
           </Stack>
           <CtaButton
+            className=" z-[1]"
             onClick={() => {
               const left =
                 props.onLeftChange && typeof props.left === "number" ? props.left : _left.current;

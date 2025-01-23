@@ -5,7 +5,7 @@ import BookRecordWriteProgressStep from "./BookRecordWriteProgressStep";
 const renderWithSelector = (progress: number) => {
   const mockOnNext = vi.fn();
   const { user } = renderWithUser(
-    <BookRecordWriteProgressStep progress={progress} onNext={mockOnNext} />,
+    <BookRecordWriteProgressStep gauge={progress} onNext={mockOnNext} />,
   );
 
   const getByProgressText = (progress: number) => {

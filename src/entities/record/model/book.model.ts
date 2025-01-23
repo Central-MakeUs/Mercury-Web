@@ -4,7 +4,7 @@ export interface Book {
   author: string; // 저자 (이미예 지음)
   isbn13: string; // 도서문헌정보
   link: string; // 구매링크
-  publisher?: string; // 출판사
+  publisher: string; // 출판사
 }
 
 export interface BookWithId extends Book {
