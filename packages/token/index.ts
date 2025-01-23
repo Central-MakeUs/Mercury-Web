@@ -34,12 +34,13 @@ export const scaleColors = {
   "main2-gradient-to": "#A269FF",
   "main3-gradient-from": "#5EE0AF",
   "main3-gradient-to": "#A269FF",
+  "main4-gradient-from": "#7CACD2",
+  "main4-gradient-to": "#A269FF",
   "sub-gradient-from": "#FEECED",
   "sub-gradient-to": "#F2E8FF",
   "gray-gradient-from": "#C6C6CF",
   "gray-gradient-to": "#F5F5F9",
 };
-
 export const semanticColors = {};
 
 export const colors = {

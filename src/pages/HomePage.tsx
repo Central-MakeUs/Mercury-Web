@@ -13,6 +13,7 @@ import useAnimationCounter from "~/shared/hooks/useAnimationCounter";
 export default function HomePage() {
   const level = useAnimationCounter({ to: 9, start: 0, duration: 1, isStart: false });
   const _exp = useAnimationCounter({ to: 2100, start: 0, duration: 1, isStart: false });
+
   return (
     <Stack className="  w-full">
       <JustifyBetween className=" pb-[30px] pt-[24px] bg-white w-full px-[16px]">
