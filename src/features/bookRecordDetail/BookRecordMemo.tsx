@@ -3,7 +3,7 @@ import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { Text } from "@repo/design-system/Text";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
-import { InteractiveBookRecordTopNavigationBar } from "../bookRecordDetail/InteractiveBookRecordTopNavigationBar";
+import { InteractiveBookRecordTopNavigationBar } from "./InteractiveBookRecordTopNavigationBar";
 import { RecordedBookMemo } from "./components/RecordedBookMemo";
 
 export interface Memo {
@@ -12,7 +12,7 @@ export interface Memo {
   updatedAt: string;
 }
 
-interface BookRecordMemoListProps {
+interface BookRecordMemoProps {
   writer: string;
   publish: string;
   title: string;
@@ -21,14 +21,14 @@ interface BookRecordMemoListProps {
   memos: Memo[];
 }
 
-export const BookRecordMemoList = ({
+export const BookRecordMemo = ({
   writer,
   publish,
   title,
   progress,
   cheeringMessage,
   memos,
-}: BookRecordMemoListProps) => {
+}: BookRecordMemoProps) => {
   const aladinUrl = "https://image.aladin.co.kr/product/35493/7/cover200/k562035555_1.jpg";
   return (
     <Stack>

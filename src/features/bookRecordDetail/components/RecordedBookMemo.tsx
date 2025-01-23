@@ -2,7 +2,8 @@ import { Text, textVariants } from "@repo/design-system/Text";
 import { cn } from "@repo/design-system/cn";
 import { Box } from "@repo/ui/Box";
 import { Stack } from "@repo/ui/Stack";
-import { useEffect, useRef, useState } from "react";
+import { usePreservedCallback } from "@xionwcfm/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Dialog } from "./Dialog";
 import { DialogMenu } from "./DialogMenu";
 
@@ -25,26 +26,28 @@ const useLongPress = (onLongPress: () => void, delay = 500) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [_isPressing, setIsPressing] = useState(false);
 
-  const startPress = () => {
+  const preservedOnLongPress = usePreservedCallback(onLongPress);
+
+  const startPress = useCallback(() => {
     setIsPressing(true);
     timeoutRef.current = setTimeout(() => {
-      onLongPress();
+      preservedOnLongPress();
     }, delay);
-  };
+  }, [delay, preservedOnLongPress]);
 
-  const stopPress = () => {
+  const stopPress = useCallback(() => {
     setIsPressing(false);
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-  };
+  }, []);
 
+  // 특정 이벤트 핸들러에 종속되지 않도록, 이벤트 리스너 등록 방식 변경
   return {
-    onMouseDown: startPress,
-    onMouseUp: stopPress,
-    onMouseLeave: stopPress,
-    onTouchStart: startPress,
-    onTouchEnd: stopPress,
+    onPointerDown: startPress,
+    onPointerUp: stopPress,
+    onPointerLeave: stopPress,
   };
 };
 

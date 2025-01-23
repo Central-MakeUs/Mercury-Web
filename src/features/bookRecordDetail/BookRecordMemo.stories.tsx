@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { BookRecordMemoList } from "./BookRecordMemoList";
+import { BookRecordMemo } from "./BookRecordMemo";
 
 const meta: Meta = {
-  title: "BookRecordWrite/BookRecordMemoList",
+  title: "BookRecordWrite/BookRecordMemo",
   tags: ["autodocs"],
 };
 export default meta;
@@ -29,7 +29,7 @@ const memos = [
 export const Default: StoryObj = {
   render: () => {
     return (
-      <BookRecordMemoList
+      <BookRecordMemo
         writer={writer}
         publish={publish}
         title={title}

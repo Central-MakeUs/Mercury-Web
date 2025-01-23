@@ -3,7 +3,7 @@ import { SafeArea } from "@repo/bridge-web/SafeArea";
 import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { vars } from "@repo/token";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useIsScrollTop } from "~/shared/hooks/useIsScrollTop";
 import { DropdownMenu } from "./components/DropDownMenu";
 
@@ -16,6 +16,7 @@ interface Props {
 }
 
 export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const { onBack } = props;
   const isScrollTop = useIsScrollTop({ threshold: THRESHOLD_POLICY, delay: BAR_DELAY });
   const textColors = isScrollTop ? vars.colors.white : vars.colors.gray[500];
@@ -38,23 +39,29 @@ export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
         style={{ backgroundColor: backgroundColors }}
         edges={["top", "left", "right"]}
       >
-        <TopNavigation.Root
-          className=" py-[3px]"
-          left={<TopNavigation.Back onClick={onBack} color={backColors} />}
-          right={<TopNavigation.Kebab color={kebabColors} className="right-[16px]" />}
-        >
-          <TopNavigation.Title style={{ color: textColors }}>
-            알라딘 {isScrollTop ? "top" : "bottom"}
-          </TopNavigation.Title>
-          <DropdownMenu.Portal>
-            <DropdownMenu.Content>
-              <DropdownMenu.Item onClick={() => alert("삭제합니다")}>
-                전체 삭제하기
-              </DropdownMenu.Item>
-              <DropdownMenu.Item>리뷰 검색하기</DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu.Portal>
-        </TopNavigation.Root>
+        <DropdownMenu.Root open={isDropDownOpen} onOpenChange={setIsDropDownOpen}>
+          <TopNavigation.Root
+            className=" py-[3px]"
+            left={<TopNavigation.Back onClick={onBack} color={backColors} />}
+            right={
+              <DropdownMenu.Trigger asChild={true}>
+                <TopNavigation.Kebab color={kebabColors} className="right-[16px]" />
+              </DropdownMenu.Trigger>
+            }
+          >
+            <TopNavigation.Title style={{ color: textColors }}>
+              알라딘 {isScrollTop ? "top" : "bottom"}
+            </TopNavigation.Title>
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content>
+                <DropdownMenu.Item onClick={() => alert("삭제합니다")}>
+                  전체 삭제하기
+                </DropdownMenu.Item>
+                <DropdownMenu.Item>리뷰 검색하기</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </TopNavigation.Root>
+        </DropdownMenu.Root>
       </SafeArea>
     </MaxWidthBox>
   );

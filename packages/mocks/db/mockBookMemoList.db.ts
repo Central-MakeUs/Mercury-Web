@@ -1,5 +1,5 @@
 export const mockBookMemoList = {
-  recordId: 3,
+  recordId: "3",
   updatedGauge: 23,
   book: {
     bookId: 2,

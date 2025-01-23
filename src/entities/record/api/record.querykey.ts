@@ -18,5 +18,6 @@ export const recordQueryKeys = {
     ...recordQueryKeys.all(),
     "getMemos",
     request.userId,
+    request.recordId,
   ],
 };

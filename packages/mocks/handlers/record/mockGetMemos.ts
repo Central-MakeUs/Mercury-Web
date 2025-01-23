@@ -2,12 +2,12 @@ import { http, HttpResponse } from "msw";
 import { baseUrl } from "../../constants";
 
 export const mockGetRecordsHandler = [
-  http.get(`${baseUrl}/records`, () => {
+  http.get(`${baseUrl}/:records`, () => {
     return HttpResponse.json({
       code: 200,
       message: "요청이 성공적으로 처리되었습니다.",
       data: {
-        recordId: 3,
+        recordId: "3",
         updatedGauge: 23,
         book: {
           bookId: 2,

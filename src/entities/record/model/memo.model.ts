@@ -1,5 +1,3 @@
-import type { BookWithId } from "./book.model";
-
 export interface Memo {
   memoId: number;
   content: string;
@@ -9,19 +7,19 @@ export interface Memo {
   recordId: number;
 }
 
-export interface MemoList extends BookWithId {
-  recordId: number;
+export interface MemoList {
+  recordId: string;
   updatedGauge: number;
   book: {
-    title: string; // 제목
-    coverImageUrl: string; // 커버이미지
-    author: string; // 저자 (이미예 지음)
-    isbn13: string; // 도서문헌정보
-    link: string; // 구매링크
-    publisher?: string; // 출판사};
+    title: string;
+    coverImageUrl: string;
+    author: string;
+    isbn13: string;
+    link: string;
+    publisher?: string;
     bookId: number;
   };
   createdAt: string;
-  updatedAt: string;
+  updatedAt: string | null;
   memos: Memo[];
 }
