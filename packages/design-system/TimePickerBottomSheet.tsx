@@ -1,4 +1,4 @@
-import { Stack } from "@repo/ui/Stack";
+import { motion } from "motion/react";
 import { overlay } from "overlay-kit";
 import { useRef } from "react";
 import { BottomSheet } from "./BottomSheet";
@@ -60,7 +60,12 @@ export const TimePickerBottomSheet = (props: TimePickerBottomSheetProps) => {
               시간 설정하기
             </Text>
           </BottomSheet.Title>
-          <Stack className=" mt-[14px] mb-[20px] h-[160px] w-full">
+          <motion.div
+            className=" flex flex-col mt-[14px] mb-[20px] h-[160px] w-full"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <IosTimePicker.Layout>
               <IosTimePicker
                 slideCount={props.leftSlideCount}
@@ -77,7 +82,7 @@ export const TimePickerBottomSheet = (props: TimePickerBottomSheetProps) => {
                 label={props.rightLabel}
               />
             </IosTimePicker.Layout>
-          </Stack>
+          </motion.div>
           <CtaButton
             className=" z-[1]"
             onClick={() => {
