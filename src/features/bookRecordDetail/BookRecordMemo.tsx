@@ -1,9 +1,10 @@
+import { FloatingActionButton } from "@repo/design-system/FloatingActionButton";
 import { Image } from "@repo/design-system/Image";
 import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { Text } from "@repo/design-system/Text";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { InteractiveBookRecordTopNavigationBar } from "./InteractiveBookRecordTopNavigationBar";
 import { RecordedBookMemo } from "./components/RecordedBookMemo";
 
@@ -35,7 +36,7 @@ export const BookRecordMemo = ({
   const navigate = useNavigate();
 
   return (
-    <Stack>
+    <Stack className="relative">
       <Stack className="max-h-[287px]">
         <InteractiveBookRecordTopNavigationBar title={title} onBack={() => navigate(-1)} />
 
@@ -96,6 +97,9 @@ export const BookRecordMemo = ({
           ))}
         </Stack>
       </Stack>
+      <Link to={"/book-record/write"} className="fixed bottom-[80px] right-4">
+        <FloatingActionButton />
+      </Link>
     </Stack>
   );
 };

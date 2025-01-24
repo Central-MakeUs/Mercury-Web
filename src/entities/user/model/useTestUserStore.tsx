@@ -1,8 +1,5 @@
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
-
 function generateRandomId(length = 8): string {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const characters = "0123456789";
   let result = "";
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
@@ -11,20 +8,14 @@ function generateRandomId(length = 8): string {
   return result;
 }
 
-const name = "@mercury_test_user_id";
+const name = "@mercury_test_user_id_W";
 
-interface TestUserState {
-  userId: string;
-}
-
-export const useTestUserStore = create<TestUserState>()(
-  persist(
-    () => ({
-      userId: generateRandomId(),
-    }),
-    {
-      name,
-      storage: createJSONStorage(() => localStorage),
-    },
-  ),
-);
+export const getUserId = () => {
+  const userId = window.localStorage.getItem(name);
+  const randomId = generateRandomId();
+  if (userId === null) {
+    window.localStorage.setItem(name, randomId);
+  }
+  const reUserId = window.localStorage.getItem(name);
+  return reUserId as string;
+};

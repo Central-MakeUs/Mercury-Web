@@ -1,6 +1,6 @@
 import { http } from "@repo/http";
 import { queryOptions } from "@tanstack/react-query";
-import { useTestUserStore } from "../model/useTestUserStore";
+import { getUserId } from "../model/useTestUserStore";
 
 export interface ExternalGetTestUserResponse {
   createdAt: string;
@@ -37,7 +37,7 @@ export const getTestUser = async (userId: string) => {
 };
 
 export const useTestUserQueryOptions = () => {
-  const userId = useTestUserStore((state) => state.userId);
+  const userId = getUserId();
   return queryOptions({
     queryKey: ["testUser", userId],
     queryFn: async () => {

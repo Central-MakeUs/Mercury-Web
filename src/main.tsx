@@ -3,7 +3,7 @@ import "../packages/design-system/iosTimePicker.css";
 import { Analytics, MercuryPostHogProvider } from "@repo/analytics";
 import { SafeArea, SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
-import { worker } from "@repo/mocks/browser";
+import { worker } from "@repo/mocks/browser.ts";
 import { Providers } from "@repo/providers";
 import { MAX_WIDTH } from "@repo/token/index.ts";
 import { StrictMode } from "react";
@@ -30,7 +30,7 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="home" element={<HomePage />} />
                 <Route path="timer" element={<TimerPage />} />
                 <Route path="book-record" element={<BookRecordPage />} />
-                <Route path="book-memo" element={<BookRecordMemoPage />} />
+                <Route path="book-memo/:recordId" element={<BookRecordMemoPage />} />
                 <Route path="book-memo-edit" element={<BookRecordMemoEditPage />} />
                 <Route path="profile" element={<ProfilePage />} />
               </Route>

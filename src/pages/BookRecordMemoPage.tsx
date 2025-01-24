@@ -1,20 +1,25 @@
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
 import { getMemos } from "~/entities/record/api/getBookMemos";
 import { BookRecordMemo } from "~/features/bookRecordDetail/BookRecordMemo";
 
 export default function BookRecordMemoPage() {
   const cheeringMessage = "얼마 안남았네요, 마무리 해보죠!";
 
-  const userId = "2";
-  const recordId = "3";
+  const userId = localStorage.getItem("@mercury_test_user_id_W") || "2";
+  const { recordId } = useParams<{ recordId: string }>();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["getMemos", userId, recordId],
-    queryFn: () => getMemos({ userId, recordId }),
+    queryFn: () => getMemos({ userId, recordId: recordId as string }),
+    enabled: !!recordId,
   });
 
+  if (!recordId) {
+    return <p>레코드 ID가 없습니다.</p>;
+  }
   if (isLoading) {
     return <p>Loading...</p>;
   }

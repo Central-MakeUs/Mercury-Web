@@ -7,12 +7,15 @@ import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
+import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
 import { KakaoButton } from "~/shared/ui/KakaoButton";
 
 export default function OnBoardingPage() {
+  const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
       <MercuryImageSection />
