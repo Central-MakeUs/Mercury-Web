@@ -9,11 +9,8 @@ export const recordQueryKeys = {
     "getBooksSearch",
     param,
   ],
-  getRecords: (request: GetRecordsRequest) => [
-    ...recordQueryKeys.all(),
-    "getRecords",
-    request.userId,
-  ],
+  allGetRecord: () => [...recordQueryKeys.all(), "getRecords"],
+  getRecords: (request: GetRecordsRequest) => [...recordQueryKeys.allGetRecord(), request.userId],
   getMemos: (request: GetBookMemosRequest) => [
     ...recordQueryKeys.all(),
     "getMemos",

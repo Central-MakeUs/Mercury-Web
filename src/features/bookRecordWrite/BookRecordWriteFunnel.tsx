@@ -2,12 +2,13 @@ import { toast } from "@repo/design-system/Toast";
 import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useFunnel } from "@use-funnel/browser";
 import { useLoading } from "@xionwcfm/react";
 import { useNavigate } from "react-router";
 import { GET_BOOKS_SEARCH_SORT_TYPE } from "~/entities/record/api/getBooksSearch";
 import { type PostRecordsRequest, usePostRecords } from "~/entities/record/api/postRecords";
+import { recordQueryKeys } from "~/entities/record/api/record.querykey";
 import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { type BookRecordWriteFormOptionalState, bookRecordWriteSteps } from "./bookRecordStepState";
 import BookRecordWriteProgressStep from "./components/ProgressStep/BookRecordWriteProgressStep";
@@ -35,6 +36,7 @@ export const BookRecordWriteFunnel = () => {
   const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
   const userId = user.userId;
   const [loading, startLoading] = useLoading();
+  const queryClient = useQueryClient();
 
   const handleBack = () => {
     navigate(-1);
@@ -42,7 +44,15 @@ export const BookRecordWriteFunnel = () => {
 
   const handleNext = async (body: PostRecordsRequest) => {
     try {
-      await startLoading(createRecords(body));
+      await startLoading(
+        (async () => {
+          await createRecords(body);
+          await queryClient.invalidateQueries({
+            queryKey: recordQueryKeys.allGetRecord(),
+            refetchType: "all",
+          });
+        })(),
+      );
       navigate("/book-record");
     } catch (_e) {
       toast.main3("죄송해요 서버가 맛이 갔나봐요 ㅜㅅㅜ", { duration: 3500 });
