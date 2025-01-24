@@ -23,8 +23,12 @@ export const Content = forwardRef<
   ElementRef<typeof DialogPrimitves.Content>,
   ComponentPropsWithoutRef<typeof DialogPrimitves.Content>
 >(({ className, ...props }, ref) => (
-  <MaxWidthBox className=" fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white rounded-[20px] w-[225px]">
-    <DialogPrimitves.Content ref={ref} className={cn("w-full", className)} {...props} />
+  <MaxWidthBox className="fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 px-[75px]">
+    <DialogPrimitves.Content
+      ref={ref}
+      className={cn("bg-white rounded-[20px]", className)}
+      {...props}
+    />
   </MaxWidthBox>
 ));
 Content.displayName = "Dialog";

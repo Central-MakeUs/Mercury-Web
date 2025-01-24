@@ -20,15 +20,18 @@ export const Item = forwardRef<ElementRef<"button">, ComponentPropsWithoutRef<"b
 Item.displayName = "DialogItem";
 
 interface DialogMenuProps {
-  memoId: number;
+  items: { label: string; onClick: () => void }[];
 }
 
-export const DialogMenu = ({ memoId }: DialogMenuProps) => {
+export const DialogMenu = ({ items }: DialogMenuProps) => {
   return (
     <Dialog.Content>
       <Stack className="px-4 py-2">
-        <Item>메모 수정하기</Item>
-        <Item>메모 삭제하기</Item>
+        {items.map((item, index) => (
+          <Item key={index} onClick={item.onClick}>
+            {item.label}
+          </Item>
+        ))}
       </Stack>
     </Dialog.Content>
   );

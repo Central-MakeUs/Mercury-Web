@@ -4,6 +4,7 @@ import { Box } from "@repo/ui/Box";
 import { Stack } from "@repo/ui/Stack";
 import { usePreservedCallback } from "@xionwcfm/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { Dialog } from "./Dialog";
 import { DialogMenu } from "./DialogMenu";
 
@@ -52,6 +53,7 @@ const useLongPress = (onLongPress: () => void, delay = 500) => {
 
 export const RecordedBookMemo = ({ updateAt, contents, memoId }: RecordedBookMemoProps) => {
   const boxRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   const [triangleMarginTop, setTriangleMarginTop] = useState("mt-[13px]");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -63,6 +65,13 @@ export const RecordedBookMemo = ({ updateAt, contents, memoId }: RecordedBookMem
       setTriangleMarginTop(boxHeight < 44 ? "mt-[8px]" : "mt-[13px]");
     }
   }, [contents]);
+
+  const editOnClick = () => {
+    navigate("/book-memo-edit");
+  };
+  const deleteOnClick = () => {
+    alert("삭제하기");
+  };
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -94,7 +103,12 @@ export const RecordedBookMemo = ({ updateAt, contents, memoId }: RecordedBookMem
         <Dialog.Title className="sr-only">메모 관리</Dialog.Title>
         <Dialog.Description className="sr-only">메모 수정, 삭제 메뉴</Dialog.Description>
         <Dialog.Overlay />
-        <DialogMenu memoId={memoId} />
+        <DialogMenu
+          items={[
+            { label: "메모 수정하기", onClick: editOnClick },
+            { label: "메모 삭제하기", onClick: deleteOnClick },
+          ]}
+        />
       </Dialog.Portal>
     </Dialog.Root>
   );

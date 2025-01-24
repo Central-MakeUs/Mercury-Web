@@ -10,6 +10,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import BottomNavigationLayout from "./app/BottomNavigationLayout.tsx";
+import BookRecordMemoEditPage from "./pages/BookRecordMemoEditPage.tsx";
 import BookRecordMemoPage from "./pages/BookRecordMemoPage.tsx";
 import BookRecordPage from "./pages/BookRecordPage.tsx";
 import BookRecordWritePage from "./pages/BookRecordWritePage.tsx";
@@ -30,6 +31,7 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="timer" element={<TimerPage />} />
                 <Route path="book-record" element={<BookRecordPage />} />
                 <Route path="book-memo" element={<BookRecordMemoPage />} />
+                <Route path="book-memo-edit" element={<BookRecordMemoEditPage />} />
                 <Route path="profile" element={<ProfilePage />} />
               </Route>
               <Route path="book-record/write" element={<BookRecordWritePage />} />
