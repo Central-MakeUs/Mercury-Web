@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import BookRecordEditMemo from "../bookRecordDetail/BookRecordEditMemo";
 import BookRecordWriteTextStep from "./BookRecordWriteTextStep";
 
 const meta: Meta = {
@@ -23,10 +22,5 @@ export const Default: StoryObj = {
         }}
       />
     );
-  },
-};
-export const Edit: StoryObj = {
-  render: () => {
-    return <BookRecordEditMemo />;
   },
 };
