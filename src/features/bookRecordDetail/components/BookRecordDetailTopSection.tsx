@@ -28,7 +28,7 @@ export const BookRecordDetailTopSection = (
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate(-1);
+    navigate("/book-record");
   };
 
   const handleSearch = () => {

@@ -5,6 +5,7 @@ import { SafeArea, SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
 import { Providers } from "@repo/providers";
 import { MAX_WIDTH } from "@repo/token/index.ts";
+import { OverlayProvider } from "overlay-kit";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
@@ -25,33 +26,35 @@ createRoot(document.getElementById("root")!).render(
       <Providers>
         <MercuryPostHogProvider>
           <BrowserRouter>
-            <Routes>
-              <Route element={<BottomNavigationLayout />}>
-                <Route path="home" element={<HomePage />} />
-                <Route path="timer" element={<TimerPage />} />
-                <Route path="book-record" element={<BookRecordPage />} />
-                <Route path="profile" element={<ProfilePage />} />
-              </Route>
+            <OverlayProvider>
+              <Routes>
+                <Route element={<BottomNavigationLayout />}>
+                  <Route path="home" element={<HomePage />} />
+                  <Route path="timer" element={<TimerPage />} />
+                  <Route path="book-record" element={<BookRecordPage />} />
+                  <Route path="profile" element={<ProfilePage />} />
+                </Route>
 
-              <Route path="book-record/write" element={<BookRecordWritePage />} />
-              <Route path="book-record/:recordId" element={<BookRecordDetailPage />} />
+                <Route path="book-record/write" element={<BookRecordWritePage />} />
+                <Route path="book-record/:recordId" element={<BookRecordDetailPage />} />
 
-              <Route
-                path="book-record/:recordId/:memoId/modify"
-                element={<BookRecordModifyPage />}
-              />
+                <Route
+                  path="book-record/:recordId/:memoId/modify"
+                  element={<BookRecordModifyPage />}
+                />
 
-              <Route path="add-memo/:recordId" element={<BookRecordMemoAddPage />} />
+                <Route path="add-memo/:recordId" element={<BookRecordMemoAddPage />} />
 
-              <Route
-                path=""
-                element={
-                  <SafeArea className=" w-full " edges={["top", "left", "right", "bottom"]}>
-                    <OnBoardingPage />
-                  </SafeArea>
-                }
-              />
-            </Routes>
+                <Route
+                  path=""
+                  element={
+                    <SafeArea className=" w-full " edges={["top", "left", "right", "bottom"]}>
+                      <OnBoardingPage />
+                    </SafeArea>
+                  }
+                />
+              </Routes>
+            </OverlayProvider>
           </BrowserRouter>
         </MercuryPostHogProvider>
 

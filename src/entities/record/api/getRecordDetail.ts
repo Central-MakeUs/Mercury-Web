@@ -17,7 +17,15 @@ export const getRecordsDetail = async (params: GetBookMemosRequest) => {
     searchParams: { userId },
   });
 
-  return response.data;
+  return {
+    ...response.data,
+    recordId: response.data.recordId.toString(),
+    book: { ...response.data.book, bookId: response.data.book.bookId.toString() },
+    memos: response.data.memos.map((memo) => ({
+      ...memo,
+      memoId: memo.memoId.toString(),
+    })),
+  } satisfies GetRecordDetailResponse;
 };
 
 export const getRecordsDetailQueryOptions = (request: GetBookMemosRequest) =>

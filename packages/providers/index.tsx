@@ -2,7 +2,6 @@ import { ToastProvider } from "@repo/design-system/Toast";
 import { DefaultProps, DefaultPropsProvider, ErrorBoundary, Suspense } from "@suspensive/react";
 import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { OverlayProvider } from "overlay-kit";
 import { type PropsWithChildren, useState } from "react";
 
 export const Providers = ({ children }: PropsWithChildren) => {
@@ -26,18 +25,16 @@ export const Providers = ({ children }: PropsWithChildren) => {
   return (
     <QueryClientProvider client={queryClient}>
       <DefaultPropsProvider defaultProps={defaultProps}>
-        <OverlayProvider>
-          <ToastProvider>
-            <QueryErrorResetBoundary>
-              {({ reset }) => (
-                <ErrorBoundary onReset={reset} fallback={null}>
-                  <Suspense fallback={null}>{children}</Suspense>
-                </ErrorBoundary>
-              )}
-            </QueryErrorResetBoundary>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </ToastProvider>
-        </OverlayProvider>
+        <ToastProvider>
+          <QueryErrorResetBoundary>
+            {({ reset }) => (
+              <ErrorBoundary onReset={reset} fallback={null}>
+                <Suspense fallback={null}>{children}</Suspense>
+              </ErrorBoundary>
+            )}
+          </QueryErrorResetBoundary>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </ToastProvider>
       </DefaultPropsProvider>
     </QueryClientProvider>
   );

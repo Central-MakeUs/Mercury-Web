@@ -39,9 +39,6 @@ export const Pressable = (props: {
     onPointerUp: onPressStop,
     onPointerLeave: onPressStop,
     onPointerCancel: onPressStop,
-    onTouchStart: onPressStart,
-    onTouchEnd: onPressStop,
-    onTouchCancel: onPressStop,
     "data-pressed": isPressing,
   });
 };

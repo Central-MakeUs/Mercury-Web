@@ -5,15 +5,20 @@ interface PatchMemoDetailRequest {
   recordId: string;
   memoId: string;
   userId: string;
+  content: string;
 }
 
 export const patchMemoDetail = async (props: PatchMemoDetailRequest) => {
-  const { recordId, memoId, userId } = props;
-  const response = await http.patch(`records/${recordId}/memos/${memoId}`, undefined, {
-    searchParams: {
-      userId,
+  const { content, recordId, memoId, userId } = props;
+  const response = await http.patch(
+    `records/${recordId}/memos/${memoId}`,
+    { content },
+    {
+      searchParams: {
+        userId,
+      },
     },
-  });
+  );
 
   return response.data;
 };

@@ -66,7 +66,11 @@ export default wrap
                 <BookRecordDetailMemoItem
                   key={memo.memoId}
                   onPressComplete={async () => {
-                    const _result = await memoEditOverlay.openAsync();
+                    memoEditOverlay.openAsync({
+                      userId: user.userId,
+                      recordId: recordId ?? "",
+                      memoId: memo.memoId,
+                    });
                   }}
                   {...createRowProps(memo)}
                 />
