@@ -2,6 +2,7 @@ import { List } from "@repo/ui/List";
 import { Delay, wrap } from "@suspensive/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
+import { useNavigate } from "react-router";
 import { getRecordsQueryOptions } from "~/entities/record/api/getRecords";
 import type { BookRecord } from "~/entities/record/model/record.model";
 import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
@@ -26,7 +27,7 @@ export const BookRecordList = wrap
     const search = useBookRecordStore((store) => store.search);
     const sortType = useBookRecordStore((store) => store.sortType);
     const recordsResponse = useSuspenseQuery(getRecordsQueryOptions({ userId, sortType }));
-
+    const navigate = useNavigate();
     const searchedRecords = searchBookRecords(recordsResponse.data.records, search);
     // const sortedRecords = sortBookRecords(searchedRecords, sortType);
     const records = searchedRecords;
@@ -37,10 +38,19 @@ export const BookRecordList = wrap
     ) : (
       <FirstUserRecordFallback />
     );
+
+    const handleClick = (recordId: string) => {
+      navigate(`/book-record/${recordId}`);
+    };
+
     return (
       <List className=" gap-y-[24px]" fallback={fallback}>
         {records.map((record) => (
-          <RecordedBookItem {...createRecordedBookItemProps(record)} key={record.recordId} />
+          <RecordedBookItem
+            {...createRecordedBookItemProps(record)}
+            onClick={() => handleClick(record.recordId)}
+            key={record.recordId}
+          />
         ))}
       </List>
     );

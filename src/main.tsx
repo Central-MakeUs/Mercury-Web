@@ -10,7 +10,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import BottomNavigationLayout from "./app/BottomNavigationLayout.tsx";
 import BookRecordDetailPage from "./pages/BookRecordDetailPage.tsx";
-import BookRecordMemoPage from "./pages/BookRecordMemoPage.tsx";
 import BookRecordModifyPage from "./pages/BookRecordModifyPage.tsx";
 import BookRecordPage from "./pages/BookRecordPage.tsx";
 import BookRecordWritePage from "./pages/BookRecordWritePage.tsx";
@@ -30,7 +29,6 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="home" element={<HomePage />} />
                 <Route path="timer" element={<TimerPage />} />
                 <Route path="book-record" element={<BookRecordPage />} />
-                <Route path="book-memo" element={<BookRecordMemoPage />} />
                 <Route path="profile" element={<ProfilePage />} />
               </Route>
 
@@ -41,6 +39,7 @@ createRoot(document.getElementById("root")!).render(
                 path="book-record/:recordId/:memoId/modify"
                 element={<BookRecordModifyPage />}
               />
+
               <Route
                 path=""
                 element={

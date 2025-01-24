@@ -1,3 +1,4 @@
+import { Spacing } from "@repo/ui/Spacing";
 import { motion } from "motion/react";
 import { overlay } from "overlay-kit";
 import { useRef } from "react";
@@ -50,7 +51,7 @@ export const TimePickerBottomSheet = (props: TimePickerBottomSheetProps) => {
     >
       <BottomSheet.Portal>
         <BottomSheet.Overlay />
-        <BottomSheet.Content className=" flex items-center flex-col pt-[16px] px-[20px] rounded-t-[20px] h-[360px] bg-gray-white">
+        <BottomSheet.Content className=" flex items-center flex-col pt-[16px] px-[20px] rounded-t-[20px] h-[400px] bg-gray-white">
           <BottomSheet.Handle className=" mb-[16px]" />
           <BottomSheet.Description className=" sr-only">
             타이머의 시간을 설정합니다.
@@ -83,6 +84,7 @@ export const TimePickerBottomSheet = (props: TimePickerBottomSheetProps) => {
               />
             </IosTimePicker.Layout>
           </motion.div>
+          <Spacing className=" h-[32px]" />
           <CtaButton
             className=" z-[1]"
             onClick={() => {
