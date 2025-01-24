@@ -10,7 +10,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import BottomNavigationLayout from "./app/BottomNavigationLayout.tsx";
 import BookRecordDetailPage from "./pages/BookRecordDetailPage.tsx";
-import BookRecordModifyPage from "./pages/BookRecordModifyPage.tsx";
+import BookRecordMemoAddPage from "./pages/BookRecordMemoAddPage.tsx";
+import BookRecordModifyPage from "./pages/BookRecordMemoModifyPage.tsx";
 import BookRecordPage from "./pages/BookRecordPage.tsx";
 import BookRecordWritePage from "./pages/BookRecordWritePage.tsx";
 import HomePage from "./pages/HomePage.tsx";
@@ -39,6 +40,8 @@ createRoot(document.getElementById("root")!).render(
                 path="book-record/:recordId/:memoId/modify"
                 element={<BookRecordModifyPage />}
               />
+
+              <Route path="add-memo/:recordId" element={<BookRecordMemoAddPage />} />
 
               <Route
                 path=""

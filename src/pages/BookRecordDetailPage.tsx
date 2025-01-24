@@ -74,7 +74,7 @@ export default wrap
             </List>
           </Stack>
         </Stack>
-        <BookRecordDetailFloatButton className=" z-[5]" />
+        <BookRecordDetailFloatButton className=" z-[5]" recordId={recordId ?? ""} />
       </>
     );
   });
