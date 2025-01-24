@@ -52,7 +52,7 @@ const Kebab = forwardRef<
   return (
     <>
       <button
-        ref={ref} // ✅ `ref` 추가
+        ref={ref}
         className={cn("absolute size-[42px] flex justify-center items-center", className)}
         {...rest}
       >

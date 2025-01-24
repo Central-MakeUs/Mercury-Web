@@ -1,8 +1,8 @@
 import { Button } from "@repo/design-system/Button";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import { Dialog } from "./Dialog";
 import { DialogConfirm } from "./DialogConfirm";
-import { DialogContent } from "./DialogContent";
 import { DialogMenu } from "./DialogMenu";
 
 const meta: Meta = {
@@ -16,16 +16,16 @@ export const ConfirmDialog: StoryObj = {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <DialogContent.Root open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent.Trigger asChild={true}>
+      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog.Trigger asChild={true}>
           <Button className="bg-blue-500 text-white bg-green">삭제 확인</Button>
-        </DialogContent.Trigger>
+        </Dialog.Trigger>
 
-        <DialogContent.Portal>
-          <DialogContent.Overlay />
+        <Dialog.Portal>
+          <Dialog.Overlay />
           <DialogConfirm onClose={() => setIsOpen(false)} />
-        </DialogContent.Portal>
-      </DialogContent.Root>
+        </Dialog.Portal>
+      </Dialog.Root>
     );
   },
 };
@@ -35,16 +35,16 @@ export const MenuDialog: StoryObj = {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <DialogContent.Root open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent.Trigger asChild={true}>
+      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog.Trigger asChild={true}>
           <Button className="bg-green-500 text-white bg-green">메뉴 열기</Button>
-        </DialogContent.Trigger>
+        </Dialog.Trigger>
 
-        <DialogContent.Portal>
-          <DialogContent.Overlay />
-          <DialogMenu />
-        </DialogContent.Portal>
-      </DialogContent.Root>
+        <Dialog.Portal>
+          <Dialog.Overlay />
+          <DialogMenu memoId={1} />
+        </Dialog.Portal>
+      </Dialog.Root>
     );
   },
 };
