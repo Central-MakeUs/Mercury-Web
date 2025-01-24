@@ -1,4 +1,5 @@
 import * as DialogPrimitves from "@radix-ui/react-dialog";
+import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { cn } from "@repo/design-system/cn";
 import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from "react";
 
@@ -22,14 +23,9 @@ export const Content = forwardRef<
   ElementRef<typeof DialogPrimitves.Content>,
   ComponentPropsWithoutRef<typeof DialogPrimitves.Content>
 >(({ className, ...props }, ref) => (
-  <DialogPrimitves.Content
-    ref={ref}
-    className={cn(
-      "absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white rounded-[20px] max-w-[327px]",
-      className,
-    )}
-    {...props}
-  />
+  <MaxWidthBox className=" fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white rounded-[20px] w-[225px]">
+    <DialogPrimitves.Content ref={ref} className={cn("w-full", className)} {...props} />
+  </MaxWidthBox>
 ));
 Content.displayName = "Dialog";
 

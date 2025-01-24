@@ -91,6 +91,8 @@ export const RecordedBookMemo = ({ updateAt, contents, memoId }: RecordedBookMem
       </Stack>
 
       <Dialog.Portal>
+        <Dialog.Title className="sr-only">메모 관리</Dialog.Title>
+        <Dialog.Description className="sr-only">메모 수정, 삭제 메뉴</Dialog.Description>
         <Dialog.Overlay />
         <DialogMenu memoId={memoId} />
       </Dialog.Portal>
