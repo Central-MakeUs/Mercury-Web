@@ -11,9 +11,8 @@ export const mockGetBooksSearchHandler = [
     const maxResults = Number(url.searchParams.get("maxResults")) ?? 10;
     const sortType = url.searchParams.get("sortType") as GetBooksSearchSortType;
     const startPage = Number(url.searchParams.get("startPage")) ?? 1;
-    const userId = url.searchParams.get("userId") ?? "";
     return HttpResponse.json(
-      mockCreateGetBooksSearchResponse({ query, maxResults, sortType, startPage, userId }),
+      mockCreateGetBooksSearchResponse({ query, maxResults, sortType, startPage }),
     );
   }),
 ];
