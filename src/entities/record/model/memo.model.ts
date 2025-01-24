@@ -1,10 +1,10 @@
 export interface Memo {
-  memoId: number;
+  memoId: string;
   content: string;
   gauge: number;
   createdAt: string;
   updatedAt: string | null;
-  recordId: number;
+  recordId: string;
 }
 
 export interface MemoList {
@@ -17,7 +17,7 @@ export interface MemoList {
     isbn13: string;
     link: string;
     publisher?: string;
-    bookId: number;
+    bookId: string;
   };
   createdAt: string;
   updatedAt: string | null;

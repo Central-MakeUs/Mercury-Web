@@ -1,21 +1,19 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Text, textVariants } from "@repo/design-system/Text";
+import { toast } from "@repo/design-system/Toast";
 import { cn } from "@repo/design-system/cn";
 import { Center } from "@repo/ui/Center";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
-import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
 import { KakaoButton } from "~/shared/ui/KakaoButton";
 
 export default function OnBoardingPage() {
-  const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
       <MercuryImageSection />
@@ -54,9 +52,9 @@ const SignUpSection = () => {
         </Text>
       </Flex>
       <Center className=" gap-x-[18px] items-center w-full justify-center">
-        <KakaoButton />
-        <AppleButton />
-        <GoogleButton />
+        <KakaoButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} />
+        <AppleButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} />
+        <GoogleButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} />
       </Center>
       <Flex>
         <Link
