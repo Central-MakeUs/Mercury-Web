@@ -1,6 +1,8 @@
+import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Text } from "@repo/design-system/Text";
 import { cn } from "@repo/design-system/cn";
+import { Box } from "@repo/ui/Box";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
 import { type Ref, forwardRef } from "react";
@@ -24,12 +26,16 @@ export const SearchBookItem = forwardRef(function SearchBookItem(
       onClick={onClick}
       className={cn("flex gap-[13px] max-h-[156px] text-left", className)}
     >
-      <Image
-        className="rounded-[4px] max-w-[104px] border-[1px] border-white/10"
-        objectfit={"contain"}
-        src={imageUrl}
-        alt={`${title} 표지`}
-      />
+      <Box className=" min-w-[104px] w-fit max-w-[104px]">
+        <AspectRatio className="w-fit" ratio={104 / 156}>
+          <Image
+            className="rounded-[4px] border-[1px] w-[104px] border-white/10"
+            objectfit={"contain"}
+            src={imageUrl}
+            alt={`${title} 표지`}
+          />
+        </AspectRatio>
+      </Box>
       <div>
         <Text variant={"body/16_sb"} className="mb-[10px] line-clamp-2 text-left">
           {title}

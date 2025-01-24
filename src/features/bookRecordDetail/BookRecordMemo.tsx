@@ -43,13 +43,13 @@ export const BookRecordMemo = ({
 
   const userId = localStorage.getItem("@mercury_test_user_id_W") || "2";
   const { recordId } = useParams<{ recordId: string }>();
-  const queryClient = useQueryClient();
+  const _queryClient = useQueryClient();
 
   const { mutate: deleteMemo } = useMutation({
     mutationFn: () => deleteMemos({ userId, recordId: recordId as string }),
     onSuccess: () => {
       alert("메모 삭제 완료!");
-      queryClient.invalidateQueries({ queryKey: ["getMemos", userId, recordId] });
+      //queryClient.invalidateQueries({ queryKey: ["getMemos", userId, recordId] });
     },
     onError: (error) => {
       alert(`삭제 실패: ${error.message}`);
