@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import animate from "tailwindcss-animate";
+import animate from "tailwindcss-animated";
 import { vars } from "./packages/token";
 
 const config: Config = {

@@ -5,6 +5,7 @@ export const mockSearchBooksDb = [
     author: "이미예 지음",
     isbn13: "9791165341909",
     link: "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=245127051&amp",
+    publisher: "문학동네",
   },
   {
     title: "달러구트 꿈 백화점 (200만 부 기념 합본호 : 아메리칸드림 에디션)",
@@ -12,6 +13,7 @@ export const mockSearchBooksDb = [
     author: "이미예 지음",
     isbn13: "9791194246442",
     link: "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=352924466&amp",
+    publisher: "문학동네",
   },
   {
     title: "달러구트 꿈 백화점 2 - 단골손님을 찾습니다",
@@ -19,5 +21,6 @@ export const mockSearchBooksDb = [
     author: "이미예 지음",
     isbn13: "9791165343729",
     link: "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=275874708&amp",
+    publisher: "문학동네",
   },
 ] as const;

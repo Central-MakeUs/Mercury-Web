@@ -8,9 +8,8 @@ import { TimerButtonSection } from "~/features/timer/components/TimerButtonSecti
 import { TimerDescription } from "~/features/timer/components/TimerDescription";
 import { TimerSpeechBubble } from "~/features/timer/components/TimerSpeechBubble";
 import { TimerText } from "~/features/timer/components/TimerText";
-import { TimerEffector } from "~/features/timer/model/TimerEffector";
-
 import { TIMER_ASSETS } from "~/features/timer/lib/timer.constants";
+import { TimerEffector } from "~/features/timer/model/TimerEffector";
 
 export default function TimerPage() {
   return (
@@ -41,7 +40,7 @@ export default function TimerPage() {
           <CenterStack>
             <TimerButtonSection />
           </CenterStack>
-          <BottomNavigationBar.Height className=" mb-[62.5px]" />
+          <BottomNavigationBar.Height className=" mb-[135px]" />
         </Stack>
       </Stack>
 

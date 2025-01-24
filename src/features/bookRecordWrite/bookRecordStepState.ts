@@ -1,9 +1,10 @@
 import { createFunnelSteps } from "@use-funnel/browser";
+import type { Book } from "~/entities/record/model/book.model";
 
 export interface BookRecordWriteFormOptionalState {
-  text?: string;
-  progress?: number;
-  book?: unknown;
+  content?: string;
+  gauge?: number;
+  book?: Book;
 }
 
 export const bookRecordWriteSteps = createFunnelSteps<BookRecordWriteFormOptionalState>()
@@ -14,6 +15,6 @@ export const bookRecordWriteSteps = createFunnelSteps<BookRecordWriteFormOptiona
     requiredKeys: ["book"],
   })
   .extends("ProgressStep", {
-    requiredKeys: ["text", "book"],
+    requiredKeys: ["content", "book"],
   })
   .build();

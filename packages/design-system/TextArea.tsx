@@ -56,6 +56,7 @@ const LetterCount = (
   return (
     <Text
       variant="body/14_m"
+      aria-label="lettercount"
       className={cn(
         "absolute bottom-[29px] right-[30px]",
         letterCount === 0 && "text-gray-300",

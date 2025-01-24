@@ -5,6 +5,13 @@
 @layer base {
   @font-face {
     font-family: "Pretendard";
+    src: url("../public/fonts/Pretendard-Light.subset.woff2") format("woff2");
+    font-weight: 300;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Pretendard";
     src: url("../public/fonts/Pretendard-Regular.subset.woff2") format("woff2");
     font-weight: 400;
     font-display: swap;
@@ -30,6 +37,7 @@
     font-weight: 700;
     font-display: swap;
   }
+
   html {
     font-family: "Pretendard", sans-serif;
   }
@@ -54,4 +62,13 @@
   .scrollbar::-webkit-resizer {
     background-color: inherit;
   }
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none; /* IE 및 Edge */
+  scrollbar-width: none; /* Firefox */
 }

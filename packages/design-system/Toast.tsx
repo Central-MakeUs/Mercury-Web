@@ -17,6 +17,10 @@ const TOAST_DEFAULT_POSITION = "bottom-navigation" as const;
 const toastVariants = cva("", {
   variants: {
     type: {
+      main3:
+        " shadow-[inset_0_0_0_1px_rgba(252,255,232,0.2)] gap-x-[4px] rounded-full w-fit py-[6px] px-[22px] flex items-center bg-gradient-to-r from-main3-gradient-from to-main3-gradient-to",
+      main: "shadow-[inset_0_0_0_1px_rgba(252,255,232,0.2)] gap-x-[4px] rounded-full w-fit py-[6px] px-[22px] flex items-center bg-gradient-to-r from-main-gradient-from to-main-gradient-to",
+      //@deprecated
       success: "",
     },
   },
@@ -102,7 +106,7 @@ const ToastItem = (props: Toast) => {
         transition={{ duration: 0.3 }}
       >
         <MaxWidthBox className=" px-[16px] flex justify-center items-center">
-          <Flex className=" gap-x-[4px] rounded-full w-fit py-[6px] px-[22px] flex items-center bg-gradient-to-r from-main3-gradient-from to-main3-gradient-to">
+          <Flex className={toastVariants({ type: props.type })}>
             {props.icon}
             {typeof props.content === "string" ? (
               <Text variant={"body/14_sb"} className=" text-white">
@@ -134,7 +138,7 @@ export const toast = {
       id,
       duration: option?.duration ?? TOAST_DEFAULT_DURATION,
       content,
-      type: option?.type ?? "success",
+      type: option?.type ?? "main",
       icon: option?.icon ?? null,
       position: option?.position ?? TOAST_DEFAULT_POSITION,
     };
@@ -142,12 +146,27 @@ export const toast = {
     return { id };
   },
   success: (
+    _content: Toast["content"],
+    _option?: Partial<Pick<Toast, "duration" | "icon" | "position">>,
+  ) => {
+    console.warn("success is deprecated. use main3 instead.");
+  },
+  main3: (
     content: Toast["content"],
     option?: Partial<Pick<Toast, "duration" | "icon" | "position">>,
   ) => {
     return toast.add(content, {
       ...option,
-      type: "success",
+      type: "main3",
+    });
+  },
+  main: (
+    content: Toast["content"],
+    option?: Partial<Pick<Toast, "duration" | "icon" | "position">>,
+  ) => {
+    return toast.add(content, {
+      ...option,
+      type: "main",
     });
   },
 };
