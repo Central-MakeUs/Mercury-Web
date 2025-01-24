@@ -24,5 +24,5 @@ Overlay.displayName = "DialogOverlay";
 const Content = DialogPrimitives.Content;
 const Title = DialogPrimitives.Title;
 const Description = DialogPrimitives.Description;
-
-export const Dialog = { Root, Trigger, Portal, Overlay, Content, Title, Description };
+const Close = DialogPrimitives.Close;
+export const Dialog = { Root, Trigger, Portal, Overlay, Content, Title, Description, Close };

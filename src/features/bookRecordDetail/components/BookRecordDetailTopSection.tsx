@@ -8,17 +8,22 @@ import { Text } from "@repo/design-system/Text";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
 
+import { toast } from "@repo/design-system/Toast";
 import { useNavigate } from "react-router";
+import type { DeleteRecordsRequest } from "~/entities/record/api/deleteRecords";
 import { createNaverReviewUrl } from "~/shared/utils/createNaverReviewUrl";
 import { openExternalUrl } from "~/shared/utils/openExternalUrl";
+import { allMemoDeleteOverlay } from "./AllMemoDeleteDialog";
 
-export const TopSection = (props: {
-  title: string;
-  author: string;
-  publisher: string;
-  src: string;
-}) => {
-  const { title, author, publisher, src } = props;
+export const BookRecordDetailTopSection = (
+  props: {
+    title: string;
+    author: string;
+    publisher: string;
+    src: string;
+  } & DeleteRecordsRequest,
+) => {
+  const { title, author, publisher, src, recordId, userId } = props;
 
   const navigate = useNavigate();
 
@@ -30,6 +35,16 @@ export const TopSection = (props: {
     openExternalUrl(createNaverReviewUrl(title));
   };
 
+  const handleMemoDelete = () => {
+    allMemoDeleteOverlay.open({
+      recordId,
+      userId,
+      onSuccess: () => {
+        toast.main("독서기록을 삭제했어요", { duration: 5000 });
+      },
+    });
+  };
+
   return (
     <Stack className="w-full h-full relative">
       <InteractiveBookRecordTopNavigationBar
@@ -37,6 +52,7 @@ export const TopSection = (props: {
         title={title}
         onBack={handleBackClick}
         onSearchReview={handleSearch}
+        onMemoDelete={handleMemoDelete}
       />
       <AspectRatio ratio={375 / 287} className=" w-full">
         <Image src={src} alt={title} className=" w-full" objectfit={"fill"} />

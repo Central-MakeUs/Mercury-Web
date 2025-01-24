@@ -1,3 +1,4 @@
+import { Button } from "@repo/design-system/Button";
 import { Dialog } from "@repo/design-system/Dialog";
 import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { Text } from "@repo/design-system/Text";
@@ -16,11 +17,12 @@ import { getGaugeMessage } from "~/entities/record/model/record.constants";
 import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { BookRecordDetailFloatButton } from "~/features/bookRecordDetail/components/BookRecordDetailFloatButton";
 import { BookRecordDetailMemoItem } from "~/features/bookRecordDetail/components/BookRecordDetailMemoItem";
-import { TopSection } from "~/features/bookRecordDetail/components/BookRecordDetailTopSection";
+import { BookRecordDetailTopSection } from "~/features/bookRecordDetail/components/BookRecordDetailTopSection";
+import { memoEditOverlay } from "~/features/bookRecordDetail/components/MemoEditDialog";
 
 export default wrap
   .Suspense()
-  .ErrorBoundary({ fallback: <Navigate to="/" /> })
+  .ErrorBoundary({ fallback: <Navigate to="/book-record" /> })
   .on(function BookRecordDetailPage() {
     const { recordId } = useParams();
     const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
@@ -40,7 +42,14 @@ export default wrap
     return (
       <>
         <Stack className=" w-full h-full">
-          <TopSection title={title} author={author} publisher={publisher} src={src} />
+          <BookRecordDetailTopSection
+            title={title}
+            author={author}
+            publisher={publisher}
+            src={src}
+            recordId={recordId ?? ""}
+            userId={user.userId}
+          />
 
           <Stack className=" pt-[16px] px-[16px] z-[3] bg-white h-full min-h-screen">
             <JustifyBetween>
@@ -81,62 +90,49 @@ const createRowProps = (props: Pick<Memo, "createdAt" | "content">) => {
   }
 };
 
-const memoEditOverlay = {
-  openAsync: async () => {
-    return overlay.openAsync<boolean>(({ isOpen, close, unmount }) => {
-      return <MemoEditDialog isOpen={isOpen} close={close} unmount={unmount} />;
+const _allMemoDeleteOverlay = {
+  open: () => {
+    return overlay.open(({ isOpen, close, unmount }) => {
+      return (
+        <AllMemoDeleteDialog
+          isOpen={isOpen}
+          onOpenChange={() => {
+            close();
+            setTimeout(unmount, 2000);
+          }}
+        />
+      );
     });
   },
 };
 
-const MemoEditDialog = (props: {
-  isOpen: boolean;
-  close: (b: boolean) => void;
-  unmount: () => void;
+const AllMemoDeleteDialog = (props: {
+  isOpen?: boolean;
+  onOpenChange?: (bool: boolean) => void;
 }) => {
-  const { isOpen, close, unmount } = props;
+  const { isOpen, onOpenChange } = props;
   return (
-    <Dialog.Root
-      open={isOpen}
-      onOpenChange={() => {
-        close(false);
-        setTimeout(unmount, 2000);
-      }}
-    >
+    <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="z-[6]" />
         <Dialog.Content>
-          <Dialog.Title className=" sr-only">메모 수정혹은 삭제하기</Dialog.Title>
-          <Dialog.Description className=" sr-only">
-            메모를 수정하거나 삭제할 수 있습니다.
-          </Dialog.Description>
-          <MaxWidthBox className="flex z-[7] justify-center items-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-            <Stack className=" w-[225px] py-1 bg-white rounded-[14px]">
-              <button
-                className=" focus:outline-none h-[40px] px-4 text-left w-full"
-                onClick={() => {
-                  close(true);
-                  setTimeout(unmount, 2000);
-                }}
-              >
-                <Text variant={"body/15_m"} className=" text-gray-600">
-                  메모 수정하기
-                </Text>
-              </button>
-              <button
-                className=" focus:outline-none h-[40px] px-4 text-left w-full"
-                onClick={() => {
-                  close(false);
-                  setTimeout(unmount, 2000);
-                }}
-              >
-                <Text variant={"body/15_m"} className=" text-gray-600">
-                  메모 삭제하기
-                </Text>
-              </button>
+          <Dialog.Title className=" sr-only">메모 전체 삭제하기</Dialog.Title>
+          <Dialog.Description className=" sr-only">전체 메모가 삭제됩니다.</Dialog.Description>
+          <MaxWidthBox className="flex z-[7] justify-center items-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]  px-6">
+            <Stack className=" bg-white rounded-[14px] pt-10 pb-4 px-4 justify-center items-center">
+              <Text className=" whitespace-pre-wrap text-gray-800" variant={"title/20_sb"}>
+                {"모든 메모가 한 번에 삭제돼요.\n정말 삭제할까요?"}
+              </Text>
+              <JustifyBetween className=" w-full mt-9">
+                <Button size={"small"} className=" w-full" variant={"gray"}>
+                  아니요
+                </Button>
+                <Button size={"small"} className=" w-full" variant={"warning"}>
+                  삭제하기
+                </Button>
+              </JustifyBetween>
             </Stack>
           </MaxWidthBox>
-          <MaxWidthBox></MaxWidthBox>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

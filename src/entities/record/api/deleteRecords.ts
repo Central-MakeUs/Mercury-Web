@@ -1,7 +1,7 @@
 import { http } from "@repo/http";
 import { useMutation } from "@tanstack/react-query";
 
-interface DeleteRecordsRequest {
+export interface DeleteRecordsRequest {
   recordId: string;
   userId: string;
 }
