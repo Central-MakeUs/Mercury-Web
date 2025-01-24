@@ -1,11 +1,11 @@
 export const BOOK_RECORD_SORT_TYPES = {
   CREATED_AT: {
     label: "생성일 순",
-    value: "CREATED_AT",
+    value: "CREATED",
   },
   UPDATED_AT: {
     label: "업데이트 순",
-    value: "UPDATED_AT",
+    value: "UPDATED",
   },
 } as const;
 
