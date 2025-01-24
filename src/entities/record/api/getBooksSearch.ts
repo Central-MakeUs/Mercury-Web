@@ -16,7 +16,6 @@ export interface GetBooksSearchRequest {
   sortType: GetBooksSearchSortType;
   startPage: number;
   maxResults: number;
-  userId: string;
 }
 
 export interface GetBooksSearchResponse {
