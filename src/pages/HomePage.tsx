@@ -22,6 +22,7 @@ export default function HomePage() {
       <ExpSection />
       <Spacing className=" h-[12px]" />
       <HabitSection />
+      <Spacing className=" h-[160px]" />
     </Stack>
   );
 }
