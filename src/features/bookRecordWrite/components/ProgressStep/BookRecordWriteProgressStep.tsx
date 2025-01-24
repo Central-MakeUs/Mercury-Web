@@ -68,36 +68,38 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
 
 const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
   return (
-    <ImageFadeAnimator
-      value={props.status}
-      className=" mt-[64px] px-[100px]"
-      caseBy={{
-        "0": (
-          <ImageFadeAnimator.FadeIn
-            key={"0"}
-            transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
-          >
-            <Image src={GAUGE_ASSETS[0]} alt="read gauge 0 image" objectfit={"contain"} />
-          </ImageFadeAnimator.FadeIn>
-        ),
-        "50": (
-          <ImageFadeAnimator.FadeIn
-            key={"50"}
-            transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
-          >
-            <Image src={GAUGE_ASSETS[50]} alt="read gauge 50 image" objectfit={"contain"} />
-          </ImageFadeAnimator.FadeIn>
-        ),
-        "100": (
-          <ImageFadeAnimator.FadeIn
-            key={"100"}
-            transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
-          >
-            <Image src={GAUGE_ASSETS[100]} alt="read gauge 100 image" objectfit={"contain"} />
-          </ImageFadeAnimator.FadeIn>
-        ),
-      }}
-    />
+    <Stack className=" min-h-[400px] w-full justify-center items-center">
+      <ImageFadeAnimator
+        value={props.status}
+        className=" mt-[64px] px-[100px]"
+        caseBy={{
+          "0": (
+            <ImageFadeAnimator.FadeIn
+              key={"0"}
+              transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
+            >
+              <Image src={GAUGE_ASSETS[0]} alt="read gauge 0 image" objectfit={"contain"} />
+            </ImageFadeAnimator.FadeIn>
+          ),
+          "50": (
+            <ImageFadeAnimator.FadeIn
+              key={"50"}
+              transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
+            >
+              <Image src={GAUGE_ASSETS[50]} alt="read gauge 50 image" objectfit={"contain"} />
+            </ImageFadeAnimator.FadeIn>
+          ),
+          "100": (
+            <ImageFadeAnimator.FadeIn
+              key={"100"}
+              transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
+            >
+              <Image src={GAUGE_ASSETS[100]} alt="read gauge 100 image" objectfit={"contain"} />
+            </ImageFadeAnimator.FadeIn>
+          ),
+        }}
+      />
+    </Stack>
   );
 });
 
