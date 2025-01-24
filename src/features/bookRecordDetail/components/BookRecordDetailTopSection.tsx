@@ -41,6 +41,7 @@ export const BookRecordDetailTopSection = (
       userId,
       onSuccess: () => {
         toast.main("독서기록을 삭제했어요", { duration: 5000 });
+        navigate("/book-record");
       },
     });
   };
