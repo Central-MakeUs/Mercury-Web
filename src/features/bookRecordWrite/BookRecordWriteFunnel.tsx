@@ -10,11 +10,11 @@ import { GET_BOOKS_SEARCH_SORT_TYPE } from "~/entities/record/api/getBooksSearch
 import { type PostRecordsRequest, usePostRecords } from "~/entities/record/api/postRecords";
 import { recordQueryKeys } from "~/entities/record/api/record.querykey";
 import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
+import BookRecordWriteProgressStep from "../../entities/record/components/ProgressStep/BookRecordWriteProgressStep";
+import BookRecordWriteSearchStep from "../../entities/record/components/SearchStep/BookRecordWriteSearchStep";
+import { WriteSearchProvider } from "../../entities/record/components/SearchStep/WriteSearchStep.store";
+import BookRecordWriteTextStep from "../../entities/record/components/TextStep/BookRecordWriteTextStep";
 import { type BookRecordWriteFormOptionalState, bookRecordWriteSteps } from "./bookRecordStepState";
-import BookRecordWriteProgressStep from "./components/ProgressStep/BookRecordWriteProgressStep";
-import BookRecordWriteSearchStep from "./components/SearchStep/BookRecordWriteSearchStep";
-import { WriteSearchProvider } from "./components/SearchStep/WriteSearchStep.store";
-import BookRecordWriteTextStep from "./components/TextStep/BookRecordWriteTextStep";
 
 const options = {
   id: "@bookrecordwrite",
@@ -48,7 +48,7 @@ export const BookRecordWriteFunnel = () => {
         (async () => {
           await createRecords(body);
           await queryClient.invalidateQueries({
-            queryKey: recordQueryKeys.allGetRecord(),
+            queryKey: recordQueryKeys.allGetRecords(),
             refetchType: "all",
           });
         })(),

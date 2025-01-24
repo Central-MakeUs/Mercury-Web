@@ -8,6 +8,7 @@ import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { useDraft } from "@xionwcfm/react";
 import { memo } from "react";
+import { getGaugeMessage } from "~/entities/record/model/record.constants";
 
 export interface BookRecordWriteProgressStepProps {
   gauge?: number;
@@ -37,7 +38,7 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
 
       <Stack className=" px-4">
         <Text variant={"body/14_m"} className=" text-pastel-violet">
-          시작이 반이에요! 화이팅!!
+          {getGaugeMessage(value)}
         </Text>
         <SingleSlider
           className="my-4"

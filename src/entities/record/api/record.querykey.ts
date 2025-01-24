@@ -1,5 +1,5 @@
-import type { GetBookMemosRequest } from "./getBookMemos";
 import type { GetBooksSearchRequest } from "./getBooksSearch";
+import type { GetBookMemosRequest } from "./getRecordDetail";
 import type { GetRecordsRequest } from "./getRecords";
 
 export const recordQueryKeys = {
@@ -9,12 +9,11 @@ export const recordQueryKeys = {
     "getBooksSearch",
     param,
   ],
-  allGetRecord: () => [...recordQueryKeys.all(), "getRecords"],
-  getRecords: (request: GetRecordsRequest) => [...recordQueryKeys.allGetRecord(), request.userId],
-  getMemos: (request: GetBookMemosRequest) => [
-    ...recordQueryKeys.all(),
-    "getMemos",
-    request.userId,
+  allGetRecords: () => [...recordQueryKeys.all(), "getRecords"],
+  allGetRecordDetail: () => [...recordQueryKeys.all(), "getRecordDetail"],
+  getRecords: (request: GetRecordsRequest) => [...recordQueryKeys.allGetRecords(), request.userId],
+  getRecordById: (request: Pick<GetBookMemosRequest, "recordId">) => [
+    ...recordQueryKeys.allGetRecordDetail(),
     request.recordId,
   ],
 };

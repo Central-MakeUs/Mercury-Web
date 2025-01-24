@@ -21,7 +21,14 @@ export const getRecords = async (request: GetRecordsRequest) => {
       sortType,
     },
   });
-  return response.data;
+  return {
+    ...response.data,
+    records: response.data.records.map((record) => ({
+      ...record,
+      recordId: record.recordId.toString(),
+      book: { ...record.book, bookId: record.book.bookId.toString() },
+    })),
+  } satisfies GetRecordsResponse;
 };
 
 export const getRecordsQueryOptions = (request: GetRecordsRequest) =>

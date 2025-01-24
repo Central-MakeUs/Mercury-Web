@@ -5,7 +5,7 @@ import { useState } from "react";
 import { DropdownMenu } from "./DropDownMenu";
 
 const meta: Meta = {
-  title: "bookRecordDetail/DropDown",
+  title: "ds/DropDown",
   tags: ["autodocs"],
 };
 export default meta;

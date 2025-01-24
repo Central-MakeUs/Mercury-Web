@@ -73,6 +73,30 @@ export const scaleTransitionDuration = {
   "1000": "1000ms",
 };
 
+export const keyframes = {
+  "fade-in": {
+    "0%": { opacity: "0" },
+    "100%": { opacity: "1" },
+  },
+  "fade-out": {
+    "0%": { opacity: "1" },
+    "100%": { opacity: "0" },
+  },
+};
+
+export const animation = {
+  "fade-in-200": "fade-in 200ms ease-in-out",
+  "fade-in-500": "fade-in 500ms ease-in-out",
+  "fade-in-1000": "fade-in 1000ms ease-in-out",
+  "fade-in-1500": "fade-in 1500ms ease-in-out",
+  "fade-in-2000": "fade-in 2000ms ease-in-out",
+  "fade-out-200": "fade-out 200ms ease-in-out",
+  "fade-out-500": "fade-out 500ms ease-in-out",
+  "fade-out-1000": "fade-out 1000ms ease-in-out",
+  "fade-out-1500": "fade-out 1500ms ease-in-out",
+  "fade-out-2000": "fade-out 2000ms ease-in-out",
+};
+
 export const semanticTransitionDuration = {
   header: scaleTransitionDuration[300],
 };
@@ -86,4 +110,6 @@ export const vars = {
   colors,
   fontSize,
   transitionDuration,
+  keyframes,
+  animation,
 };

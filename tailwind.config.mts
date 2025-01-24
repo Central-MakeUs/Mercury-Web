@@ -18,6 +18,12 @@ const config: Config = {
       fontFamily: {
         pretendard: ["Pretendard", "sans-serif"],
       },
+      keyframes: {
+        ...vars.keyframes,
+      },
+      animation: {
+        ...vars.animation,
+      },
     },
   },
 

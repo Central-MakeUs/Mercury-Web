@@ -1,4 +1,5 @@
 import type { BookWithId } from "./book.model";
+import type { Memo } from "./memo.model";
 
 export interface BookRecord {
   recordId: string;
@@ -8,4 +9,13 @@ export interface BookRecord {
   dedtailUpdatedAt: string | null;
   latestMemoContent: string;
   updatedGauge: number;
+}
+
+export interface BookRecordDetail {
+  recordId: string;
+  createdAt: string;
+  updatedAt: string;
+  book: BookWithId;
+  updatedGauge: number;
+  memos: Memo[];
 }

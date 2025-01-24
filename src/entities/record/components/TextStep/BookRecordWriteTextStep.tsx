@@ -22,8 +22,10 @@ interface FormState {
   content: string;
 }
 
-export default function BookRecordWriteTextStep(props: BookRecordWriteTextStepProps) {
-  const { book, content, onNext } = props;
+export default function BookRecordWriteTextStep(
+  props: BookRecordWriteTextStepProps & { isLoading?: boolean },
+) {
+  const { book, content, onNext, isLoading } = props;
   const form = useForm<FormState>({ defaultValues: { content: content } });
 
   return (
@@ -69,7 +71,7 @@ export default function BookRecordWriteTextStep(props: BookRecordWriteTextStepPr
               </TextArea.LetterCountPosition>
             </TextArea.Layout>
           </Box>
-          <Cta onNext={onNext} />
+          <Cta onNext={onNext} isLoading={isLoading} />
         </Stack>
       </Stack>
     </FormProvider>
@@ -78,7 +80,7 @@ export default function BookRecordWriteTextStep(props: BookRecordWriteTextStepPr
 
 const LIMIT_POLICY = 1000;
 
-const Cta = (props: { onNext: (text: string) => void }) => {
+const Cta = (props: { onNext: (text: string) => void; isLoading?: boolean }) => {
   const form = useFormContext<FormState>();
   const content = useWatch({ control: form.control, name: "content" });
   const disabled = content?.length > LIMIT_POLICY;
@@ -90,6 +92,7 @@ const Cta = (props: { onNext: (text: string) => void }) => {
       </Flex>
       <FixedBottom className=" px-[24px] pb-[24px]">
         <CtaButton
+          loading={props.isLoading}
           disabled={disabled}
           onClick={() => {
             props.onNext(content);
