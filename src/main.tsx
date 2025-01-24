@@ -3,7 +3,6 @@ import "../packages/design-system/iosTimePicker.css";
 import { Analytics, MercuryPostHogProvider } from "@repo/analytics";
 import { SafeArea, SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
-import { worker } from "@repo/mocks/browser.ts";
 import { Providers } from "@repo/providers";
 import { MAX_WIDTH } from "@repo/token/index.ts";
 import { StrictMode } from "react";
@@ -55,5 +54,5 @@ createRoot(document.getElementById("root")!).render(
 );
 
 if (process.env.NODE_ENV === "development") {
-  worker.start({ quiet: true, onUnhandledRequest: "bypass" });
+  //worker.start({ quiet: true, onUnhandledRequest: "bypass" });
 }

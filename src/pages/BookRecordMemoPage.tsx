@@ -14,11 +14,10 @@ export default function BookRecordMemoPage() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["getMemos", userId, recordId],
     queryFn: () => getMemos({ userId, recordId: recordId as string }),
-    enabled: !!recordId,
   });
 
   if (!recordId) {
-    return <p>레코드 ID가 없습니다.</p>;
+    return <p>통신에 실패했습니다.</p>;
   }
   if (isLoading) {
     return <p>Loading...</p>;

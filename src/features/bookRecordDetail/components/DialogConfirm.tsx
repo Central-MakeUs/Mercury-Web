@@ -7,9 +7,10 @@ import { Dialog } from "./Dialog";
 
 interface DialogConfirmProps {
   onClose: () => void;
+  onDelete?: () => void;
 }
 
-export const DialogConfirm = ({ onClose }: DialogConfirmProps) => {
+export const DialogConfirm = ({ onClose, onDelete }: DialogConfirmProps) => {
   return (
     <Dialog.Content>
       <Stack className="p-4 gap-[35px]">
@@ -23,7 +24,7 @@ export const DialogConfirm = ({ onClose }: DialogConfirmProps) => {
           <br /> 정말 삭제할까요?
         </Dialog.Title>
 
-        <Flex className="gap-2">
+        <Flex className="justify-between">
           <Button
             onClick={onClose}
             className="rounded-[14px] bg-gray-200 text-gray-400 max-w-[56px] flex items-center justify-center"
@@ -31,10 +32,7 @@ export const DialogConfirm = ({ onClose }: DialogConfirmProps) => {
             아니요
           </Button>
           <Button
-            onClick={() => {
-              alert("삭제되었습니다.");
-              onClose();
-            }}
+            onClick={onDelete}
             className="rounded-[14px] bg-warning-red text-white max-w-[56px] flex items-center justify-center"
           >
             삭제하기

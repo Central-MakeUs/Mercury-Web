@@ -42,7 +42,12 @@ export const MenuDialog: StoryObj = {
 
         <Dialog.Portal>
           <Dialog.Overlay />
-          <DialogMenu memoId={1} />
+          <DialogMenu
+            items={[
+              { label: "메모 수정하기", onClick: () => {} },
+              { label: "메모 삭제하기", onClick: () => {} },
+            ]}
+          />
         </Dialog.Portal>
       </Dialog.Root>
     );

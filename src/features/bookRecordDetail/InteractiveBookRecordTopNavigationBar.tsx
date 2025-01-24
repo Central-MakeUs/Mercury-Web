@@ -18,7 +18,7 @@ interface Props {
 
 export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const { onBack } = props;
+  const { onBack, onMemoDelete } = props;
   const isScrollTop = useIsScrollTop({ threshold: THRESHOLD_POLICY, delay: BAR_DELAY });
   const textColors = isScrollTop ? vars.colors.white : vars.colors.gray[500];
   const backgroundColors = isScrollTop ? undefined : vars.colors.white;
@@ -63,9 +63,7 @@ export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
             <TopNavigation.Title style={{ color: textColors }}>독서기록</TopNavigation.Title>
             <DropdownMenu.Portal>
               <DropdownMenu.Content>
-                <DropdownMenu.Item onClick={() => alert("삭제합니다")}>
-                  전체 삭제하기
-                </DropdownMenu.Item>
+                <DropdownMenu.Item onClick={onMemoDelete}>전체 삭제하기</DropdownMenu.Item>
                 <DropdownMenu.Item onClick={handleOpenSearchBook}>리뷰 검색하기</DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
