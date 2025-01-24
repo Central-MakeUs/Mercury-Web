@@ -26,3 +26,21 @@ export const calculateUserLevel = (exp: number): number => {
 
   return Object.keys(EXP_TABLE).length + 1;
 };
+
+export const getGoalExp = (level: number) => {
+  let goalExp = 0;
+
+  for (let i = 1; i <= level; i++) {
+    goalExp += EXP_TABLE[i as keyof typeof EXP_TABLE] ?? 0;
+  }
+
+  return goalExp;
+};
+
+export const getExpPercentage = (exp: number, goalExp: number): number => {
+  const result = (exp / goalExp) * 100;
+  if (Number.isNaN(result)) {
+    return 1;
+  }
+  return result;
+};
