@@ -15,7 +15,7 @@ export const FirstUserRecordFallback = () => {
       <Spacing className=" h-[128px]" />
       <Text
         variant={"body/18_m"}
-        className=" text-gray-1000 text-center whitespace-pre-wrap"
+        className=" text-gray-1000 text-center line-clamp-2 whitespace-pre-wrap"
       >{`나의 독서 습관을 만들어줄\n첫 번째 독서기록을 시작해보세요`}</Text>
     </CenterStack>
   );

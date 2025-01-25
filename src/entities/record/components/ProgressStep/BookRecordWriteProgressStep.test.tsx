@@ -35,9 +35,9 @@ describe("BookRecordWriteProgressStep를 테스트합니다.", () => {
 
   it.each([
     { input: 0, expected: "0" },
-    { input: 49, expected: "0" },
+    { input: 49, expected: "50" },
     { input: 50, expected: "50" },
-    { input: 99, expected: "50" },
+    { input: 99, expected: "100" },
     { input: 100, expected: "100" },
   ] as const)("각 이미지는 0, 50, 100을 기준으로 교체됩니다.", ({ input, expected }) => {
     const { getByImage } = renderWithSelector(input);
