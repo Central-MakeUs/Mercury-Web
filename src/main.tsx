@@ -28,7 +28,13 @@ createRoot(document.getElementById("root")!).render(
           <BrowserRouter>
             <OverlayProvider>
               <Routes>
-                <Route element={<BottomNavigationLayout />}>
+                <Route
+                  element={
+                    <SafeArea className=" w-full h-full" edges={["top", "left", "right", "bottom"]}>
+                      <BottomNavigationLayout />
+                    </SafeArea>
+                  }
+                >
                   <Route path="home" element={<HomePage />} />
                   <Route path="timer" element={<TimerPage />} />
                   <Route path="book-record" element={<BookRecordPage />} />

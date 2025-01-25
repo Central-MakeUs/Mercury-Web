@@ -71,7 +71,9 @@ const SEARCH_ASSETS = {
 const FirstFallback = (props: { isLoading?: boolean }) => {
   const { isLoading } = props;
   return (
-    <CenterStack className={cn(" h-full  w-full  px-[96px]", isLoading && " animate-pulse")}>
+    <CenterStack
+      className={cn(" h-full  w-full  px-[96px]", isLoading && " opacity-30 animate-pulse")}
+    >
       <AspectRatio>
         <Image src={SEARCH_ASSETS.FIRST_FALLBACK} alt="검색 결과 없음" />
       </AspectRatio>
