@@ -49,6 +49,7 @@ export const TextAndProgressFunnel = (props: {
       )}
       ProgressStep={({ context }) => (
         <BookRecordWriteProgressStep
+          gauge={gauge}
           loading={isLoading}
           onNext={(gauge) => onSuccess?.({ ...context, gauge })}
         />
