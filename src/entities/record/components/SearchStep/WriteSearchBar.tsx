@@ -9,9 +9,10 @@ export const WriteSearchBar = () => {
   const setQuery = useWriteSearchStore((state) => state.actions.setQuery);
   const debouncing = useDebouncedInputValue(storeValue, { delay: 2000 });
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     setQuery(debouncing.debouncedValue);
-  }, [setQuery, debouncing.debouncedValue]);
+  }, [debouncing.debouncedValue]);
 
   return (
     <SearchBar
