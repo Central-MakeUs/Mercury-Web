@@ -60,7 +60,7 @@ export const BookRecordWriteFunnel = () => {
   };
 
   return (
-    <Stack className=" w-full">
+    <Stack className=" w-full h-full">
       <TopNavigation.Root left={<TopNavigation.Back onClick={handleBack} />}>
         <TopNavigation.Title>독서기록</TopNavigation.Title>
       </TopNavigation.Root>

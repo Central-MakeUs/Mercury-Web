@@ -41,7 +41,17 @@ createRoot(document.getElementById("root")!).render(
                   <Route path="profile" element={<ProfilePage />} />
                 </Route>
 
-                <Route path="book-record/write" element={<BookRecordWritePage />} />
+                <Route
+                  path="book-record/write"
+                  element={
+                    <SafeArea
+                      className=" w-full h-screen"
+                      edges={["top", "left", "right", "bottom"]}
+                    >
+                      <BookRecordWritePage />
+                    </SafeArea>
+                  }
+                />
                 <Route path="book-record/:recordId" element={<BookRecordDetailPage />} />
 
                 <Route
