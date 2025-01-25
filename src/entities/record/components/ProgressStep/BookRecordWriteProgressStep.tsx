@@ -113,10 +113,10 @@ const GAUGE_ASSETS = {
 };
 
 const getStatus = (value: number) => {
-  if (value === 100) {
+  if (value >= 70) {
     return "100" as const;
   }
-  if (value > 49) {
+  if (value >= 35) {
     return "50" as const;
   }
   return "0" as const;
