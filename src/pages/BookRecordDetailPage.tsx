@@ -51,8 +51,8 @@ export default wrap
             userId={user.userId}
           />
 
-          <Stack className=" pt-[16px] px-[16px] z-[3] bg-white h-full min-h-screen">
-            <JustifyBetween>
+          <Stack className=" pt-[16px]  z-[3] bg-white h-full min-h-screen">
+            <JustifyBetween className=" px-[16px]">
               <Text variant={"body/16_m"} className=" text-gray-600">
                 {gaugeMessage}
               </Text>
@@ -60,8 +60,10 @@ export default wrap
                 {cheeringMessage}
               </Text>
             </JustifyBetween>
+
             <Spacing className=" h-[16px]" />
-            <List className=" w-full   gap-y-4 ">
+
+            <List className=" w-full ">
               {memos.map((memo) => (
                 <BookRecordDetailMemoItem
                   key={memo.memoId}
