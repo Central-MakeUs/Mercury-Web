@@ -56,7 +56,7 @@ export const InteractiveBookRecordTopNavigationBar = (props: Props) => {
             <DropdownMenu.Portal>
               <DropdownMenu.Content className=" z-[2]">
                 <DropdownMenu.Item onClick={onMemoDelete}>전체 삭제하기</DropdownMenu.Item>
-                <DropdownMenu.Item onClick={onSearchReview}>리뷰 검색하기</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={onSearchReview}>블로그 리뷰 보기</DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
           </TopNavigation.Root>
