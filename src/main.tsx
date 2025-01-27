@@ -1,7 +1,7 @@
 import "./index.css";
 import "../packages/design-system/iosTimePicker.css";
 import { Analytics, MercuryPostHogProvider } from "@repo/analytics";
-import { SafeArea, SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
+import { SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
 import { Providers } from "@repo/providers";
 import { MAX_WIDTH } from "@repo/token/index.ts";
@@ -28,30 +28,14 @@ createRoot(document.getElementById("root")!).render(
           <BrowserRouter>
             <OverlayProvider>
               <Routes>
-                <Route
-                  element={
-                    <SafeArea className=" w-full h-full" edges={["top", "left", "right", "bottom"]}>
-                      <BottomNavigationLayout />
-                    </SafeArea>
-                  }
-                >
+                <Route element={<BottomNavigationLayout />}>
                   <Route path="home" element={<HomePage />} />
                   <Route path="timer" element={<TimerPage />} />
                   <Route path="book-record" element={<BookRecordPage />} />
                   <Route path="profile" element={<ProfilePage />} />
                 </Route>
 
-                <Route
-                  path="book-record/write"
-                  element={
-                    <SafeArea
-                      className=" w-full h-screen"
-                      edges={["top", "left", "right", "bottom"]}
-                    >
-                      <BookRecordWritePage />
-                    </SafeArea>
-                  }
-                />
+                <Route path="book-record/write" element={<BookRecordWritePage />} />
                 <Route path="book-record/:recordId" element={<BookRecordDetailPage />} />
 
                 <Route
@@ -61,14 +45,7 @@ createRoot(document.getElementById("root")!).render(
 
                 <Route path="add-memo/:recordId" element={<BookRecordMemoAddPage />} />
 
-                <Route
-                  path=""
-                  element={
-                    <SafeArea className=" w-full " edges={["top", "left", "right", "bottom"]}>
-                      <OnBoardingPage />
-                    </SafeArea>
-                  }
-                />
+                <Route path="" element={<OnBoardingPage />} />
               </Routes>
             </OverlayProvider>
           </BrowserRouter>

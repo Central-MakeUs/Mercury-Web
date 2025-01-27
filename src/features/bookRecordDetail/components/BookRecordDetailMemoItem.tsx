@@ -24,12 +24,12 @@ export const BookRecordDetailMemoItem = (
   }, []);
 
   return (
-    <Stack className="">
-      <Flex className={cn(" text-gray-600 mb-2 ", textVariants({ variant: "body/13_r" }))}>
-        {header}
-      </Flex>
-      <Pressable onPressComplete={onPressComplete} delay={600}>
-        <Stack className=" touch-none select-none w-full pl-4  transition-all data-[pressed=true]:duration-[400ms] data-[pressed=true]:scale-[0.98] data-[pressed=true]:opacity-70 data-[pressed=false]:duration-[400ms]">
+    <Pressable onPressComplete={onPressComplete} delay={400}>
+      <Stack className=" px-[16px] py-[16px] data-[pressed=true]:bg-gray-200 rounded-[14px] touch-none select-none transition-all data-[pressed=true]:duration-[400ms] data-[pressed=true]:scale-[0.98] data-[pressed=true]:opacity-70 data-[pressed=false]:duration-[400ms]">
+        <Flex className={cn(" text-gray-600 mb-2 ", textVariants({ variant: "body/13_r" }))}>
+          {header}
+        </Flex>
+        <Stack className=" group  w-full pl-4 ">
           <Stack
             ref={memoRef}
             className=" p-[10px] min-h-[43px] relative bg-yellow-green w-full rounded-[12px]"
@@ -44,7 +44,7 @@ export const BookRecordDetailMemoItem = (
             />
           </Stack>
         </Stack>
-      </Pressable>
-    </Stack>
+      </Stack>
+    </Pressable>
   );
 };
