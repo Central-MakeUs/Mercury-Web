@@ -71,25 +71,36 @@ const SEARCH_ASSETS = {
 const FirstFallback = (props: { isLoading?: boolean }) => {
   const { isLoading } = props;
   return (
-    <CenterStack
-      className={cn(" h-full  w-full  px-[96px]", isLoading && " opacity-30 animate-pulse")}
-    >
-      <AspectRatio>
-        <Image src={SEARCH_ASSETS.FIRST_FALLBACK} alt="검색 결과 없음" />
-      </AspectRatio>
-    </CenterStack>
+    <Stack className="h-full  w-full">
+      <CenterStack
+        className={cn(
+          " h-full  w-full pl-[116px] pr-[96px]",
+          isLoading && " opacity-30 animate-pulse",
+        )}
+      >
+        <AspectRatio>
+          <Image src={SEARCH_ASSETS.FIRST_FALLBACK} alt="검색 결과 없음" />
+        </AspectRatio>
+      </CenterStack>
+      <Text
+        className=" mt-[40px] text-gray-600 whitespace-pre-wrap text-center"
+        variant={"body/18_sb"}
+      >
+        {"독서기록을 남기기 위한\n책 검색부터 시작해 볼게요"}
+      </Text>
+    </Stack>
   );
 };
 
 const EmptyFallback = () => {
   return (
     <Stack className=" h-full w-full justify-center items-center ">
-      <CenterStack className=" w-full  px-[96px]">
+      <CenterStack className=" w-full pl-[117px] pr-[96px]">
         <AspectRatio>
           <Image src={SEARCH_ASSETS.SEARCH_RESULT_EMPTY_FALLBACK} alt="검색 결과 없음" />
         </AspectRatio>
       </CenterStack>
-      <Text className=" mt-[40px] text-gray-1000" variant={"body/18_m"}>
+      <Text className=" mt-[40px] text-gray-600" variant={"body/18_sb"}>
         검색 결과가 없어요
       </Text>
     </Stack>
