@@ -6,11 +6,11 @@ export const getTimerSpeechBubbleText = (status: TimerStatus) => {
   }
 
   if (status === TIMER_STATUS.RUNNING) {
-    return "잘 하고 있어요!";
+    return "잘하고 있어요!";
   }
 
   if (status === TIMER_STATUS.PAUSED) {
-    return "잠시 멈췄어요!";
+    return "잠깐 멈췄어요!";
   }
 
   if (status === TIMER_STATUS.COMPLETED) {
