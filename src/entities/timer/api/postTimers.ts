@@ -5,15 +5,22 @@ import type { Timer } from "../model/timer.model";
 export interface PostTimersRequest {
   seconds: number;
   userId: string;
+  deviceTime?: string;
 }
 
 export type PostTimersResponse = Timer[];
 
 export const postTimers = async (request: PostTimersRequest) => {
-  const { userId, ...rest } = request;
+  const { userId, deviceTime, ...rest } = request;
+
+  const body = {
+    ...rest,
+    deviceTime: deviceTime ?? new Date().toISOString(),
+  };
+
   const response = await http.post<Omit<PostTimersRequest, "userId">, PostTimersResponse>(
     `/timers`,
-    rest,
+    body,
     {
       searchParams: {
         userId,

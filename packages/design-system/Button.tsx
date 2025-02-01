@@ -11,8 +11,8 @@ interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
 const buttonStyles = cva("rounded-[30px] py-[12px] max-h-[50px]", {
   variants: {
     variant: {
-      primary: "bg-green text-white-pink",
-      warning: "bg-pastel-red text-white-pink",
+      primary: "bg-green text-white",
+      warning: "bg-pastel-red text-white",
       gray: "bg-gray-200 text-gray-800",
     },
     size: {
