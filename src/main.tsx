@@ -16,6 +16,7 @@ import BookRecordModifyPage from "./pages/BookRecordMemoModifyPage.tsx";
 import BookRecordPage from "./pages/BookRecordPage.tsx";
 import BookRecordWritePage from "./pages/BookRecordWritePage.tsx";
 import HomePage from "./pages/HomePage.tsx";
+import Notification from "./pages/Notification.tsx";
 import OnBoardingPage from "./pages/OnBoardingPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import TimerPage from "./pages/TimerPage.tsx";
@@ -45,6 +46,7 @@ createRoot(document.getElementById("root")!).render(
 
                 <Route path="add-memo/:recordId" element={<BookRecordMemoAddPage />} />
 
+                <Route path="notification" element={<Notification />} />
                 <Route path="" element={<OnBoardingPage />} />
               </Routes>
             </OverlayProvider>

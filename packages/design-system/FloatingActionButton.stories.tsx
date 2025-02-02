@@ -15,3 +15,12 @@ export const Default: StoryObj = {
     );
   },
 };
+export const PlusMemo: StoryObj = {
+  render: () => {
+    return (
+      <>
+        <FloatingActionButton variant="plus" />
+      </>
+    );
+  },
+};
