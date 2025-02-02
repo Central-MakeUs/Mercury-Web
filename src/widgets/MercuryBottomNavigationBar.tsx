@@ -27,11 +27,11 @@ export const MercuryBottomNavigationBar = () => {
       />
       <BottomNavigationBar.Action
         icon={({ selected }) => (
-          <Link to="/profile">
+          <Link to="/home">
             <MyIcon selected={selected} />
           </Link>
         )}
-        value="/profile"
+        value="/home"
       />
     </BottomNavigationBar.Root>
   );

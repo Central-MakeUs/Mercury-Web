@@ -36,13 +36,15 @@ const Header = () => {
         </AspectRatio>
       </Flex>
 
-      <NotificationBadge.Button
-        onClick={() => {
-          toast.main("준비중인 기능이에요", { duration: 1500 });
-        }}
-      >
-        <NotificationBadge.Icon />
-      </NotificationBadge.Button>
+      <Flex>
+        <NotificationBadge.Button
+          onClick={() => {
+            toast.main("준비중인 기능이에요", { duration: 1500 });
+          }}
+        >
+          <NotificationBadge.Icon />
+        </NotificationBadge.Button>
+      </Flex>
     </motion.div>
   );
 };
