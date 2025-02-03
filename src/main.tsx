@@ -19,6 +19,7 @@ import HomePage from "./pages/HomePage.tsx";
 import Notification from "./pages/Notification.tsx";
 import OnBoardingPage from "./pages/OnBoardingPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
+import SettingPage from "./pages/SettingPage.tsx";
 import TimerPage from "./pages/TimerPage.tsx";
 
 createRoot(document.getElementById("root")!).render(
@@ -47,6 +48,7 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="add-memo/:recordId" element={<BookRecordMemoAddPage />} />
 
                 <Route path="notification" element={<Notification />} />
+                <Route path="settings" element={<SettingPage />} />
                 <Route path="" element={<OnBoardingPage />} />
               </Routes>
             </OverlayProvider>

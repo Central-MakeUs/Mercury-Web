@@ -7,6 +7,7 @@ import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { motion } from "motion/react";
+import { useNavigate } from "react-router";
 import { HabitSection } from "~/features/userExp/HabitSection";
 import { MainSection } from "~/features/userInfo/UserInfoSection";
 
@@ -23,6 +24,8 @@ export default function HomePage() {
 }
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <motion.div
       className=" flex justify-between pb-[30px] pt-[24px] bg-white w-full px-[16px]"
@@ -49,7 +52,7 @@ const Header = () => {
 
         <SettingsBadge.Button
           onClick={() => {
-            toast.main("셋팅페이지 이동", { duration: 1500 });
+            navigate("/settings");
           }}
         >
           <SettingsBadge.Icon />
