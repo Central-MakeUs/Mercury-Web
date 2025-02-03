@@ -1,6 +1,7 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { NotificationBadge } from "@repo/design-system/NotificationBadge";
+import { SettingsBadge } from "@repo/design-system/SettingsBadge";
 import { toast } from "@repo/design-system/Toast";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
@@ -36,13 +37,23 @@ const Header = () => {
         </AspectRatio>
       </Flex>
 
-      <NotificationBadge.Button
-        onClick={() => {
-          toast.main("준비중인 기능이에요", { duration: 1500 });
-        }}
-      >
-        <NotificationBadge.Icon />
-      </NotificationBadge.Button>
+      <Flex className="gap-[17px]">
+        <NotificationBadge.Button
+          onClick={() => {
+            toast.main("준비중인 기능이에요", { duration: 1500 });
+          }}
+        >
+          <NotificationBadge.Icon />
+        </NotificationBadge.Button>
+
+        <SettingsBadge.Button
+          onClick={() => {
+            toast.main("셋팅페이지 이동", { duration: 1500 });
+          }}
+        >
+          <SettingsBadge.Icon />
+        </SettingsBadge.Button>
+      </Flex>
     </motion.div>
   );
 };

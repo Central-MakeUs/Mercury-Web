@@ -1,6 +1,5 @@
 import { BottomNavigationBar } from "@repo/design-system/BottomNavigationBar";
 import { BookIcon } from "@repo/icon/BookIcon";
-import { HomeIcon } from "@repo/icon/HomeIcon";
 import { MyIcon } from "@repo/icon/MyIcon";
 import { TimerIcon } from "@repo/icon/TimerIcon";
 import { Link, useLocation } from "react-router";
@@ -12,11 +11,11 @@ export const MercuryBottomNavigationBar = () => {
     <BottomNavigationBar.Root value={pathname}>
       <BottomNavigationBar.Action
         icon={({ selected }) => (
-          <Link to="/home">
-            <HomeIcon selected={selected} />
+          <Link to="/book-record">
+            <BookIcon selected={selected} />
           </Link>
         )}
-        value="/home"
+        value="/book-record"
       />
       <BottomNavigationBar.Action
         icon={({ selected }) => (
@@ -28,19 +27,11 @@ export const MercuryBottomNavigationBar = () => {
       />
       <BottomNavigationBar.Action
         icon={({ selected }) => (
-          <Link to="/book-record">
-            <BookIcon selected={selected} />
-          </Link>
-        )}
-        value="/book-record"
-      />
-      <BottomNavigationBar.Action
-        icon={({ selected }) => (
-          <Link to="/profile">
+          <Link to="/home">
             <MyIcon selected={selected} />
           </Link>
         )}
-        value="/profile"
+        value="/home"
       />
     </BottomNavigationBar.Root>
   );

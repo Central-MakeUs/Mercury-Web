@@ -58,7 +58,7 @@ const SignUpSection = () => {
       </Center>
       <Flex>
         <Link
-          to={"/home"}
+          to={"/book-record"}
           className={cn(
             textVariants({ variant: "caption/12_r" }),
             " text-gray-300 underline underline-offset-4",
