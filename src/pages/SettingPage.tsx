@@ -2,9 +2,12 @@ import { Text } from "@repo/design-system/Text";
 import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
+import { useNavigate } from "react-router";
 import { SettingMenuItem } from "~/features/settingsMenu/settingsMenuItem";
 
 export default function SettingPage() {
+  const _navigate = useNavigate();
+
   return (
     <Stack className="w-full h-full">
       <TopNavigation.Root className="w-full" left={<TopNavigation.Back />}>
@@ -13,9 +16,13 @@ export default function SettingPage() {
 
       <Stack className="px-4 mt-5">
         <SettingMenuItem type="toggle" menuName="알림설정" />
-        <SettingMenuItem type="link" menuName="문의하기" />
-        <SettingMenuItem type="link" menuName="이용약관 및 개인정보 처리방침" />
-        <SettingMenuItem type="link" menuName="공지사항" />
+        <SettingMenuItem type="link" menuName="문의하기" link={SETTINGS_LINKS.FQA} />
+        <SettingMenuItem
+          type="link"
+          menuName="이용약관 및 개인정보 처리방침"
+          link={SETTINGS_LINKS.TERMSANDPRIVACY}
+        />
+        <SettingMenuItem type="link" menuName="공지사항" link={SETTINGS_LINKS.NOTICE} />
         <SettingMenuItem type="exit" menuName="로그아웃" />
         <SettingMenuItem type="exit" menuName="탈퇴하기" />
 
@@ -31,3 +38,9 @@ export default function SettingPage() {
     </Stack>
   );
 }
+
+const SETTINGS_LINKS = {
+  FQA: "https://burly-jar-165.notion.site/18828ba3580d80f8b23ef2a7082f8412?pvs=4",
+  TERMSANDPRIVACY: "https://burly-jar-165.notion.site/use-policy?pvs=4",
+  NOTICE: "https://burly-jar-165.notion.site/announcement?pvs=4",
+};
