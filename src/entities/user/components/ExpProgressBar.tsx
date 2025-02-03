@@ -1,28 +1,11 @@
 import * as ProgressPrimitives from "@radix-ui/react-progress";
-import { textVariants } from "@repo/design-system/Text";
-import { cn } from "@repo/design-system/cn";
-import { Flex } from "@repo/ui/Flex";
 import { motion } from "motion/react";
 import type { ComponentProps } from "react";
-import useAnimationCounter from "~/shared/hooks/useAnimationCounter";
 
 export const ExpProgressBar = (
   props: ComponentProps<typeof ProgressPrimitives.Root> & { totalExp: number; currentExp: number },
 ) => {
   const { children, value, totalExp, currentExp, style, ...rest } = props;
-  const currentExpText = useAnimationCounter({
-    to: currentExp,
-    start: 0,
-    duration: 1,
-    delay: 0.3,
-  });
-
-  const totalExpText = useAnimationCounter({
-    to: totalExp,
-    start: 0,
-    duration: 1,
-    delay: 0.3,
-  });
 
   return (
     <ProgressPrimitives.Root
@@ -45,15 +28,6 @@ export const ExpProgressBar = (
           transition={{ duration: 0.5, ease: "easeInOut" }}
         />
       </ProgressPrimitives.Indicator>
-
-      <Flex className=" absolute gap-x-[8px] items-center top-0 left-0 z-10 px-[12px] w-full h-full">
-        <motion.span className={cn(textVariants({ variant: "caption/12_m" }), "text-white")}>
-          {currentExpText}
-        </motion.span>
-        <motion.span className={cn(" text-[10px] font-light text-white")}>
-          {totalExpText}
-        </motion.span>
-      </Flex>
       {children}
     </ProgressPrimitives.Root>
   );
