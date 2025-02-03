@@ -1,21 +1,21 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
-import { Image } from "@repo/design-system/Image";
 import { NotificationBadge } from "@repo/design-system/NotificationBadge";
 import { SettingsBadge } from "@repo/design-system/SettingsBadge";
+import { Text } from "@repo/design-system/Text";
 import { toast } from "@repo/design-system/Toast";
-import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { motion } from "motion/react";
+import { useNavigate } from "react-router";
 import { HabitSection } from "~/features/userExp/HabitSection";
+import { MainSection } from "~/features/userInfo/UserInfoSection";
 
 export default function HomePage() {
   return (
     <Stack className="  w-full">
       <Header />
       <MainSection />
-      <Spacing className=" h-[16px]" />
 
       <HabitSection />
       <Spacing className=" h-[160px]" />
@@ -24,6 +24,8 @@ export default function HomePage() {
 }
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <motion.div
       className=" flex justify-between pb-[30px] pt-[24px] bg-white w-full px-[16px]"
@@ -33,7 +35,9 @@ const Header = () => {
     >
       <Flex className=" w-[161px] h-[32px]">
         <AspectRatio ratio={161 / 32}>
-          <Image src={HOME_ASSETS.HOME_LOGO} alt="home_logo" objectfit={"fill"} />
+          <Text variant={"title/24_sb"} className="text-gray-800">
+            마이페이지
+          </Text>
         </AspectRatio>
       </Flex>
 
@@ -48,7 +52,7 @@ const Header = () => {
 
         <SettingsBadge.Button
           onClick={() => {
-            toast.main("셋팅페이지 이동", { duration: 1500 });
+            navigate("/settings");
           }}
         >
           <SettingsBadge.Icon />
@@ -56,26 +60,4 @@ const Header = () => {
       </Flex>
     </motion.div>
   );
-};
-
-const MainSection = () => {
-  return (
-    <CenterStack className=" w-full bg-navy">
-      <motion.div
-        className=" w-full h-full"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
-        <AspectRatio ratio={375 / 343} className=" flex justify-center items-center">
-          <Image src={HOME_ASSETS.HOME_MERCURY} alt="mercury character" objectfit={"fill"} />
-        </AspectRatio>
-      </motion.div>
-    </CenterStack>
-  );
-};
-
-const HOME_ASSETS = {
-  HOME_LOGO: "/images/home/home_logo.webp",
-  HOME_MERCURY: "/images/home/home_mercury.webp",
 };

@@ -9,24 +9,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { isAfter, isSameDay } from "date-fns";
 import { useMemo } from "react";
 import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
-import { ExpProgressBar } from "~/entities/user/components/ExpProgressBar";
 import { HabitCalendar } from "~/entities/user/components/HabitCalendar";
-import { calculateUserLevel, getExpPercentage, getGoalExp } from "~/entities/user/model/user.model";
-
-const ExpSection = (props: { exp: number; goalExp: number; percentage: number; level: string }) => {
-  const { exp, goalExp, percentage, level } = props;
-  return (
-    <Stack className=" w-full px-[20px]">
-      <Flex className=" gap-x-[16px]">
-        <Text variant={"body/18_sb"} className=" text-nowrap text-[#393F46]">
-          {level}
-        </Text>
-
-        <ExpProgressBar value={percentage} totalExp={goalExp} currentExp={exp} />
-      </Flex>
-    </Stack>
-  );
-};
 
 const HabitBar = (props: { normalText: string; boldText: string }) => {
   const { normalText, boldText } = props;
@@ -99,7 +82,6 @@ const getDayName = (date: Date) => {
 const Fallback = () => {
   return (
     <>
-      <ExpSection exp={0} goalExp={0} percentage={0} level={`레벨 1`} />
       <Spacing className=" h-[12px]" />
       <Stack className=" px-[20px] w-full animate-pulse">
         <Text variant={"body/18_sb"} className=" mb-[10px] text-[#393F46]">
@@ -137,17 +119,11 @@ export const HabitSection = wrap
     const boldText =
       successCount > 0 ? `${successCount}일 연속 습관 쌓는 중!` : "습관 쌓을 준비 중";
 
-    const level = calculateUserLevel(user.exp);
-    const goalExp = getGoalExp(level);
-    const exp = user.exp + 50;
-    const percentage = getExpPercentage(exp, goalExp);
-
     const weekDates = useMemo(() => getWeekDates(new Date()), []);
 
     return (
       <>
-        <ExpSection exp={exp} goalExp={goalExp} percentage={percentage} level={`레벨 ${level}`} />
-        <Spacing className=" h-[12px]" />
+        <Spacing className=" h-[17px]" />
         <Stack className=" px-[20px]">
           <Text variant={"body/18_sb"} className=" mb-[10px] text-[#393F46]">
             습관 쌓기
