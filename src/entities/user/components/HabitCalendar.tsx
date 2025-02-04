@@ -12,6 +12,7 @@ const Cell = forwardRef(function Cell(
   return (
     <div className={cn(" w-full h-full flex flex-col gap-y-[5px]", className)}>
       {header ?? <div />}
+
       <button
         data-status={status}
         ref={ref}
