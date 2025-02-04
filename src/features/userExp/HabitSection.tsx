@@ -1,7 +1,13 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
+import { BottomSheet } from "@repo/design-system/BottomSheet";
+import { Image } from "@repo/design-system/Image";
 import { Text } from "@repo/design-system/Text";
+import { BookIcon } from "@repo/icon/BookIcon";
+import { CheckIcon } from "@repo/icon/CheckIcon";
 import { MercuryIcon } from "@repo/icon/MercuryIcon";
+import { TimerIcon } from "@repo/icon/TimerIcon";
 import { Flex } from "@repo/ui/Flex";
+import { JustifyBetween } from "@repo/ui/JustifyBetween";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
@@ -122,7 +128,7 @@ export const HabitSection = wrap
     const weekDates = useMemo(() => getWeekDates(new Date()), []);
 
     return (
-      <>
+      <BottomSheet.Root handleOnly={true}>
         <Spacing className=" h-[17px]" />
         <Stack className=" px-[20px]">
           <Text variant={"body/18_sb"} className=" mb-[10px] text-[#393F46]">
@@ -131,19 +137,89 @@ export const HabitSection = wrap
 
           <Flex className=" gap-x-[8px] justify-between">
             {weekDates.map((date) => (
-              <HabitCalendar.Cell
-                key={date.toISOString()}
-                header={<HabitCalendar.Header>{getDayName(date)}</HabitCalendar.Header>}
-                status={getStatus({ targetDate: date, today: new Date(), isDone: true })}
-              >
-                {date.getDate()}
-              </HabitCalendar.Cell>
+              <BottomSheet.Trigger asChild={true} key={date.toISOString()}>
+                <HabitCalendar.Cell
+                  key={date.toISOString()}
+                  header={<HabitCalendar.Header>{getDayName(date)}</HabitCalendar.Header>}
+                  status={getStatus({ targetDate: date, today: new Date(), isDone: true })}
+                >
+                  {date.getDate()}
+                </HabitCalendar.Cell>
+              </BottomSheet.Trigger>
             ))}
           </Flex>
 
           <Spacing className=" h-[12px]" />
           <HabitBar normalText={normalText} boldText={boldText} />
         </Stack>
-      </>
+        <TodayHabit />
+      </BottomSheet.Root>
     );
   });
+
+const TodayHabit = () => {
+  return (
+    <>
+      <BottomSheet.Portal>
+        <BottomSheet.Overlay />
+        <BottomSheet.Content className=" flex  items-center flex-col pt-[16px] px-[20px] rounded-t-[20px] h-[360px] bg-gray-white">
+          <BottomSheet.Handle className=" mb-[16px]" />
+          <BottomSheet.Description className=" sr-only">
+            오늘의 미션을 확인합니다.
+          </BottomSheet.Description>
+          <BottomSheet.Title asChild={true}>
+            <JustifyBetween className="w-full">
+              <Text variant={"title/25_sb"} className="text-gray-800 whitespace-pre-wrap">
+                {"6일 연속 \n성공했어요!"}
+              </Text>
+              <Image src={HABIIT_ASSETS.LOGO} alt="mercury character" objectfit={"fill"} />
+            </JustifyBetween>
+          </BottomSheet.Title>
+
+          <Stack className="mt-[19px] mb-[20px] w-full">
+            <Flex className="items-center">
+              <Image
+                src={HABIIT_ASSETS.BLOCK}
+                alt="habit block"
+                objectfit={"fill"}
+                className="w-5 h-5"
+              />
+              <Text className="ml-[7px] mr-[12px] text-gray-600" variant={"body/18_sb"}>
+                습관쌓기
+              </Text>
+              <Text className="text-pastel-violet" variant={"body/18_m"}>
+                + 50xp
+              </Text>
+            </Flex>
+
+            <Stack className="rounded-[5px] bg-gray-100 px-7 py-[14px] mt-[9px] gap-[14px]">
+              <JustifyBetween className="items-center">
+                <Flex className="items-center">
+                  <BookIcon />
+                  <Text className="text-gray-500 ml-[13px] mr-[20px]" variant={"body/15_m"}>
+                    독서기록 또는 메모 1개 작성하기
+                  </Text>
+                </Flex>
+                <CheckIcon />
+              </JustifyBetween>
+              <JustifyBetween className="items-center">
+                <Flex className="items-center">
+                  <TimerIcon selected={true} />
+                  <Text className="text-gray-500 ml-[13px] mr-[20px]" variant={"body/15_m"}>
+                    10초 이상 타이머 완료하기
+                  </Text>
+                </Flex>
+                <CheckIcon checked={true} />
+              </JustifyBetween>
+            </Stack>
+          </Stack>
+        </BottomSheet.Content>
+      </BottomSheet.Portal>
+    </>
+  );
+};
+
+const HABIIT_ASSETS = {
+  LOGO: "/images/habit/mercury_habit_logo.webp",
+  BLOCK: "/images/habit/habit_block.webp",
+};
