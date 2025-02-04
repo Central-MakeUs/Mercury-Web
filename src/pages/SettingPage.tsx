@@ -3,7 +3,7 @@ import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { useNavigate } from "react-router";
-import { SettingMenuItem } from "~/features/settingsMenu/settingsMenuItem";
+import { SettingMenuItem } from "~/features/settingsMenu/SettingsMenuItem";
 
 export default function SettingPage() {
   const _navigate = useNavigate();
