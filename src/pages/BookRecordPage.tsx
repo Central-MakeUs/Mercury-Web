@@ -1,3 +1,4 @@
+import { SafeArea } from "@repo/bridge-web/SafeArea";
 import { Text } from "@repo/design-system/Text";
 import { Flex } from "@repo/ui/Flex";
 import { JustifyBetween } from "@repo/ui/JustifyBetween";
@@ -15,7 +16,7 @@ export default function BookRecordPage(
 ) {
   return (
     <BookRecordProvider {...props}>
-      <Stack className=" w-full min-h-screen ">
+      <SafeArea edges={["top", "bottom", "left", "right"]} className=" w-full min-h-screen ">
         <Stack>
           <Spacing className=" h-[24px]" />
           <JustifyBetween className=" items-end w-full px-[16px]">
@@ -36,7 +37,7 @@ export default function BookRecordPage(
         </Stack>
 
         <GoBookRecordWriteButton />
-      </Stack>
+      </SafeArea>
     </BookRecordProvider>
   );
 }
