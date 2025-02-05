@@ -6,11 +6,14 @@ import { useNavigate } from "react-router";
 import { SettingMenuItem } from "~/features/settingsMenu/settingsMenuItem";
 
 export default function SettingPage() {
-  const _navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Stack className="w-full h-full">
-      <TopNavigation.Root className="w-full" left={<TopNavigation.Back />}>
+      <TopNavigation.Root
+        className="w-full"
+        left={<TopNavigation.Back onClick={() => navigate("/home", { replace: true })} />}
+      >
         <TopNavigation.Title>설정</TopNavigation.Title>
       </TopNavigation.Root>
 
