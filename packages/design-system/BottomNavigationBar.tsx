@@ -1,3 +1,4 @@
+import { SafeArea } from "@repo/bridge-web/SafeArea";
 import { Box } from "@repo/ui/Box";
 import { createSafeContext } from "@xionwcfm/react";
 import { useDraft } from "@xionwcfm/react";
@@ -32,28 +33,30 @@ const Root = (props: ComponentPropsWithoutRef<"div"> & LayoutProps) => {
 
   return (
     <Box
-      className={cn("fixed bottom-0 left-[50%] w-screen translate-x-[-50%]")}
+      className={cn("fixed bottom-0 bg-white left-[50%] w-screen translate-x-[-50%]")}
       style={{
         maxWidth: maxWidth,
       }}
     >
-      <BottomNavigationProvider value={{ value, onValueChange }}>
-        <Box
-          as={"nav"}
-          className={cn(
-            " bg-white flex justify-between h-[72px] pt-[16px] pb-[20px] border-t-[2px] border-gray-200 rounded-[16px]",
-            " duration-200 transition-all",
-            className,
-          )}
-          style={{
-            opacity,
-            visibility,
-            translate: `0px ${translateY}`,
-          }}
-        >
-          {children}
-        </Box>
-      </BottomNavigationProvider>
+      <SafeArea edges={["bottom"]}>
+        <BottomNavigationProvider value={{ value, onValueChange }}>
+          <Box
+            as={"nav"}
+            className={cn(
+              " bg-white flex justify-between h-[72px]  border-t-[2px] border-gray-200 rounded-[16px]",
+              " duration-200 transition-all",
+              className,
+            )}
+            style={{
+              opacity,
+              visibility,
+              translate: `0px ${translateY}`,
+            }}
+          >
+            {children}
+          </Box>
+        </BottomNavigationProvider>
+      </SafeArea>
     </Box>
   );
 };
@@ -74,7 +77,7 @@ const Action = (props: ActionProps) => {
     <button
       type="button"
       className={cn(
-        "  flex flex-col justify-center items-center w-full h-full",
+        "  flex flex-col pt-[16px] items-center w-full h-full",
         " transition-all duration-200 rounded-sm",
 
         className,

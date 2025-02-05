@@ -1,3 +1,4 @@
+import { SafeArea } from "@repo/bridge-web/SafeArea";
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { BottomNavigationBar } from "@repo/design-system/BottomNavigationBar";
 import { Image } from "@repo/design-system/Image";
@@ -14,8 +15,11 @@ import { TimerEffector } from "~/features/timer/model/TimerEffector";
 export default function TimerPage() {
   return (
     <>
-      <Stack className=" pt-[24px] justify-between w-full ">
-        <Stack>
+      <SafeArea
+        edges={["top", "left", "bottom", "right"]}
+        className="flex flex-col justify-between w-full "
+      >
+        <Stack className=" pt-[24px]">
           <Text variant={"title/24_sb"} className=" px-[20px] text-gray-800 mb-[26px]">
             타이머
           </Text>
@@ -42,7 +46,7 @@ export default function TimerPage() {
           </CenterStack>
           <BottomNavigationBar.Height className=" mb-[135px]" />
         </Stack>
-      </Stack>
+      </SafeArea>
 
       <TimerEffector />
     </>
