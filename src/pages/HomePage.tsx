@@ -1,3 +1,4 @@
+import { SafeArea } from "@repo/bridge-web/SafeArea";
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { NotificationBadge } from "@repo/design-system/NotificationBadge";
 import { SettingsBadge } from "@repo/design-system/SettingsBadge";
@@ -13,13 +14,14 @@ import { MainSection } from "~/features/userInfo/UserInfoSection";
 
 export default function HomePage() {
   return (
-    <Stack className="  w-full">
-      <Header />
-      <MainSection />
-
-      <HabitSection />
-      <Spacing className=" h-[160px]" />
-    </Stack>
+    <SafeArea edges={["top", "left", "bottom", "right"]} className=" w-full">
+      <Stack className="  w-full">
+        <Header />
+        <MainSection />
+        <HabitSection />
+        <Spacing className=" h-[160px]" />
+      </Stack>
+    </SafeArea>
   );
 }
 
@@ -28,7 +30,7 @@ const Header = () => {
 
   return (
     <motion.div
-      className=" flex justify-between pb-[30px] pt-[24px] bg-white w-full px-[16px]"
+      className=" pt-[24px] flex justify-between pb-[30px] bg-white w-full px-[16px]"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

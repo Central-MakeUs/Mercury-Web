@@ -1,3 +1,4 @@
+import { bridge } from "@repo/bridge-web";
 import { BottomNavigationBar } from "@repo/design-system/BottomNavigationBar";
 import { BookIcon } from "@repo/icon/BookIcon";
 import { MyIcon } from "@repo/icon/MyIcon";
@@ -10,6 +11,9 @@ export const MercuryBottomNavigationBar = () => {
   return (
     <BottomNavigationBar.Root value={pathname}>
       <BottomNavigationBar.Action
+        onClick={() => {
+          bridge.triggerHapticFeedback("selection");
+        }}
         icon={({ selected }) => (
           <Link to="/book-record">
             <BookIcon selected={selected} />
@@ -18,6 +22,9 @@ export const MercuryBottomNavigationBar = () => {
         value="/book-record"
       />
       <BottomNavigationBar.Action
+        onClick={() => {
+          bridge.triggerHapticFeedback("selection");
+        }}
         icon={({ selected }) => (
           <Link to="/timer">
             <TimerIcon selected={selected} />
@@ -26,6 +33,9 @@ export const MercuryBottomNavigationBar = () => {
         value="/timer"
       />
       <BottomNavigationBar.Action
+        onClick={() => {
+          bridge.triggerHapticFeedback("selection");
+        }}
         icon={({ selected }) => (
           <Link to="/home">
             <MyIcon selected={selected} />

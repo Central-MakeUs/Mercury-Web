@@ -42,9 +42,11 @@ export const WriteSearchList = wrap.Suspense().on(
     return (
       <>
         <List className=" w-full gap-y-[24px]" fallback={fallback}>
-          {books.map((book) => (
+          {books.map((book, index) => (
             <SearchBookItem
-              key={book.isbn13}
+              // 책이 중복으로 오는 케이스가 존재해서 키값으로 isbn값과 같은 것을 사용할 경우 react error가 발생합니다.
+              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+              key={index}
               authorName={book.author}
               publishName={book.publisher}
               imageUrl={book.coverImageUrl}
