@@ -16,9 +16,8 @@ export default function BookRecordPage(
 ) {
   return (
     <BookRecordProvider {...props}>
-      <SafeArea edges={["top", "bottom", "left", "right"]} className=" w-full min-h-screen ">
-        <Stack>
-          <Spacing className=" h-[24px]" />
+      <SafeArea edges={["top", "bottom", "left", "right"]} className="  w-full min-h-screen ">
+        <Stack className=" pt-[24px]">
           <JustifyBetween className=" items-end w-full px-[16px]">
             <Text variant={"title/24_sb"} className=" text-gray-800">
               독서기록
