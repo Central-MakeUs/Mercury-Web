@@ -56,23 +56,25 @@ export default function BookRecordWriteTextStep(
           <WarningText />
         </Flex>
 
-        <Stack className=" flex-grow h-full bg-white-yellow">
-          <Box className=" w-full px-[16px] mt-[20px] h-full mb-[16px]">
-            <TextArea.Layout>
-              <TextArea.Field
-                className=" h-full"
-                resize={false}
-                placeholder="내용을 입력해주세요"
-                required={true}
-                {...form.register("content", { maxLength: 1000 })}
-              />
-              <TextArea.LetterCountPosition>
-                <LetterCount />
-              </TextArea.LetterCountPosition>
-            </TextArea.Layout>
-          </Box>
-          <Cta onNext={onNext} isLoading={isLoading} />
-        </Stack>
+        <FixedBottom>
+          <Flex className=" flex-grow h-full bg-white-yellow">
+            <Box className=" w-full px-[16px] mt-[20px] h-full mb-[16px]">
+              <TextArea.Layout>
+                <TextArea.Field
+                  className=" h-full"
+                  resize={false}
+                  placeholder="내용을 입력해주세요"
+                  required={true}
+                  {...form.register("content", { maxLength: 1000 })}
+                />
+                <TextArea.LetterCountPosition>
+                  <LetterCount />
+                </TextArea.LetterCountPosition>
+              </TextArea.Layout>
+            </Box>
+            <Cta onNext={onNext} isLoading={isLoading} />
+          </Flex>
+        </FixedBottom>
       </Stack>
     </FormProvider>
   );
