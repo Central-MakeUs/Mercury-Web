@@ -3,22 +3,26 @@ import { type ComponentPropsWithoutRef, type Ref, forwardRef } from "react";
 import { cn } from "./cn";
 
 type FloatingActionButtonProps = ComponentPropsWithoutRef<"button"> & {
-  active: boolean;
+  disabled?: boolean;
+  loading?: boolean;
 };
 
-export const SendActionButton = forwardRef(function FloatingActionButton(
-  { active, className, ...rest }: FloatingActionButtonProps,
+export const SendActionButton = forwardRef(function SendActionButton(
+  { disabled, loading, className, ...rest }: FloatingActionButtonProps,
   ref?: Ref<HTMLButtonElement>,
 ) {
   return (
     <button
       ref={ref}
       className={cn(
-        active ? "bg-green " : "bg-gray-200",
-        " ring-[2px] flex justify-center items-center w-[38px] h-[38px] rounded-full",
+        "ring-[2px] flex justify-center items-center w-[38px] h-[38px] rounded-full",
+        disabled ? "bg-gray-200" : "bg-green",
+        loading && "animate-pulse",
         className,
       )}
       {...rest}
+      disabled={disabled || loading}
+      aria-disabled={disabled || loading}
     >
       <SendIcon />
     </button>

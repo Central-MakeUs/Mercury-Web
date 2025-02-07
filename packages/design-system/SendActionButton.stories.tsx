@@ -10,7 +10,7 @@ export const Default: StoryObj = {
   render: () => {
     return (
       <>
-        <SendActionButton active={true} />
+        <SendActionButton disabled={true} />
       </>
     );
   },
@@ -19,7 +19,7 @@ export const Disable: StoryObj = {
   render: () => {
     return (
       <>
-        <SendActionButton active={false} />
+        <SendActionButton disabled={false} />
       </>
     );
   },

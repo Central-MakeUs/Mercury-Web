@@ -25,9 +25,7 @@ describe("BookRecordWriteTextStep를 테스트합니다.", () => {
       />,
     );
 
-    const getCta = () => {
-      return screen.getByRole("button", { name: "다 적었어요" });
-    };
+    const getNextButton = () => screen.getByTestId("next-button");
 
     const getLetterCount = () => {
       return screen.getByLabelText("lettercount");
@@ -41,7 +39,7 @@ describe("BookRecordWriteTextStep를 테스트합니다.", () => {
       return screen.queryByText("1000자까지만 입력할 수 있어요");
     };
 
-    return { getCta, getLetterCount, getTextArea, user, mockOnNext, getWarningText };
+    return { getNextButton, getLetterCount, getTextArea, user, mockOnNext, getWarningText };
   };
 
   it("초기값을 받고 글자수를 체크합니다.", () => {
@@ -52,17 +50,17 @@ describe("BookRecordWriteTextStep를 테스트합니다.", () => {
   it("1000자 미만일때에는 경고문이 나타나지 않으며 CTA는 활성화 됩니다.", () => {
     const result = renderWithSelector("초기값 반영");
     expect(result.getWarningText()).not.toBeInTheDocument();
-    expect(result.getCta()).toBeEnabled();
+    expect(result.getNextButton()).toBeEnabled();
   });
 
   it("1000자 이상일때에는 경고문이 나타나며 CTA는 비활성화 됩니다.", async () => {
     const result = renderWithSelector(num1001Text);
     expect(result.getWarningText()).toBeInTheDocument();
-    expect(result.getCta()).toBeDisabled();
+    expect(result.getNextButton()).toBeDisabled();
   });
   it("제출 가능한 상태일때 CTA를 누르면 onNext가 입력된 글자와 함께 호출됩니다.", async () => {
     const result = renderWithSelector(num999Text);
-    await result.user.click(result.getCta());
+    await result.user.click(result.getNextButton());
     expect(result.mockOnNext).toHaveBeenCalledWith(num999Text);
   });
 });
