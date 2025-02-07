@@ -13,7 +13,6 @@ import { overlay } from "overlay-kit";
 import { Navigate, useParams } from "react-router";
 import { getRecordsDetailQueryOptions } from "~/entities/record/api/getRecordDetail";
 import type { Memo } from "~/entities/record/model/memo.model";
-import { getGaugeMessage } from "~/entities/record/model/record.constants";
 import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { BookRecordDetailFloatButton } from "~/features/bookRecordDetail/components/BookRecordDetailFloatButton";
 import { BookRecordDetailMemoItem } from "~/features/bookRecordDetail/components/BookRecordDetailMemoItem";
@@ -35,9 +34,7 @@ export default wrap
     const author = book.author;
     const publisher = book.publisher;
     const src = book.coverImageUrl;
-    const gauge = updatedGauge;
-    const gaugeMessage = `${gauge}%까지 읽었어요!`;
-    const cheeringMessage = getGaugeMessage(gauge);
+    const _gauge = updatedGauge;
 
     return (
       <>
@@ -52,16 +49,7 @@ export default wrap
           />
 
           <Stack className=" pt-[16px]  z-[3] bg-white h-full min-h-screen">
-            <JustifyBetween className=" px-[16px]">
-              <Text variant={"body/16_m"} className=" text-gray-600">
-                {gaugeMessage}
-              </Text>
-              <Text variant={"body/16_m"} className=" text-pastel-violet">
-                {cheeringMessage}
-              </Text>
-            </JustifyBetween>
-
-            <Spacing className=" h-[16px]" />
+            <Spacing className=" h-[24px]" />
 
             <List className=" w-full ">
               {memos.map((memo) => (
@@ -85,14 +73,14 @@ export default wrap
     );
   });
 
-const createRowProps = (props: Pick<Memo, "createdAt" | "content">) => {
-  const { createdAt, content } = props;
+const createRowProps = (props: Pick<Memo, "createdAt" | "content" | "gauge">) => {
+  const { createdAt, content, gauge } = props;
 
   try {
     const header = format(toDate(createdAt), "yyyy.MM.dd");
-    return { header, children: content };
+    return { header, children: content, gauge };
   } catch (_e) {
-    return { header: "유효하지 않은 날짜에요", children: content };
+    return { header: "유효하지 않은 날짜에요", children: content, gauge: 0 };
   }
 };
 

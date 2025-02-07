@@ -1,7 +1,7 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
-import { CtaButton } from "@repo/design-system/CtaButton";
 import { FixedBottom } from "@repo/design-system/FixedBottom";
 import { Image } from "@repo/design-system/Image";
+import { SendActionButton } from "@repo/design-system/SendActionButton";
 import { Text } from "@repo/design-system/Text";
 import { TextArea } from "@repo/design-system/TextArea";
 import { FormProvider } from "@repo/form";
@@ -34,7 +34,7 @@ export default function BookRecordWriteTextStep(
         <JustifyBetween className=" px-[16px] w-full h-[104px]">
           <Stack className=" justify-between h-full flex-grow">
             <Text className=" text-gray-800" variant={"title/24_sb"}>
-              내용을 기록해볼까요?
+              메모를 남겨볼까요?
             </Text>
             <Text variant={"body/16_m"} className=" text-gray-600 whitespace-pre-wrap">
               {"책을 읽으면서 기억나는 내용이나\n들었던 생각을 적어주세요"}
@@ -56,23 +56,26 @@ export default function BookRecordWriteTextStep(
           <WarningText />
         </Flex>
 
-        <Stack className=" flex-grow h-full bg-white-yellow">
-          <Box className=" w-full px-[16px] mt-[20px] h-full mb-[16px]">
-            <TextArea.Layout>
-              <TextArea.Field
-                className=" h-full"
-                resize={false}
-                placeholder="내용을 입력해주세요"
-                required={true}
-                {...form.register("content", { maxLength: 1000 })}
-              />
-              <TextArea.LetterCountPosition>
-                <LetterCount />
-              </TextArea.LetterCountPosition>
-            </TextArea.Layout>
-          </Box>
-          <Cta onNext={onNext} isLoading={isLoading} />
-        </Stack>
+        <FixedBottom className=" max-h-[229px] bg-white-yellow p-4">
+          <Flex className=" flex-grow min-h-[168px] gap-[11px]">
+            <Box className=" w-full">
+              <TextArea.Layout>
+                <TextArea.Field
+                  className=" h-full"
+                  resize={false}
+                  placeholder="내용을 입력해주세요"
+                  required={true}
+                  {...form.register("content", { maxLength: 1000 })}
+                />
+                <TextArea.LetterCountPosition>
+                  <LetterCount />
+                </TextArea.LetterCountPosition>
+              </TextArea.Layout>
+            </Box>
+
+            <NextButton onNext={onNext} isLoading={isLoading} />
+          </Flex>
+        </FixedBottom>
       </Stack>
     </FormProvider>
   );
@@ -80,28 +83,21 @@ export default function BookRecordWriteTextStep(
 
 const LIMIT_POLICY = 1000;
 
-const Cta = (props: { onNext: (text: string) => void; isLoading?: boolean }) => {
+const NextButton = (props: { onNext: (text: string) => void; isLoading?: boolean }) => {
   const form = useFormContext<FormState>();
-  const content = useWatch({ control: form.control, name: "content" });
-  const disabled = content?.length > LIMIT_POLICY;
+  const content = useWatch({ control: form.control, name: "content" }) ?? "";
+  const disabled = content?.length > LIMIT_POLICY || content?.length === 0;
 
   return (
-    <>
-      <Flex className=" px-[16px] mb-[24px]">
-        <div className=" h-[54px]" />
-      </Flex>
-      <FixedBottom className=" px-[24px] pb-[24px]">
-        <CtaButton
-          loading={props.isLoading}
-          disabled={disabled}
-          onClick={() => {
-            props.onNext(content);
-          }}
-        >
-          다 적었어요
-        </CtaButton>
-      </FixedBottom>
-    </>
+    <SendActionButton
+      data-testid="next-button"
+      disabled={disabled}
+      loading={props.isLoading}
+      onClick={() => {
+        props.onNext(content);
+      }}
+      className="shrink-0 mt-auto"
+    />
   );
 };
 

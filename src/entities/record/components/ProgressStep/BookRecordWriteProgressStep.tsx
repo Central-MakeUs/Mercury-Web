@@ -33,7 +33,7 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
           </Text>
         </Stack>
 
-        <ImageSection status={getStatus(value)} />
+        <ImageSection status={getStatus(value)} value={value} />
       </Stack>
 
       <Stack className=" px-4">
@@ -67,12 +67,12 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
   );
 }
 
-const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
+const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number }) => {
   return (
     <Stack className=" min-h-[400px] w-full justify-center items-center">
       <ImageFadeAnimator
         value={props.status}
-        className=" mt-[64px] px-[100px]"
+        className=" px-[100px] relative"
         caseBy={{
           "0": (
             <ImageFadeAnimator.FadeIn
@@ -80,6 +80,9 @@ const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
               <Image src={GAUGE_ASSETS[0]} alt="read gauge 0 image" objectfit={"contain"} />
+              <Text className="text-dark-violet text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                {props.value}%
+              </Text>
             </ImageFadeAnimator.FadeIn>
           ),
           "50": (
@@ -88,6 +91,9 @@ const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
               <Image src={GAUGE_ASSETS[50]} alt="read gauge 50 image" objectfit={"contain"} />
+              <Text className="text-white-yellow text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                {props.value}%
+              </Text>
             </ImageFadeAnimator.FadeIn>
           ),
           "100": (
@@ -96,6 +102,9 @@ const ImageSection = memo((props: { status: "0" | "50" | "100" }) => {
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
               <Image src={GAUGE_ASSETS[100]} alt="read gauge 100 image" objectfit={"contain"} />
+              <Text className="text-white-violet text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                {props.value}%
+              </Text>
             </ImageFadeAnimator.FadeIn>
           ),
         }}

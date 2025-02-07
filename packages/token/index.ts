@@ -16,6 +16,7 @@ export const scaleColors = {
   blue: "#8EFFFD",
   "warning-red": "#FF667D",
   "white-orange": "#FDE4D1",
+  "dark-violet": "#554D9E",
   gray: {
     white: "#FFFFFF",
     100: "#F5F5F9",

@@ -6,11 +6,11 @@ import { recordQueryKeys } from "./record.querykey";
 export const GET_BOOKS_SEARCH_SORT_TYPE = {
   SALES_POINT: {
     value: "SALES_POINT",
-    label: "판매량",
+    label: "인기도순",
   },
   PUBLISH_TIME: {
     value: "PUBLISH_TIME",
-    label: "출간일",
+    label: "최신순",
   },
 } as const;
 
