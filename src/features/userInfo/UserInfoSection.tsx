@@ -10,6 +10,7 @@ import { motion } from "motion/react";
 import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { ExpProgressBar } from "~/entities/user/components/ExpProgressBar";
 import { calculateUserLevel, getExpPercentage, getGoalExp } from "~/entities/user/model/user.model";
+import { HOME_ASSETS } from "~/shared/images/home/homeImages";
 
 const ExpSection = (props: { exp: number; goalExp: number; percentage: number; level: string }) => {
   const { exp, goalExp, percentage, level } = props;
@@ -45,7 +46,7 @@ const Fallback = () => {
               <Text>머큐리와 함께한 지 000일</Text>
               <Text></Text>
             </Stack>
-            <Image src={HOME_ASSETS.HOME_MERCURY} alt="mercury character" objectfit={"fill"} />
+            <Image src={HOME_ASSETS.HOME_MERCURY_WEBP} alt="mercury character" objectfit={"fill"} />
             <ExpSection exp={0} goalExp={0} percentage={0} level={`레벨 1`} />
           </Stack>
         </AspectRatio>
@@ -90,7 +91,7 @@ export const MainSection = wrap
               </Stack>
 
               <Image
-                src={HOME_ASSETS.HOME_MERCURY}
+                src={HOME_ASSETS.HOME_MERCURY_WEBP}
                 alt="mercury character"
                 objectfit={"fill"}
                 className="px-[36px]"
@@ -108,7 +109,3 @@ export const MainSection = wrap
       </Stack>
     );
   });
-
-const HOME_ASSETS = {
-  HOME_MERCURY: "/images/home/home_mercury.webp",
-};

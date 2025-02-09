@@ -10,6 +10,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { InView } from "@xionwcfm/react";
 import { getBooksSearchInfiniteQueryOptions } from "~/entities/record/api/getBooksSearch";
 import type { Book } from "~/entities/record/model/book.model";
+import { BOOKRECORD_ASSETS } from "~/shared/images/bookrecord/bookrecordImages";
 import { SearchBookItem } from "./WriteSearchBookItem";
 import { useWriteSearchStore } from "./WriteSearchStep.store";
 
@@ -65,11 +66,6 @@ export const WriteSearchList = wrap.Suspense().on(
   },
 );
 
-const SEARCH_ASSETS = {
-  FIRST_FALLBACK: "/images/bookrecord/bookrecord_search_empty_fallback.webp",
-  SEARCH_RESULT_EMPTY_FALLBACK: "/images/bookrecord/bookrecord_tab_no_search_result_fallback.webp",
-};
-
 const FirstFallback = (props: { isLoading?: boolean }) => {
   const { isLoading } = props;
   return (
@@ -81,7 +77,10 @@ const FirstFallback = (props: { isLoading?: boolean }) => {
         )}
       >
         <AspectRatio>
-          <Image src={SEARCH_ASSETS.FIRST_FALLBACK} alt="검색 결과 없음" />
+          <Image
+            src={BOOKRECORD_ASSETS.BOOKRECORD_SEARCH_EMPTY_FALLBACK_WEBP}
+            alt="검색 결과 없음"
+          />
         </AspectRatio>
       </CenterStack>
       <Text
@@ -99,7 +98,10 @@ const EmptyFallback = () => {
     <Stack className=" h-full w-full justify-center items-center ">
       <CenterStack className=" w-full pl-[117px] pr-[96px]">
         <AspectRatio>
-          <Image src={SEARCH_ASSETS.SEARCH_RESULT_EMPTY_FALLBACK} alt="검색 결과 없음" />
+          <Image
+            src={BOOKRECORD_ASSETS.BOOKRECORD_TAB_NO_SEARCH_RESULT_FALLBACK_WEBP}
+            alt="검색 결과 없음"
+          />
         </AspectRatio>
       </CenterStack>
       <Text className=" mt-[40px] text-gray-600" variant={"body/18_sb"}>

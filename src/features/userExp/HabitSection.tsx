@@ -16,7 +16,7 @@ import { isAfter, isSameDay } from "date-fns";
 import { useMemo } from "react";
 import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { HabitCalendar } from "~/entities/user/components/HabitCalendar";
-
+import { HABIT_ASSETS } from "~/shared/images/habit/habitImages";
 const HabitBar = (props: { normalText: string; boldText: string }) => {
   const { normalText, boldText } = props;
   return (
@@ -172,14 +172,18 @@ const TodayHabit = () => {
               <Text variant={"title/25_sb"} className="text-gray-800 whitespace-pre-wrap">
                 {"6일 연속 \n성공했어요!"}
               </Text>
-              <Image src={HABIIT_ASSETS.LOGO} alt="mercury character" objectfit={"fill"} />
+              <Image
+                src={HABIT_ASSETS.MERCURY_HABIT_LOGO_WEBP}
+                alt="mercury character"
+                objectfit={"fill"}
+              />
             </JustifyBetween>
           </BottomSheet.Title>
 
           <Stack className="mt-[19px] mb-[20px] w-full">
             <Flex className="items-center">
               <Image
-                src={HABIIT_ASSETS.BLOCK}
+                src={HABIT_ASSETS.HABIT_BLOCK_WEBP}
                 alt="habit block"
                 objectfit={"fill"}
                 className="w-5 h-5"
@@ -217,9 +221,4 @@ const TodayHabit = () => {
       </BottomSheet.Portal>
     </>
   );
-};
-
-const HABIIT_ASSETS = {
-  LOGO: "/images/habit/mercury_habit_logo.webp",
-  BLOCK: "/images/habit/habit_block.webp",
 };

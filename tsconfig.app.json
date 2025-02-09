@@ -30,6 +30,7 @@
     "vitest.config.mts",
     ".storybook/Configure.mdx",
     "__tests__",
-    ".storybook/**/*.tsx"
+    ".storybook/**/*.tsx",
+    "vite.config.ts"
   ]
 }

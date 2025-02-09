@@ -9,6 +9,7 @@ import { Stack } from "@repo/ui/Stack";
 import { useDraft } from "@xionwcfm/react";
 import { memo } from "react";
 import { getGaugeMessage } from "~/entities/record/model/record.constants";
+import { GAUGE_ASSETS } from "~/shared/images/gauge/gaugeImages";
 
 export interface BookRecordWriteProgressStepProps {
   gauge?: number;
@@ -79,7 +80,11 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               key={"0"}
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
-              <Image src={GAUGE_ASSETS[0]} alt="read gauge 0 image" objectfit={"contain"} />
+              <Image
+                src={GAUGE_ASSETS.GAUGE_0_WEBP}
+                alt="read gauge 0 image"
+                objectfit={"contain"}
+              />
               <Text className="text-dark-violet text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 {props.value}%
               </Text>
@@ -90,7 +95,11 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               key={"50"}
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
-              <Image src={GAUGE_ASSETS[50]} alt="read gauge 50 image" objectfit={"contain"} />
+              <Image
+                src={GAUGE_ASSETS.GAUGE_50_WEBP}
+                alt="read gauge 50 image"
+                objectfit={"contain"}
+              />
               <Text className="text-white-yellow text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 {props.value}%
               </Text>
@@ -101,7 +110,11 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               key={"100"}
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
-              <Image src={GAUGE_ASSETS[100]} alt="read gauge 100 image" objectfit={"contain"} />
+              <Image
+                src={GAUGE_ASSETS.GAUGE_100_WEBP}
+                alt="read gauge 100 image"
+                objectfit={"contain"}
+              />
               <Text className="text-white-violet text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 {props.value}%
               </Text>
@@ -115,11 +128,6 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
 
 const GAUGE_DURATION_POLICY = 0.3; // 300ms duration
 const GAUGE_EASE_POLICY = "easeOut" as const;
-const GAUGE_ASSETS = {
-  "0": "/images/gauge/gauge_0.webp",
-  "50": "/images/gauge/gauge_50.webp",
-  "100": "/images/gauge/gauge_100.webp",
-};
 
 const getStatus = (value: number) => {
   if (value >= 70) {
