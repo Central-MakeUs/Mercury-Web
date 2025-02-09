@@ -9,8 +9,8 @@ import { TimerButtonSection } from "~/features/timer/components/TimerButtonSecti
 import { TimerDescription } from "~/features/timer/components/TimerDescription";
 import { TimerSpeechBubble } from "~/features/timer/components/TimerSpeechBubble";
 import { TimerText } from "~/features/timer/components/TimerText";
-import { TIMER_ASSETS } from "~/features/timer/lib/timer.constants";
 import { TimerEffector } from "~/features/timer/model/TimerEffector";
+import { TIMER_ASSETS } from "~/shared/images/timer/timerImages";
 
 export default function TimerPage() {
   return (
@@ -32,7 +32,7 @@ export default function TimerPage() {
             <TimerText className=" absolute top-[42px] left-[50%] translate-x-[-50%] z-10" />
 
             <AspectRatio className=" w-full" ratio={1}>
-              <Image src={TIMER_ASSETS.CHARACTER} alt="timer character" />
+              <Image src={TIMER_ASSETS.TIMER_CHARACTER_WEBP} alt="timer character" />
             </AspectRatio>
           </CenterStack>
         </Stack>

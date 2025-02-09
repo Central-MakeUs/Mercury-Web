@@ -10,6 +10,7 @@ import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { Link } from "react-router";
+import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
 import { KakaoButton } from "~/shared/ui/KakaoButton";
@@ -28,13 +29,13 @@ const MercuryImageSection = () => {
     <CenterStack className=" w-full px-4">
       <Stack className=" w-full">
         <AspectRatio ratio={343 / 219}>
-          <Image src={ONBOARDING_ASSETS.MERCURY_LOGIN_LOGO} alt="mercury logo" objectfit={"fill"} />
+          <Image src={LOGO_ASSETS.MERCURY_LOGIN_LOGO_WEBP} alt="mercury logo" objectfit={"fill"} />
         </AspectRatio>
       </Stack>
       <Stack className=" mt-[30px] pl-[66px] pr-[54px] w-full">
         <AspectRatio ratio={255 / 52}>
           <Image
-            src={ONBOARDING_ASSETS.WORDMARKLOGO_DARKBG}
+            src={LOGO_ASSETS.WORDMARKLOGO_DARKBG_WEBP}
             alt="wordmark logo"
             objectfit={"fill"}
           />
@@ -71,9 +72,4 @@ const SignUpSection = () => {
       <Spacing className=" h-[40px]" />
     </Stack>
   );
-};
-
-const ONBOARDING_ASSETS = {
-  MERCURY_LOGIN_LOGO: "/images/logo/mercury_login_logo.webp",
-  WORDMARKLOGO_DARKBG: "/images/logo/wordmarklogo_darkbg.webp",
 };
