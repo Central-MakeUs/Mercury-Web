@@ -72,7 +72,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
     <Stack className=" min-h-[400px] w-full justify-center items-center">
       <ImageFadeAnimator
         value={props.status}
-        className=" px-[100px] relative"
+        className=" px-[115px] relative"
         caseBy={{
           "0": (
             <ImageFadeAnimator.FadeIn
@@ -80,7 +80,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
               <Image src={GAUGE_ASSETS[0]} alt="read gauge 0 image" objectfit={"contain"} />
-              <Text className="text-dark-violet text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <Text className="text-dark-violet/70 text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 {props.value}%
               </Text>
             </ImageFadeAnimator.FadeIn>

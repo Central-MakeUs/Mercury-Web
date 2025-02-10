@@ -24,9 +24,8 @@ export const SingleSlider = (
         className,
       )}
     >
-      <Box className=" shadow-[inset_0_0_0_3px_rgba(252,255,232,0.2)] rounded-full w-full h-[24px] bg-gradient-to-r from-main2-gradient-from via-main2-gradient-via to-main2-gradient-to" />
-      <SliderPrimitive.Track>
-        <SliderPrimitive.Range />
+      <SliderPrimitive.Track className="bg-gray-200 relative rounded-full w-full h-[24px]">
+        <SliderPrimitive.Range className="absolute bg-gradient-to-r from-main2-gradient-from via-main2-gradient-via to-main2-gradient-to rounded-full h-full" />
       </SliderPrimitive.Track>
       <SliderPrimitive.Thumb className=" duration-300 transition-transform active:scale-105 flex justify-center items-center focus:outline-none size-[48px] rounded-full bg-pastel-red bg-gradient-to-tl from-green to-yellow-green">
         <Box className=" size-[40px] rounded-full bg-green flex justify-center items-center">

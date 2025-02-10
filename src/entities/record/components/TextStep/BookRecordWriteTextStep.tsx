@@ -56,7 +56,7 @@ export default function BookRecordWriteTextStep(
           <WarningText />
         </Flex>
 
-        <FixedBottom className=" max-h-[229px] bg-white-yellow p-4">
+        <FixedBottom className=" max-h-[229px] bg-white-yellow p-4 pb-[37px]">
           <Flex className=" flex-grow min-h-[168px] gap-[11px]">
             <Box className=" w-full">
               <TextArea.Layout>
