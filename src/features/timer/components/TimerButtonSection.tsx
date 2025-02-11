@@ -4,10 +4,8 @@ import { toast } from "@repo/design-system/Toast";
 import { MercuryIcon } from "@repo/icon/MercuryIcon";
 import { Flex } from "@repo/ui/Flex";
 import { Iife } from "@repo/ui/Iife";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import type { ComponentProps } from "react";
 import { usePostTimers } from "~/entities/timer/api/postTimers";
-import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { useTimerStore } from "../model/TimerProvider";
 import { TIMER_STATUS } from "../model/timer.model";
 
@@ -40,12 +38,10 @@ export const TimerButtonSection = (props: ComponentProps<"div">) => {
   };
 
   const { mutate: postTimer } = usePostTimers();
-  const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
-  const userId = user?.userId;
   const timer = useTimerStore();
 
   const handleComplete = () => {
-    postTimer({ seconds: timer.settingSecond, userId });
+    postTimer({ seconds: timer.settingSecond });
 
     toast.success("집중한만큼 보상을 얻었어요!", { icon: <MercuryIcon /> });
     actions.reset();

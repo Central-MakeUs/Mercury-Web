@@ -5,9 +5,7 @@ import { Text } from "@repo/design-system/Text";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
-import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { ExpProgressBar } from "~/entities/user/components/ExpProgressBar";
 import { calculateUserLevel, getExpPercentage, getGoalExp } from "~/entities/user/model/user.model";
 import { HOME_ASSETS } from "~/shared/images/home/homeImages";
@@ -60,13 +58,11 @@ export const MainSection = wrap
     fallback: <Fallback />,
   })
   .on(() => {
-    const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
+    const nickname = `테스터`;
 
-    const nickname = `테스터${user.nickname.slice(10, 14)}`;
-
-    const level = calculateUserLevel(user.exp);
+    const level = calculateUserLevel(0);
     const goalExp = getGoalExp(level);
-    const exp = user.exp + 50;
+    const exp = 0 + 50;
     const percentage = getExpPercentage(exp, goalExp);
 
     return (

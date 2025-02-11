@@ -1,3 +1,5 @@
+import type { BookWithId } from "./book.model";
+
 export interface Memo {
   memoId: string;
   content: string;
@@ -10,15 +12,7 @@ export interface Memo {
 export interface MemoList {
   recordId: string;
   updatedGauge: number;
-  book: {
-    title: string;
-    coverImageUrl: string;
-    author: string;
-    isbn13: string;
-    link: string;
-    publisher?: string;
-    bookId: string;
-  };
+  book: BookWithId;
   createdAt: string;
   updatedAt: string | null;
   memos: Memo[];

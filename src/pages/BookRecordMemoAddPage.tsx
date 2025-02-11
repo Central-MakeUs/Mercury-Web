@@ -5,25 +5,22 @@ import { wrap } from "@suspensive/react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useLoading } from "@xionwcfm/react";
 import { Navigate, useNavigate, useParams } from "react-router";
-import { getRecordsDetailQueryOptions } from "~/entities/record/api/getRecordDetail";
+import { useGetRecordsDetailQueryOptions } from "~/entities/record/api/getRecordDetail";
 import { usePostMemo } from "~/entities/record/api/postMemo";
 import { recordQueryKeys } from "~/entities/record/api/record.querykey";
 import {
   TextAndProgressFunnel,
   type TextAndProgressFunnelState,
 } from "~/entities/record/components/TextAndProgressFunnel/TextAndProgressFunnel";
-import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 
 export default wrap
   .Suspense()
   .ErrorBoundary({ fallback: <Navigate to={"/book-record"} /> })
   .on(function BookRecordMemoAddPage() {
     const params = useParams();
-    const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
-    const userId = user?.userId;
     const recordId = params.recordId ?? "";
 
-    const { data: records } = useSuspenseQuery(getRecordsDetailQueryOptions({ userId, recordId }));
+    const { data: records } = useSuspenseQuery(useGetRecordsDetailQueryOptions({ recordId }));
     const queryClient = useQueryClient();
     const { mutateAsync: postMemo } = usePostMemo();
     const [_loading, startLoading] = useLoading();
@@ -40,7 +37,7 @@ export default wrap
       const { content, gauge } = props;
       await startLoading(
         (async () => {
-          await postMemo({ content, gauge, recordId, userId });
+          await postMemo({ content, gauge, recordId });
           await queryClient.invalidateQueries({
             queryKey: recordQueryKeys.getRecordById({ recordId }),
             refetchType: "all",

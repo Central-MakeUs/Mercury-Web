@@ -10,9 +10,7 @@ const srcDir = path.join(__dirname, "src/shared/images");
 // 이미지 파일을 WebP 형식으로 변환하는 함수
 const convertToWebP = async (inputPath: string, outputPath: string) => {
   try {
-    await sharp(inputPath)
-      .webp({ quality: 80 }) // 80% 품질로 WebP로 변환
-      .toFile(outputPath);
+    await sharp(inputPath).webp({ quality: 100 }).toFile(outputPath);
   } catch (error) {
     console.error(`Error converting ${inputPath}: ${error}`);
   }

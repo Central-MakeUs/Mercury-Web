@@ -11,7 +11,7 @@ export const recordQueryKeys = {
   ],
   allGetRecords: () => [...recordQueryKeys.all(), "getRecords"],
   allGetRecordDetail: () => [...recordQueryKeys.all(), "getRecordDetail"],
-  getRecords: (request: GetRecordsRequest) => [...recordQueryKeys.allGetRecords(), request.userId],
+  getRecords: (request: GetRecordsRequest) => [...recordQueryKeys.allGetRecords(), request],
   getRecordById: (request: Pick<GetBookMemosRequest, "recordId">) => [
     ...recordQueryKeys.allGetRecordDetail(),
     request.recordId,

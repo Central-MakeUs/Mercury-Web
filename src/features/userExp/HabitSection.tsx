@@ -11,10 +11,8 @@ import { JustifyBetween } from "@repo/ui/JustifyBetween";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { isAfter, isSameDay } from "date-fns";
 import { useMemo } from "react";
-import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { HabitCalendar } from "~/entities/user/components/HabitCalendar";
 import { HABIT_ASSETS } from "~/shared/images/habit/habitImages";
 const HabitBar = (props: { normalText: string; boldText: string }) => {
@@ -117,9 +115,7 @@ export const HabitSection = wrap
     fallback: <Fallback />,
   })
   .on(() => {
-    const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
-
-    const nickname = `테스터${user.nickname.slice(10, 14)}`;
+    const nickname = `테스터`;
     const normalText = `${nickname}님은 현재`;
     const successCount = 5;
     const boldText =

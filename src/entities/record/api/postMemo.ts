@@ -1,10 +1,14 @@
+// can guest
+
 import { http } from "@repo/http";
 import { useMutation } from "@tanstack/react-query";
+import { authStore } from "~/entities/user/model/auth.store";
+import { generateRandomId } from "~/shared/utils/generateRandomId";
+import { guestRecordStore } from "../model/guestRecordStore";
 import type { Memo } from "../model/memo.model";
 
 interface PostMemosRequest {
   recordId: string;
-  userId: string;
   content: string;
   gauge: number;
 }
@@ -12,23 +16,55 @@ interface PostMemosRequest {
 type PostMemosResponse = Memo;
 
 export const postMemo = async (props: PostMemosRequest) => {
-  const { recordId, userId, content, gauge } = props;
-  const response = await http.post<unknown, PostMemosResponse>(
-    `records/${recordId}/memos`,
-    {
-      content,
-      gauge,
-    },
-    {
-      searchParams: {
-        userId,
-      },
-    },
-  );
+  const { recordId, content, gauge } = props;
+  const response = await http.post<unknown, PostMemosResponse>(`records/${recordId}/memos`, {
+    content,
+    gauge,
+  });
 
   return response.data;
 };
 
+const guestPostMemo = async (props: PostMemosRequest) => {
+  const { recordId, content, gauge } = props;
+  const memoList = guestRecordStore.getItem();
+  const id = generateRandomId();
+  const createdAt = new Date().toISOString();
+  const updatedAt = new Date().toISOString();
+  guestRecordStore.setItem(
+    memoList.map((item) => {
+      if (item.recordId.toString() !== recordId.toString()) {
+        return item;
+      }
+
+      return {
+        ...item,
+        memos: [
+          ...item.memos,
+          {
+            content,
+            gauge,
+            memoId: id,
+            createdAt,
+            updatedAt,
+            recordId,
+          },
+        ],
+      };
+    }),
+  );
+  return {
+    content,
+    gauge,
+    memoId: id,
+    createdAt,
+    updatedAt,
+    recordId,
+  };
+};
+
 export const usePostMemo = () => {
-  return useMutation({ mutationFn: postMemo });
+  const auth = authStore.useAuth();
+  const mutationFn = auth.isLoggedIn ? postMemo : guestPostMemo;
+  return useMutation({ mutationFn });
 };

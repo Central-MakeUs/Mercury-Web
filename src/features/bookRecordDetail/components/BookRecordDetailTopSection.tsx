@@ -23,7 +23,7 @@ export const BookRecordDetailTopSection = (
     src: string;
   } & DeleteRecordsRequest,
 ) => {
-  const { title, author, publisher, src, recordId, userId } = props;
+  const { title, author, publisher, src, recordId } = props;
 
   const navigate = useNavigate();
 
@@ -38,7 +38,6 @@ export const BookRecordDetailTopSection = (
   const handleMemoDelete = () => {
     allMemoDeleteOverlay.open({
       recordId,
-      userId,
       onSuccess: () => {
         toast.main("독서기록을 삭제했어요", { duration: 5000 });
         navigate("/book-record");

@@ -42,9 +42,9 @@ export const Default: StoryObj = {
             key={memo.memoId}
             onPressComplete={async () => {
               memoEditOverlay.openAsync({
-                userId: "1",
                 recordId: "1",
                 memoId: memo.memoId,
+                content: memo.content,
               });
             }}
             {...createRowProps(memo)}
