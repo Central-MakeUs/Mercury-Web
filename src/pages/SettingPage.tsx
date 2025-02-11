@@ -7,7 +7,6 @@ import { SettingMenuList } from "~/features/settingsMenu/components/SettingMenuL
 
 export default function SettingPage() {
   const navigate = useNavigate();
-
   return (
     <SafeArea
       edges={["top", "bottom", "left", "right"]}

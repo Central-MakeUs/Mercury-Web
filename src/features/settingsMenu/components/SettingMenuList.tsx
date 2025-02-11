@@ -3,12 +3,16 @@ import { OnOffToggleButton } from "./OnOffToggleButton";
 import { SettingMenuRow } from "./SettingMenuRow";
 
 import { List } from "@repo/ui/List";
+import { useNavigate } from "react-router";
 import { logoutDialogOverlay } from "~/entities/user/components/LogoutDialog";
+import { NotSigned } from "~/entities/user/components/NotSigned";
+import { Signed } from "~/entities/user/components/Signed";
 import { SETTINGS_LINKS } from "~/shared/constants/externalLink";
 import { openExternalUrl } from "~/shared/utils/openExternalUrl";
 
 export const SettingMenuList = () => {
   const [selected, setSelected] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogoutClick = () => {
     logoutDialogOverlay.open();
@@ -26,6 +30,14 @@ export const SettingMenuList = () => {
     openExternalUrl(SETTINGS_LINKS.FAQ);
   };
 
+  const handleLoginClick = () => {
+    navigate("/");
+  };
+
+  const handleSignupClick = () => {
+    navigate("/");
+  };
+
   return (
     <List className=" gap-y-[6px] w-full">
       <SettingMenuRow
@@ -37,10 +49,22 @@ export const SettingMenuList = () => {
       <SettingMenuRow onClick={handleFaqClick}>문의하기</SettingMenuRow>
       <SettingMenuRow onClick={handlePolicyClick}>이용약관 및 개인정보 처리방침</SettingMenuRow>
       <SettingMenuRow onClick={handleNoticeClick}>공지사항</SettingMenuRow>
-      <SettingMenuRow className=" text-gray-400" onClick={handleLogoutClick}>
-        로그아웃
-      </SettingMenuRow>
-      <SettingMenuRow className=" text-gray-400">탈퇴하기</SettingMenuRow>
+
+      <NotSigned>
+        <SettingMenuRow className=" text-gray-400" onClick={handleLoginClick}>
+          로그인
+        </SettingMenuRow>
+        <SettingMenuRow className=" text-gray-400" onClick={handleSignupClick}>
+          회원가입
+        </SettingMenuRow>
+      </NotSigned>
+
+      <Signed>
+        <SettingMenuRow className=" text-gray-400" onClick={handleLogoutClick}>
+          로그아웃
+        </SettingMenuRow>
+        <SettingMenuRow className=" text-gray-400">탈퇴하기</SettingMenuRow>
+      </Signed>
     </List>
   );
 };

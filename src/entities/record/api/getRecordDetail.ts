@@ -1,21 +1,22 @@
+// can guest
+
 import { http } from "@repo/http";
 import { queryOptions } from "@tanstack/react-query";
+import { authStore } from "~/entities/user/model/auth.store";
+import { guestRecordStore } from "../model/guestRecordStore";
 import type { BookRecordDetail } from "../model/record.model";
 import { recordQueryKeys } from "./record.querykey";
 
 export interface GetBookMemosRequest {
-  userId: string;
   recordId: string;
 }
 
 export type GetRecordDetailResponse = BookRecordDetail;
 
-export const getRecordsDetail = async (params: GetBookMemosRequest) => {
-  const { userId, recordId } = params;
+const getRecordsDetail = async (params: GetBookMemosRequest) => {
+  const { recordId } = params;
 
-  const response = await http.get<GetRecordDetailResponse>(`records/${recordId}`, {
-    searchParams: { userId },
-  });
+  const response = await http.get<GetRecordDetailResponse>(`records/${recordId}`);
 
   return {
     ...response.data,
@@ -28,8 +29,27 @@ export const getRecordsDetail = async (params: GetBookMemosRequest) => {
   } satisfies GetRecordDetailResponse;
 };
 
-export const getRecordsDetailQueryOptions = (request: GetBookMemosRequest) =>
-  queryOptions({
+const guestGetRecordsDetail = async (request: GetBookMemosRequest) => {
+  const { recordId } = request;
+  const memoList = guestRecordStore.getItem();
+  const memo = memoList.find((memo) => memo.recordId.toString() === recordId.toString());
+  if (!memo) {
+    throw new Error("메모가 존재하지 않습니다.");
+  }
+
+  return memo satisfies GetRecordDetailResponse;
+};
+
+export const useGetRecordsDetailQueryOptions = (request: GetBookMemosRequest) => {
+  const auth = authStore.useAuth();
+
+  return queryOptions({
     queryKey: recordQueryKeys.getRecordById(request),
-    queryFn: () => getRecordsDetail(request),
+    queryFn: () => {
+      if (auth.isLoggedIn) {
+        return getRecordsDetail(request);
+      }
+      return guestGetRecordsDetail(request);
+    },
   });
+};

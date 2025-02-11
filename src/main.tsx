@@ -16,6 +16,7 @@ import BookRecordModifyPage from "./pages/BookRecordMemoModifyPage.tsx";
 import BookRecordPage from "./pages/BookRecordPage.tsx";
 import BookRecordWritePage from "./pages/BookRecordWritePage.tsx";
 import HomePage from "./pages/HomePage.tsx";
+import { LoginPage } from "./pages/LoginPage.tsx";
 import Notification from "./pages/Notification.tsx";
 import OnBoardingPage from "./pages/OnBoardingPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
@@ -50,6 +51,7 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="notification" element={<Notification />} />
                 <Route path="settings" element={<SettingPage />} />
                 <Route path="" element={<OnBoardingPage />} />
+                <Route path="login" element={<LoginPage />} />
               </Routes>
             </OverlayProvider>
           </BrowserRouter>
