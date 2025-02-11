@@ -15,11 +15,12 @@ export const useStorageService = <T>(
 ) => {
   const storage = options.storage;
   const setStorage = useCallback(
-    (newValue: string) => {
-      storage.setItem(key, newValue);
-      dispatchEvent(new StorageEvent("storage", { key: key, newValue }));
+    (newValue: T) => {
+      window.dispatchEvent(
+        new StorageEvent("storage", { key: key, newValue: JSON.stringify(newValue) }),
+      );
     },
-    [key, storage],
+    [key],
   );
 
   const getSnapshot = () => storage.getItem(key) ?? options.defaultValue;

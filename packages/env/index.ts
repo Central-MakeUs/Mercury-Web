@@ -12,7 +12,7 @@ export const env = createEnv({
   clientPrefix: "VITE",
   emptyStringAsUndefined: true,
   runtimeEnv: {
-    VITE_API_URL: import.meta.env.VITE_API_URL,
+    VITE_API_URL: `${import.meta.env.VITE_API_URL}/api`,
     DEV: import.meta.env.DEV,
     PROD: import.meta.env.PROD,
   },

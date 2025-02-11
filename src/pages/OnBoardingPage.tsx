@@ -1,15 +1,17 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
+import { Pressable } from "@repo/design-system/Pressable";
 import { Text, textVariants } from "@repo/design-system/Text";
 
 import { toast } from "@repo/design-system/Toast";
 import { cn } from "@repo/design-system/cn";
+import { env } from "@repo/env";
 import { Center } from "@repo/ui/Center";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
@@ -25,12 +27,24 @@ export default function OnBoardingPage() {
 }
 
 const MercuryImageSection = () => {
+  const navigate = useNavigate();
   return (
     <CenterStack className=" w-full px-4">
       <Stack className=" w-full">
-        <AspectRatio ratio={343 / 219}>
-          <Image src={LOGO_ASSETS.MERCURY_LOGIN_LOGO_WEBP} alt="mercury logo" objectfit={"fill"} />
-        </AspectRatio>
+        <Pressable
+          delay={env.DEV ? 0 : 5000}
+          onPressComplete={() => {
+            navigate("/login");
+          }}
+        >
+          <AspectRatio ratio={343 / 219}>
+            <Image
+              src={LOGO_ASSETS.MERCURY_LOGIN_LOGO_WEBP}
+              alt="mercury logo"
+              objectfit={"fill"}
+            />
+          </AspectRatio>
+        </Pressable>
       </Stack>
       <Stack className=" mt-[30px] pl-[66px] pr-[54px] w-full">
         <AspectRatio ratio={255 / 52}>
