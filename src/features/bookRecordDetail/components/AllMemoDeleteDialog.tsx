@@ -34,13 +34,13 @@ const AllMemoDeleteDialog = (
     onError?: () => void;
   } & DeleteRecordsRequest,
 ) => {
-  const { isOpen, onOpenChange, recordId, userId, onSuccess, onError } = props;
+  const { isOpen, onOpenChange, recordId, onSuccess, onError } = props;
   const { mutateAsync: allMemoDelete, isPending } = useDeleteRecords();
   const queryClient = useQueryClient();
 
   const handleAllDeleteClick = async () => {
     try {
-      await allMemoDelete({ recordId, userId });
+      await allMemoDelete({ recordId });
       await queryClient.invalidateQueries({ queryKey: recordQueryKeys.all(), refetchType: "all" });
       onOpenChange?.(false);
       onSuccess?.();

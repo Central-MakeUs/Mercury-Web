@@ -4,14 +4,13 @@ import type { Timer } from "../model/timer.model";
 
 export interface PostTimersRequest {
   seconds: number;
-  userId: string;
   deviceTime?: string;
 }
 
 export type PostTimersResponse = Timer[];
 
 export const postTimers = async (request: PostTimersRequest) => {
-  const { userId, deviceTime, ...rest } = request;
+  const { deviceTime, ...rest } = request;
 
   const body = {
     ...rest,
@@ -21,11 +20,6 @@ export const postTimers = async (request: PostTimersRequest) => {
   const response = await http.post<Omit<PostTimersRequest, "userId">, PostTimersResponse>(
     `/timers`,
     body,
-    {
-      searchParams: {
-        userId,
-      },
-    },
   );
   return response.data;
 };

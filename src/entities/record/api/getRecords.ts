@@ -9,15 +9,13 @@ export interface GetRecordsResponse {
 }
 
 export interface GetRecordsRequest {
-  userId: string;
   sortType: BookRecordSortType;
 }
 
 export const getRecords = async (request: GetRecordsRequest) => {
-  const { userId, sortType } = request;
+  const { sortType } = request;
   const response = await http.get<GetRecordsResponse>(`/records`, {
     searchParams: {
-      userId,
       sortType,
     },
   });

@@ -6,7 +6,6 @@ export interface PostRecordsRequest {
   book: Book;
   content: string;
   gauge: number;
-  userId: string;
 }
 
 export interface PostRecordsResponse {
@@ -20,15 +19,10 @@ export interface PostRecordsResponse {
 }
 
 export const postRecords = async (request: PostRecordsRequest) => {
-  const { userId, ...rest } = request;
+  const { ...rest } = request;
   const response = await http.post<Omit<PostRecordsRequest, "userId">, PostRecordsResponse>(
     `/records`,
     rest,
-    {
-      searchParams: {
-        userId,
-      },
-    },
   );
   return response.data;
 };

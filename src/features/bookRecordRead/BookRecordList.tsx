@@ -5,7 +5,6 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router";
 import { getRecordsQueryOptions } from "~/entities/record/api/getRecords";
 import type { BookRecord } from "~/entities/record/model/record.model";
-import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { FirstUserRecordFallback } from "~/features/bookRecordRead/components/FirstUserRecordFallback";
 import { RecordedBookItem } from "~/features/bookRecordRead/components/RecordedBookItem";
 import { SearchResultEmptyFallback } from "~/features/bookRecordRead/components/SearchResultEmptyFallback";
@@ -22,11 +21,9 @@ export const BookRecordList = wrap
     ),
   })
   .on(() => {
-    const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
-    const userId = user.userId;
     const search = useBookRecordStore((store) => store.search);
     const sortType = useBookRecordStore((store) => store.sortType);
-    const recordsResponse = useSuspenseQuery(getRecordsQueryOptions({ userId, sortType }));
+    const recordsResponse = useSuspenseQuery(getRecordsQueryOptions({ sortType }));
     const navigate = useNavigate();
     const searchedRecords = searchBookRecords(recordsResponse.data.records, search);
     // const sortedRecords = sortBookRecords(searchedRecords, sortType);

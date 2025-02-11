@@ -10,7 +10,7 @@ import { useDeleteMemoDetail } from "~/entities/record/api/deleteMemoDetail";
 import { recordQueryKeys } from "~/entities/record/api/record.querykey";
 
 export const memoEditOverlay = {
-  openAsync: async (props: { userId: string; recordId: string; memoId: string }) => {
+  openAsync: async (props: { recordId: string; memoId: string }) => {
     return overlay.openAsync<boolean>(({ isOpen, close, unmount }) => {
       return <MemoEditDialog isOpen={isOpen} close={close} unmount={unmount} {...props} />;
     });
@@ -22,10 +22,9 @@ const MemoEditDialog = (props: {
   close: (b: boolean) => void;
   unmount: () => void;
   recordId: string;
-  userId: string;
   memoId: string;
 }) => {
-  const { isOpen, close, unmount, recordId, memoId, userId } = props;
+  const { isOpen, close, unmount, recordId, memoId } = props;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutateAsync: deleteMemo } = useDeleteMemoDetail();
@@ -39,7 +38,7 @@ const MemoEditDialog = (props: {
   const handleDelete = async () => {
     close(true);
     navigate(`/book-record/${recordId}`);
-    await deleteMemo({ memoId, recordId, userId });
+    await deleteMemo({ memoId, recordId });
     await queryClient.invalidateQueries({
       queryKey: recordQueryKeys.getRecordById({ recordId }),
       refetchType: "all",

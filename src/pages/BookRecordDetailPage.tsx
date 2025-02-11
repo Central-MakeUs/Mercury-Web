@@ -11,9 +11,8 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { format, toDate } from "date-fns";
 import { overlay } from "overlay-kit";
 import { Navigate, useParams } from "react-router";
-import { getRecordsDetailQueryOptions } from "~/entities/record/api/getRecordDetail";
+import { useGetRecordsDetailQueryOptions } from "~/entities/record/api/getRecordDetail";
 import type { Memo } from "~/entities/record/model/memo.model";
-import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import { BookRecordDetailFloatButton } from "~/features/bookRecordDetail/components/BookRecordDetailFloatButton";
 import { BookRecordDetailMemoItem } from "~/features/bookRecordDetail/components/BookRecordDetailMemoItem";
 import { BookRecordDetailTopSection } from "~/features/bookRecordDetail/components/BookRecordDetailTopSection";
@@ -24,9 +23,11 @@ export default wrap
   .ErrorBoundary({ fallback: <Navigate to="/book-record" /> })
   .on(function BookRecordDetailPage() {
     const { recordId } = useParams();
-    const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
 
-    const options = getRecordsDetailQueryOptions({ userId: user.userId, recordId: recordId ?? "" });
+    const options = useGetRecordsDetailQueryOptions({
+      recordId: recordId ?? "",
+    });
+
     const { data: recordDetail } = useSuspenseQuery(options);
 
     const { book, updatedGauge, memos } = recordDetail;
@@ -34,7 +35,6 @@ export default wrap
     const author = book.author;
     const publisher = book.publisher;
     const src = book.coverImageUrl;
-    const _gauge = updatedGauge;
 
     return (
       <>
@@ -45,7 +45,6 @@ export default wrap
             publisher={publisher}
             src={src}
             recordId={recordId ?? ""}
-            userId={user.userId}
           />
 
           <Stack className=" pt-[16px]  z-[3] bg-white h-full min-h-screen">
@@ -57,7 +56,6 @@ export default wrap
                   key={memo.memoId}
                   onPressComplete={async () => {
                     memoEditOverlay.openAsync({
-                      userId: user.userId,
                       recordId: recordId ?? "",
                       memoId: memo.memoId,
                     });

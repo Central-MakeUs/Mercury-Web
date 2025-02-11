@@ -4,7 +4,6 @@ import type { Memo } from "../model/memo.model";
 
 interface PostMemosRequest {
   recordId: string;
-  userId: string;
   content: string;
   gauge: number;
 }
@@ -12,19 +11,11 @@ interface PostMemosRequest {
 type PostMemosResponse = Memo;
 
 export const postMemo = async (props: PostMemosRequest) => {
-  const { recordId, userId, content, gauge } = props;
-  const response = await http.post<unknown, PostMemosResponse>(
-    `records/${recordId}/memos`,
-    {
-      content,
-      gauge,
-    },
-    {
-      searchParams: {
-        userId,
-      },
-    },
-  );
+  const { recordId, content, gauge } = props;
+  const response = await http.post<unknown, PostMemosResponse>(`records/${recordId}/memos`, {
+    content,
+    gauge,
+  });
 
   return response.data;
 };

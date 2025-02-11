@@ -2,14 +2,13 @@ import { toast } from "@repo/design-system/Toast";
 import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useFunnel } from "@use-funnel/browser";
 import { useLoading } from "@xionwcfm/react";
 import { useNavigate } from "react-router";
 import { GET_BOOKS_SEARCH_SORT_TYPE } from "~/entities/record/api/getBooksSearch";
 import { type PostRecordsRequest, usePostRecords } from "~/entities/record/api/postRecords";
 import { recordQueryKeys } from "~/entities/record/api/record.querykey";
-import { useTestUserQueryOptions } from "~/entities/user/api/getTestUser";
 import {
   type BookRecordWriteFormOptionalState,
   bookRecordWriteSteps,
@@ -36,8 +35,6 @@ export const BookRecordWriteFunnel = () => {
   const funnel = useFunnel(options);
   const navigate = useNavigate();
   const { mutateAsync: createRecords } = usePostRecords();
-  const { data: user } = useSuspenseQuery(useTestUserQueryOptions());
-  const userId = user.userId;
   const [loading, startLoading] = useLoading();
   const queryClient = useQueryClient();
 
@@ -87,7 +84,7 @@ export const BookRecordWriteFunnel = () => {
           ProgressStep={({ context }) => (
             <BookRecordWriteProgressStep
               loading={loading}
-              onNext={(gauge) => handleNext({ ...context, gauge, userId })}
+              onNext={(gauge) => handleNext({ ...context, gauge })}
             />
           )}
         />
