@@ -1,3 +1,4 @@
+// can guest
 import { http } from "@repo/http";
 import { useMutation } from "@tanstack/react-query";
 import { authStore } from "~/entities/user/model/auth.store";

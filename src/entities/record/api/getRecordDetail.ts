@@ -1,3 +1,5 @@
+// can guest
+
 import { http } from "@repo/http";
 import { queryOptions } from "@tanstack/react-query";
 import { authStore } from "~/entities/user/model/auth.store";
@@ -35,18 +37,7 @@ const guestGetRecordsDetail = async (request: GetBookMemosRequest) => {
     throw new Error("메모가 존재하지 않습니다.");
   }
 
-  return {
-    ...memo,
-    recordId: memo?.recordId.toString() ?? "",
-    book: { ...memo?.book },
-    memos: memo?.memos.map((memo) => ({
-      ...memo,
-      memoId: memo.memoId.toString(),
-    })),
-    updatedAt: memo?.updatedAt ?? "",
-    createdAt: memo?.createdAt ?? "",
-    updatedGauge: memo?.updatedGauge ?? 0,
-  } satisfies GetRecordDetailResponse;
+  return memo satisfies GetRecordDetailResponse;
 };
 
 export const useGetRecordsDetailQueryOptions = (request: GetBookMemosRequest) => {
