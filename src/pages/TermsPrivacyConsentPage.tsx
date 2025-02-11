@@ -8,10 +8,12 @@ import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { openExternalUrl } from "~/shared/utils/openExternalUrl";
 
 export default function TermsPrivacyConsentPage() {
+  const navigate = useNavigate();
   const [termsOfService, setTermsOfService] = useState(false);
   const [privacyConsent, setPrivacyConsent] = useState(false);
 
@@ -29,7 +31,7 @@ export default function TermsPrivacyConsentPage() {
 
   const handleConfirm = () => {
     if (allChecked) {
-      alert("약관 동의 완료!");
+      navigate("/home");
     }
   };
 
