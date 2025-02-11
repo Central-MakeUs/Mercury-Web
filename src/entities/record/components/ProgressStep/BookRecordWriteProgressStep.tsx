@@ -73,7 +73,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
     <Stack className=" min-h-[400px] w-full justify-center items-center">
       <ImageFadeAnimator
         value={props.status}
-        className=" px-[100px] relative"
+        className=" px-[115px] relative"
         caseBy={{
           "0": (
             <ImageFadeAnimator.FadeIn
