@@ -1,3 +1,4 @@
+import { SafeArea } from "@repo/bridge-web/SafeArea";
 import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
@@ -48,7 +49,10 @@ export default wrap
     };
 
     return (
-      <Stack className=" w-full h-full min-h-screen">
+      <SafeArea
+        edges={["top", "left", "right", "bottom"]}
+        className=" flex flex-col w-full h-full min-h-screen"
+      >
         <TopNavigation.Root left={<TopNavigation.Back onClick={handleBack} />}>
           <TopNavigation.Title>메모 작성</TopNavigation.Title>
         </TopNavigation.Root>
@@ -62,6 +66,6 @@ export default wrap
             }}
           />
         </Stack>
-      </Stack>
+      </SafeArea>
     );
   });

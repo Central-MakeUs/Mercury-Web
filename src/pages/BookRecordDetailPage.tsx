@@ -58,6 +58,7 @@ export default wrap
                     memoEditOverlay.openAsync({
                       recordId: recordId ?? "",
                       memoId: memo.memoId,
+                      content: memo.content,
                     });
                   }}
                   {...createRowProps(memo)}

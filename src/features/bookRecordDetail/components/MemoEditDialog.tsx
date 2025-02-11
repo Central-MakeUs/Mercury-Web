@@ -8,9 +8,10 @@ import { overlay } from "overlay-kit";
 import { useNavigate } from "react-router";
 import { useDeleteMemoDetail } from "~/entities/record/api/deleteMemoDetail";
 import { recordQueryKeys } from "~/entities/record/api/record.querykey";
+import { copyClipBoard } from "~/shared/utils/copyClipBoard";
 
 export const memoEditOverlay = {
-  openAsync: async (props: { recordId: string; memoId: string }) => {
+  openAsync: async (props: { recordId: string; memoId: string; content: string }) => {
     return overlay.openAsync<boolean>(({ isOpen, close, unmount }) => {
       return <MemoEditDialog isOpen={isOpen} close={close} unmount={unmount} {...props} />;
     });
@@ -23,8 +24,9 @@ const MemoEditDialog = (props: {
   unmount: () => void;
   recordId: string;
   memoId: string;
+  content: string;
 }) => {
-  const { isOpen, close, unmount, recordId, memoId } = props;
+  const { isOpen, close, unmount, recordId, memoId, content } = props;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutateAsync: deleteMemo } = useDeleteMemoDetail();
@@ -50,6 +52,13 @@ const MemoEditDialog = (props: {
     toast.main("메모를 삭제했어요");
   };
 
+  const handleCopy = () => {
+    copyClipBoard(content);
+    toast.main("메모 내용을 복사했어요");
+
+    close(true);
+  };
+
   return (
     <Dialog.Root
       open={isOpen}
@@ -68,6 +77,15 @@ const MemoEditDialog = (props: {
           <MaxWidthBox className="flex z-[7] justify-center items-center fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
             <Stack className=" w-[225px] py-1 bg-white rounded-[14px]">
               <button
+                onClick={handleCopy}
+                className=" focus:outline-none h-[40px] px-4 text-left w-full"
+              >
+                <Text variant={"body/15_m"} className=" text-gray-600">
+                  메모 내용 복사하기
+                </Text>
+              </button>
+
+              <button
                 onClick={handleModify}
                 className=" focus:outline-none h-[40px] px-4 text-left w-full"
               >
@@ -75,6 +93,7 @@ const MemoEditDialog = (props: {
                   메모 수정하기
                 </Text>
               </button>
+
               <button
                 onClick={handleDelete}
                 className=" focus:outline-none h-[40px] px-4 text-left w-full"
