@@ -3,6 +3,7 @@ import { Button } from "@repo/design-system/Button";
 import { FixedBottom } from "@repo/design-system/FixedBottom";
 import { Image } from "@repo/design-system/Image";
 import { Text, textVariants } from "@repo/design-system/Text";
+
 import { toast } from "@repo/design-system/Toast";
 import { cn } from "@repo/design-system/cn";
 import { CheckIconHome } from "@repo/icon/CheckIconHome";
@@ -13,6 +14,7 @@ import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { useState } from "react";
 import { Link } from "react-router";
+import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
 import { openExternalUrl } from "~/shared/utils/openExternalUrl";
@@ -32,13 +34,13 @@ const MercuryImageSection = () => {
     <CenterStack className=" w-full px-4">
       <Stack className=" w-full">
         <AspectRatio ratio={343 / 219}>
-          <Image src={ONBOARDING_ASSETS.MERCURY_LOGIN_LOGO} alt="mercury logo" objectfit={"fill"} />
+          <Image src={LOGO_ASSETS.MERCURY_LOGIN_LOGO_WEBP} alt="mercury logo" objectfit={"fill"} />
         </AspectRatio>
       </Stack>
       <Stack className=" mt-[30px] pl-[66px] pr-[54px] w-full">
         <AspectRatio ratio={255 / 52}>
           <Image
-            src={ONBOARDING_ASSETS.WORDMARKLOGO_DARKBG}
+            src={LOGO_ASSETS.WORDMARKLOGO_DARKBG_WEBP}
             alt="wordmark logo"
             objectfit={"fill"}
           />
@@ -155,7 +157,7 @@ const TermsPrivacyConsentSection = () => {
   );
 };
 
-const ONBOARDING_ASSETS = {
+const _ONBOARDING_ASSETS = {
   MERCURY_LOGIN_LOGO: "/images/logo/mercury_login_logo.webp",
   WORDMARKLOGO_DARKBG: "/images/logo/wordmarklogo_darkbg.webp",
 };

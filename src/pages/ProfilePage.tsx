@@ -2,6 +2,7 @@ import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Stack } from "@repo/ui/Stack";
 import { motion } from "motion/react";
+import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 
 export default function Page() {
   return (
@@ -20,7 +21,11 @@ export default function Page() {
             transition={{ duration: 1.5, delay: 0.8 }}
           >
             <AspectRatio ratio={375 / 343}>
-              <Image src={PROFILE_ASSETS.PROFILE_LOGO} alt="profile_logo" objectfit={"fill"} />
+              <Image
+                src={LOGO_ASSETS.MERCURY_LOGIN_LOGO_WEBP}
+                alt="profile_logo"
+                objectfit={"fill"}
+              />
             </AspectRatio>
           </motion.button>
           <motion.h1
@@ -36,7 +41,3 @@ export default function Page() {
     </>
   );
 }
-
-const PROFILE_ASSETS = {
-  PROFILE_LOGO: "/images/logo/mercury_login_logo.webp",
-};
