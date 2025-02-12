@@ -1,5 +1,6 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
+import { toast } from "@repo/design-system/Toast";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Stack } from "@repo/ui/Stack";
 import { useEffect } from "react";
@@ -13,13 +14,18 @@ export default function LoginSuccessPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const accessToken = params.get("access_token");
+    const isNewUser = params.get("isNewUser");
 
     if (accessToken) {
       authStore.setAccessToken(accessToken);
-      navigate("/home", { replace: true });
+      if (isNewUser) {
+        navigate("/login/agree", { replace: true });
+      } else {
+        navigate("/home", { replace: true });
+      }
     } else {
-      console.error("로그인 실패");
-      //navigate("/");
+      toast.main("로그인에 실패했습니다.", { duration: 1500 });
+      navigate("/");
     }
   }, [navigate]);
 
