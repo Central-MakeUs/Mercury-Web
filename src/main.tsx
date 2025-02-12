@@ -17,10 +17,12 @@ import BookRecordPage from "./pages/BookRecordPage.tsx";
 import BookRecordWritePage from "./pages/BookRecordWritePage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import { LoginPage } from "./pages/LoginPage.tsx";
+import LoginSuccessPage from "./pages/LoginSuccessPage.tsx";
 import Notification from "./pages/Notification.tsx";
 import OnBoardingPage from "./pages/OnBoardingPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import SettingPage from "./pages/SettingPage.tsx";
+import TermsPrivacyConsentPage from "./pages/TermsPrivacyConsentPage.tsx";
 import TimerPage from "./pages/TimerPage.tsx";
 
 createRoot(document.getElementById("root")!).render(
@@ -52,6 +54,8 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="settings" element={<SettingPage />} />
                 <Route path="" element={<OnBoardingPage />} />
                 <Route path="login" element={<LoginPage />} />
+                <Route path="login/success" element={<LoginSuccessPage />} />
+                <Route path="login/agree" element={<TermsPrivacyConsentPage />} />
               </Routes>
             </OverlayProvider>
           </BrowserRouter>

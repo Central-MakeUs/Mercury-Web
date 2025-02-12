@@ -11,17 +11,28 @@ import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
+import { authStore } from "~/entities/user/model/auth.store";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
-import { KakaoButton } from "~/shared/ui/KakaoButton";
+import { openExternalUrl } from "~/shared/utils/openExternalUrl";
 
 export default function OnBoardingPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = authStore.getAccessToken();
+    if (accessToken) {
+      navigate("/home");
+    }
+  }, [navigate]);
+
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
       <MercuryImageSection />
-      <SignUpSection />
+      <_SignUpSection />
     </CenterStack>
   );
 }
@@ -59,7 +70,7 @@ const MercuryImageSection = () => {
   );
 };
 
-const SignUpSection = () => {
+const _SignUpSection = () => {
   return (
     <Stack className="gap-y-[14px] w-full items-center">
       <Flex>
@@ -68,9 +79,9 @@ const SignUpSection = () => {
         </Text>
       </Flex>
       <Center className=" gap-x-[18px] items-center w-full justify-center">
-        <KakaoButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} />
+        {/* <KakaoButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} /> */}
         <AppleButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} />
-        <GoogleButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} />
+        <GoogleButton onClick={() => openExternalUrl(ONBOARDING_LINKS.GOOGLE_LOGIN)} />
       </Center>
       <Flex>
         <Link
@@ -86,4 +97,8 @@ const SignUpSection = () => {
       <Spacing className=" h-[40px]" />
     </Stack>
   );
+};
+
+const ONBOARDING_LINKS = {
+  GOOGLE_LOGIN: "https://api.mercuryplanet.co.kr/oauth2/authorization/google",
 };
