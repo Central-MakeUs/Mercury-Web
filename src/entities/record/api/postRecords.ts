@@ -10,6 +10,7 @@ export interface PostRecordsRequest {
   book: Book;
   content: string;
   gauge: number;
+  deviceTime: string;
 }
 
 export interface PostRecordsResponse {

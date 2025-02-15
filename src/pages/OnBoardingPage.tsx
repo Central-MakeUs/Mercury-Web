@@ -46,6 +46,7 @@ const MercuryImageSection = () => {
           </AspectRatio>
         </Pressable>
       </Stack>
+
       <Stack className=" mt-[30px] pl-[66px] pr-[54px] w-full">
         <AspectRatio ratio={255 / 52}>
           <Image

@@ -11,22 +11,24 @@ interface PostMemosRequest {
   recordId: string;
   content: string;
   gauge: number;
+  deviceTime: string;
 }
 
 type PostMemosResponse = Memo;
 
 export const postMemo = async (props: PostMemosRequest) => {
-  const { recordId, content, gauge } = props;
+  const { recordId, content, gauge, deviceTime } = props;
   const response = await http.post<unknown, PostMemosResponse>(`records/${recordId}/memos`, {
     content,
     gauge,
+    deviceTime,
   });
 
   return response.data;
 };
 
 const guestPostMemo = async (props: PostMemosRequest) => {
-  const { recordId, content, gauge } = props;
+  const { recordId, content, gauge, deviceTime } = props;
   const memoList = guestRecordStore.getItem();
   const id = generateRandomId();
   const createdAt = new Date().toISOString();
@@ -48,6 +50,7 @@ const guestPostMemo = async (props: PostMemosRequest) => {
             createdAt,
             updatedAt,
             recordId,
+            deviceTime,
           },
         ],
       };
@@ -60,6 +63,7 @@ const guestPostMemo = async (props: PostMemosRequest) => {
     createdAt,
     updatedAt,
     recordId,
+    deviceTime,
   };
 };
 

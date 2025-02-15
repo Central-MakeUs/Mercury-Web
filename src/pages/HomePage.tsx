@@ -21,7 +21,7 @@ export default function HomePage() {
       <Stack className="  w-full">
         <Header />
         <MainSection nickname={user.nickname} exp={user.exp} />
-        <HabitSection />
+        <HabitSection nickname={user.nickname} exp={user.exp} />
         <Spacing className=" h-[160px]" />
       </Stack>
     </SafeArea>
