@@ -37,7 +37,8 @@ export default wrap
       const { content, gauge } = props;
       await startLoading(
         (async () => {
-          await postMemo({ content, gauge, recordId });
+          const deviceTime = new Date().toISOString();
+          await postMemo({ content, gauge, recordId, deviceTime });
           await queryClient.invalidateQueries({
             queryKey: recordQueryKeys.getRecordById({ recordId }),
             refetchType: "all",

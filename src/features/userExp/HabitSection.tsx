@@ -14,6 +14,7 @@ import { wrap } from "@suspensive/react";
 import { isAfter, isSameDay } from "date-fns";
 import { useMemo } from "react";
 import { HabitCalendar } from "~/entities/user/components/HabitCalendar";
+import type { User } from "~/entities/user/model/user.model";
 import { HABIT_ASSETS } from "~/shared/images/habit/habitImages";
 const HabitBar = (props: { normalText: string; boldText: string }) => {
   const { normalText, boldText } = props;
@@ -114,7 +115,7 @@ export const HabitSection = wrap
   .Suspense({
     fallback: <Fallback />,
   })
-  .on(() => {
+  .on((_props: Pick<User, "nickname" | "exp">) => {
     const nickname = `테스터`;
     const normalText = `${nickname}님은 현재`;
     const successCount = 5;

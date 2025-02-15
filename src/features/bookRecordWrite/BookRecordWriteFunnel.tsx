@@ -84,7 +84,9 @@ export const BookRecordWriteFunnel = () => {
           ProgressStep={({ context }) => (
             <BookRecordWriteProgressStep
               loading={loading}
-              onNext={(gauge) => handleNext({ ...context, gauge })}
+              onNext={(gauge) =>
+                handleNext({ ...context, gauge, deviceTime: new Date().toISOString() })
+              }
             />
           )}
         />

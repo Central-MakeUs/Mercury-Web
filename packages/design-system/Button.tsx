@@ -26,7 +26,7 @@ const buttonStyles = cva("rounded-[30px] py-[12px] max-h-[50px]", {
   },
 });
 
-export const Button = forwardRef<ElementRef<"button">, ButtonProps>(
+export const Button = forwardRef<ElementRef<"button">, ButtonProps & { loading?: boolean }>(
   ({ children, className, variant = "primary", size = "small", ...props }, ref) => {
     return (
       <button
@@ -37,6 +37,8 @@ export const Button = forwardRef<ElementRef<"button">, ButtonProps>(
           className,
         )}
         {...props}
+        disabled={props.disabled || props.loading}
+        aria-disabled={props.disabled || props.loading}
       >
         {children}
       </button>
