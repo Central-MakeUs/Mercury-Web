@@ -11,24 +11,13 @@ import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
-import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
-import { authStore } from "~/entities/user/model/auth.store";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
 import { openExternalUrl } from "~/shared/utils/openExternalUrl";
 
 export default function OnBoardingPage() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const accessToken = authStore.getAccessToken();
-    if (accessToken) {
-      navigate("/home");
-    }
-  }, [navigate]);
-
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
       <MercuryImageSection />
