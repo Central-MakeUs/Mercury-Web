@@ -15,7 +15,7 @@
     "report": "vitest run --coverage.enabled true",
     "ci:check": "npx @biomejs/biome check --config-path=./biome-ci.json --diagnostic-level=error --write .",
     "ci:check:nowrite": "npx @biomejs/biome check --config-path=./biome-ci.json --diagnostic-level=error .",
-    "generate:image": "tsx imageConstantsGenerator.mts"
+    "generate:image": "tsx imageConstantsGenerator.mts && npx @biomejs/biome check --config-path=./biome-ci.json --diagnostic-level=error --write ./src/shared/images"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
