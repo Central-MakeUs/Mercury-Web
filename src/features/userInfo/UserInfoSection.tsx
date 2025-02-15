@@ -7,7 +7,12 @@ import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
 import { motion } from "motion/react";
 import { ExpProgressBar } from "~/entities/user/components/ExpProgressBar";
-import { calculateUserLevel, getExpPercentage, getGoalExp } from "~/entities/user/model/user.model";
+import {
+  type User,
+  calculateUserLevel,
+  getExpPercentage,
+  getGoalExp,
+} from "~/entities/user/model/user.model";
 import { HOME_ASSETS } from "~/shared/images/home/homeImages";
 
 const ExpSection = (props: { exp: number; goalExp: number; percentage: number; level: string }) => {
@@ -57,12 +62,11 @@ export const MainSection = wrap
   .Suspense({
     fallback: <Fallback />,
   })
-  .on(() => {
-    const nickname = `테스터`;
+  .on((props: Pick<User, "nickname" | "exp">) => {
+    const { nickname, exp } = props;
 
-    const level = calculateUserLevel(0);
+    const level = calculateUserLevel(exp);
     const goalExp = getGoalExp(level);
-    const exp = 0 + 50;
     const percentage = getExpPercentage(exp, goalExp);
 
     return (
