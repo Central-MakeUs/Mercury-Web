@@ -24,7 +24,7 @@ const ClarityEffector = () => {
   return null;
 };
 
-const PostHogPageView = () => {
+export const PostHogPageView = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const pathname = location.pathname;
@@ -56,10 +56,5 @@ export const MercuryPostHogProvider = (props: PropsWithChildren) => {
     return <>{props.children}</>;
   }
 
-  return (
-    <PostHogProvider client={posthog}>
-      <PostHogPageView />
-      {props.children}
-    </PostHogProvider>
-  );
+  return <PostHogProvider client={posthog}>{props.children}</PostHogProvider>;
 };
