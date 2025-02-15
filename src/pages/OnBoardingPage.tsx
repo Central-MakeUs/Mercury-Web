@@ -2,8 +2,6 @@ import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Pressable } from "@repo/design-system/Pressable";
 import { Text, textVariants } from "@repo/design-system/Text";
-
-import { toast } from "@repo/design-system/Toast";
 import { cn } from "@repo/design-system/cn";
 import { env } from "@repo/env";
 import { Center } from "@repo/ui/Center";
@@ -15,7 +13,7 @@ import { Link, useNavigate } from "react-router";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
-import { openExternalUrl } from "~/shared/utils/openExternalUrl";
+import { openWindowUrl } from "~/shared/utils/openWindowUrl";
 
 export default function OnBoardingPage() {
   return (
@@ -70,8 +68,8 @@ const _SignUpSection = () => {
       </Flex>
       <Center className=" gap-x-[18px] items-center w-full justify-center">
         {/* <KakaoButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} /> */}
-        <AppleButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} />
-        <GoogleButton onClick={() => openExternalUrl(ONBOARDING_LINKS.GOOGLE_LOGIN)} />
+        <AppleButton onClick={() => openWindowUrl(ONBOARDING_LINKS.APPLE_LOGIN)} />
+        <GoogleButton onClick={() => openWindowUrl(ONBOARDING_LINKS.GOOGLE_LOGIN)} />
       </Center>
       <Flex>
         <Link
@@ -90,5 +88,6 @@ const _SignUpSection = () => {
 };
 
 const ONBOARDING_LINKS = {
-  GOOGLE_LOGIN: "https://api.mercuryplanet.co.kr/oauth2/authorization/google",
+  GOOGLE_LOGIN: `https://api.mercuryplanet.co.kr/oauth2/authorization/google`,
+  APPLE_LOGIN: `https://api.mercuryplanet.co.kr/oauth2/authorization/apple`,
 };
