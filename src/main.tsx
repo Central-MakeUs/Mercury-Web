@@ -1,6 +1,6 @@
 import "./index.css";
 import "../packages/design-system/iosTimePicker.css";
-import { Analytics, MercuryPostHogProvider } from "@repo/analytics";
+import { Analytics, MercuryPostHogProvider, PostHogPageView } from "@repo/analytics";
 import { SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
 import { Providers } from "@repo/providers";
@@ -25,6 +25,9 @@ import ProfilePage from "./pages/ProfilePage.tsx";
 import SettingPage from "./pages/SettingPage.tsx";
 import TermsPrivacyConsentPage from "./pages/TermsPrivacyConsentPage.tsx";
 import TimerPage from "./pages/TimerPage.tsx";
+import { sentryInitialize } from "./sentry.tsx";
+
+sentryInitialize();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -32,6 +35,7 @@ createRoot(document.getElementById("root")!).render(
       <Providers>
         <MercuryPostHogProvider>
           <BrowserRouter>
+            <PostHogPageView />
             <OverlayProvider>
               <Routes>
                 <Route element={<BottomNavigationLayout />}>
