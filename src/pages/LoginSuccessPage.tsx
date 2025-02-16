@@ -1,6 +1,6 @@
+import { isApp } from "@repo/bridge-web/isApp";
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
-import { toast } from "@repo/design-system/Toast";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Stack } from "@repo/ui/Stack";
 import { useEffect } from "react";
@@ -14,18 +14,39 @@ export default function LoginSuccessPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const accessToken = params.get("access_token");
+    const refreshToken = params.get("refresh_token");
     const isNewUser = params.get("isNewUser");
+    const oauthType = params.get("oauthType");
+    const SCHEMA_LINK = "exp://192.168.0.20:8081";
 
-    if (accessToken) {
-      authStore.setAccessToken(accessToken);
+    if (!accessToken || !refreshToken || !isNewUser || !oauthType) {
+      return () => {};
+    }
+
+    authStore.setAccessToken(accessToken);
+    // refresh Token 관리 작업 병합되면 추가하기
+
+    const isGoogle = oauthType === "GOOGLE";
+    const isInApp = isApp();
+
+    const newUsernavigateHandler = () => {
       if (isNewUser) {
         navigate("/login/agree", { replace: true });
       } else {
-        navigate("/home", { replace: true });
+        navigate("/book-record", { replace: true });
       }
-    } else {
-      toast.main("로그인에 실패했습니다.", { duration: 1500 });
-      navigate("/");
+    };
+
+    if (!isGoogle) {
+      newUsernavigateHandler();
+    }
+
+    if (!isInApp) {
+      window.location.href = `${SCHEMA_LINK}?access_token=${accessToken}&refresh_token=${refreshToken}&isNewUser=${isNewUser}&oauthType=${oauthType}`;
+    }
+
+    if (isInApp) {
+      newUsernavigateHandler();
     }
   }, [navigate]);
 

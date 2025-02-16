@@ -11,7 +11,7 @@ const apiSchema = z.object({
 export const createResponse = async <T>(
   response: KyResponse<T>,
 ): Promise<ApiSuccessResponse<T>> => {
-  const data = await response.json();
+  const data = await response.clone().json();
   try {
     const parsed = apiSchema.parse(data);
     return {

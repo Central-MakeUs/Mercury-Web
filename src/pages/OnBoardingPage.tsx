@@ -2,8 +2,6 @@ import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Pressable } from "@repo/design-system/Pressable";
 import { Text, textVariants } from "@repo/design-system/Text";
-
-import { toast } from "@repo/design-system/Toast";
 import { cn } from "@repo/design-system/cn";
 import { env } from "@repo/env";
 import { Center } from "@repo/ui/Center";
@@ -18,6 +16,7 @@ import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
 import { openExternalUrl } from "~/shared/utils/openExternalUrl";
+import { openWindowUrl } from "~/shared/utils/openWindowUrl";
 
 export default function OnBoardingPage() {
   const navigate = useNavigate();
@@ -57,6 +56,7 @@ const MercuryImageSection = () => {
           </AspectRatio>
         </Pressable>
       </Stack>
+
       <Stack className=" mt-[30px] pl-[66px] pr-[54px] w-full">
         <AspectRatio ratio={255 / 52}>
           <Image
@@ -80,7 +80,7 @@ const _SignUpSection = () => {
       </Flex>
       <Center className=" gap-x-[18px] items-center w-full justify-center">
         {/* <KakaoButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} /> */}
-        <AppleButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} />
+        <AppleButton onClick={() => openWindowUrl(ONBOARDING_LINKS.APPLE_LOGIN)} />
         <GoogleButton onClick={() => openExternalUrl(ONBOARDING_LINKS.GOOGLE_LOGIN)} />
       </Center>
       <Flex>
@@ -93,6 +93,12 @@ const _SignUpSection = () => {
         >
           게스트로 둘러보기
         </Link>
+        <a
+          className=" bg-white p-4"
+          href="exp://192.168.0.20:8081?access_token=123&refresh_token=345&isNewUser=true"
+        >
+          딥링크
+        </a>
       </Flex>
       <Spacing className=" h-[40px]" />
     </Stack>
@@ -100,5 +106,6 @@ const _SignUpSection = () => {
 };
 
 const ONBOARDING_LINKS = {
-  GOOGLE_LOGIN: "https://api.mercuryplanet.co.kr/oauth2/authorization/google",
+  GOOGLE_LOGIN: `https://api.mercuryplanet.co.kr/oauth2/authorization/google`,
+  APPLE_LOGIN: `https://api.mercuryplanet.co.kr/oauth2/authorization/apple`,
 };

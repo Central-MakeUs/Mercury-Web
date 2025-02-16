@@ -28,7 +28,35 @@ const instance = createInstance({
       },
     ],
     afterResponse: [
-      async (_request, _options, response) => {
+      async (request, options, response) => {
+        if (response.status === 401) {
+          const data = (await response.clone().json()) as { message: string };
+          if (data?.message?.includes("만료된 access 토큰입니다")) {
+            try {
+              const response = await instance.post("auth/refresh");
+              const accessToken = response.headers.get("Authorization");
+              authStore.setAccessToken(accessToken);
+              try {
+                //@ts-expect-error
+                options.context = { ...options.context, retried: true };
+                let newRequestUrl = request.url.replace(env.VITE_API_URL, "");
+                if (newRequestUrl.startsWith("/")) {
+                  newRequestUrl = newRequestUrl.slice(1);
+                }
+
+                const retryResponse = await instance(newRequestUrl, {
+                  ...options,
+                });
+                return retryResponse;
+              } catch (_e) {
+                return response;
+              }
+            } catch (_e) {
+              authStore.setAccessToken(null);
+              return response;
+            }
+          }
+        }
         return response;
       },
     ],

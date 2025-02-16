@@ -5,7 +5,7 @@ import { Text } from "@repo/design-system/Text";
 import { JustifyBetween } from "@repo/ui/JustifyBetween";
 import { Stack } from "@repo/ui/Stack";
 import { overlay } from "overlay-kit";
-import { authStore } from "../model/auth.store";
+import { useLogout } from "../api/useLogout";
 
 export const logoutDialogOverlay = {
   open: () => {
@@ -28,7 +28,7 @@ const LogoutDialog = (props: {
   onOpenChange?: (bool: boolean) => void;
 }) => {
   const { isOpen, onOpenChange } = props;
-  const auth = authStore.useAuth();
+  const { logout, isLoading } = useLogout();
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
@@ -55,8 +55,9 @@ const LogoutDialog = (props: {
                   size={"small"}
                   className=" w-full rounded-[14px]"
                   variant={"warning"}
-                  onClick={() => {
-                    auth.setAccessToken(null);
+                  loading={isLoading}
+                  onClick={async () => {
+                    await logout();
                     onOpenChange?.(false);
                   }}
                 >

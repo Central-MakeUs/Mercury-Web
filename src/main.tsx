@@ -1,6 +1,6 @@
 import "./index.css";
 import "../packages/design-system/iosTimePicker.css";
-import { Analytics, MercuryPostHogProvider } from "@repo/analytics";
+import { Analytics, MercuryPostHogProvider, PostHogPageView } from "@repo/analytics";
 import { SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
 import { Providers } from "@repo/providers";
@@ -8,8 +8,10 @@ import { MAX_WIDTH } from "@repo/token/index.ts";
 import { OverlayProvider } from "overlay-kit";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import BottomNavigationLayout from "./app/BottomNavigationLayout.tsx";
+import { AppSocialLoginProcessor } from "./entities/user/components/AppSocialLoginProcessor.tsx";
+import { NotSigned } from "./entities/user/components/NotSigned.tsx";
 import BookRecordDetailPage from "./pages/BookRecordDetailPage.tsx";
 import BookRecordMemoAddPage from "./pages/BookRecordMemoAddPage.tsx";
 import BookRecordModifyPage from "./pages/BookRecordMemoModifyPage.tsx";
@@ -24,6 +26,9 @@ import ProfilePage from "./pages/ProfilePage.tsx";
 import SettingPage from "./pages/SettingPage.tsx";
 import TermsPrivacyConsentPage from "./pages/TermsPrivacyConsentPage.tsx";
 import TimerPage from "./pages/TimerPage.tsx";
+import { sentryInitialize } from "./sentry.tsx";
+
+sentryInitialize();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -31,6 +36,8 @@ createRoot(document.getElementById("root")!).render(
       <Providers>
         <MercuryPostHogProvider>
           <BrowserRouter>
+            <PostHogPageView />
+            <AppSocialLoginProcessor />
             <OverlayProvider>
               <Routes>
                 <Route element={<BottomNavigationLayout />}>
@@ -52,7 +59,14 @@ createRoot(document.getElementById("root")!).render(
 
                 <Route path="notification" element={<Notification />} />
                 <Route path="settings" element={<SettingPage />} />
-                <Route path="" element={<OnBoardingPage />} />
+                <Route
+                  path=""
+                  element={
+                    <NotSigned fallback={<Navigate to={"/home"} replace={true} />}>
+                      <OnBoardingPage />
+                    </NotSigned>
+                  }
+                />
                 <Route path="login" element={<LoginPage />} />
                 <Route path="login/success" element={<LoginSuccessPage />} />
                 <Route path="login/agree" element={<TermsPrivacyConsentPage />} />

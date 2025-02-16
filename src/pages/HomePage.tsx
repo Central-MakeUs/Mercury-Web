@@ -7,18 +7,21 @@ import { toast } from "@repo/design-system/Toast";
 import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
+import { useGetUserQueryOptions } from "~/entities/user/api/getUserQueryOptions";
 import { HabitSection } from "~/features/userExp/HabitSection";
 import { MainSection } from "~/features/userInfo/UserInfoSection";
 
 export default function HomePage() {
+  const { data: user } = useSuspenseQuery(useGetUserQueryOptions());
   return (
     <SafeArea edges={["top", "left", "bottom", "right"]} className=" w-full">
       <Stack className="  w-full">
         <Header />
-        <MainSection />
-        <HabitSection />
+        <MainSection nickname={user.nickname} exp={user.exp} />
+        <HabitSection nickname={user.nickname} exp={user.exp} />
         <Spacing className=" h-[160px]" />
       </Stack>
     </SafeArea>

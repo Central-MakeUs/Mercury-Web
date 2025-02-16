@@ -1,3 +1,4 @@
+import { http } from "@repo/http";
 import { LocalStorageService } from "@repo/storage/localStorageService";
 import { queryOptions } from "@tanstack/react-query";
 import { authStore } from "../model/auth.store";
@@ -29,12 +30,22 @@ export const guestUserStore = {
   },
 };
 
+const getUsersMe = async () => {
+  return http.get<User>("/users/me");
+};
+
 export const useGetUserQueryOptions = () => {
-  const _auth = authStore.useAuth();
+  const auth = authStore.useAuth();
   return queryOptions({
     queryKey: userQueryKeys.all(),
-    queryFn: () => {
-      return guestUserStore.getItem();
+    queryFn: async () => {
+      if (auth.isLoggedIn) {
+        const response = await getUsersMe();
+        return response.data satisfies User;
+      }
+
+      const localUser = guestUserStore.getItem() ?? defaultUser;
+      return localUser satisfies User;
     },
   });
 };

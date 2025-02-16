@@ -7,17 +7,27 @@ import { Stack } from "@repo/ui/Stack";
 import { cva } from "class-variance-authority";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { authStore } from "~/entities/user/model/auth.store";
 
 export const LoginPage = () => {
   const form = useForm<{ id: string }>();
   const [isOpen, setIsOpen] = useState(false);
+  const auth = authStore.useAuth();
+  const navigate = useNavigate();
+  const onSubmit = async (data: { id: string }) => {
+    const response = await postUsersTest(data);
+    const accessToken = response.response.headers.get("Authorization");
+    auth.setAccessToken(accessToken);
+    toast.success("회원가입 완료");
+    navigate("/home");
+  };
   return (
     <SafeArea className=" flex flex-col w-full" edges={["top", "bottom", "right", "left"]}>
       <Text className=" px-4 mt-4">Login Page</Text>
 
       <Stack className=" px-4 py-4 w-full">
-        <form className=" gap-y-4 flex flex-col w-full">
+        <form className=" gap-y-4 flex flex-col w-full" onSubmit={form.handleSubmit(onSubmit)}>
           <input
             className={inputStyle()}
             {...form.register("id")}
@@ -50,6 +60,8 @@ const postUsersTest = async (props: { id: string }) => {
 const CreateAccountSection = () => {
   const form = useForm<{ id: string }>();
   const auth = authStore.useAuth();
+  const _navigate = useNavigate();
+
   const onSubmit = async (data: { id: string }) => {
     const response = await postUsersTest(data);
     const accessToken = response.response.headers.get("Authorization");
