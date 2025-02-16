@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
+import { openExternalUrl } from "~/shared/utils/openExternalUrl";
 import { openWindowUrl } from "~/shared/utils/openWindowUrl";
 
 export default function OnBoardingPage() {
@@ -69,7 +70,7 @@ const _SignUpSection = () => {
       <Center className=" gap-x-[18px] items-center w-full justify-center">
         {/* <KakaoButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} /> */}
         <AppleButton onClick={() => openWindowUrl(ONBOARDING_LINKS.APPLE_LOGIN)} />
-        <GoogleButton onClick={() => openWindowUrl(ONBOARDING_LINKS.GOOGLE_LOGIN)} />
+        <GoogleButton onClick={() => openExternalUrl(ONBOARDING_LINKS.GOOGLE_LOGIN)} />
       </Center>
       <Flex>
         <Link
