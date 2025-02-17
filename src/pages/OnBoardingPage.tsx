@@ -93,6 +93,12 @@ const _SignUpSection = () => {
         >
           게스트로 둘러보기
         </Link>
+        <a
+          className=" bg-white p-4"
+          href="exp://192.168.0.20:8081?access_token=123&refresh_token=345&isNewUser=true"
+        >
+          딥링크
+        </a>
       </Flex>
       <Spacing className=" h-[40px]" />
     </Stack>
