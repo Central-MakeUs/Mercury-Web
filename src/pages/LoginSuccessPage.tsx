@@ -30,7 +30,7 @@ export default function LoginSuccessPage() {
     const isInApp = isApp();
 
     const newUsernavigateHandler = () => {
-      if (isNewUser) {
+      if (isNewUser === "true") {
         navigate("/login/agree", { replace: true });
       } else {
         navigate("/book-record", { replace: true });
