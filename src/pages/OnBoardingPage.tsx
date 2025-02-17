@@ -9,7 +9,9 @@ import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
+import { authStore } from "~/entities/user/model/auth.store";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
@@ -17,6 +19,15 @@ import { openExternalUrl } from "~/shared/utils/openExternalUrl";
 import { openWindowUrl } from "~/shared/utils/openWindowUrl";
 
 export default function OnBoardingPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = authStore.getAccessToken();
+    if (accessToken) {
+      navigate("/home");
+    }
+  }, [navigate]);
+
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
       <MercuryImageSection />
@@ -82,6 +93,12 @@ const _SignUpSection = () => {
         >
           게스트로 둘러보기
         </Link>
+        <a
+          className=" bg-white p-4"
+          href="exp://192.168.0.20:8081?access_token=123&refresh_token=345&isNewUser=true"
+        >
+          딥링크
+        </a>
       </Flex>
       <Spacing className=" h-[40px]" />
     </Stack>

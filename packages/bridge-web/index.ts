@@ -53,3 +53,11 @@ type AbstractBridgeFunctions = {
 export type AppBridge = BridgeStore<AbstractBridgeFunctions>;
 
 export const bridge = linkBridge<AppBridge>();
+
+// bridge.addEventListener("login", (data) => {
+//   const typedData = data as {access_token:string ; refresh_token:string ; isNewUser:string}
+//   console.log("hello!!", data)
+//   console.log("hello", typedData.access_token);
+//   console.log("hello", typedData.refresh_token);
+//   console.log("hello", typedData.isNewUser);
+// });

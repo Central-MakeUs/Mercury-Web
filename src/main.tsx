@@ -10,6 +10,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import BottomNavigationLayout from "./app/BottomNavigationLayout.tsx";
+import { AppSocialLoginProcessor } from "./entities/user/components/AppSocialLoginProcessor.tsx";
 import { NotSigned } from "./entities/user/components/NotSigned.tsx";
 import BookRecordDetailPage from "./pages/BookRecordDetailPage.tsx";
 import BookRecordMemoAddPage from "./pages/BookRecordMemoAddPage.tsx";
@@ -36,6 +37,7 @@ createRoot(document.getElementById("root")!).render(
         <MercuryPostHogProvider>
           <BrowserRouter>
             <PostHogPageView />
+            <AppSocialLoginProcessor />
             <OverlayProvider>
               <Routes>
                 <Route element={<BottomNavigationLayout />}>
