@@ -17,10 +17,10 @@ jobs:
 
       - run: npm install
 
-      - name: Create .env file
+      - name: Inject environment
         run: |
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> $GITHUB_ENV
-          echo "VITE_PUBLIC_DEEP_LINK_SCHEME=${{ secrets.VITE_PUBLIC_DEEP_LINK_SCHEME }}" >> $GITHUB_ENV
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+          echo "VITE_PUBLIC_DEEP_LINK_SCHEME=${{ secrets.VITE_PUBLIC_DEEP_LINK_SCHEME }}" >> .env
 
       - name: Run Type Check
         run: npm run test:type
