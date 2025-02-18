@@ -21,9 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Inject environment
+      - name: Create .env file
         run: |
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> $GITHUB_ENV
+          echo "VITE_PUBLIC_DEEP_LINK_SCHEME=${{ secrets.VITE_PUBLIC_DEEP_LINK_SCHEME }}" >> $GITHUB_ENV
 
       - name: Run Check
         run: npm run ci:check
