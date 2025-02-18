@@ -80,8 +80,12 @@ const _SignUpSection = () => {
       </Flex>
       <Center className=" gap-x-[18px] items-center w-full justify-center">
         {/* <KakaoButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} /> */}
-        <AppleButton onClick={() => openWindowUrl(ONBOARDING_LINKS.APPLE_LOGIN)} />
-        <GoogleButton onClick={() => openExternalUrl(ONBOARDING_LINKS.GOOGLE_LOGIN)} />
+        <AppleButton
+          onClick={() => openWindowUrl(ONBOARDING_LINKS.APPLE_LOGIN, { target: "_self" })}
+        />
+        <GoogleButton
+          onClick={() => openExternalUrl(ONBOARDING_LINKS.GOOGLE_LOGIN, { target: "_self" })}
+        />
       </Center>
       <Flex>
         <Link

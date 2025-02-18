@@ -1,43 +1,56 @@
 import { isApp } from "@repo/bridge-web/isApp";
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
-import { toast } from "@repo/design-system/Toast";
 import { env } from "@repo/env";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Stack } from "@repo/ui/Stack";
-import { delay } from "@xionwcfm/utils";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
+import * as z from "zod";
 import { authStore } from "~/entities/user/model/auth.store";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 
+const queryParamSchema = z.object({
+  access_token: z.string(),
+  refresh_token: z.string(),
+  isNewUser: z.string(),
+  oauthType: z.string(),
+});
+
 export default function LoginSuccessPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     (async () => {
-      await delay(2000);
-      toast.main3(`${env.VITE_PUBLIC_DEEP_LINK_SCHEME}`);
-      await delay(2000);
-      const params = new URLSearchParams(window.location.search);
-      const accessToken = params.get("access_token");
-      const refreshToken = params.get("refresh_token");
-      const isNewUser = params.get("isNewUser");
-      const oauthType = params.get("oauthType");
-
       const SCHEMA_LINK = env.VITE_PUBLIC_DEEP_LINK_SCHEME;
 
-      if (!accessToken || !refreshToken || !isNewUser || !oauthType) {
+      const queryParams = queryParamSchema.safeParse({
+        access_token: searchParams.get("access_token"),
+        refresh_token: searchParams.get("refresh_token"),
+        isNewUser: searchParams.get("isNewUser"),
+        oauthType: searchParams.get("oauthType"),
+      });
+
+      if (!queryParams.success) {
         return () => {};
       }
 
-      authStore.setAccessToken(accessToken);
-      authStore.setRefreshToken(refreshToken);
+      const { access_token, refresh_token, isNewUser, oauthType } = queryParams.data;
+      const mercuryDeepLink = `${SCHEMA_LINK}?access_token=${access_token}&refresh_token=${refresh_token}&isNewUser=${isNewUser}&oauthType=${oauthType}`;
 
       const isGoogle = oauthType === "GOOGLE";
       const isInApp = isApp();
 
-      const newUsernavigateHandler = () => {
+      if (isGoogle && !isInApp) {
+        window.location.href = mercuryDeepLink;
+        return () => {};
+      }
+
+      const navigateHomeOrTermsByIsNewUser = () => {
+        authStore.setAccessToken(`Bearer ${access_token}`);
+        authStore.setRefreshToken(refresh_token);
         if (isNewUser) {
           navigate("/login/agree", { replace: true });
         } else {
@@ -45,19 +58,9 @@ export default function LoginSuccessPage() {
         }
       };
 
-      if (!isGoogle) {
-        newUsernavigateHandler();
-      }
-
-      if (!isInApp) {
-        window.location.href = `${SCHEMA_LINK}?access_token=${accessToken}&refresh_token=${refreshToken}&isNewUser=${isNewUser}&oauthType=${oauthType}`;
-      }
-
-      if (isInApp) {
-        newUsernavigateHandler();
-      }
+      navigateHomeOrTermsByIsNewUser();
     })();
-  }, [navigate]);
+  }, []);
 
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
