@@ -1,3 +1,3 @@
-export const openWindowUrl = (url: string, target?: "_blank") => {
-  return window.open(url, target);
+export const openWindowUrl = (url: string, options?: { target?: "_blank" | "_self" }) => {
+  return window.open(url, options?.target);
 };
