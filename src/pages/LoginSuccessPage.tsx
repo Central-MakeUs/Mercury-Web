@@ -1,8 +1,11 @@
 import { isApp } from "@repo/bridge-web/isApp";
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
+import { toast } from "@repo/design-system/Toast";
+import { env } from "@repo/env";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Stack } from "@repo/ui/Stack";
+import { delay } from "@xionwcfm/utils";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { authStore } from "~/entities/user/model/auth.store";
@@ -12,42 +15,48 @@ export default function LoginSuccessPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const accessToken = params.get("access_token");
-    const refreshToken = params.get("refresh_token");
-    const isNewUser = params.get("isNewUser");
-    const oauthType = params.get("oauthType");
-    const SCHEMA_LINK = "exp://192.168.0.20:8081";
+    (async () => {
+      await delay(2000);
+      toast.main3(`${env.VITE_PUBLIC_DEEP_LINK_SCHEME}`);
+      await delay(2000);
+      const params = new URLSearchParams(window.location.search);
+      const accessToken = params.get("access_token");
+      const refreshToken = params.get("refresh_token");
+      const isNewUser = params.get("isNewUser");
+      const oauthType = params.get("oauthType");
 
-    if (!accessToken || !refreshToken || !isNewUser || !oauthType) {
-      return () => {};
-    }
+      const SCHEMA_LINK = env.VITE_PUBLIC_DEEP_LINK_SCHEME;
 
-    authStore.setAccessToken(accessToken);
-    // refresh Token 관리 작업 병합되면 추가하기
-
-    const isGoogle = oauthType === "GOOGLE";
-    const isInApp = isApp();
-
-    const newUsernavigateHandler = () => {
-      if (isNewUser) {
-        navigate("/login/agree", { replace: true });
-      } else {
-        navigate("/book-record", { replace: true });
+      if (!accessToken || !refreshToken || !isNewUser || !oauthType) {
+        return () => {};
       }
-    };
 
-    if (!isGoogle) {
-      newUsernavigateHandler();
-    }
+      authStore.setAccessToken(accessToken);
+      authStore.setRefreshToken(refreshToken);
 
-    if (!isInApp) {
-      window.location.href = `${SCHEMA_LINK}?access_token=${accessToken}&refresh_token=${refreshToken}&isNewUser=${isNewUser}&oauthType=${oauthType}`;
-    }
+      const isGoogle = oauthType === "GOOGLE";
+      const isInApp = isApp();
 
-    if (isInApp) {
-      newUsernavigateHandler();
-    }
+      const newUsernavigateHandler = () => {
+        if (isNewUser) {
+          navigate("/login/agree", { replace: true });
+        } else {
+          navigate("/book-record", { replace: true });
+        }
+      };
+
+      if (!isGoogle) {
+        newUsernavigateHandler();
+      }
+
+      if (!isInApp) {
+        window.location.href = `${SCHEMA_LINK}?access_token=${accessToken}&refresh_token=${refreshToken}&isNewUser=${isNewUser}&oauthType=${oauthType}`;
+      }
+
+      if (isInApp) {
+        newUsernavigateHandler();
+      }
+    })();
   }, [navigate]);
 
   return (
