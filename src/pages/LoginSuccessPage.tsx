@@ -38,7 +38,7 @@ export default function LoginSuccessPage() {
       }
 
       const { access_token, refresh_token, isNewUser, oauthType } = queryParams.data;
-      const mercuryDeepLink = `${SCHEMA_LINK}?access_token=${access_token}&refresh_token=${refresh_token}&isNewUser=${isNewUser}&oauthType=${oauthType}`;
+      const mercuryDeepLink = `${SCHEMA_LINK}://?access_token=${access_token}&refresh_token=${refresh_token}&isNewUser=${isNewUser}&oauthType=${oauthType}`;
 
       const isGoogle = oauthType === "GOOGLE";
       const isInApp = isApp();
