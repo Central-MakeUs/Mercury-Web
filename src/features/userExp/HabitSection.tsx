@@ -16,6 +16,7 @@ import { useMemo } from "react";
 import { HabitCalendar } from "~/entities/user/components/HabitCalendar";
 import type { User } from "~/entities/user/model/user.model";
 import { HABIT_ASSETS } from "~/shared/images/habit/habitImages";
+
 const HabitBar = (props: { normalText: string; boldText: string }) => {
   const { normalText, boldText } = props;
   return (
@@ -115,8 +116,8 @@ export const HabitSection = wrap
   .Suspense({
     fallback: <Fallback />,
   })
-  .on((_props: Pick<User, "nickname" | "exp">) => {
-    const nickname = `테스터`;
+  .on((props: Pick<User, "nickname" | "exp">) => {
+    const { nickname, exp } = props;
     const normalText = `${nickname}님은 현재`;
     const successCount = 5;
     const boldText =

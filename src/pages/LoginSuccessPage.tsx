@@ -1,54 +1,67 @@
 import { isApp } from "@repo/bridge-web/isApp";
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
+import { env } from "@repo/env";
+
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Stack } from "@repo/ui/Stack";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
+import * as z from "zod";
 import { authStore } from "~/entities/user/model/auth.store";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 
+const queryParamSchema = z.object({
+  access_token: z.string(),
+  refresh_token: z.string(),
+  isNewUser: z.string(),
+  oauthType: z.string(),
+});
+
 export default function LoginSuccessPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const accessToken = params.get("access_token");
-    const refreshToken = params.get("refresh_token");
-    const isNewUser = params.get("isNewUser");
-    const oauthType = params.get("oauthType");
-    const SCHEMA_LINK = "exp://192.168.0.20:8081";
+    (async () => {
+      const SCHEMA_LINK = env.VITE_PUBLIC_DEEP_LINK_SCHEME;
 
-    if (!accessToken || !refreshToken || !isNewUser || !oauthType) {
-      return () => {};
-    }
+      const queryParams = queryParamSchema.safeParse({
+        access_token: searchParams.get("access_token"),
+        refresh_token: searchParams.get("refresh_token"),
+        isNewUser: searchParams.get("isNewUser"),
+        oauthType: searchParams.get("oauthType"),
+      });
 
-    authStore.setAccessToken(accessToken);
-    // refresh Token 관리 작업 병합되면 추가하기
-
-    const isGoogle = oauthType === "GOOGLE";
-    const isInApp = isApp();
-
-    const newUsernavigateHandler = () => {
-      if (isNewUser === "true") {
-        navigate("/login/agree", { replace: true });
-      } else {
-        navigate("/book-record", { replace: true });
+      if (!queryParams.success) {
+        return () => {};
       }
-    };
 
-    if (!isGoogle) {
-      newUsernavigateHandler();
-    }
+      const { access_token, refresh_token, isNewUser, oauthType } = queryParams.data;
+      const mercuryDeepLink = `${SCHEMA_LINK}://?access_token=${access_token}&refresh_token=${refresh_token}&isNewUser=${isNewUser}&oauthType=${oauthType}`;
 
-    if (!isInApp) {
-      window.location.href = `${SCHEMA_LINK}?access_token=${accessToken}&refresh_token=${refreshToken}&isNewUser=${isNewUser}&oauthType=${oauthType}`;
-    }
+      const isGoogle = oauthType === "GOOGLE";
+      const isInApp = isApp();
 
-    if (isInApp) {
-      newUsernavigateHandler();
-    }
-  }, [navigate]);
+      if (isGoogle && !isInApp) {
+        window.location.href = mercuryDeepLink;
+        return () => {};
+      }
+
+      const navigateHomeOrTermsByIsNewUser = () => {
+        authStore.setAccessToken(`Bearer ${access_token}`);
+        authStore.setRefreshToken(refresh_token);
+        if (isNewUser === "true") {
+          navigate("/login/agree", { replace: true });
+        } else {
+          navigate("/book-record", { replace: true });
+        }
+      };
+
+      navigateHomeOrTermsByIsNewUser();
+    })();
+  }, []);
 
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
