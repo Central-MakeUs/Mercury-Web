@@ -2,6 +2,7 @@ import { isApp } from "@repo/bridge-web/isApp";
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { env } from "@repo/env";
+
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Stack } from "@repo/ui/Stack";
 import { useEffect } from "react";
@@ -51,7 +52,7 @@ export default function LoginSuccessPage() {
       const navigateHomeOrTermsByIsNewUser = () => {
         authStore.setAccessToken(`Bearer ${access_token}`);
         authStore.setRefreshToken(refresh_token);
-        if (isNewUser) {
+        if (isNewUser === "true") {
           navigate("/login/agree", { replace: true });
         } else {
           navigate("/book-record", { replace: true });

@@ -7,10 +7,15 @@ export const AppSocialLoginProcessor = () => {
 
   useEffect(() => {
     const unsubscribe = bridge.addEventListener("login", (data) => {
-      const typedData = data as { access_token: string; refresh_token: string; isNewUser: string };
+      const typedData = data as {
+        access_token: string;
+        refresh_token: string;
+        isNewUser: string;
+        oauthType: string;
+      };
 
       navigate(
-        `/login/success?access_token=${typedData.access_token}&refresh_token=${typedData.refresh_token}&isNewUser=${typedData.isNewUser}`,
+        `/login/success?access_token=${typedData.access_token}&refresh_token=${typedData.refresh_token}&isNewUser=${typedData.isNewUser}&oauthType=${typedData.oauthType}`,
       );
     });
 
