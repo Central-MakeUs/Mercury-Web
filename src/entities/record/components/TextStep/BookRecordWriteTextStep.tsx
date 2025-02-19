@@ -9,6 +9,7 @@ import { Box } from "@repo/ui/Box";
 import { Flex } from "@repo/ui/Flex";
 import { JustifyBetween } from "@repo/ui/JustifyBetween";
 import { Stack } from "@repo/ui/Stack";
+import { useEffect } from "react";
 import { useForm, useFormContext, useWatch } from "react-hook-form";
 import type { Book } from "~/entities/record/model/book.model";
 
@@ -27,6 +28,12 @@ export default function BookRecordWriteTextStep(
 ) {
   const { book, content, onNext, isLoading } = props;
   const form = useForm<FormState>({ defaultValues: { content: content } });
+
+  const { setFocus } = form;
+
+  useEffect(() => {
+    setFocus("content");
+  }, [setFocus]);
 
   return (
     <FormProvider {...form}>
