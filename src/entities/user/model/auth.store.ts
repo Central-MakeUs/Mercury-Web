@@ -4,6 +4,7 @@ import { useCallback } from "react";
 
 export const AUTH_ACCESS_TOKEN_STORAGE_KEY = "@mercury_authentication";
 export const AUTH_REFRESH_TOKEN_STORAGE_KEY = "@mercury_refresh_token";
+
 export const authStore = {
   setRefreshToken: (refreshToken: string | null) => {
     LocalStorageService.setItem(AUTH_REFRESH_TOKEN_STORAGE_KEY, refreshToken);

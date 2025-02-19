@@ -44,11 +44,6 @@ export default function LoginSuccessPage() {
       const isGoogle = oauthType === "GOOGLE";
       const isInApp = isApp();
 
-      if (isGoogle && !isInApp) {
-        window.location.href = mercuryDeepLink;
-        return () => {};
-      }
-
       const navigateHomeOrTermsByIsNewUser = () => {
         authStore.setAccessToken(`Bearer ${access_token}`);
         authStore.setRefreshToken(refresh_token);
@@ -58,6 +53,12 @@ export default function LoginSuccessPage() {
           navigate("/book-record", { replace: true });
         }
       };
+
+      if (isGoogle && !isInApp) {
+        window.location.href = mercuryDeepLink;
+        navigateHomeOrTermsByIsNewUser();
+        return () => {};
+      }
 
       navigateHomeOrTermsByIsNewUser();
     })();
