@@ -15,7 +15,7 @@ export const SendActionButton = forwardRef(function SendActionButton(
     <button
       ref={ref}
       className={cn(
-        "ring-[2px] flex justify-center items-center w-[38px] h-[38px] rounded-full",
+        "flex justify-center items-center w-[38px] h-[38px] rounded-full",
         disabled ? "bg-gray-200" : "bg-green",
         loading && "animate-pulse",
         className,
