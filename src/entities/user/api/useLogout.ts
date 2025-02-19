@@ -9,12 +9,11 @@ export const useLogout = () => {
   const logout = useCallback(async () => {
     try {
       await setLoading(http.post("/signoff/logout"));
-    } catch (error) {
-      console.error("로그아웃 실패:", error);
-    } finally {
-      auth.setAccessToken(null);
-      auth.setRefreshToken(null);
+    } catch (e) {
+      console.error(e);
     }
+    auth.setAccessToken(null);
+    auth.setRefreshToken(null);
   }, [setLoading, auth]);
   return { logout, isLoading };
 };

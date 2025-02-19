@@ -59,7 +59,11 @@ const LogoutDialog = (props: {
                   variant={"warning"}
                   loading={isLoading}
                   onClick={async () => {
-                    await logout();
+                    try {
+                      await logout();
+                    } catch (e) {
+                      console.error(e);
+                    }
                     onOpenChange?.(false);
                     navigate("/");
                   }}
