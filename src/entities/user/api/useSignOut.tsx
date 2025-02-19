@@ -12,13 +12,14 @@ export const useSignOut = () => {
       try {
         await http.post("/signoff/withdraw");
         auth.setAccessToken(null);
+        auth.setRefreshToken(null);
         return { success: true };
       } catch (e) {
         return { success: false, error: e };
       }
     };
     await setIsLoading(transaction());
-  }, [auth.setAccessToken, setIsLoading]);
+  }, [auth.setAccessToken, auth.setRefreshToken, setIsLoading]);
 
   return { signOut, isLoading };
 };
