@@ -5,6 +5,7 @@ import { Text } from "@repo/design-system/Text";
 import { JustifyBetween } from "@repo/ui/JustifyBetween";
 import { Stack } from "@repo/ui/Stack";
 import { overlay } from "overlay-kit";
+import { useNavigate } from "react-router";
 import { useLogout } from "../api/useLogout";
 
 export const logoutDialogOverlay = {
@@ -29,6 +30,7 @@ const LogoutDialog = (props: {
 }) => {
   const { isOpen, onOpenChange } = props;
   const { logout, isLoading } = useLogout();
+  const navigate = useNavigate();
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
@@ -59,6 +61,7 @@ const LogoutDialog = (props: {
                   onClick={async () => {
                     await logout();
                     onOpenChange?.(false);
+                    navigate("/");
                   }}
                 >
                   로그아웃
