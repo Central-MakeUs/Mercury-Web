@@ -14,6 +14,6 @@ export const useLogout = () => {
     }
     auth.setAccessToken(null);
     auth.setRefreshToken(null);
-  }, [setLoading, auth]);
+  }, [setLoading, auth.setAccessToken, auth.setRefreshToken]);
   return { logout, isLoading };
 };
