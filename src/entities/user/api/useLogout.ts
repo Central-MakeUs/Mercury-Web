@@ -9,6 +9,7 @@ export const useLogout = () => {
   const logout = useCallback(async () => {
     await setLoading(http.post("/signoff/logout"));
     auth.setAccessToken(null);
+    auth.setRefreshToken(null);
   }, [setLoading, auth]);
   return { logout, isLoading };
 };
