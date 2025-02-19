@@ -22,6 +22,7 @@ export const LoginPage = () => {
     toast.success("회원가입 완료");
     navigate("/home");
   };
+
   return (
     <SafeArea className=" flex flex-col w-full" edges={["top", "bottom", "right", "left"]}>
       <Text className=" px-4 mt-4">Login Page</Text>

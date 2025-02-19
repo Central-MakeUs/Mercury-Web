@@ -7,7 +7,11 @@ export const useLogout = () => {
   const [isLoading, setLoading] = useLoading();
   const auth = authStore.useAuth();
   const logout = useCallback(async () => {
-    await setLoading(http.post("/signoff/logout"));
+    try {
+      await setLoading(http.post("/signoff/logout"));
+    } catch (e) {
+      console.error(e);
+    }
     auth.setAccessToken(null);
     auth.setRefreshToken(null);
   }, [setLoading, auth]);
