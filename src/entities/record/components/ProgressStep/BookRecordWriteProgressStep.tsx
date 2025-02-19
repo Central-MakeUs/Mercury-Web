@@ -85,7 +85,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
                 alt="read gauge 0 image"
                 objectfit={"contain"}
               />
-              <Text className="text-dark-violet text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <Text className="text-dark-violet/70 text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 {props.value}%
               </Text>
             </ImageFadeAnimator.FadeIn>
