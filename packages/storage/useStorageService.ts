@@ -1,5 +1,5 @@
 import type { StorageService } from "@xionwcfm/storage";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export interface StorageServiceOptions<T> {
   storage: StorageService;
@@ -20,5 +20,13 @@ export const useStorageService = <T>(
     setValue(value as T);
   }, [key, storage]);
 
-  return [value, setValue] as const;
+  const setStorage = useCallback(
+    (newValue: T) => {
+      storage.setItem(key, newValue);
+      setValue(newValue);
+    },
+    [key, storage],
+  );
+
+  return [value, setStorage] as const;
 };
