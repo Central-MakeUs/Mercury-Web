@@ -1,3 +1,4 @@
+import { SafeArea } from "@repo/bridge-web/SafeArea";
 import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
@@ -53,14 +54,16 @@ export default wrap
     };
 
     return (
-      <Stack className=" w-full h-full min-h-screen">
-        <TopNavigation.Root left={<TopNavigation.Back onClick={handleBack} />}>
-          <TopNavigation.Title>메모 작성</TopNavigation.Title>
-        </TopNavigation.Root>
-        <Spacing className="h-[10px]" />
-        <Stack className=" h-screen">
-          <TextAndProgressFunnel book={book} gauge={gauge} onSuccess={handleSuccess} />
+      <SafeArea className=" w-full h-full" edges={["top", "bottom", "right", "left"]}>
+        <Stack className=" w-full h-full min-h-screen">
+          <TopNavigation.Root left={<TopNavigation.Back onClick={handleBack} />}>
+            <TopNavigation.Title>메모 작성</TopNavigation.Title>
+          </TopNavigation.Root>
+          <Spacing className="h-[10px]" />
+          <Stack className=" h-screen">
+            <TextAndProgressFunnel book={book} gauge={gauge} onSuccess={handleSuccess} />
+          </Stack>
         </Stack>
-      </Stack>
+      </SafeArea>
     );
   });
