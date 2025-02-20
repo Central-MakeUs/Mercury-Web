@@ -17,7 +17,7 @@ export default function TimerPage() {
     <>
       <SafeArea
         edges={["top", "left", "bottom", "right"]}
-        className="flex flex-col justify-between w-full "
+        className="flex flex-col justify-between w-full overflow-hidden"
       >
         <Stack className=" pt-[24px]">
           <Text variant={"title/24_sb"} className=" px-[20px] text-gray-800 mb-[26px]">

@@ -8,7 +8,7 @@ import { Box } from "@repo/ui/Box";
 export const GoBookRecordWriteButton = () => {
   return (
     <Box className=" fixed bottom-0 left-[50%] translate-x-[-50%]">
-      <MaxWidthBox className="flex justify-end mb-[94px] mr-[18px]">
+      <MaxWidthBox className="flex justify-end mb-[94px] pr-[18px]">
         <SafeArea edges={["bottom"]}>
           <Link to={"/book-record/write"}>
             <FloatingActionButton />
