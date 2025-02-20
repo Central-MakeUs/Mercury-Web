@@ -1,6 +1,5 @@
 import type { StorageService } from "@xionwcfm/storage";
-import { useSyncExternalStore } from "react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export interface StorageServiceOptions<T> {
   storage: StorageService;
@@ -14,25 +13,20 @@ export const useStorageService = <T>(
   options: StorageServiceOptions<T> | StorageServiceOptions<T>,
 ) => {
   const storage = options.storage;
+  const [value, setValue] = useState<T>(options.defaultValue);
+
+  useEffect(() => {
+    const value = storage.getItem(key);
+    setValue(value as T);
+  }, [key, storage]);
+
   const setStorage = useCallback(
     (newValue: T) => {
-      window.dispatchEvent(
-        new StorageEvent("storage", { key: key, newValue: JSON.stringify(newValue) }),
-      );
+      storage.setItem(key, newValue);
+      setValue(newValue);
     },
-    [key],
+    [key, storage],
   );
 
-  const getSnapshot = () => storage.getItem(key) ?? options.defaultValue;
-
-  const subscribe = (listener: () => void) => {
-    window.addEventListener("storage", listener);
-    return () => window.removeEventListener("storage", listener);
-  };
-
-  const getServerSnapshot = () => options.defaultValue;
-
-  const store = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot) as T;
-
-  return [store, setStorage] as const;
+  return [value, setStorage] as const;
 };

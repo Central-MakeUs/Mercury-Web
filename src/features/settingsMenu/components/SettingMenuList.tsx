@@ -6,28 +6,34 @@ import { List } from "@repo/ui/List";
 import { useNavigate } from "react-router";
 import { logoutDialogOverlay } from "~/entities/user/components/LogoutDialog";
 import { NotSigned } from "~/entities/user/components/NotSigned";
+import { useSignOutDialog } from "~/entities/user/components/SignOutDialog";
 import { Signed } from "~/entities/user/components/Signed";
 import { SETTINGS_LINKS } from "~/shared/constants/externalLink";
-import { openExternalUrl } from "~/shared/utils/openExternalUrl";
+import { openInAppUrl } from "~/shared/utils/openInAppUrl";
 
 export const SettingMenuList = () => {
   const [selected, setSelected] = useState(false);
   const navigate = useNavigate();
+  const signoutDialog = useSignOutDialog();
+
+  const handleSignOutClick = () => {
+    signoutDialog.open();
+  };
 
   const handleLogoutClick = () => {
     logoutDialogOverlay.open();
   };
 
   const handlePolicyClick = () => {
-    openExternalUrl(SETTINGS_LINKS.TERMSANDPRIVACY);
+    openInAppUrl(SETTINGS_LINKS.TERMSANDPRIVACY);
   };
 
   const handleNoticeClick = () => {
-    openExternalUrl(SETTINGS_LINKS.NOTICE);
+    openInAppUrl(SETTINGS_LINKS.NOTICE);
   };
 
   const handleFaqClick = () => {
-    openExternalUrl(SETTINGS_LINKS.FAQ);
+    openInAppUrl(SETTINGS_LINKS.FAQ);
   };
 
   const handleLoginClick = () => {
@@ -63,7 +69,9 @@ export const SettingMenuList = () => {
         <SettingMenuRow className=" text-gray-400" onClick={handleLogoutClick}>
           로그아웃
         </SettingMenuRow>
-        <SettingMenuRow className=" text-gray-400">탈퇴하기</SettingMenuRow>
+        <SettingMenuRow className=" text-gray-400" onClick={handleSignOutClick}>
+          탈퇴하기
+        </SettingMenuRow>
       </Signed>
     </List>
   );
