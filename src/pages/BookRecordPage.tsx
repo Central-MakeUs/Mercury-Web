@@ -31,7 +31,7 @@ export default function BookRecordPage(
           </Flex>
         </Stack>
 
-        <Stack className=" w-full  px-[16px] py-[14px] ">
+        <Stack className=" w-full  px-[16px] py-[14px] pb-[100px]">
           <BookRecordList />
         </Stack>
 

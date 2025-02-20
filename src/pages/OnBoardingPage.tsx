@@ -88,9 +88,9 @@ const _SignUpSection = () => {
         />
       </Center>
       <Flex>
-        <a className=" p-16 bg-pastel-red" href={`mercury://`}>
+        {/* <a className=" p-16 bg-pastel-red" href={`mercury://`}>
           딥링크
-        </a>
+        </a> */}
 
         <Link
           to={"/book-record"}
