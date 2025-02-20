@@ -17,7 +17,7 @@ export default function BookRecordPage(
   return (
     <BookRecordProvider {...props}>
       <SafeArea edges={["top", "bottom", "left", "right"]} className="  w-full min-h-screen ">
-        <Stack className=" pt-[24px]">
+        <Stack className=" pt-[24px] fixed w-full bg-white z-10">
           <JustifyBetween className=" items-end w-full px-[16px]">
             <Text variant={"title/24_sb"} className=" text-gray-800">
               독서기록
@@ -26,12 +26,12 @@ export default function BookRecordPage(
           </JustifyBetween>
           <Spacing className=" h-[26px]" />
 
-          <Flex className=" px-[16px]">
+          <Flex className=" px-[16px] z-2">
             <BookRecordSearchBar />
           </Flex>
         </Stack>
 
-        <Stack className=" w-full  px-[16px] py-[14px] pb-[100px]">
+        <Stack className=" w-full  px-[16px] py-[14px] pb-[100px] pt-[150px]">
           <BookRecordList />
         </Stack>
 
