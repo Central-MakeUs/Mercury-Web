@@ -33,7 +33,7 @@ const Header = () => {
 
   return (
     <motion.div
-      className=" pt-[24px] flex justify-between pb-[30px] bg-white w-full px-[16px]"
+      className=" pt-[24px] flex justify-between pb-[30px] bg-white w-full px-[16px] overflow-hidden"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
