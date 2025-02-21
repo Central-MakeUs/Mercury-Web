@@ -15,7 +15,7 @@ import { authStore } from "~/entities/user/model/auth.store";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
 import { GoogleButton } from "~/shared/ui/GoogleButton";
-import { openExternalUrl } from "~/shared/utils/openExternalUrl";
+import { openInAppUrl } from "~/shared/utils/openInAppUrl";
 import { openWindowUrl } from "~/shared/utils/openWindowUrl";
 
 export default function OnBoardingPage() {
@@ -84,7 +84,7 @@ const _SignUpSection = () => {
           onClick={() => openWindowUrl(ONBOARDING_LINKS.APPLE_LOGIN, { target: "_self" })}
         />
         <GoogleButton
-          onClick={() => openExternalUrl(ONBOARDING_LINKS.GOOGLE_LOGIN, { target: "_self" })}
+          onClick={() => openInAppUrl(ONBOARDING_LINKS.GOOGLE_LOGIN, { target: "_self" })}
         />
       </Center>
       <Flex>

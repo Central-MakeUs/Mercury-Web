@@ -6,6 +6,7 @@ import { JustifyBetween } from "@repo/ui/JustifyBetween";
 import { Stack } from "@repo/ui/Stack";
 import { overlay } from "overlay-kit";
 import { useNavigate } from "react-router";
+import { useLogout } from "../api/useLogout";
 import { useSignOut } from "../api/useSignOut";
 
 export const useSignOutDialog = () => {
@@ -26,6 +27,7 @@ export const useSignOutDialog = () => {
 const SignOutDialog = (props: { isOpen?: boolean; onClose?: () => void }) => {
   const { isOpen, onClose } = props;
   const { signOut, isLoading } = useSignOut();
+  const { logout } = useLogout();
   const navigate = useNavigate();
 
   return (
@@ -57,6 +59,7 @@ const SignOutDialog = (props: { isOpen?: boolean; onClose?: () => void }) => {
                   onClick={async () => {
                     try {
                       await signOut();
+                      await logout();
                     } catch (e) {
                       console.error(e);
                     }
