@@ -1,4 +1,5 @@
 import { List } from "@repo/ui/List";
+import { Stack } from "@repo/ui/Stack";
 import { Delay, wrap } from "@suspensive/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -26,22 +27,31 @@ export const BookRecordList = wrap
     const recordsResponse = useSuspenseQuery(getRecordsQueryOptions({ sortType }));
     const navigate = useNavigate();
     const searchedRecords = searchBookRecords(recordsResponse.data.records, search);
-    // const sortedRecords = sortBookRecords(searchedRecords, sortType);
     const records = searchedRecords;
     const isSearchResultEmpty = search.length > 0 && searchedRecords.length === 0;
-
-    const fallback = isSearchResultEmpty ? (
-      <SearchResultEmptyFallback />
-    ) : (
-      <FirstUserRecordFallback />
-    );
 
     const handleClick = (recordId: string) => {
       navigate(`/book-record/${recordId}`);
     };
 
+    if (isSearchResultEmpty) {
+      return (
+        <Stack className=" h-full">
+          <SearchResultEmptyFallback />
+        </Stack>
+      );
+    }
+
+    if (records.length === 0) {
+      return (
+        <Stack className=" h-full">
+          <FirstUserRecordFallback />
+        </Stack>
+      );
+    }
+
     return (
-      <List className=" gap-y-[24px]" fallback={fallback}>
+      <List className=" gap-y-[24px]">
         {records.map((record) => (
           <RecordedBookItem
             {...createRecordedBookItemProps(record)}
