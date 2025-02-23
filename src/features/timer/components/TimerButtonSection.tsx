@@ -30,7 +30,14 @@ export const TimerButtonSection = (props: ComponentProps<"div">) => {
   };
 
   const handleReset = () => {
-    actions.reset();
+    timePickerBottomSheet.openAsync({
+      ...timePickerBottomSheet.getMinuteAndSecondProps(),
+      onConfirm: (result) => {
+        const { left: minute, right: second } = result;
+        const totalSecond = minute * 60 + second;
+        actions.start(totalSecond);
+      },
+    });
   };
 
   const handleRestart = () => {
