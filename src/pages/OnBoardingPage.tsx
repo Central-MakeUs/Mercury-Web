@@ -14,8 +14,7 @@ import { Link, useNavigate } from "react-router";
 import { authStore } from "~/entities/user/model/auth.store";
 import { LOGO_ASSETS } from "~/shared/images/logo/logoImages";
 import { AppleButton } from "~/shared/ui/AppleButton";
-import { GoogleButton } from "~/shared/ui/GoogleButton";
-import { openInAppUrl } from "~/shared/utils/openInAppUrl";
+import { KakaoButton } from "~/shared/ui/KakaoButton";
 import { openWindowUrl } from "~/shared/utils/openWindowUrl";
 
 export default function OnBoardingPage() {
@@ -31,7 +30,7 @@ export default function OnBoardingPage() {
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
       <MercuryImageSection />
-      <_SignUpSection />
+      <SignUpSection />
     </CenterStack>
   );
 }
@@ -70,7 +69,7 @@ const MercuryImageSection = () => {
   );
 };
 
-const _SignUpSection = () => {
+const SignUpSection = () => {
   return (
     <Stack className="gap-y-[14px] w-full items-center">
       <Flex>
@@ -79,12 +78,13 @@ const _SignUpSection = () => {
         </Text>
       </Flex>
       <Center className=" gap-x-[18px] items-center w-full justify-center">
-        {/* <KakaoButton onClick={() => toast.main("준비중인 기능이에요", { duration: 1500 })} /> */}
         <AppleButton
           onClick={() => openWindowUrl(ONBOARDING_LINKS.APPLE_LOGIN, { target: "_self" })}
         />
-        <GoogleButton
-          onClick={() => openInAppUrl(ONBOARDING_LINKS.GOOGLE_LOGIN, { target: "_self" })}
+        <KakaoButton
+          onClick={() => {
+            openWindowUrl(ONBOARDING_LINKS.KAKAO_LOGIN, { target: "_self" });
+          }}
         />
       </Center>
       <Flex>
@@ -106,4 +106,5 @@ const _SignUpSection = () => {
 const ONBOARDING_LINKS = {
   GOOGLE_LOGIN: `https://api.mercuryplanet.co.kr/oauth2/authorization/google`,
   APPLE_LOGIN: `https://api.mercuryplanet.co.kr/oauth2/authorization/apple`,
+  KAKAO_LOGIN: `https://api.mercuryplanet.co.kr/oauth2/authorization/kakao`,
 };
