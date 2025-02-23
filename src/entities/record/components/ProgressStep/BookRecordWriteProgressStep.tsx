@@ -73,7 +73,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
     <Stack className=" min-h-[400px] w-full justify-center items-center">
       <ImageFadeAnimator
         value={props.status}
-        className=" px-[115px] relative"
+        className=" px-[115px] relative "
         caseBy={{
           "0": (
             <ImageFadeAnimator.FadeIn
@@ -81,7 +81,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
               <Image
-                src={GAUGE_ASSETS.GAUGE_0_WEBP}
+                src={GAUGE_ASSETS.GAUGE0_WEBP}
                 alt="read gauge 0 image"
                 objectfit={"contain"}
               />
@@ -96,7 +96,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
               <Image
-                src={GAUGE_ASSETS.GAUGE_50_WEBP}
+                src={GAUGE_ASSETS.GAUGE50_WEBP}
                 alt="read gauge 50 image"
                 objectfit={"contain"}
               />
@@ -111,7 +111,7 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
               <Image
-                src={GAUGE_ASSETS.GAUGE_100_WEBP}
+                src={GAUGE_ASSETS.GAUGE100_WEBP}
                 alt="read gauge 100 image"
                 objectfit={"contain"}
               />
