@@ -51,15 +51,17 @@ export const BookRecordList = wrap
     }
 
     return (
-      <List className=" gap-y-[24px]">
-        {records.map((record) => (
-          <RecordedBookItem
-            {...createRecordedBookItemProps(record)}
-            onClick={() => handleClick(record.recordId)}
-            key={record.recordId}
-          />
-        ))}
-      </List>
+      <Stack className=" pt-[160px] px-[16px]">
+        <List className=" gap-y-[24px]">
+          {records.map((record) => (
+            <RecordedBookItem
+              {...createRecordedBookItemProps(record)}
+              onClick={() => handleClick(record.recordId)}
+              key={record.recordId}
+            />
+          ))}
+        </List>
+      </Stack>
     );
   });
 

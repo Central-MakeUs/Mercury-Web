@@ -6,7 +6,7 @@ export interface BookRecord {
   createdAt: string;
   updatedAt: string | null;
   book: BookWithId;
-  dedtailUpdatedAt: string | null;
+  detailUpdatedAt: string | null;
   latestMemoContent: string;
   updatedGauge: number;
 }
