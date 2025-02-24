@@ -72,16 +72,6 @@ const getStatus = (context: { targetDate: Date; today: Date; isDone?: boolean })
   return "fail" as const;
 };
 
-const _englishToKoreanDayMap: Record<string, string> = {
-  SUNDAY: "일",
-  MONDAY: "월",
-  TUESDAY: "화",
-  WEDNESDAY: "수",
-  THURSDAY: "목",
-  FRIDAY: "금",
-  SATURDAY: "토",
-};
-
 const getDayName = (date: Date) => {
   const dayEnum = {
     0: "일",
@@ -143,17 +133,25 @@ export const HabitSection = wrap
           </Text>
 
           <Flex className=" gap-x-[8px] justify-between">
-            {weekDates.map((date) => (
-              <BottomSheet.Trigger asChild={true} key={date.toISOString()}>
-                <HabitCalendar.Cell
-                  key={date.toISOString()}
-                  header={<HabitCalendar.Header>{getDayName(date)}</HabitCalendar.Header>}
-                  status={getStatus({ targetDate: date, today: new Date(), isDone: true })}
-                >
-                  {date.getDate()}
-                </HabitCalendar.Cell>
-              </BottomSheet.Trigger>
-            ))}
+            {weekDates.map((date) => {
+              const englishDay = date
+                .toLocaleDateString("en-US", { weekday: "long" })
+                .toUpperCase();
+              const streakData = weeklyStreak?.find((s) => s.day === englishDay);
+              const isDone = streakData ? streakData.isSuccess : false;
+
+              return (
+                <BottomSheet.Trigger asChild={true} key={date.toISOString()}>
+                  <HabitCalendar.Cell
+                    key={date.toISOString()}
+                    header={<HabitCalendar.Header>{getDayName(date)}</HabitCalendar.Header>}
+                    status={getStatus({ targetDate: date, today: new Date(), isDone })}
+                  >
+                    {date.getDate()}
+                  </HabitCalendar.Cell>
+                </BottomSheet.Trigger>
+              );
+            })}
           </Flex>
 
           <Spacing className=" h-[12px]" />
