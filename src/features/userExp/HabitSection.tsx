@@ -116,12 +116,11 @@ export const HabitSection = wrap
   .Suspense({
     fallback: <Fallback />,
   })
-  .on((props: Pick<User, "nickname" | "exp">) => {
-    const { nickname, exp } = props;
+  .on((props: Pick<User, "nickname" | "streakDays" | "weeklyStreak">) => {
+    const { nickname, streakDays, weeklyStreak } = props;
     const normalText = `${nickname}님은 현재`;
     const successCount = 5;
-    const boldText =
-      successCount > 0 ? `${successCount}일 연속 습관 쌓는 중!` : "습관 쌓을 준비 중";
+    const boldText = successCount > 0 ? `${streakDays}일 연속 습관 쌓는 중!` : "습관 쌓을 준비 중";
 
     const weekDates = useMemo(() => getWeekDates(new Date()), []);
 
@@ -134,17 +133,25 @@ export const HabitSection = wrap
           </Text>
 
           <Flex className=" gap-x-[8px] justify-between">
-            {weekDates.map((date) => (
-              <BottomSheet.Trigger asChild={true} key={date.toISOString()}>
-                <HabitCalendar.Cell
-                  key={date.toISOString()}
-                  header={<HabitCalendar.Header>{getDayName(date)}</HabitCalendar.Header>}
-                  status={getStatus({ targetDate: date, today: new Date(), isDone: true })}
-                >
-                  {date.getDate()}
-                </HabitCalendar.Cell>
-              </BottomSheet.Trigger>
-            ))}
+            {weekDates.map((date) => {
+              const englishDay = date
+                .toLocaleDateString("en-US", { weekday: "long" })
+                .toUpperCase();
+              const streakData = weeklyStreak?.find((s) => s.day === englishDay);
+              const isDone = streakData ? streakData.isSuccess : false;
+
+              return (
+                <BottomSheet.Trigger asChild={true} key={date.toISOString()}>
+                  <HabitCalendar.Cell
+                    key={date.toISOString()}
+                    header={<HabitCalendar.Header>{getDayName(date)}</HabitCalendar.Header>}
+                    status={getStatus({ targetDate: date, today: new Date(), isDone })}
+                  >
+                    {date.getDate()}
+                  </HabitCalendar.Cell>
+                </BottomSheet.Trigger>
+              );
+            })}
           </Flex>
 
           <Spacing className=" h-[12px]" />

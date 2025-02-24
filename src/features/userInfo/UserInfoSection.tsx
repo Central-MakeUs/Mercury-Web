@@ -62,8 +62,8 @@ export const MainSection = wrap
   .Suspense({
     fallback: <Fallback />,
   })
-  .on((props: Pick<User, "nickname" | "exp">) => {
-    const { nickname, exp } = props;
+  .on((props: Pick<User, "nickname" | "exp" | "joinDays">) => {
+    const { nickname, exp, joinDays } = props;
 
     const level = calculateUserLevel(exp);
     const goalExp = getGoalExp(level);
@@ -82,7 +82,7 @@ export const MainSection = wrap
               <Stack className="px-5 gap-[6px]">
                 <Caption>
                   <Text className="text-white" variant={"caption/12_m"}>
-                    머큐리와 함께한 지 000일
+                    머큐리와 함께한 지 {joinDays}일
                   </Text>
                 </Caption>
                 <Text variant={"title/25_b"} className="text-gray-100">

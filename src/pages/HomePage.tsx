@@ -10,18 +10,27 @@ import { Stack } from "@repo/ui/Stack";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
-import { useGetUserQueryOptions } from "~/entities/user/api/getUserQueryOptions";
+import { useGetUserActivityQueryOptions } from "~/entities/user/api/getUserActivity";
 import { HabitSection } from "~/features/userExp/HabitSection";
 import { MainSection } from "~/features/userInfo/UserInfoSection";
 
 export default function HomePage() {
-  const { data: user } = useSuspenseQuery(useGetUserQueryOptions());
+  //const { data: user } = useSuspenseQuery(useGetUserQueryOptions());
+  const { data: activities } = useSuspenseQuery(useGetUserActivityQueryOptions());
   return (
     <SafeArea edges={["top", "left", "bottom", "right"]} className=" w-full">
       <Stack className="  w-full">
         <Header />
-        <MainSection nickname={user.nickname} exp={user.exp} />
-        <HabitSection nickname={user.nickname} exp={user.exp} />
+        <MainSection
+          nickname={activities.nickname}
+          exp={activities.exp}
+          joinDays={activities.joinDays}
+        />
+        <HabitSection
+          nickname={activities.nickname}
+          streakDays={activities.streakDays}
+          weeklyStreak={activities.weeklyStreak}
+        />
         <Spacing className=" h-[160px]" />
       </Stack>
     </SafeArea>
