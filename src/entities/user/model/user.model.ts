@@ -1,8 +1,16 @@
+interface WeeklyStreak {
+  day: string;
+  isSuccess: boolean;
+}
+
 export interface User {
   id: number | string;
   nickname: string;
   email: string;
   exp: number;
+  joinDays?: number;
+  streakDays?: number;
+  weeklyStreak?: WeeklyStreak[];
 }
 
 export const EXP_TABLE = {

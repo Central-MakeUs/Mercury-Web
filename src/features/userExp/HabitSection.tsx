@@ -72,6 +72,16 @@ const getStatus = (context: { targetDate: Date; today: Date; isDone?: boolean })
   return "fail" as const;
 };
 
+const _englishToKoreanDayMap: Record<string, string> = {
+  SUNDAY: "일",
+  MONDAY: "월",
+  TUESDAY: "화",
+  WEDNESDAY: "수",
+  THURSDAY: "목",
+  FRIDAY: "금",
+  SATURDAY: "토",
+};
+
 const getDayName = (date: Date) => {
   const dayEnum = {
     0: "일",
@@ -116,12 +126,11 @@ export const HabitSection = wrap
   .Suspense({
     fallback: <Fallback />,
   })
-  .on((props: Pick<User, "nickname" | "exp">) => {
-    const { nickname, exp } = props;
+  .on((props: Pick<User, "nickname" | "streakDays" | "weeklyStreak">) => {
+    const { nickname, streakDays, weeklyStreak } = props;
     const normalText = `${nickname}님은 현재`;
     const successCount = 5;
-    const boldText =
-      successCount > 0 ? `${successCount}일 연속 습관 쌓는 중!` : "습관 쌓을 준비 중";
+    const boldText = successCount > 0 ? `${streakDays}일 연속 습관 쌓는 중!` : "습관 쌓을 준비 중";
 
     const weekDates = useMemo(() => getWeekDates(new Date()), []);
 
