@@ -125,9 +125,18 @@ export const HabitSection = wrap
       streakDays && streakDays > 0 ? `${streakDays}일 연속 습관 쌓는 중!` : "습관 쌓을 준비 중";
 
     const weekDates = useMemo(() => getWeekDates(new Date()), []);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    const [selectedDate, setSelectedDate] = useState<string | null>(null);
     const handleDateClick = (date: Date) => {
-      setSelectedDate(date);
+      const formattedDate = date
+        .toLocaleDateString("ko-KR", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        })
+        .replace(/. /g, "-")
+        .replace(".", "");
+
+      setSelectedDate(formattedDate);
     };
 
     return (
@@ -167,7 +176,7 @@ export const HabitSection = wrap
           <Spacing className=" h-[12px]" />
           <HabitBar normalText={normalText} boldText={boldText} />
         </Stack>
-        <TodayHabit selectedDate={selectedDate ? selectedDate.toISOString().split("T")[0] : ""} />
+        <TodayHabit selectedDate={selectedDate ? selectedDate : ""} />
       </BottomSheet.Root>
     );
   });
