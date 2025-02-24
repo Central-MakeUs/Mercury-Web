@@ -1,9 +1,7 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Text } from "@repo/design-system/Text";
-
 import { CenterStack } from "@repo/ui/CenterStack";
-
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 
@@ -15,11 +13,11 @@ export const FirstUserRecordFallback = () => {
           <Image src={EMPTY_FALLBACK} alt="list empty fallback image" objectfit={"fill"} />
         </AspectRatio>
         <Spacing className=" h-[45px]" />
+        <Text
+          variant={"body/18_sb"}
+          className=" text-gray-600 text-center whitespace-pre-wrap"
+        >{`나의 독서 습관을 만들어줄\n첫 번째 독서기록을 시작해보세요`}</Text>
       </CenterStack>
-      <Text
-        variant={"body/18_sb"}
-        className=" text-gray-600 text-center whitespace-pre-wrap"
-      >{`나의 독서 습관을 만들어줄\n첫 번째 독서기록을 시작해보세요`}</Text>
     </Stack>
   );
 };

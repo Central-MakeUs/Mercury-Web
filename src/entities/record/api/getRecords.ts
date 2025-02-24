@@ -22,6 +22,7 @@ export const getRecords = async (request: GetRecordsRequest) => {
       sortType,
     },
   });
+
   return {
     ...response.data,
     records: response.data.records.map((record) => ({
@@ -48,7 +49,7 @@ const guestGetRecords = async (request: GetRecordsRequest) => {
       updatedAt: record.updatedAt,
       updatedGauge: record.updatedGauge,
       latestMemoContent: record.memos[0].content,
-      dedtailUpdatedAt: record.updatedAt,
+      detailUpdatedAt: record.updatedAt,
     })),
   } satisfies GetRecordsResponse;
 };

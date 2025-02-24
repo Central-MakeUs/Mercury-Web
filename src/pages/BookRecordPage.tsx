@@ -1,9 +1,9 @@
 import { SafeArea } from "@repo/bridge-web/SafeArea";
+import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { Text } from "@repo/design-system/Text";
 import { Flex } from "@repo/ui/Flex";
 import { JustifyBetween } from "@repo/ui/JustifyBetween";
 import { Spacing } from "@repo/ui/Spacing";
-import { Stack } from "@repo/ui/Stack";
 import type { ComponentProps } from "react";
 import { BookRecordList } from "~/features/bookRecordRead/BookRecordList";
 import { BookRecordSearchBar } from "~/features/bookRecordRead/BookRecordSearchBar";
@@ -17,7 +17,7 @@ export default function BookRecordPage(
   return (
     <BookRecordProvider {...props}>
       <SafeArea edges={["top", "bottom", "left", "right"]} className="  w-full min-h-screen ">
-        <Stack className=" pt-[24px] fixed w-full bg-white z-10">
+        <MaxWidthBox className=" pt-[24px] fixed w-full bg-white z-10">
           <JustifyBetween className=" items-end w-full px-[16px]">
             <Text variant={"title/24_sb"} className=" text-gray-800">
               독서기록
@@ -29,11 +29,9 @@ export default function BookRecordPage(
           <Flex className=" px-[16px] z-2">
             <BookRecordSearchBar />
           </Flex>
-        </Stack>
+        </MaxWidthBox>
 
-        <Stack className=" w-full  px-[16px] py-[14px] pb-[100px] pt-[150px]">
-          <BookRecordList />
-        </Stack>
+        <BookRecordList />
 
         <GoBookRecordWriteButton />
       </SafeArea>
