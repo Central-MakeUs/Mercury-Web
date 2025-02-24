@@ -28,7 +28,7 @@ export const WriteSearchProvider = (props: PropsWithChildren<Partial<BookRecordS
   const [store] = useState(() =>
     createStore<BookRecordSearchState & BookRecordSearchAction>((set) => ({
       query: props.query ?? "",
-      maxResults: props.maxResults ?? 80,
+      maxResults: props.maxResults ?? 70,
       startPage: props.startPage ?? 1,
       sortType: props.sortType ?? GET_BOOKS_SEARCH_SORT_TYPE.SALES_POINT.value,
       actions: {
