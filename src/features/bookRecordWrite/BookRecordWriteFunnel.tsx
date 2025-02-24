@@ -67,7 +67,7 @@ export const BookRecordWriteFunnel = () => {
       <Spacing className="h-[10px]" />
 
       <WriteSearchProvider
-        maxResults={100}
+        maxResults={70}
         startPage={1}
         sortType={GET_BOOKS_SEARCH_SORT_TYPE.SALES_POINT.value}
       >
