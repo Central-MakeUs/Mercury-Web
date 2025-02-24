@@ -11,8 +11,10 @@ import { JustifyBetween } from "@repo/ui/JustifyBetween";
 import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { isAfter, isSameDay } from "date-fns";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { useGetTodayHabitQueryOptions } from "~/entities/user/api/getUserActivity";
 import { HabitCalendar } from "~/entities/user/components/HabitCalendar";
 import type { User } from "~/entities/user/model/user.model";
 import { HABIT_ASSETS } from "~/shared/images/habit/habitImages";
@@ -119,10 +121,14 @@ export const HabitSection = wrap
   .on((props: Pick<User, "nickname" | "streakDays" | "weeklyStreak">) => {
     const { nickname, streakDays, weeklyStreak } = props;
     const normalText = `${nickname}님은 현재`;
-    const successCount = 5;
-    const boldText = successCount > 0 ? `${streakDays}일 연속 습관 쌓는 중!` : "습관 쌓을 준비 중";
+    const boldText =
+      streakDays && streakDays > 0 ? `${streakDays}일 연속 습관 쌓는 중!` : "습관 쌓을 준비 중";
 
     const weekDates = useMemo(() => getWeekDates(new Date()), []);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    const handleDateClick = (date: Date) => {
+      setSelectedDate(date);
+    };
 
     return (
       <BottomSheet.Root handleOnly={true}>
@@ -141,7 +147,11 @@ export const HabitSection = wrap
               const isDone = streakData ? streakData.isSuccess : false;
 
               return (
-                <BottomSheet.Trigger asChild={true} key={date.toISOString()}>
+                <BottomSheet.Trigger
+                  asChild={true}
+                  key={date.toISOString()}
+                  onClick={() => handleDateClick(date)}
+                >
                   <HabitCalendar.Cell
                     key={date.toISOString()}
                     header={<HabitCalendar.Header>{getDayName(date)}</HabitCalendar.Header>}
@@ -157,12 +167,14 @@ export const HabitSection = wrap
           <Spacing className=" h-[12px]" />
           <HabitBar normalText={normalText} boldText={boldText} />
         </Stack>
-        <TodayHabit />
+        <TodayHabit selectedDate={selectedDate ? selectedDate.toISOString().split("T")[0] : ""} />
       </BottomSheet.Root>
     );
   });
 
-const TodayHabit = () => {
+const TodayHabit = ({ selectedDate }: { selectedDate: string }) => {
+  const { data: habits } = useSuspenseQuery(useGetTodayHabitQueryOptions(selectedDate));
+
   return (
     <>
       <BottomSheet.Portal>
@@ -175,7 +187,7 @@ const TodayHabit = () => {
           <BottomSheet.Title asChild={true}>
             <JustifyBetween className="w-full">
               <Text variant={"title/25_sb"} className="text-gray-800 whitespace-pre-wrap">
-                {"6일 연속 \n성공했어요!"}
+                {`${habits.streakCount}일 연속 \n성공했어요!`}
               </Text>
               <Image
                 src={HABIT_ASSETS.MERCURY_HABIT_LOGO_WEBP}
@@ -197,28 +209,28 @@ const TodayHabit = () => {
                 습관쌓기
               </Text>
               <Text className="text-pastel-violet" variant={"body/18_m"}>
-                + 50xp
+                + {habits.acquiredExp}xp
               </Text>
             </Flex>
 
             <Stack className="rounded-[5px] bg-gray-100 px-7 py-[14px] mt-[9px] gap-[14px]">
               <JustifyBetween className="items-center">
                 <Flex className="items-center">
-                  <BookIcon />
+                  <BookIcon selected={habits.hasRecord} />
                   <Text className="text-gray-500 ml-[13px] mr-[20px]" variant={"body/15_m"}>
                     독서기록 또는 메모 1개 작성하기
                   </Text>
                 </Flex>
-                <CheckIcon />
+                <CheckIcon checked={habits.hasRecord} />
               </JustifyBetween>
               <JustifyBetween className="items-center">
                 <Flex className="items-center">
-                  <TimerIcon selected={true} />
+                  <TimerIcon selected={habits.hasTimer} />
                   <Text className="text-gray-500 ml-[13px] mr-[20px]" variant={"body/15_m"}>
                     10초 이상 타이머 완료하기
                   </Text>
                 </Flex>
-                <CheckIcon checked={true} />
+                <CheckIcon checked={habits.hasTimer} />
               </JustifyBetween>
             </Stack>
           </Stack>
