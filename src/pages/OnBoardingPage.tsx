@@ -41,6 +41,10 @@ export default function LoginPage() {
 
 const MercuryImageSection = () => {
   const navigate = useNavigate();
+  const onboardingAgain = () => {
+    localStorage.setItem("hasVisited", "false");
+    navigate("/");
+  };
   return (
     <CenterStack className=" w-full px-4">
       <Stack className=" w-full">
@@ -62,11 +66,13 @@ const MercuryImageSection = () => {
 
       <Stack className=" mt-[30px] pl-[66px] pr-[54px] w-full">
         <AspectRatio ratio={255 / 52}>
-          <Image
-            src={LOGO_ASSETS.WORDMARKLOGO_DARKBG_WEBP}
-            alt="wordmark logo"
-            objectfit={"fill"}
-          />
+          <button onClick={onboardingAgain}>
+            <Image
+              src={LOGO_ASSETS.WORDMARKLOGO_DARKBG_WEBP}
+              alt="wordmark logo"
+              objectfit={"fill"}
+            />
+          </button>
         </AspectRatio>
       </Stack>
     </CenterStack>
