@@ -1,3 +1,4 @@
+import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Text } from "@repo/design-system/Text";
 import { CenterStack } from "@repo/ui/CenterStack";
@@ -16,13 +17,14 @@ export const FirstOnBoardingStep3 = () => {
             쉽게 만드는 독서 습관
           </Text>
         </CenterStack>
-
-        <Image
-          src={"/images/onboarding/onBoarding3.webp"}
-          alt="onBoardingFunnel3"
-          objectfit={"cover"}
-          className="fixed z-[2] top-[10px]"
-        />
+        <AspectRatio ratio={375 / 700}>
+          <Image
+            src={"/images/onboarding/onBoarding3.webp"}
+            alt="onBoardingFunnel3"
+            objectfit={"cover"}
+            className="fixed z-[2] top-[10px]"
+          />
+        </AspectRatio>
         <Image
           src={"/images/onboarding/onBoardingBack.webp"}
           alt="onBoardingFunnel2"

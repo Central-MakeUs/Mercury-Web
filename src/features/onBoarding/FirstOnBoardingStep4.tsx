@@ -1,3 +1,4 @@
+import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Text } from "@repo/design-system/Text";
 import { CenterStack } from "@repo/ui/CenterStack";
@@ -16,19 +17,22 @@ export const FirstOnBoardingStep4 = () => {
           머큐리와 함께
         </Text>
       </CenterStack>
-
-      <Image
-        src={HOME_ASSETS.HOME_MERCURY_WEBP}
-        alt="mercury character"
-        objectfit={"fill"}
-        className="px-[36px] z-[2] fixed top-[200px]"
-      />
-      <Image
-        src={"/images/onboarding/onBoarding4.webp"}
-        alt="onBoardingFunnel4"
-        objectfit={"cover"}
-        className="fixed z-[2] bottom-[100px]"
-      />
+      <AspectRatio ratio={300 / 200}>
+        <Image
+          src={HOME_ASSETS.HOME_MERCURY_WEBP}
+          alt="mercury character"
+          objectfit={"fill"}
+          className="px-[36px] z-[2] fixed top-[200px]"
+        />
+      </AspectRatio>
+      <AspectRatio ratio={300 / 400}>
+        <Image
+          src={"/images/onboarding/onBoarding4.webp"}
+          alt="onBoardingFunnel4"
+          objectfit={"cover"}
+          className="fixed z-[2] bottom-[100px]"
+        />
+      </AspectRatio>
       <Image
         src={"/images/onboarding/onBoardingBack.webp"}
         alt="onBoardingFunnel2"
