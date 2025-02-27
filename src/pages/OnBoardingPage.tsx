@@ -27,6 +27,10 @@ export default function OnBoardingPage() {
     }
   }, [navigate]);
 
+  useEffect(() => {
+    localStorage.setItem("hasVisited", "true");
+  }, []);
+
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
       <MercuryImageSection />
