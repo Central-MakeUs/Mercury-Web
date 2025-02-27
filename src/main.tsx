@@ -16,7 +16,7 @@ import BookRecordMemoAddPage from "./pages/BookRecordMemoAddPage.tsx";
 import BookRecordModifyPage from "./pages/BookRecordMemoModifyPage.tsx";
 import BookRecordPage from "./pages/BookRecordPage.tsx";
 import BookRecordWritePage from "./pages/BookRecordWritePage.tsx";
-import OnboardingFunnel from "./pages/FirstOnBoardingPage.tsx";
+import FirstOnBoardingPage from "./pages/FirstOnBoardingPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import { LoginPage } from "./pages/LoginPage.tsx";
 import LoginSuccessPage from "./pages/LoginSuccessPage.tsx";
@@ -59,7 +59,7 @@ createRoot(document.getElementById("root")!).render(
 
               <Route path="notification" element={<Notification />} />
               <Route path="settings" element={<SettingPage />} />
-              <Route path="" element={<OnboardingFunnel />} />
+              <Route path="" element={<FirstOnBoardingPage />} />
               <Route
                 path="onboarding"
                 element={

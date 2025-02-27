@@ -3,7 +3,7 @@ import { Text } from "@repo/design-system/Text";
 import { TopNavigation } from "@repo/design-system/TopNavigation";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { FirstOnBoardingStep1 } from "~/features/onBoarding/FirstOnBoardingStep1";
@@ -18,14 +18,14 @@ const steps = [
   FirstOnBoardingStep4,
 ];
 
-export const OnboardingFunnel = () => {
+const FirstOnBoardingPage = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const currentStepRef = useRef(currentStep);
   const [direction, setDirection] = useState(1);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
-  const threshold = window.innerWidth / 2;
+  const threshold = window.innerWidth / 3;
 
   useEffect(() => {
     const hasVisited = localStorage.getItem("hasVisited");
@@ -69,7 +69,7 @@ export const OnboardingFunnel = () => {
     >
       <TopNavigation.Root
         right={
-          <Link to={"/"}>
+          <Link to={"/onboarding"}>
             <Text variant={"body/15_m"} className="text-gray-300 mr-[25px]">
               skip
             </Text>
@@ -77,7 +77,7 @@ export const OnboardingFunnel = () => {
         }
         className="w-full"
       >
-        <TopNavigation.Title className="sr-only">온보딩</TopNavigation.Title>
+        <TopNavigation.Title className="sr-only">머큐리 사용 설명</TopNavigation.Title>
       </TopNavigation.Root>
       <Flex className="relative w-full h-full overflow-hidden flex-col justify-center items-center">
         <AnimatePresence initial={false} custom={direction}>
@@ -111,4 +111,4 @@ export const OnboardingFunnel = () => {
   );
 };
 
-export default OnboardingFunnel;
+export default FirstOnBoardingPage;
