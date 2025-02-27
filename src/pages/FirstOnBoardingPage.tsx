@@ -95,7 +95,7 @@ const FirstOnBoardingPage = () => {
             </motion.div>
           </AnimatePresence>
         </Flex>
-        <FixedBottom className="w-full pt-[29px] pb-[52px] bg-gradient-to-r from-main3-gradient-from to-main4-gradient-to rounded-t-[20px]">
+        <FixedBottom className="w-full pt-[29px] pb-[52px] bg-gradient-to-r from-main3-gradient-from to-main4-gradient-to rounded-t-[20px] z-[2]">
           <Flex className="w-full py-4 flex justify-center items-center">
             {[...Array(5)].map((_, index) => (
               <div
