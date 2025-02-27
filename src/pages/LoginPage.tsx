@@ -48,6 +48,15 @@ export const LoginPage = () => {
         >
           계정 생성하기
         </button>
+        <button
+          className=" mt-4 text-gray-600"
+          onClick={() => {
+            localStorage.setItem("hasVisited", "false");
+            navigate("/");
+          }}
+        >
+          온보딩 퍼널 다시보기
+        </button>
       </Stack>
       {isOpen && <CreateAccountSection />}
     </SafeArea>
