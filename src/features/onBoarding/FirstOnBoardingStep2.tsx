@@ -1,4 +1,5 @@
 import { Image } from "@repo/design-system/Image";
+
 import { Text } from "@repo/design-system/Text";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Stack } from "@repo/ui/Stack";
