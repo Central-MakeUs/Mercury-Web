@@ -17,15 +17,19 @@ import { AppleButton } from "~/shared/ui/AppleButton";
 import { KakaoButton } from "~/shared/ui/KakaoButton";
 import { openWindowUrl } from "~/shared/utils/openWindowUrl";
 
-export default function OnBoardingPage() {
+export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
     const accessToken = authStore.getAccessToken();
     if (accessToken) {
-      navigate("/home");
+      navigate("/book-record");
     }
   }, [navigate]);
+
+  useEffect(() => {
+    localStorage.setItem("hasVisited", "true");
+  }, []);
 
   return (
     <CenterStack className=" min-h-screen w-full bg-navy h-full gap-y-[100px]">
@@ -43,7 +47,7 @@ const MercuryImageSection = () => {
         <Pressable
           delay={env.DEV ? 0 : 5000}
           onPressComplete={() => {
-            navigate("/login");
+            navigate("login/input");
           }}
         >
           <AspectRatio ratio={343 / 219}>
