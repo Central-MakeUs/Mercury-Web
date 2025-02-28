@@ -62,7 +62,10 @@ const FirstOnBoardingPage = () => {
   const CurrentStepComponent = steps[currentStep];
 
   return (
-    <SafeArea edges={["top", "bottom", "left", "right"]} className="bg-navy">
+    <SafeArea
+      edges={["top", "bottom", "left", "right"]}
+      className="bg-navy overflow-hidden h-screen"
+    >
       <Stack
         className="w-full h-full items-center justify-center bg-navy overflow-hidden"
         onTouchStart={handleTouchStart}

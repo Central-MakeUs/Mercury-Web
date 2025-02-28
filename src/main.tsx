@@ -63,7 +63,7 @@ createRoot(document.getElementById("root")!).render(
               <Route
                 path="onboarding"
                 element={
-                  <NotSigned fallback={<Navigate to={"/home"} replace={true} />}>
+                  <NotSigned fallback={<Navigate to={"/book-record"} replace={true} />}>
                     <OnBoardingPage />
                   </NotSigned>
                 }

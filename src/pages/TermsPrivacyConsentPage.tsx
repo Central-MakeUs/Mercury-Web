@@ -31,7 +31,7 @@ export default function TermsPrivacyConsentPage() {
 
   const handleConfirm = () => {
     if (allChecked) {
-      navigate("/home");
+      navigate("/book-record");
     }
   };
 

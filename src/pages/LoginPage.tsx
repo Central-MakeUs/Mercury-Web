@@ -20,7 +20,7 @@ export const LoginPage = () => {
     const accessToken = response.response.headers.get("Authorization");
     auth.setAccessToken(accessToken);
     toast.success("회원가입 완료");
-    navigate("/home");
+    navigate("/book-record");
   };
 
   return (
