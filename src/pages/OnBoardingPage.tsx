@@ -1,4 +1,5 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
+import { FixedBottom } from "@repo/design-system/FixedBottom";
 import { Image } from "@repo/design-system/Image";
 import { Pressable } from "@repo/design-system/Pressable";
 import { Text, textVariants } from "@repo/design-system/Text";
@@ -7,7 +8,6 @@ import { env } from "@repo/env";
 import { Center } from "@repo/ui/Center";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
-import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
@@ -108,7 +108,13 @@ const SignUpSection = () => {
           게스트로 둘러보기
         </Link>
       </Flex>
-      <Spacing className=" h-[40px]" />
+      <FixedBottom className="w-full flex justify-center items-center gap-1 bottom-[68px]">
+        <div className="w-[6px] h-[6px] bg-gray-200 rounded-full" />
+        <div className="w-[6px] h-[6px] bg-gray-200 rounded-full" />
+        <div className="w-[6px] h-[6px] bg-gray-200 rounded-full" />
+        <div className="w-[6px] h-[6px] bg-gray-200 rounded-full" />
+        <div className="w-[10px] h-[6px] bg-white rounded-full" />
+      </FixedBottom>
     </Stack>
   );
 };
