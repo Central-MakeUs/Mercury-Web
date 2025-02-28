@@ -28,7 +28,7 @@ interface UserActivity {
 const defaultActivity: UserActivity = {
   habitID: 0,
   joinDays: 0,
-  nickname: "string",
+  nickname: "Guest",
   exp: 0,
   streakDays: 0,
   weeklyStreak: [

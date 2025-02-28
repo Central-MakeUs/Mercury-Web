@@ -55,11 +55,11 @@ const guestGetRecords = async (request: GetRecordsRequest) => {
 };
 
 export const getRecordsQueryOptions = (request: GetRecordsRequest) => {
-  const auth = authStore.useAuth();
+  const auth = authStore.isLoggedIn();
   return queryOptions({
     queryKey: recordQueryKeys.getRecords(request),
     queryFn: () => {
-      if (auth.isLoggedIn) {
+      if (auth) {
         return getRecords(request);
       }
       return guestGetRecords(request);
