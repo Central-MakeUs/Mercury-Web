@@ -6,7 +6,7 @@ import { Stack } from "@repo/ui/Stack";
 
 export const FirstOnBoardingStep1 = () => {
   return (
-    <Stack className="w-screen max-w-[450px] bg-navy">
+    <Stack className="w-screen max-w-[450px] bg-navy ">
       <Stack className="relative">
         <CenterStack className="gap-[10px] w-full z-[2] mt-10 absolute top-0">
           <Text
