@@ -51,7 +51,7 @@ const MercuryImageSection = () => {
         <Pressable
           delay={env.DEV ? 0 : 5000}
           onPressComplete={() => {
-            navigate("/login");
+            navigate("login/input");
           }}
         >
           <AspectRatio ratio={343 / 219}>

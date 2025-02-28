@@ -27,7 +27,6 @@ export const FirstOnBoardingStep1 = () => {
           />
         </AspectRatio>
       </Stack>
-
       <Image
         src={"/images/onboarding/onBoardingBack.webp"}
         alt="onBoardingFunnel2"
