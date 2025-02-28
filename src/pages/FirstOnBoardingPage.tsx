@@ -72,7 +72,7 @@ const FirstOnBoardingPage = () => {
         <TopNavigation.Root
           right={
             <Link to={"/onboarding"}>
-              <Text variant={"body/15_m"} className="text-gray-300 mr-[25px]">
+              <Text variant={"body/18_m"} className="text-gray-300 px-[25px]">
                 skip
               </Text>
             </Link>
@@ -85,9 +85,9 @@ const FirstOnBoardingPage = () => {
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={currentStep}
-              initial={{ x: direction === 1 ? "100%" : "-100%", opacity: 0 }}
-              animate={{ x: "0%", opacity: 1 }}
-              exit={{ x: direction === 1 ? "-100%" : "100%", opacity: 0 }}
+              initial={{ x: direction === 1 ? "100%" : "-100%", y: 0, opacity: 0 }}
+              animate={{ x: "0%", y: 0, opacity: 1 }}
+              exit={{ x: direction === 1 ? "-100%" : "100%", y: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="relative w-full h-full flex items-center justify-center"
             >
@@ -96,11 +96,11 @@ const FirstOnBoardingPage = () => {
           </AnimatePresence>
         </Flex>
         <FixedBottom className="w-full pt-[29px] pb-[52px] bg-gradient-to-r from-main3-gradient-from to-main4-gradient-to rounded-t-[20px] z-[2]">
-          <Flex className="w-full py-4 flex justify-center items-center">
+          <Flex className="w-full py-4 flex justify-center items-center gap-1">
             {[...Array(5)].map((_, index) => (
               <div
                 key={index}
-                className={`mx-1 transition-all ${
+                className={`transition-all ${
                   (currentStep === index && index < 4) || (index === 4 && currentStep === 4)
                     ? "w-[10px] h-[6px] bg-white"
                     : "w-[6px] h-[6px] bg-gray-200"

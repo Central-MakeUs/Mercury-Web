@@ -6,9 +6,9 @@ import { Stack } from "@repo/ui/Stack";
 
 export const FirstOnBoardingStep3 = () => {
   return (
-    <div className="w-full h-full bg-navy">
-      <Stack className="w-screen">
-        <CenterStack className="gap-[10px] w-full items-center fixed top-[80px]">
+    <Stack className="w-screen max-w-[450px] bg-navy">
+      <Stack className="relative">
+        <CenterStack className="gap-[10px] w-full z-[2] mt-10 absolute top-0">
           <Text
             variant={"body/16_m"}
             className="text-gray-100 whitespace-pre-wrap opacity-80 text-center"
@@ -17,21 +17,22 @@ export const FirstOnBoardingStep3 = () => {
             쉽게 만드는 독서 습관
           </Text>
         </CenterStack>
-        <AspectRatio ratio={375 / 700}>
+
+        <AspectRatio ratio={375 / 800} className="z-[2] absolute">
           <Image
             src={"/images/onboarding/onBoarding3.webp"}
-            alt="onBoardingFunnel3"
+            alt="onBoardingFunnel1"
             objectfit={"cover"}
-            className="fixed z-[2] top-[10px]"
           />
         </AspectRatio>
-        <Image
-          src={"/images/onboarding/onBoardingBack.webp"}
-          alt="onBoardingFunnel2"
-          objectfit={"cover"}
-          className="fixed z-[1] top-0"
-        />
       </Stack>
-    </div>
+
+      <Image
+        src={"/images/onboarding/onBoardingBack.webp"}
+        alt="onBoardingFunnel2"
+        objectfit={"cover"}
+        className="absolute inset-0 z-[1]"
+      />
+    </Stack>
   );
 };
