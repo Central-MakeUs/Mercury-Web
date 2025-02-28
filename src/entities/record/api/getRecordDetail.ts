@@ -41,12 +41,12 @@ const guestGetRecordsDetail = async (request: GetBookMemosRequest) => {
 };
 
 export const useGetRecordsDetailQueryOptions = (request: GetBookMemosRequest) => {
-  const auth = authStore.useAuth();
+  const auth = authStore.isLoggedIn();
 
   return queryOptions({
     queryKey: recordQueryKeys.getRecordById(request),
     queryFn: () => {
-      if (auth.isLoggedIn) {
+      if (auth) {
         return getRecordsDetail(request);
       }
       return guestGetRecordsDetail(request);
