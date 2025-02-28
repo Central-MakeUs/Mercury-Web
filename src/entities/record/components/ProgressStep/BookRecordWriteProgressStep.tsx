@@ -1,3 +1,4 @@
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { CtaButton } from "@repo/design-system/CtaButton";
 import { FixedBottom } from "@repo/design-system/FixedBottom";
 import { Image } from "@repo/design-system/Image";
@@ -80,15 +81,17 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               key={"0"}
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
-              <Image
-                src={GAUGE_ASSETS.GAUGE0_WEBP}
-                alt="read gauge 0 image"
-                className=" w-full"
-                objectfit={"contain"}
-              />
-              <Text className="text-dark-violet/70 text-[32px] font-bold absolute top-1/2 left-[50%] transform -translate-x-1/2 -translate-y-1/2">
-                {props.value}%
-              </Text>
+              <AspectRatio ratio={1 / 1}>
+                <Image
+                  src={GAUGE_ASSETS.GAUGE0_WEBP}
+                  alt="read gauge 0 image"
+                  className=" w-full"
+                  objectfit={"contain"}
+                />
+                <Text className="text-dark-violet/70 text-[32px] font-bold absolute top-1/2 left-[50%] transform -translate-x-1/2 -translate-y-1/2">
+                  {props.value}%
+                </Text>
+              </AspectRatio>
             </ImageFadeAnimator.FadeIn>
           ),
           "50": (
@@ -96,15 +99,17 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               key={"50"}
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
-              <Image
-                src={GAUGE_ASSETS.GAUGE50_WEBP}
-                alt="read gauge 50 image"
-                className=" w-full"
-                objectfit={"contain"}
-              />
-              <Text className="text-white-yellow text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                {props.value}%
-              </Text>
+              <AspectRatio ratio={1 / 1}>
+                <Image
+                  src={GAUGE_ASSETS.GAUGE50_WEBP}
+                  alt="read gauge 50 image"
+                  className=" w-full"
+                  objectfit={"contain"}
+                />
+                <Text className="text-white-yellow text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  {props.value}%
+                </Text>
+              </AspectRatio>
             </ImageFadeAnimator.FadeIn>
           ),
           "100": (
@@ -112,15 +117,17 @@ const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number })
               key={"100"}
               transition={{ duration: GAUGE_DURATION_POLICY, ease: GAUGE_EASE_POLICY }}
             >
-              <Image
-                src={GAUGE_ASSETS.GAUGE100_WEBP}
-                alt="read gauge 100 image"
-                className=" w-full"
-                objectfit={"contain"}
-              />
-              <Text className="text-white-violet text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                {props.value}%
-              </Text>
+              <AspectRatio ratio={1 / 1}>
+                <Image
+                  src={GAUGE_ASSETS.GAUGE100_WEBP}
+                  alt="read gauge 100 image"
+                  className=" w-full"
+                  objectfit={"contain"}
+                />
+                <Text className="text-white-violet text-[32px] font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  {props.value}%
+                </Text>
+              </AspectRatio>
             </ImageFadeAnimator.FadeIn>
           ),
         }}
