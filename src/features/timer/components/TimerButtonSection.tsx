@@ -14,7 +14,7 @@ export const TimerButtonSection = (props: ComponentProps<"div">) => {
   const status = useTimerStore((state) => state.status);
   const actions = useTimerStore((state) => state.actions);
 
-  const handleStart = () => {
+  const openTimePickerBottomSheet = () => {
     timePickerBottomSheet.openAsync({
       ...timePickerBottomSheet.getMinuteAndSecondProps(),
       onConfirm: (result) => {
@@ -23,6 +23,10 @@ export const TimerButtonSection = (props: ComponentProps<"div">) => {
         actions.start(totalSecond);
       },
     });
+  };
+
+  const handleStart = () => {
+    openTimePickerBottomSheet();
   };
 
   const handlePause = () => {
@@ -30,14 +34,7 @@ export const TimerButtonSection = (props: ComponentProps<"div">) => {
   };
 
   const handleReset = () => {
-    timePickerBottomSheet.openAsync({
-      ...timePickerBottomSheet.getMinuteAndSecondProps(),
-      onConfirm: (result) => {
-        const { left: minute, right: second } = result;
-        const totalSecond = minute * 60 + second;
-        actions.start(totalSecond);
-      },
-    });
+    openTimePickerBottomSheet();
   };
 
   const handleRestart = () => {
@@ -48,10 +45,17 @@ export const TimerButtonSection = (props: ComponentProps<"div">) => {
   const timer = useTimerStore();
 
   const handleComplete = () => {
-    postTimer({ seconds: timer.settingSecond });
-
-    toast.success("집중한만큼 보상을 얻었어요!", { icon: <MercuryIcon /> });
-    actions.reset();
+    postTimer(
+      { seconds: timer.settingSecond },
+      {
+        onSuccess: () => {
+          toast.success("집중한만큼 보상을 얻었어요!", { icon: <MercuryIcon /> });
+        },
+        onSettled: () => {
+          actions.reset();
+        },
+      },
+    );
   };
 
   return (
