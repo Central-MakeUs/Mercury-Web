@@ -42,7 +42,7 @@ export const BookRecordDetailMemoItem = (
             ref={memoRef}
             className=" p-[10px] min-h-[43px] relative bg-yellow-green w-full rounded-[12px]"
           >
-            <Text className=" w-full text-gray-600 z-[1]" variant={"body/15_r"}>
+            <Text className=" w-full text-gray-600 z-[1] whitespace-pre-wrap" variant={"body/15_r"}>
               {children}
             </Text>
             <Image
