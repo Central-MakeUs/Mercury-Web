@@ -1,8 +1,10 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
+import { Skeleton } from "@repo/design-system/Skeleton";
 import { Text } from "@repo/design-system/Text";
 import { cn } from "@repo/design-system/cn";
 import { CenterStack } from "@repo/ui/CenterStack";
+import { Flex } from "@repo/ui/Flex";
 import { List } from "@repo/ui/List";
 import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
@@ -32,13 +34,44 @@ export const WriteSearchList = wrap.Suspense().on(
     const isObserverDisplay = hasNextPage && query.length > 0;
 
     const fallback =
-      query.length === 0 || isLoading ? <FirstFallback isLoading={isLoading} /> : <EmptyFallback />;
+      query.length === 0 ? <FirstFallback isLoading={isLoading} /> : <EmptyFallback />;
 
     const handleIntersectStart = () => {
       if (hasNextPage) {
         fetchNextPage();
       }
     };
+
+    if (isLoading) {
+      return (
+        <Stack className=" gap-y-[16px]">
+          <Flex className=" gap-x-[12px]">
+            <Skeleton className=" rounded-[4px] min-w-[104px] h-[156px] w-[104px]" />
+            <Stack className=" w-full">
+              <Skeleton className=" mb-[10px] w-full h-[20px]" />
+              <Skeleton className=" mb-[4px] w-[50%] h-[20px]" />
+              <Skeleton className=" w-[50%] h-[20px]" />
+            </Stack>
+          </Flex>
+          <Flex className=" gap-x-[12px]">
+            <Skeleton className=" rounded-[4px] min-w-[104px] h-[156px] w-[104px]" />
+            <Stack className=" w-full">
+              <Skeleton className=" mb-[10px] w-full h-[20px]" />
+              <Skeleton className=" mb-[4px] w-[50%] h-[20px]" />
+              <Skeleton className=" w-[50%] h-[20px]" />
+            </Stack>
+          </Flex>
+          <Flex className=" gap-x-[12px]">
+            <Skeleton className=" rounded-[4px] min-w-[104px] h-[156px] w-[104px]" />
+            <Stack className=" w-full">
+              <Skeleton className=" mb-[10px] w-full h-[20px]" />
+              <Skeleton className=" mb-[4px] w-[50%] h-[20px]" />
+              <Skeleton className=" w-[50%] h-[20px]" />
+            </Stack>
+          </Flex>
+        </Stack>
+      );
+    }
 
     return (
       <>

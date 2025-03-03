@@ -1,4 +1,5 @@
 import { List } from "@repo/ui/List";
+import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { Delay, wrap } from "@suspensive/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -61,6 +62,7 @@ export const BookRecordList = wrap
             />
           ))}
         </List>
+        <Spacing className=" h-[160px]" />
       </Stack>
     );
   });
