@@ -53,7 +53,8 @@ export const BookRecordWriteFunnel = () => {
           });
         })(),
       );
-      navigate("/book-record");
+      navigate("/book-record/write", { replace: true });
+      navigate("/book-record", { replace: true });
     } catch (_e) {
       toast.main3("죄송해요 서버가 맛이 갔나봐요 ㅜㅅㅜ", { duration: 3500 });
     }

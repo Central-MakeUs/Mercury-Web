@@ -43,10 +43,10 @@ export const SearchBookItem = forwardRef(function SearchBookItem(
 
         <Stack className="gap-[4px] ">
           <Flex className="gap-[5px]">
-            <Text variant={"body/15_m"} className="text-gray-500">
+            <Text variant={"body/15_m"} className="text-gray-500 shrink-0">
               저자
             </Text>
-            <Text variant={"body/15_m"} className="text-gray-800">
+            <Text variant={"body/15_m"} className="text-gray-800 line-clamp-1">
               {authorName}
             </Text>
           </Flex>

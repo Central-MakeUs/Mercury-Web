@@ -34,6 +34,7 @@ export default function BookRecordPage(
         <BookRecordList />
 
         <GoBookRecordWriteButton />
+        <Spacing className="h-[80px]" />
       </SafeArea>
     </BookRecordProvider>
   );
