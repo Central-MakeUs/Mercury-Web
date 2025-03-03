@@ -50,10 +50,9 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
           value={value}
           onChange={setValue}
         />
-        <Text variant={"body/15_sb"} className=" mb-[62px] text-gray-600 text-center">
+        <Text variant={"body/15_sb"} className=" text-gray-600 text-center">
           {value}%까지 읽었어요
         </Text>
-        <Spacing className=" h-[80px]" />
         <FixedBottom className=" px-[24px] pb-[24px]">
           <CtaButton
             id="hello"
@@ -72,7 +71,7 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
 
 const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number }) => {
   return (
-    <Stack className=" min-h-[300px] w-full justify-center items-center">
+    <Stack className=" min-h-[340px] w-full justify-center items-center">
       <ImageFadeAnimator
         value={props.status}
         className=" px-[115px] relative "
