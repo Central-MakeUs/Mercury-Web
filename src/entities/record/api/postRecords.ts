@@ -1,5 +1,6 @@
 import { http } from "@repo/http";
 import { useMutation } from "@tanstack/react-query";
+import { batchRequestsOf } from "@xionwcfm/utils";
 import { authStore } from "~/entities/user/model/auth.store";
 import { generateRandomId } from "~/shared/utils/generateRandomId";
 import type { Book, BookWithId } from "../model/book.model";
@@ -23,11 +24,11 @@ export interface PostRecordsResponse {
   updatedGauge: number;
 }
 
-const postRecords = async (request: PostRecordsRequest) => {
+const postRecords = batchRequestsOf(async (request: PostRecordsRequest) => {
   const { ...rest } = request;
   const response = await http.post<PostRecordsRequest, PostRecordsResponse>(`/records`, rest);
   return response.data;
-};
+});
 
 const guestPostRecords = async (request: PostRecordsRequest) => {
   const response = guestRecordStore.getItem();

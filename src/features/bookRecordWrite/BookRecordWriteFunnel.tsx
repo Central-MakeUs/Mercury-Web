@@ -4,7 +4,7 @@ import { Spacing } from "@repo/ui/Spacing";
 import { Stack } from "@repo/ui/Stack";
 import { useQueryClient } from "@tanstack/react-query";
 import { useFunnel } from "@use-funnel/browser";
-import { useLoading } from "@xionwcfm/react";
+import { useLoading, useThrottle } from "@xionwcfm/react";
 import { useNavigate } from "react-router";
 import { GET_BOOKS_SEARCH_SORT_TYPE } from "~/entities/record/api/getBooksSearch";
 import { type PostRecordsRequest, usePostRecords } from "~/entities/record/api/postRecords";
@@ -42,7 +42,7 @@ export const BookRecordWriteFunnel = () => {
     navigate(-1);
   };
 
-  const handleNext = async (body: PostRecordsRequest) => {
+  const handleNext = useThrottle(async (body: PostRecordsRequest) => {
     try {
       await startLoading(
         (async () => {
@@ -58,13 +58,14 @@ export const BookRecordWriteFunnel = () => {
     } catch (_e) {
       toast.main3("죄송해요 서버가 맛이 갔나봐요 ㅜㅅㅜ", { duration: 3500 });
     }
-  };
+  }, 3000);
 
   return (
     <Stack className=" w-full h-full">
       <TopNavigation.Root left={<TopNavigation.Back onClick={handleBack} />}>
         <TopNavigation.Title>독서기록</TopNavigation.Title>
       </TopNavigation.Root>
+
       <Spacing className="h-[10px]" />
 
       <WriteSearchProvider
