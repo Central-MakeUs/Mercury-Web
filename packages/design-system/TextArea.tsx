@@ -20,16 +20,18 @@ const Field = forwardRef<
 >(function Field(props, ref) {
   const { className, resize = false, ...rest } = props;
   return (
-    <textarea
-      ref={ref}
-      {...rest}
-      className={cn(
-        textVariants({ variant: "body/16_m" }),
-        "scrollbar  w-full h-full outline-none bg-yellow-green py-[9px] px-[15px] rounded-[12px] text-gray-600 placeholder:gray-400",
-        className,
-        resize ? "resize" : "resize-none",
-      )}
-    />
+    <div className="w-full h-full pb-[32px] bg-yellow-green">
+      <textarea
+        ref={ref}
+        {...rest}
+        className={cn(
+          textVariants({ variant: "body/16_m" }),
+          "scrollbar  w-full h-full outline-none bg-yellow-green py-[9px] px-[15px] rounded-[12px] text-gray-600 placeholder:gray-400",
+          className,
+          resize ? "resize" : "resize-none",
+        )}
+      />
+    </div>
   );
 });
 
@@ -38,7 +40,7 @@ const LetterCountPosition = (props: ComponentPropsWithoutRef<"div">) => {
   return (
     <div
       className={cn(
-        "absolute bottom-[-27px] right-[-30px] translate-x-[-14px] translate-y-[-14px]",
+        "absolute bottom-[-30px] right-[-30px] translate-x-[-14px] translate-y-[-14px]",
         className,
       )}
       {...rest}

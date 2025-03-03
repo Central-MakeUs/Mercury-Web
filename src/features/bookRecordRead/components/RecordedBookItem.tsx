@@ -63,7 +63,7 @@ export const RecordedBookItem = forwardRef(function RecordedBookItem(
             </Flex>
           </JustifyBetween>
 
-          <Text variant={"body/13_r"} className="line-clamp-3 text-gray-400 mt-[21px]">
+          <Text variant={"body/13_r"} className=" text-gray-400 mt-[21px] line-clamp-2">
             {bookSummary}
           </Text>
         </Stack>

@@ -34,6 +34,7 @@ export const TimerButtonSection = (props: ComponentProps<"div">) => {
   };
 
   const handleReset = () => {
+    handlePause();
     openTimePickerBottomSheet();
   };
 

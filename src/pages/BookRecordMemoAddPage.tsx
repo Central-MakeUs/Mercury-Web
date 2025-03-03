@@ -50,7 +50,10 @@ export default wrap
           });
         })(),
       );
-      navigate(`/book-record/${recordId}`, { replace: true });
+      navigate(`/add-memo/${recordId}`, { replace: true });
+      navigate(`/add-memo/${recordId}?%40textandprogress.step=ProgressStep`, { replace: true });
+      navigate(`/book-record`, { replace: true });
+      navigate(`/book-record/${recordId}`);
     };
 
     return (
