@@ -55,12 +55,12 @@ export default wrap
 
     return (
       <SafeArea className=" w-full h-full" edges={["top", "bottom", "right", "left"]}>
-        <Stack className=" w-full h-full min-h-screen">
+        <Stack className=" w-full h-full overflow-hidden">
           <TopNavigation.Root left={<TopNavigation.Back onClick={handleBack} />}>
             <TopNavigation.Title>메모 작성</TopNavigation.Title>
           </TopNavigation.Root>
-          <Spacing className="h-[10px]" />
-          <Stack className=" h-screen">
+          <Spacing className="h-[10px] " />
+          <Stack>
             <TextAndProgressFunnel book={book} gauge={gauge} onSuccess={handleSuccess} />
           </Stack>
         </Stack>

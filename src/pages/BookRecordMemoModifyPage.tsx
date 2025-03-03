@@ -57,7 +57,7 @@ export default wrap
           <TopNavigation.Title>메모 작성</TopNavigation.Title>
         </TopNavigation.Root>
         <Spacing className="h-[10px]" />
-        <Stack className=" h-screen">
+        <Stack>
           <BookRecordWriteTextStep
             book={book}
             content={content}
