@@ -56,6 +56,7 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
         <Spacing className=" h-[80px]" />
         <FixedBottom className=" px-[24px] pb-[24px]">
           <CtaButton
+            id="hello"
             loading={props.loading}
             onClick={() => {
               props.onNext(value);
