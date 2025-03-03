@@ -64,7 +64,7 @@ export default function BookRecordWriteTextStep(
         </Flex>
 
         <FixedBottom className=" max-h-[229px] bg-white-yellow p-4 pb-[37px]">
-          <Flex className=" flex-grow min-h-[168px] gap-[11px]">
+          <Flex className=" flex-grow min-h-[168px] gap-[11px] relative">
             <Box className=" w-full">
               <TextArea.Layout>
                 <TextArea.Field

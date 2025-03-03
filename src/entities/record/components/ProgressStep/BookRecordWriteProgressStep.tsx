@@ -71,7 +71,7 @@ export default function BookRecordWriteProgressStep(props: BookRecordWriteProgre
 
 const ImageSection = memo((props: { status: "0" | "50" | "100"; value: number }) => {
   return (
-    <Stack className=" min-h-[400px] w-full justify-center items-center">
+    <Stack className=" min-h-[300px] w-full justify-center items-center">
       <ImageFadeAnimator
         value={props.status}
         className=" px-[115px] relative "
