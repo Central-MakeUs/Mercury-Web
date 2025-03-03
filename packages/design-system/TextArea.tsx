@@ -20,7 +20,7 @@ const Field = forwardRef<
 >(function Field(props, ref) {
   const { className, resize = false, ...rest } = props;
   return (
-    <div className="w-full h-full pb-[32px] bg-yellow-green">
+    <div className="w-full h-full pb-[32px] bg-yellow-green relative">
       <textarea
         ref={ref}
         {...rest}
