@@ -50,7 +50,7 @@ export default wrap
           });
         })(),
       );
-      navigate(`/book-record/${recordId}`);
+      navigate(`/book-record/${recordId}`, { replace: true });
     };
 
     return (

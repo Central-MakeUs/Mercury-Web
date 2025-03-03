@@ -37,7 +37,10 @@ const guestGetRecordsDetail = async (request: GetBookMemosRequest) => {
     throw new Error("메모가 존재하지 않습니다.");
   }
 
-  return memo satisfies GetRecordDetailResponse;
+  return {
+    ...memo,
+    memos: [...memo.memos].reverse(),
+  } satisfies GetRecordDetailResponse;
 };
 
 export const useGetRecordsDetailQueryOptions = (request: GetBookMemosRequest) => {

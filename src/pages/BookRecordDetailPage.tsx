@@ -51,22 +51,19 @@ export default wrap
             <Spacing className=" h-[24px]" />
 
             <List className=" w-full ">
-              {memos
-                .slice()
-                .reverse()
-                .map((memo) => (
-                  <BookRecordDetailMemoItem
-                    key={memo.memoId}
-                    onPressComplete={async () => {
-                      memoEditOverlay.openAsync({
-                        recordId: recordId ?? "",
-                        memoId: memo.memoId,
-                        content: memo.content,
-                      });
-                    }}
-                    {...createRowProps(memo)}
-                  />
-                ))}
+              {memos.map((memo) => (
+                <BookRecordDetailMemoItem
+                  key={memo.memoId}
+                  onPressComplete={async () => {
+                    memoEditOverlay.openAsync({
+                      recordId: recordId ?? "",
+                      memoId: memo.memoId,
+                      content: memo.content,
+                    });
+                  }}
+                  {...createRowProps(memo)}
+                />
+              ))}
             </List>
           </Stack>
         </Stack>
