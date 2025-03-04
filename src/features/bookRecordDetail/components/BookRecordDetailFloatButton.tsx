@@ -11,9 +11,9 @@ export const BookRecordDetailFloatButton = (props: { className?: string; recordI
     <MaxWidthBox className={cn(" fixed bottom-0 left-[50%] translate-x-[-50%]", className)}>
       <MaxWidthBox className="flex justify-end mb-[94px] pr-[18px]">
         <SafeArea edges={["bottom"]}>
-          <button onClick={() => navigate(`/add-memo/${recordId}`, { replace: true })}>
+          <div onClick={() => navigate(`/add-memo/${recordId}`, { replace: true })}>
             <FloatingActionButton variant={"plus"} />
-          </button>
+          </div>
         </SafeArea>
       </MaxWidthBox>
     </MaxWidthBox>
