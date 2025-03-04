@@ -2,6 +2,7 @@ import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Skeleton } from "@repo/design-system/Skeleton";
 import { Text } from "@repo/design-system/Text";
+import { toast } from "@repo/design-system/Toast";
 import { cn } from "@repo/design-system/cn";
 import { CenterStack } from "@repo/ui/CenterStack";
 import { Flex } from "@repo/ui/Flex";
@@ -10,9 +11,12 @@ import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { InView } from "@xionwcfm/react";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import { getBooksSearchInfiniteQueryOptions } from "~/entities/record/api/getBooksSearch";
 import type { Book } from "~/entities/record/model/book.model";
 import { BOOKRECORD_ASSETS } from "~/shared/images/bookrecord/bookrecordImages";
+import { getBooksExist } from "../../api/getBooksExist";
 import { SearchBookItem } from "./WriteSearchBookItem";
 import { useWriteSearchStore } from "./WriteSearchStep.store";
 
@@ -32,6 +36,7 @@ export const WriteSearchList = wrap.Suspense().on(
     const books = data?.pages.flatMap((page) => page.books) ?? [];
 
     const isObserverDisplay = hasNextPage && query.length > 0;
+    const [_loadingBookId, setLoadingBookId] = useState<string | null>(null);
 
     const fallback =
       query.length === 0 ? <FirstFallback isLoading={isLoading} /> : <EmptyFallback />;
@@ -39,6 +44,25 @@ export const WriteSearchList = wrap.Suspense().on(
     const handleIntersectStart = () => {
       if (hasNextPage) {
         fetchNextPage();
+      }
+    };
+
+    const navigate = useNavigate();
+
+    const handleBookClick = async (book: Book) => {
+      setLoadingBookId(book.isbn13);
+      try {
+        const record = await getBooksExist(book.isbn13);
+        if (record.isRegistered) {
+          toast.main("이미 존재하는 독서기록 입니다.", { duration: 1500 });
+          navigate(`/book-record/${record.recordId}`);
+        } else {
+          onNext(book);
+        }
+      } catch (error) {
+        console.error("기록 조회 중 오류 발생", error);
+      } finally {
+        setLoadingBookId(null);
       }
     };
 
@@ -85,7 +109,7 @@ export const WriteSearchList = wrap.Suspense().on(
               publishName={book.publisher}
               imageUrl={book.coverImageUrl}
               title={book.title}
-              onClick={() => onNext(book)}
+              onClick={() => handleBookClick(book)}
             />
           ))}
         </List>
