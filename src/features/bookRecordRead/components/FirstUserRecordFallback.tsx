@@ -8,11 +8,13 @@ import { Stack } from "@repo/ui/Stack";
 export const FirstUserRecordFallback = () => {
   return (
     <Stack className=" w-full h-full">
-      <CenterStack className="h-full w-full px-[80px]">
-        <AspectRatio ratio={213 / 208}>
-          <Image src={EMPTY_FALLBACK} alt="list empty fallback image" objectfit={"fill"} />
-        </AspectRatio>
-        <Spacing className=" h-[45px]" />
+      <CenterStack className="w-full h-full">
+        <CenterStack className="w-full px-[80px]">
+          <AspectRatio ratio={213 / 208}>
+            <Image src={EMPTY_FALLBACK} alt="list empty fallback image" objectfit={"fill"} />
+          </AspectRatio>
+          <Spacing className=" h-[45px]" />
+        </CenterStack>
         <Text
           variant={"body/18_sb"}
           className=" text-gray-600 text-center whitespace-pre-wrap"
