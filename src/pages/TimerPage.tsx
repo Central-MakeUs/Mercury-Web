@@ -28,10 +28,10 @@ export default function TimerPage() {
             <TimerSpeechBubble className=" mb-[2px]" />
           </CenterStack>
 
-          <CenterStack className=" w-full px-[46px] relative">
+          <CenterStack className=" px-[46px] relative">
             <TimerText className=" absolute top-[42px] left-[50%] translate-x-[-50%] z-10" />
 
-            <AspectRatio className=" w-full" ratio={1}>
+            <AspectRatio className=" w-full " ratio={1}>
               <Image src={TIMER_ASSETS.TIMER_CHARACTER_WEBP} alt="timer character" />
             </AspectRatio>
           </CenterStack>
@@ -44,7 +44,7 @@ export default function TimerPage() {
           <CenterStack>
             <TimerButtonSection />
           </CenterStack>
-          <BottomNavigationBar.Height className=" mb-[135px]" />
+          <BottomNavigationBar.Height className=" mb-[10px]" />
         </Stack>
       </SafeArea>
 
