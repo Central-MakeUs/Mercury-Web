@@ -13,23 +13,32 @@ import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { isAfter, isSameDay } from "date-fns";
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useGetTodayHabitQueryOptions } from "~/entities/user/api/getUserActivity";
 import { HabitCalendar } from "~/entities/user/components/HabitCalendar";
 import type { User } from "~/entities/user/model/user.model";
 import { HABIT_ASSETS } from "~/shared/images/habit/habitImages";
 
-const HabitBar = (props: { normalText: string; boldText: string }) => {
-  const { normalText, boldText } = props;
+type HabitBarProps = React.HTMLAttributes<HTMLDivElement> & {
+  normalText: string;
+  boldText: string;
+};
+
+const HabitBar = React.forwardRef<HTMLDivElement, HabitBarProps>((props, ref) => {
+  const { normalText, boldText, ...rest } = props;
   return (
-    <Flex className=" line-clamp-1 w-full h-[40px] py-[8px] rounded-[4px] bg-gradient-to-r from-main3-gradient-from to-main3-gradient-to flex justify-center items-center">
-      <Flex className=" w-[17px] h-[17px] ">
+    <Flex
+      ref={ref}
+      {...rest}
+      className="line-clamp-1 w-full h-[40px] py-[8px] rounded-[4px] bg-gradient-to-r from-main3-gradient-from to-main3-gradient-to flex justify-center items-center"
+    >
+      <Flex className="w-[17px] h-[17px]">
         <AspectRatio ratio={1}>
           <MercuryIcon />
         </AspectRatio>
       </Flex>
-      <Text as="p" className=" w-[80%] line-clamp-1 text-white">
-        <Text as="span" variant={"body/15_m"} className=" ml-[10px] mr-[4px]">
+      <Text as="p" className="w-[80%] line-clamp-1 text-white">
+        <Text as="span" variant={"body/15_m"} className="ml-[10px] mr-[4px]">
           {normalText}
         </Text>
         <Text as="span" variant={"body/15_sb"}>
@@ -38,7 +47,7 @@ const HabitBar = (props: { normalText: string; boldText: string }) => {
       </Text>
     </Flex>
   );
-};
+});
 
 const getWeekDates = (date: Date) => {
   const currentDate = new Date(date);
@@ -62,15 +71,12 @@ const getStatus = (context: { targetDate: Date; today: Date; isDone?: boolean })
   if (isSameDay(targetDate, today) && !isDone) {
     return "pending" as const;
   }
-
   if (isAfter(targetDate, today)) {
     return "pending" as const;
   }
-
   if (isDone) {
     return "success" as const;
   }
-
   return "fail" as const;
 };
 
@@ -90,12 +96,12 @@ const getDayName = (date: Date) => {
 const Fallback = () => {
   return (
     <>
-      <Spacing className=" h-[12px]" />
-      <Stack className=" px-[20px] w-full animate-pulse">
-        <Text variant={"body/18_sb"} className=" mb-[10px] text-[#393F46]">
+      <Spacing className="h-[12px]" />
+      <Stack className="px-[20px] w-full animate-pulse">
+        <Text variant={"body/18_sb"} className="mb-[10px] text-[#393F46]">
           습관 쌓기
         </Text>
-        <Flex className=" gap-x-[8px] justify-between">
+        <Flex className="gap-x-[8px] justify-between">
           {getWeekDates(new Date()).map((date) => (
             <HabitCalendar.Cell
               key={date.toISOString()}
@@ -106,9 +112,8 @@ const Fallback = () => {
             </HabitCalendar.Cell>
           ))}
         </Flex>
-
-        <Spacing className=" h-[12px]" />
-        <Flex className=" w-full h-[40px] py-[8px] rounded-[4px] bg-gradient-to-r from-main3-gradient-from to-main3-gradient-to flex justify-center items-center"></Flex>
+        <Spacing className="h-[12px]" />
+        <Flex className="w-full h-[40px] py-[8px] rounded-[4px] bg-gradient-to-r from-main3-gradient-from to-main3-gradient-to flex justify-center items-center"></Flex>
       </Stack>
     </>
   );
@@ -125,7 +130,17 @@ export const HabitSection = wrap
       streakDays && streakDays > 0 ? `${streakDays}일 연속 습관 쌓는 중!` : "습관 쌓을 준비 중";
 
     const weekDates = useMemo(() => getWeekDates(new Date()), []);
-    const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
+    const formattedToday = new Date()
+      .toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .replace(/. /g, "-")
+      .replace(".", "");
+    const [selectedDate, setSelectedDate] = useState<string>(formattedToday);
+
     const handleDateClick = (date: Date) => {
       const formattedDate = date
         .toLocaleDateString("ko-KR", {
@@ -135,19 +150,17 @@ export const HabitSection = wrap
         })
         .replace(/. /g, "-")
         .replace(".", "");
-
       setSelectedDate(formattedDate);
     };
 
     return (
       <BottomSheet.Root handleOnly={true}>
-        <Spacing className=" h-[17px]" />
-        <Stack className=" px-[20px]">
-          <Text variant={"body/18_sb"} className=" mb-[10px] text-[#393F46]">
+        <Spacing className="h-[17px]" />
+        <Stack className="px-[20px]">
+          <Text variant={"body/18_sb"} className="mb-[10px] text-[#393F46]">
             습관 쌓기
           </Text>
-
-          <Flex className=" gap-x-[8px] justify-between">
+          <Flex className="gap-x-[8px] justify-between">
             {weekDates.map((date) => {
               const englishDay = date
                 .toLocaleDateString("en-US", { weekday: "long" })
@@ -172,11 +185,12 @@ export const HabitSection = wrap
               );
             })}
           </Flex>
-
-          <Spacing className=" h-[12px]" />
-          <HabitBar normalText={normalText} boldText={boldText} />
+          <Spacing className="h-[12px]" />
+          <BottomSheet.Trigger asChild={true} onClick={() => handleDateClick(new Date())}>
+            <HabitBar normalText={normalText} boldText={boldText} />
+          </BottomSheet.Trigger>
         </Stack>
-        <TodayHabit selectedDate={selectedDate ? selectedDate : ""} />
+        <TodayHabit selectedDate={selectedDate} />
       </BottomSheet.Root>
     );
   });
@@ -188,9 +202,9 @@ const TodayHabit = ({ selectedDate }: { selectedDate: string }) => {
     <>
       <BottomSheet.Portal>
         <BottomSheet.Overlay />
-        <BottomSheet.Content className=" flex  items-center flex-col pt-[16px] px-[20px] rounded-t-[20px] h-[360px] bg-gray-white">
-          <BottomSheet.Handle className=" mb-[16px]" />
-          <BottomSheet.Description className=" sr-only">
+        <BottomSheet.Content className="flex items-center flex-col pt-[16px] px-[20px] rounded-t-[20px] h-[360px] bg-gray-white">
+          <BottomSheet.Handle className="mb-[16px]" />
+          <BottomSheet.Description className="sr-only">
             오늘의 미션을 확인합니다.
           </BottomSheet.Description>
           <BottomSheet.Title asChild={true}>
@@ -205,7 +219,6 @@ const TodayHabit = ({ selectedDate }: { selectedDate: string }) => {
               />
             </JustifyBetween>
           </BottomSheet.Title>
-
           <Stack className="mt-[19px] mb-[20px] w-full">
             <Flex className="items-center">
               <Image
@@ -221,7 +234,6 @@ const TodayHabit = ({ selectedDate }: { selectedDate: string }) => {
                 + {habits.acquiredExp}xp
               </Text>
             </Flex>
-
             <Stack className="rounded-[5px] bg-gray-100 px-7 py-[14px] mt-[9px] gap-[14px]">
               <JustifyBetween className="items-center">
                 <Flex className="items-center">
