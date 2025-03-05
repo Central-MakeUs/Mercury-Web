@@ -1,16 +1,17 @@
 import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Image } from "@repo/design-system/Image";
 import { Stack } from "@repo/ui/Stack";
+import { ONBOARDING_ASSETS } from "~/shared/images/onboarding/onboardingImages";
 
 export const FirstOnBoardingStep4 = () => {
   return (
-    <Stack className="w-screen max-w-[450px]">
+    <Stack className="w-screen max-w-[450px] h-full">
       <AspectRatio ratio={375 / 800}>
         <Image
-          src={"/images/onboarding/firstOnBoarding4.webp"}
+          src={ONBOARDING_ASSETS.FIRSTONBOARDING4_WEBP}
           alt="onBoardingFunnel2"
           objectfit={"cover"}
-          className=""
+          className="absolute bottom-[100px]"
         />
       </AspectRatio>
     </Stack>

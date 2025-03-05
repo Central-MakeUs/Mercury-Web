@@ -67,7 +67,7 @@ const FirstOnBoardingPage = () => {
       className="bg-navy overflow-hidden h-screen"
     >
       <Stack
-        className="w-full h-full items-center justify-center bg-navy overflow-hidden"
+        className="w-full h-scrren items-center justify-center bg-navy overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
