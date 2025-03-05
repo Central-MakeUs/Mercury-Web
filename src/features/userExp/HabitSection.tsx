@@ -178,7 +178,7 @@ export const HabitSection = wrap
         }}
         handleOnly={true}
       >
-        a18875e0c900f46c0291196a7dabf929aeccac
+
         <Spacing className="h-[17px]" />
         <Stack className="px-[20px]">
           <Text variant={"body/18_sb"} className="mb-[10px] text-[#393F46]">
