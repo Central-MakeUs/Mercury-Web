@@ -13,7 +13,7 @@ import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { isAfter, isSameDay } from "date-fns";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useGetTodayHabitQueryOptions } from "~/entities/user/api/getUserActivity";
 import { HabitCalendar } from "~/entities/user/components/HabitCalendar";
 import type { User } from "~/entities/user/model/user.model";
@@ -139,7 +139,19 @@ export const HabitSection = wrap
       })
       .replace(/. /g, "-")
       .replace(".", "");
+
     const [selectedDate, setSelectedDate] = useState<string>(formattedToday);
+    const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+    useEffect(() => {
+      const handlePopState = (_event: PopStateEvent) => {
+        if (isSheetOpen && window.history.state?.habitBottomSheet) {
+          setIsSheetOpen(false);
+        }
+      };
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
+    }, [isSheetOpen]);
 
     const handleDateClick = (date: Date) => {
       const formattedDate = date
@@ -151,10 +163,22 @@ export const HabitSection = wrap
         .replace(/. /g, "-")
         .replace(".", "");
       setSelectedDate(formattedDate);
+      window.history.pushState({ habitBottomSheet: true }, "");
+      setIsSheetOpen(true);
     };
 
     return (
-      <BottomSheet.Root handleOnly={true}>
+      <BottomSheet.Root
+        open={isSheetOpen}
+        onOpenChange={(open) => {
+          setIsSheetOpen(open);
+          if (!open && window.history.state?.habitBottomSheet) {
+            window.history.back();
+          }
+        }}
+        handleOnly={true}
+      >
+        a18875e0c900f46c0291196a7dabf929aeccac
         <Spacing className="h-[17px]" />
         <Stack className="px-[20px]">
           <Text variant={"body/18_sb"} className="mb-[10px] text-[#393F46]">
@@ -175,7 +199,6 @@ export const HabitSection = wrap
                   onClick={() => handleDateClick(date)}
                 >
                   <HabitCalendar.Cell
-                    key={date.toISOString()}
                     header={<HabitCalendar.Header>{getDayName(date)}</HabitCalendar.Header>}
                     status={getStatus({ targetDate: date, today: new Date(), isDone })}
                   >
