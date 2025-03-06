@@ -26,7 +26,7 @@ export default function BookRecordPage(
           </JustifyBetween>
           <Spacing className=" h-[26px]" />
 
-          <Flex className=" px-[16px] z-2">
+          <Flex className=" px-[16px] z-2 pb-[3px]">
             <BookRecordSearchBar />
           </Flex>
         </MaxWidthBox>

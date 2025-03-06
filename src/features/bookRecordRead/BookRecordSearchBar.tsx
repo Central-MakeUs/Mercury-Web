@@ -1,4 +1,3 @@
-import { MaxWidthBox } from "@repo/design-system/MaxWidthBox";
 import { SearchBar } from "@repo/design-system/SearchBar";
 import { MagnifyIcon } from "@repo/icon/MagnifyIcon";
 import { useDebouncedInputValue } from "@xionwcfm/react";
@@ -17,13 +16,11 @@ export const BookRecordSearchBar = () => {
   }, [actions.setSearch, debounce.debouncedValue]);
 
   return (
-    <MaxWidthBox className="w-full pb-[3px]">
-      <SearchBar
-        left={<MagnifyIcon />}
-        value={debounce.value}
-        onChange={(e) => debounce.onChange(e.target.value)}
-        placeholder="독서기록 검색하기"
-      />
-    </MaxWidthBox>
+    <SearchBar
+      left={<MagnifyIcon />}
+      value={debounce.value}
+      onChange={(e) => debounce.onChange(e.target.value)}
+      placeholder="독서기록 검색하기"
+    />
   );
 };
