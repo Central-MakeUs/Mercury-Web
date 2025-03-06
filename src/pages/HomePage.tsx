@@ -19,7 +19,7 @@ export default function HomePage() {
   const { data: activities } = useSuspenseQuery(useGetUserActivityQueryOptions());
   return (
     <SafeArea edges={["top", "left", "bottom", "right"]} className=" w-full">
-      <Stack className="  w-full">
+      <Stack className=" w-full">
         <Header />
         <MainSection
           nickname={activities.nickname}
@@ -31,7 +31,7 @@ export default function HomePage() {
           streakDays={activities.streakDays}
           weeklyStreak={activities.weeklyStreak}
         />
-        <Spacing className=" h-[160px]" />
+        <Spacing className=" h-[100px] short:h-[70px]" />
       </Stack>
     </SafeArea>
   );
@@ -42,7 +42,7 @@ const Header = () => {
 
   return (
     <motion.div
-      className=" pt-[24px] flex justify-between pb-[30px] bg-white w-full px-[16px] overflow-hidden"
+      className=" py-[5%] flex justify-between bg-white w-full px-[16px] overflow-hidden"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

@@ -24,6 +24,9 @@ const config: Config = {
       animation: {
         ...vars.animation,
       },
+      screens: {
+        short: { raw: "(max-height: 700px)" },
+      },
     },
   },
 
