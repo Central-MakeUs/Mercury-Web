@@ -19,7 +19,7 @@ export const FirstOnBoardingStep1 = () => {
       </CenterStack>
 
       <Image
-        src={ONBOARDING_ASSETS.ONBOARDING1_WEBP}
+        src={ONBOARDING_ASSETS.ONBOARDINGFUNNEL1_WEBP}
         alt="onBoardingFunnel1"
         objectfit={"cover"}
         className="absolute z-[2]"

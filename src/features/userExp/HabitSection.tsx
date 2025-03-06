@@ -235,7 +235,7 @@ const TodayHabit = ({ selectedDate }: { selectedDate: string }) => {
                 {`${habits.streakCount}일 연속 \n성공했어요!`}
               </Text>
               <Image
-                src={HABIT_ASSETS.MERCURY_CHARACTER}
+                src={HABIT_ASSETS.MERCURY_CHARACTER_WEBP}
                 alt="mercury character"
                 objectfit={"fill"}
                 className="w-[66px]"

@@ -2,6 +2,7 @@ import { AspectRatio } from "@repo/design-system/AspectRatio";
 import { Caption } from "@repo/design-system/Caption";
 import { Image } from "@repo/design-system/Image";
 import { Text } from "@repo/design-system/Text";
+import { cn } from "@repo/design-system/cn";
 import { Flex } from "@repo/ui/Flex";
 import { Stack } from "@repo/ui/Stack";
 import { wrap } from "@suspensive/react";
@@ -70,41 +71,39 @@ export const MainSection = wrap
     const percentage = getExpPercentage(exp, goalExp);
 
     return (
-      <Stack className=" w-full bg-navy justify-between">
+      <Stack className=" w-full bg-navy justify-between py-[16px]">
         <motion.div
           className=" w-full h-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <AspectRatio ratio={375 / 392} className=" flex justify-center items-center">
-            <Stack className="gap-[25px]">
-              <Stack className="px-5 gap-[6px]">
-                <Caption>
-                  <Text className="text-white" variant={"caption/12_m"}>
-                    머큐리와 함께한 지 {joinDays}일
-                  </Text>
-                </Caption>
-                <Text variant={"title/25_b"} className="text-gray-100">
-                  {nickname}
+          <Stack className="gap-[25px]">
+            <Stack className="px-5 gap-[6px]">
+              <Caption>
+                <Text className="text-white" variant={"caption/12_m"}>
+                  머큐리와 함께한 지 {joinDays}일
                 </Text>
-              </Stack>
-
-              <Image
-                src={HOME_ASSETS.HOME_MERCURY_WEBP}
-                alt="mercury character"
-                objectfit={"fill"}
-                className="px-[36px]"
-              />
-
-              <ExpSection
-                exp={exp}
-                goalExp={goalExp}
-                percentage={percentage}
-                level={`레벨 ${level}`}
-              />
+              </Caption>
+              <Text variant={"title/25_b"} className="text-gray-100">
+                {nickname}
+              </Text>
             </Stack>
-          </AspectRatio>
+
+            <Image
+              src={HOME_ASSETS.HOME_MERCURY_WEBP}
+              alt="mercury character"
+              objectfit={"fill"}
+              className={cn("px-[36px] short:px-[50px]")}
+            />
+
+            <ExpSection
+              exp={exp}
+              goalExp={goalExp}
+              percentage={percentage}
+              level={`레벨 ${level}`}
+            />
+          </Stack>
         </motion.div>
       </Stack>
     );

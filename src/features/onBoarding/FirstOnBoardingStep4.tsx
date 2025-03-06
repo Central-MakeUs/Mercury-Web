@@ -8,7 +8,7 @@ export const FirstOnBoardingStep4 = () => {
     <Stack className="w-screen max-w-[450px] h-full">
       <AspectRatio ratio={375 / 800}>
         <Image
-          src={ONBOARDING_ASSETS.ONBOARDING4_WEBP}
+          src={ONBOARDING_ASSETS.ONBOARDINGFUNNEL4_WEBP}
           alt="onBoardingFunnel2"
           objectfit={"cover"}
           className="absolute bottom-[100px]"
