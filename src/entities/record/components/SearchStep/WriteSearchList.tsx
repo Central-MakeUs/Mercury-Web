@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getBooksSearchInfiniteQueryOptions } from "~/entities/record/api/getBooksSearch";
 import type { Book } from "~/entities/record/model/book.model";
+import { authStore } from "~/entities/user/model/auth.store";
 import { BOOKRECORD_ASSETS } from "~/shared/images/bookrecord/bookrecordImages";
 import { getBooksExist } from "../../api/getBooksExist";
 import { SearchBookItem } from "./WriteSearchBookItem";
@@ -49,20 +50,25 @@ export const WriteSearchList = wrap.Suspense().on(
 
     const navigate = useNavigate();
 
+    const auth = authStore.useAuth();
     const handleBookClick = async (book: Book) => {
-      setLoadingBookId(book.isbn13);
-      try {
-        const record = await getBooksExist(book.isbn13);
-        if (record.isRegistered) {
-          toast.main("이미 존재하는 독서기록 입니다.", { duration: 1500 });
-          navigate(`/book-record/${record.recordId}`);
-        } else {
-          onNext(book);
+      if (auth.isLoggedIn) {
+        setLoadingBookId(book.isbn13);
+        try {
+          const record = await getBooksExist(book.isbn13);
+          if (record.isRegistered) {
+            toast.main("이미 존재하는 독서기록 입니다.", { duration: 1500 });
+            navigate(`/book-record/${record.recordId}`);
+          } else {
+            onNext(book);
+          }
+        } catch (error) {
+          console.error("기록 조회 중 오류 발생", error);
+        } finally {
+          setLoadingBookId(null);
         }
-      } catch (error) {
-        console.error("기록 조회 중 오류 발생", error);
-      } finally {
-        setLoadingBookId(null);
+      } else {
+        onNext(book);
       }
     };
 
