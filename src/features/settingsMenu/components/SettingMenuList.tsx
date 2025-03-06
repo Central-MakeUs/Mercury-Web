@@ -9,7 +9,7 @@ import { NotSigned } from "~/entities/user/components/NotSigned";
 import { useSignOutDialog } from "~/entities/user/components/SignOutDialog";
 import { Signed } from "~/entities/user/components/Signed";
 import { SETTINGS_LINKS } from "~/shared/constants/externalLink";
-import { openInAppUrl } from "~/shared/utils/openInAppUrl";
+import { openWindowUrl } from "~/shared/utils/openWindowUrl";
 
 export const SettingMenuList = () => {
   const [selected, setSelected] = useState(false);
@@ -25,15 +25,15 @@ export const SettingMenuList = () => {
   };
 
   const handlePolicyClick = () => {
-    openInAppUrl(SETTINGS_LINKS.TERMSANDPRIVACY);
+    openWindowUrl(SETTINGS_LINKS.TERMSANDPRIVACY, { target: "_self" });
   };
 
   const handleNoticeClick = () => {
-    openInAppUrl(SETTINGS_LINKS.NOTICE);
+    openWindowUrl(SETTINGS_LINKS.NOTICE, { target: "_self" });
   };
 
   const handleFaqClick = () => {
-    openInAppUrl(SETTINGS_LINKS.FAQ);
+    openWindowUrl(SETTINGS_LINKS.FAQ, { target: "_self" });
   };
 
   const handleLoginClick = () => {
