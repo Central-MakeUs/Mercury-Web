@@ -7,7 +7,7 @@ export const BookRecordDetailFloatButton = (props: { className?: string; recordI
   const { className, recordId } = props;
   const navigate = useNavigate();
   return (
-    <MaxWidthBox className={cn(" fixed bottom-[113px] left-[80%] ", className)}>
+    <MaxWidthBox className={cn(" fixed bottom-[130px] left-[80%] ", className)}>
       <div onClick={() => navigate(`/add-memo/${recordId}`, { replace: true })}>
         <FloatingActionButton variant={"plus"} />
       </div>
