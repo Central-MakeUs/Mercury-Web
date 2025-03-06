@@ -235,9 +235,10 @@ const TodayHabit = ({ selectedDate }: { selectedDate: string }) => {
                 {`${habits.streakCount}일 연속 \n성공했어요!`}
               </Text>
               <Image
-                src={HABIT_ASSETS.MERCURY_HABIT_LOGO_WEBP}
+                src={HABIT_ASSETS.MERCURY_CHARACTER}
                 alt="mercury character"
                 objectfit={"fill"}
+                className="w-[66px]"
               />
             </JustifyBetween>
           </BottomSheet.Title>
