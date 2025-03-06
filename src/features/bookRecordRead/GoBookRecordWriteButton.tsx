@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 export const GoBookRecordWriteButton = () => {
   return (
-    <MaxWidthBox className={cn(" fixed bottom-[113px] left-[80%] ")}>
+    <MaxWidthBox className={cn(" fixed bottom-[130px] left-[80%] ")}>
       <Link to={"/book-record/write"}>
         <FloatingActionButton />
       </Link>
