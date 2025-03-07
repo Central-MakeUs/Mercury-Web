@@ -37,9 +37,9 @@ export default function BookRecordPage(
     <BookRecordProvider {...props}>
       <SafeArea edges={["top", "bottom", "left", "right"]} className="  w-full min-h-screen ">
         <motion.div
-          initial={{ opacity: 1, translateY: 0 }}
+          initial={{ opacity: 0, translateY: 0 }}
           animate={hideSearchBar ? { opacity: 0, translateY: -50 } : { opacity: 1, translateY: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.4 }}
         >
           <MaxWidthBox className=" pt-[24px] fixed w-full bg-white z-10">
             <JustifyBetween className=" items-end w-full px-[16px]">
