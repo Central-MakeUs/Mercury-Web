@@ -4,4 +4,5 @@ export const ONBOARDING_ASSETS = {
   ONBOARDINGFUNNEL2_WEBP: "/images/onboarding/onBoardingFunnel2.webp",
   ONBOARDINGFUNNEL3_WEBP: "/images/onboarding/onBoardingFunnel3.webp",
   ONBOARDINGFUNNEL4_WEBP: "/images/onboarding/onBoardingFunnel4.webp",
+  ONBOARDINGFUNNELLAST_WEBP: "/images/onboarding/onBoardingFunnelLast.webp",
 };
