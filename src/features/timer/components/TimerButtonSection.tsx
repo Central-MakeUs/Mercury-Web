@@ -1,3 +1,4 @@
+import { bridge } from "@repo/bridge-web";
 import { Button } from "@repo/design-system/Button";
 import { timePickerBottomSheet } from "@repo/design-system/TimePickerBottomSheet";
 import { TimePickerBottomSheet } from "@repo/design-system/TimePickerBottomSheet";
@@ -42,6 +43,7 @@ export const TimerButtonSection = (props: ComponentProps<"div">) => {
             onClose={() => close(null)}
             onExit={unmount}
             onConfirm={(result) => {
+              bridge.triggerHapticFeedback("impact-medium");
               close(result);
               setTimeout(() => unmount(), 1500);
             }}
