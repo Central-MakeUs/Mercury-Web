@@ -1,5 +1,6 @@
 import "./index.css";
 import "../packages/design-system/iosTimePicker.css";
+import { Analytics, MercuryPostHogProvider, PostHogPageView } from "@repo/analytics/index.tsx";
 import { SafeAreaEffector } from "@repo/bridge-web/SafeArea.tsx";
 import { MobileLayout } from "@repo/design-system/MobileLayout.tsx";
 import { Providers } from "@repo/providers";
@@ -34,50 +35,50 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <MobileLayout maxWidth={MAX_WIDTH}>
       <Providers>
-        {/* <MercuryPostHogProvider> */}
-        <BrowserRouter>
-          {/* <PostHogPageView /> */}
-          <AppSocialLoginProcessor />
-          <OverlayProvider>
-            <Routes>
-              <Route element={<BottomNavigationLayout />}>
-                <Route path="home" element={<HomePage />} />
-                <Route path="timer" element={<TimerPage />} />
-                <Route path="book-record" element={<BookRecordPage />} />
-                <Route path="profile" element={<ProfilePage />} />
-              </Route>
+        <MercuryPostHogProvider>
+          <BrowserRouter>
+            <PostHogPageView />
+            <AppSocialLoginProcessor />
+            <OverlayProvider>
+              <Routes>
+                <Route element={<BottomNavigationLayout />}>
+                  <Route path="home" element={<HomePage />} />
+                  <Route path="timer" element={<TimerPage />} />
+                  <Route path="book-record" element={<BookRecordPage />} />
+                  <Route path="profile" element={<ProfilePage />} />
+                </Route>
 
-              <Route path="book-record/write" element={<BookRecordWritePage />} />
-              <Route path="book-record/:recordId" element={<BookRecordDetailPage />} />
+                <Route path="book-record/write" element={<BookRecordWritePage />} />
+                <Route path="book-record/:recordId" element={<BookRecordDetailPage />} />
 
-              <Route
-                path="book-record/:recordId/:memoId/modify"
-                element={<BookRecordModifyPage />}
-              />
+                <Route
+                  path="book-record/:recordId/:memoId/modify"
+                  element={<BookRecordModifyPage />}
+                />
 
-              <Route path="add-memo/:recordId" element={<BookRecordMemoAddPage />} />
+                <Route path="add-memo/:recordId" element={<BookRecordMemoAddPage />} />
 
-              <Route path="notification" element={<Notification />} />
-              <Route path="settings" element={<SettingPage />} />
-              <Route path="" element={<FirstOnBoardingPage />} />
-              <Route
-                path="onboarding"
-                element={
-                  <NotSigned fallback={<Navigate to={"/book-record"} replace={true} />}>
-                    <OnBoardingPage />
-                  </NotSigned>
-                }
-              />
-              <Route path="login" element={<LoginPage />} />
-              <Route path="login/success" element={<LoginSuccessPage />} />
-              <Route path="login/agree" element={<TermsPrivacyConsentPage />} />
-            </Routes>
-          </OverlayProvider>
-        </BrowserRouter>
-        {/* </MercuryPostHogProvider> */}
+                <Route path="notification" element={<Notification />} />
+                <Route path="settings" element={<SettingPage />} />
+                <Route path="" element={<FirstOnBoardingPage />} />
+                <Route
+                  path="onboarding"
+                  element={
+                    <NotSigned fallback={<Navigate to={"/book-record"} replace={true} />}>
+                      <OnBoardingPage />
+                    </NotSigned>
+                  }
+                />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="login/success" element={<LoginSuccessPage />} />
+                <Route path="login/agree" element={<TermsPrivacyConsentPage />} />
+              </Routes>
+            </OverlayProvider>
+          </BrowserRouter>
+        </MercuryPostHogProvider>
 
         <SafeAreaEffector />
-        {/* <Analytics /> */}
+        <Analytics />
       </Providers>
     </MobileLayout>
   </StrictMode>,
