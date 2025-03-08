@@ -1,3 +1,4 @@
+import { bridge } from "@repo/bridge-web";
 import { Spacing } from "@repo/ui/Spacing";
 import { motion } from "motion/react";
 import { overlay } from "overlay-kit";
@@ -32,11 +33,13 @@ export const TimePickerBottomSheet = (props: TimePickerBottomSheetProps) => {
 
   const onRightChange = (second: number) => {
     _right.current = second;
+    bridge.triggerHapticFeedback("impact-medium");
     props.onRightChange?.(second);
   };
 
   const onLeftChange = (minute: number) => {
     _left.current = minute;
+    bridge.triggerHapticFeedback("impact-medium");
     props.onLeftChange?.(minute);
   };
 
